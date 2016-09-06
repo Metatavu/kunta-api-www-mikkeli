@@ -4,8 +4,8 @@ block content
   .container
     .row
       .col-xs
-        | 1 of ääretön
-      .col-xs
-        | 1 of 3
-      .col-xs
-        | 1 of 3
+        each event in events
+          p 
+            =event.name
+          if event.imageSrc
+            img(src=event.imageSrc)
