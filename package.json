@@ -16,5 +16,8 @@
     "grunt": "^1.0.1",
     "grunt-contrib-sass": "^1.0.0",
     "load-grunt-tasks": "^3.5.2"
+  },
+  "dependencies": {
+    "moment": "^2.14.1"
   }
 }

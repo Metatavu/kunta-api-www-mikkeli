@@ -1,0 +1,28 @@
+@charset "UTF-8";
+
+$eventTextColor: #bf167d;
+$eventNameColor: #ffffff;
+$eventBannerColor: #50266e;
+
+.event {
+  
+  background-color: $eventBannerColor;
+  height: 100%;
+  
+  .event-image {
+    max-width: 100%;
+  }
+  
+  .event-place {
+    color: $eventTextColor;
+  }
+  
+  .event-date {
+    color: $eventTextColor;
+  }
+  
+  .event-name {
+    color: $eventNameColor;
+  }
+  
+}

@@ -1,11 +1,38 @@
 extends ../layout/index.pug
 
+block styles
+  link(rel="stylesheet", href="/css/index.min.css")
+
 block content
   .container
     .row
       .col-xs
-        each event in events
-          p 
-            =event.name
-          if event.imageSrc
-            img(src=event.imageSrc)
+        .row
+          .col-xs.text-xs-center
+            |Tulevia tapahtumia Mikkelissä
+        .row
+          each event in events
+            .col-xs-4
+              .event
+                .row
+                  .col-xs
+                    img.event-image(src=event.imageSrc + "?size=400")
+                .row.no-margins
+                  .col-xs.event-banner
+                    .row
+                      .col-xs-3
+                        span.event-date
+                          =event.shortDate
+                      .col-xs-9
+                        label.event-place
+                          =event.place            
+                        label.event-name
+                          =event.name            
+        .row
+          .col-xs.text-xs-center
+            span
+              |Katso kaikki tapahtumat
+            span
+              | 
+            a(href="www.mikkelinyt.fi",target="_blank")
+              |www.mikkelinyt.fi
