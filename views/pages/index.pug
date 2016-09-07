@@ -1,5 +1,23 @@
 extends ../layout/index.pug
 
+mixin event(event) 
+  .col-xs-4
+    .event
+      .row
+        .col-xs
+          img.event-image(src=event.imageSrc + "?size=400")
+      .row.no-margins
+        .col-xs.event-banner
+          .row
+            .col-xs-3
+              span.event-date
+                =event.shortDate
+            .col-xs-9
+              label.event-place
+                =event.place            
+              label.event-name
+                =event.name 
+
 block styles
   link(rel="stylesheet", href="/css/index.min.css")
 
@@ -11,23 +29,27 @@ block content
           .col-xs.text-xs-center
             |Tulevia tapahtumia Mikkelissä
         .row
-          each event in events
-            .col-xs-4
-              .event
-                .row
-                  .col-xs
-                    img.event-image(src=event.imageSrc + "?size=400")
-                .row.no-margins
-                  .col-xs.event-banner
-                    .row
-                      .col-xs-3
-                        span.event-date
-                          =event.shortDate
-                      .col-xs-9
-                        label.event-place
-                          =event.place            
-                        label.event-name
-                          =event.name            
+          .col-xs
+            #event-slide.carousel.slide(data-ride='carousel')
+              .event-carousel-indicators
+                ol.carousel-indicators
+                  each eventPage, pageIndex in eventPages
+                    li(data-target='#event-slide', data-slide-to='#{pageIndex}')
+              .event-carousel-items
+                .carousel-inner(role='listbox')
+                  each pageEvents, pageIndex in eventPages
+                    - var itemClass=pageIndex == 0 ? "carousel-item active" : 'carousel-item'
+                    div(class=itemClass)
+                      .row
+                        each event in pageEvents
+                          +event(event)
+              .event-carousel-controls
+                a.left.carousel-control(href='#event-slide', role='button', data-slide='prev')
+                  span.icon-prev(aria-hidden='true')
+                  span.sr-only Previous
+                a.right.carousel-control(href='#event-slide', role='button', data-slide='next')
+                  span.icon-next(aria-hidden='true')
+                  span.sr-only Next
         .row
           .col-xs.text-xs-center
             span

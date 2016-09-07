@@ -4,6 +4,13 @@ $eventTextColor: #bf167d;
 $eventNameColor: #ffffff;
 $eventBannerColor: #50266e;
 
+.event-carousel-indicators {
+  .carousel-indicators {
+    bottom: initial;
+    top: 10px;
+  }
+}
+
 .event {
   
   background-color: $eventBannerColor;
