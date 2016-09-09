@@ -18,6 +18,30 @@ mixin event(event)
               label.event-name
                 =event.name 
 
+mixin newsArticleTop(article)
+  .news-article.top-article(style='background-image: url(' + article.imageSrc + '?size=350)')
+    .date
+      =article.shortDate
+    .details
+      .title
+        =article.title
+      .abstract
+        !=article.abstract
+mixin newsArticleThumb(article)
+  .news-article.thumb-article(style='background-image: url(' + article.imageSrc + '?size=350)')
+    .date
+      =article.shortDate
+    .details
+      .title
+        =article.title
+      .abstract
+        !=article.abstract
+
+mixin newsArticleText(article)
+  .news-article.text-article
+    .title
+      =article.title
+
 block styles
   link(rel="stylesheet", href="/css/index.min.css")
 
@@ -26,8 +50,27 @@ block content
     .row
       .col-xs
         .row
-          .col-xs.text-xs-center
-            |Tulevia tapahtumia Mikkelissä
+          .col-xs
+            |Zadaa
+        .row
+          .col-xs-8
+            .row
+              .col-xs
+                +newsArticleTop(news.top)
+            .row
+              .col-xs
+                .row
+                  each newsArticle in news.thumbs
+                    .col-xs-6
+                      +newsArticleThumb(newsArticle)
+            .row
+              .col-xs
+                each newsArticle in news.texts
+                  .row
+                    .col-xs
+                      +newsArticleText(newsArticle)
+          .col-xs-4
+            |HEE
         .row
           .col-xs
             #event-slide.carousel.slide(data-ride='carousel')

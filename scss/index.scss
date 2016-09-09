@@ -11,6 +11,52 @@ $eventBannerColor: #50266e;
   }
 }
 
+.news-article {
+  
+  position: relative;
+  overflow: hidden;
+  background-size: cover;
+  margin-bottom: 15px;
+  
+  .date {
+    background: #000;
+    color: #fff;
+    display: inline-block;
+    position: absolute;
+  }
+
+  .details {
+    position: absolute;
+    bottom: 0px;
+    background: rgba(255, 255, 255, 0.5);
+  }
+
+  &.top-article {
+    height: 250px;
+    
+    .date {
+      bottom: 100px;
+    }
+    
+    .details {
+      height: 100px;
+    }
+  }
+  
+  &.thumb-article {
+    height: 200px;
+    
+    .date {
+      bottom: 80px;
+    }
+    
+    .details {
+      height: 80px;
+    }
+  }
+    
+}
+
 .event {
   
   background-color: $eventBannerColor;
