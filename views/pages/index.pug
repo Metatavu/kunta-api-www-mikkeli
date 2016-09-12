@@ -41,7 +41,16 @@ mixin newsArticleText(article)
   .news-article.text-article
     .title
       =article.title
-
+      
+mixin banner(banner)
+  .header-banner-item(style='background-image: url(' + banner.imageSrc + ')')
+    if banner.link
+      a.banner-link(href=banner.link,target="_blank")
+    h1
+      =banner.title
+    p
+      !=banner.contents
+      
 block styles
   link(rel="stylesheet", href="/css/index.min.css")
 
@@ -51,7 +60,28 @@ block content
       .col-xs
         .row
           .col-xs
-            |Zadaa
+            .header-banner
+              .header-border-top
+              #banner-slide.carousel.slide(data-ride='carousel')
+                .banner-carousel-indicators
+                  ol.carousel-indicators
+                    each banner, bannerIndex in banners
+                      li(data-target='#banner-slide', data-slide-to='#{bannerIndex}')
+                .banner-carousel-items
+                  .carousel-inner(role='listbox')
+                    each banner, bannerIndex in banners
+                      - var itemClass=bannerIndex == 0 ? "carousel-item active" : 'carousel-item'
+                      div(class=itemClass)
+                        +banner(banner)
+                .banner-carousel-controls
+                  a.left.carousel-control(href='#banner-slide', role='button', data-slide='prev')
+                    span.icon-prev(aria-hidden='true')
+                    span.sr-only Previous
+                  a.right.carousel-control(href='#banner-slide', role='button', data-slide='next')
+                    span.icon-next(aria-hidden='true')
+                    span.sr-only Next
+              .header-silhouette
+              .header-border-bottom
         .row
           .col-xs-8
             .row
