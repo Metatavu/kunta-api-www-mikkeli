@@ -51,6 +51,16 @@ mixin banner(banner)
     p
       !=banner.contents
       
+mixin tile(tile)
+  .tile(style='background-image: url(' + tile.imageSrc + ')')
+    if tile.link
+      a.tile-link(href=tile.link,target="_blank")
+    .details
+      h3
+        =tile.title
+      p
+        !=tile.contents
+      
 block styles
   link(rel="stylesheet", href="/css/index.min.css")
 
@@ -99,8 +109,11 @@ block content
                   .row
                     .col-xs
                       +newsArticleText(newsArticle)
-          .col-xs-4
-            |HEE
+          .col-xs-4.tiles
+             each tile in tiles
+               .row
+                 .col-xs
+                   +tile(tile)
         .row
           .col-xs
             #event-slide.carousel.slide(data-ride='carousel')

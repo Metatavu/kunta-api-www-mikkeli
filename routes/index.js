@@ -14,6 +14,7 @@
         .events.latest(EVENT_PAGES * EVENTS_PER_PAGE)
         .news.latest(0, 9)
         .banners.list()
+        .tiles.list()
         .callback(function (data) {
           var events = _.clone(data[0]||[]).map(event => {
             return Object.assign(event, {
@@ -38,9 +39,18 @@
             });
           });
           
+          console.log(data[3]);
+
+          var tiles = _.clone(data[3]||[]).map(tile => {
+            return Object.assign(tile, {
+              imageSrc: tile.imageSrc ? tile.imageSrc : '/gfx/layout/mikkeli-tile-default.jpg'
+            });
+          });
+          
           res.render('pages/index.pug', { 
             eventPages: eventPages,
             banners: banners,
+            tiles: tiles,
             news: {
               top: news.splice(0, 1)[0],
               thumbs: news.splice(0, 4),
