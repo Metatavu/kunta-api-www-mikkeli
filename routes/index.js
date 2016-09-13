@@ -39,8 +39,6 @@
             });
           });
           
-          console.log(data[3]);
-
           var tiles = _.clone(data[3]||[]).map(tile => {
             return Object.assign(tile, {
               imageSrc: tile.imageSrc ? tile.imageSrc : '/gfx/layout/mikkeli-tile-default.jpg'
