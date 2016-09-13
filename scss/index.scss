@@ -1,9 +1,6 @@
 @charset "UTF-8";
 
-$eventTextColor: #bf167d;
-$eventNameColor: #ffffff;
-$eventBannerColor: #50266e;
-
+@import 'vars';
 
 .carousel-indicators {
   bottom: initial;
@@ -11,7 +8,6 @@ $eventBannerColor: #50266e;
 }
 
 .header-banner {
-  
   position: relative;
   
   .header-border-top,
@@ -33,7 +29,7 @@ $eventBannerColor: #50266e;
   }
   
   .header-banner-item {
-    height: 250px;
+    height: 560px;
     background-size: cover;
     background-repeat: no-repeat;
     position: relative;
@@ -49,9 +45,23 @@ $eventBannerColor: #50266e;
       z-index: 0;
     }
   
+    h1 {
+      @include font-ultra(70px);
+      padding-top: 145px;
+      font-weight: 900;
+      letter-spacing: 3px;
+    }
+  
+    p {
+      @include font-std(18px);
+      padding-top: 20px;
+    }
+  
     p, h1 {
       position: relative;
       z-index: 1;
+      color: #fff;
+      padding-left: 500px;
     }  
   }
 }
@@ -59,11 +69,12 @@ $eventBannerColor: #50266e;
 .tiles {
   
   .tile {
-    width: 317px;
-    height: 204px;  
+    width: 100%;
+    height: 200px;
     background-size: cover;
     background-repeat: no-repeat;
     position: relative;
+    margin-bottom: 10px;
     
     a.tile-link {
       position: absolute;
@@ -81,15 +92,38 @@ $eventBannerColor: #50266e;
       bottom: 0px;
       left: 0px;
       right: 0px;
-      top: 75px;
+      height: 125px;
       background: rgba(0, 0, 0, 0.2);
+      padding-top: 20px;
+      padding-left: 16px;
+      padding-right: 16px;
       
-      h3, p {
+      *:empty {
+        display: none;
+      }
+    
+      h3 {
+        text-transform: uppercase;
         color: #fff;
+        @include font-ultra(29px);
+        max-height: 60px;
+        position: relative;
+        overflow: hidden;
+        text-overflow: ellipsis;
+        margin-bottom: 10px;
+      }
+      
+      p {
+        color: #fff;
+        @include font-std(18px);
+        overflow: hidden;
+        text-overflow: ellipsis;
         
         a {
           position: relative;
           z-index: 2;
+          color: #fff;
+          text-decoration: underline;
         }
       }
     }
@@ -109,66 +143,216 @@ $eventBannerColor: #50266e;
   position: relative;
   overflow: hidden;
   background-size: cover;
-  margin-bottom: 15px;
   
   .date {
-    background: #000;
+    background: #bc177e;
     color: #fff;
     display: inline-block;
-    position: absolute;
+    @include font-std(16px);
+    padding: 2px 15px;
   }
 
   .details {
     position: absolute;
     bottom: 0px;
+    left: 0px;
+    right: 0px;
     background: rgba(255, 255, 255, 0.5);
+    padding-left: 24px;
+    overflow: hidden;
+    
+    .title {
+      color: #bc177e;
+      @include font-ultra(30px);
+    }
+    
+    .abstract {
+      color: #000;
+      @include font-std(15px);
+    }
   }
 
   &.top-article {
-    height: 250px;
-    
+    height: 458px;
+    margin-bottom: 15px;
+
     .date {
-      bottom: 100px;
+      bottom: 155px;
+      position: absolute;
     }
-    
+
     .details {
-      height: 100px;
+      height: 155px;
+      padding-top: 19px;
+      
+      .abstract {
+        max-height: 80px;
+        overflow: hidden;
+        text-overflow: ellipsis;
+      }
+    }
+  
+    &:after {
+      content: '.';
+      color: transparent;
+      font-size: 0px;
+      display: block;
+      height: 8px;
+      background-repeat: no-repeat;
+      background-image: url('/gfx/layout/mikkeli-banner-border.png');
+      position: absolute;
+      bottom: 0px;
+      left: 0px;
+      right: 0px;
     }
   }
   
   &.thumb-article {
-    height: 200px;
-    
+    height: 287px;
+    margin-bottom: 15px;
+
     .date {
-      bottom: 80px;
+      bottom: 120px;
+      position: absolute;
     }
     
     .details {
-      height: 80px;
+      height: 120px;
+      padding-top: 6px;
+
+      .abstract {
+        max-height: 45px;
+        overflow: hidden;
+        text-overflow: ellipsis;
+      }
     }
+  }
+   
+  &.text-article {
+    
+    border-top: 1px solid #aaa;
+    padding-top: 7px;
+    padding-bottom: 7px;
+      
+    .date {
+      background: #bc177e;
+      color: #fff;
+      display: inline-block;
+      @include font-std(16px);
+    }
+  
+    .title {
+      @include font-std(18px);
+      padding-left: 12px;
+      display: inline-block;
+    }
+    
   }
     
 }
 
+.all-news-link {
+  margin-top: 15px;
+  margin-bottom: 30px;
+  background: #bc177e;
+  color: #fff;
+  display: inline-block;
+  @include font-ultra(20px);
+  padding: 20px 24px;
+  line-height: 20px;
+  
+  &:hover {
+    color: #fff;
+  }
+}
+
+.text-articles-container {
+  
+  .row:last-child .text-article {
+    border-bottom: 1px solid #aaa;
+  }
+
+}
+
+.events-title {
+  color: #bc177e;
+  @include font-ultra(30px);
+  text-transform: uppercase;
+  margin-top: 15px;
+  margin-bottom: 15px;
+}
+
 .event {
+  height: 263px;
+  position: relative;
+  background-size: cover;
+  background-repeat: no-repeat;
   
-  background-color: $eventBannerColor;
-  height: 100%;
+  .details {
+    position: absolute;
+    background: #50266f;
+    height: 90px;
+    left: 0px;
+    right: 0px;
+    bottom: 0px;
+    padding-right: 15px;
+    
+    .date, 
+    .place {
+      color: #bf167d;
+    }
   
-  .event-image {
-    max-width: 100%;
+    .date  {
+      @include font-ultra(55px);
+      margin-top: 0px;
+      text-align: right;
+    }
+
+    .name {
+      @include font-std(14px);       
+      color: #fff;
+      white-space: nowrap;
+    }
+  
+    .place {
+      @include font-ultra(20px);
+      margin-top: 15px;
+      text-transform: uppercase; 
+      white-space: nowrap;
+    }
+     
+    .place, .name {
+      overflow: hidden;
+      text-overflow: ellipsis;
+    }
   }
+}
+
+.event-carousel-controls {
   
-  .event-place {
-    color: $eventTextColor;
+  .carousel-control {
+    background-image: none;
+    
+    .icon-next, 
+    .icon-prev {
+      color: #c2c2c2;
+      line-height: 0px;
+      font-size: 150px;
+      font-family: serif;
+      text-shadow: none;
+    }
+
+    &.left {
+      left: -15%;  
+    }
+  
+    &.right {
+      right: -15%;  
+    }
   }
-  
-  .event-date {
-    color: $eventTextColor;
-  }
-  
-  .event-name {
-    color: $eventNameColor;
-  }
-  
+}
+
+.all-events-container {
+  padding-top: 15px;
+  padding-bottom: 15px;
 }

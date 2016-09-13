@@ -29,7 +29,7 @@
 
           var news = _.clone(data[1]).map(newsArticle => {
             return Object.assign(newsArticle, {
-              "shortDate": moment(newsArticle.published).format("DD.MM.YYYY")
+              "shortDate": moment(newsArticle.published).format("D.M.YYYY")
             });
           });
 

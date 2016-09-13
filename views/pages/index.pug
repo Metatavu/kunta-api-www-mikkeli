@@ -2,21 +2,18 @@ extends ../layout/index.pug
 
 mixin event(event) 
   .col-xs-4
-    .event
-      .row
-        .col-xs
-          img.event-image(src=event.imageSrc + "?size=400")
-      .row.no-margins
-        .col-xs.event-banner
-          .row
-            .col-xs-3
-              span.event-date
-                =event.shortDate
-            .col-xs-9
-              label.event-place
-                =event.place            
-              label.event-name
-                =event.name 
+    .event(style='background-image: url(' + event.imageSrc + '?size=480)')
+      a.event-link(href=event.originalUrl,target="_blank")
+      .details
+        .row
+          .col-xs-5.no-gutter-right
+            .date
+              =event.shortDate
+          .col-xs-7
+            .place
+              =event.place    
+            .name
+              =event.name 
 
 mixin newsArticleTop(article)
   .news-article.top-article(style='background-image: url(' + article.imageSrc + '?size=350)')
@@ -24,21 +21,24 @@ mixin newsArticleTop(article)
       =article.shortDate
     .details
       .title
-        =article.title
+        !=article.title
       .abstract
         !=article.abstract
+    .border
 mixin newsArticleThumb(article)
   .news-article.thumb-article(style='background-image: url(' + article.imageSrc + '?size=350)')
     .date
       =article.shortDate
     .details
       .title
-        =article.title
+        !=article.title
       .abstract
         !=article.abstract
 
 mixin newsArticleText(article)
   .news-article.text-article
+    .date
+      =article.shortDate
     .title
       =article.title
       
@@ -51,13 +51,37 @@ mixin banner(banner)
     p
       !=banner.contents
       
+mixin banners-slider(banners) 
+  .header-banner
+    .header-border-top
+    #banner-slide.carousel.slide(data-ride='carousel')
+      .banner-carousel-indicators
+        ol.carousel-indicators
+          each banner, bannerIndex in banners
+            li(data-target='#banner-slide', data-slide-to='#{bannerIndex}')
+      .banner-carousel-items
+        .carousel-inner(role='listbox')
+          each banner, bannerIndex in banners
+            - var itemClass=bannerIndex == 0 ? "carousel-item active" : 'carousel-item'
+            div(class=itemClass)
+              +banner(banner)
+      .banner-carousel-controls
+        a.left.carousel-control(href='#banner-slide', role='button', data-slide='prev')
+          span.icon-prev(aria-hidden='true')
+          span.sr-only Previous
+        a.right.carousel-control(href='#banner-slide', role='button', data-slide='next')
+          span.icon-next(aria-hidden='true')
+          span.sr-only Next
+    .header-silhouette
+    .header-border-bottom
+      
 mixin tile(tile)
   .tile(style='background-image: url(' + tile.imageSrc + ')')
     if tile.link
       a.tile-link(href=tile.link,target="_blank")
     .details
       h3
-        =tile.title
+        !=tile.title
       p
         !=tile.contents
       
@@ -65,79 +89,75 @@ block styles
   link(rel="stylesheet", href="/css/index.min.css")
 
 block content
-  .container
+  .container-fluid.no-gutters
+    .row
+      .col-xs
+        +banners-slider(banners)
+
+  .container.no-gutters
     .row
       .col-xs
         .row
-          .col-xs
-            .header-banner
-              .header-border-top
-              #banner-slide.carousel.slide(data-ride='carousel')
-                .banner-carousel-indicators
-                  ol.carousel-indicators
-                    each banner, bannerIndex in banners
-                      li(data-target='#banner-slide', data-slide-to='#{bannerIndex}')
-                .banner-carousel-items
-                  .carousel-inner(role='listbox')
-                    each banner, bannerIndex in banners
-                      - var itemClass=bannerIndex == 0 ? "carousel-item active" : 'carousel-item'
-                      div(class=itemClass)
-                        +banner(banner)
-                .banner-carousel-controls
-                  a.left.carousel-control(href='#banner-slide', role='button', data-slide='prev')
-                    span.icon-prev(aria-hidden='true')
-                    span.sr-only Previous
-                  a.right.carousel-control(href='#banner-slide', role='button', data-slide='next')
-                    span.icon-next(aria-hidden='true')
-                    span.sr-only Next
-              .header-silhouette
-              .header-border-bottom
-        .row
-          .col-xs-8
+          .col-xs-9
             .row
-              .col-xs
+              .col-xs.no-gutter-left.top-article-container
                 +newsArticleTop(news.top)
             .row
-              .col-xs
+              .col-xs.no-gutter-left.thumb-articles-container
                 .row
                   each newsArticle in news.thumbs
                     .col-xs-6
                       +newsArticleThumb(newsArticle)
             .row
-              .col-xs
+              .col-xs.no-gutter-left.text-articles-container
                 each newsArticle in news.texts
                   .row
                     .col-xs
                       +newsArticleText(newsArticle)
-          .col-xs-4.tiles
+          .col-xs-3.tiles.no-gutter-right
              each tile in tiles
                .row
                  .col-xs
                    +tile(tile)
         .row
-          .col-xs
-            #event-slide.carousel.slide(data-ride='carousel')
-              .event-carousel-indicators
-                ol.carousel-indicators
-                  each eventPage, pageIndex in eventPages
-                    li(data-target='#event-slide', data-slide-to='#{pageIndex}')
-              .event-carousel-items
-                .carousel-inner(role='listbox')
-                  each pageEvents, pageIndex in eventPages
-                    - var itemClass=pageIndex == 0 ? "carousel-item active" : 'carousel-item'
-                    div(class=itemClass)
-                      .row
-                        each event in pageEvents
-                          +event(event)
-              .event-carousel-controls
-                a.left.carousel-control(href='#event-slide', role='button', data-slide='prev')
-                  span.icon-prev(aria-hidden='true')
-                  span.sr-only Previous
-                a.right.carousel-control(href='#event-slide', role='button', data-slide='next')
-                  span.icon-next(aria-hidden='true')
-                  span.sr-only Next
+          .col-xs.no-gutters
+            a.all-news-link(href="#")
+              | > Katso kaikki uutiset
+              
+  .container-fluid.no-gutters
+    .row
+      .col-xs
+        .horizontal-line
+        
+  .container.no-gutters
+    .row
+      .col-xs.text-xs-center.events-title
+        span
+          |Tulevia tapahtumia mikkelissä
+    .row
+      .col-xs
+        #event-slide.carousel.slide(data-ride='carousel')
+          .event-carousel-indicators
+            ol.carousel-indicators
+              each eventPage, pageIndex in eventPages
+                li(data-target='#event-slide', data-slide-to='#{pageIndex}')
+          .event-carousel-items
+            .carousel-inner(role='listbox')
+              each pageEvents, pageIndex in eventPages
+                - var itemClass=pageIndex == 0 ? "carousel-item active" : 'carousel-item'
+                div(class=itemClass)
+                  .row
+                    each event in pageEvents
+                      +event(event)
+          .event-carousel-controls
+            a.left.carousel-control(href='#event-slide', role='button', data-slide='prev')
+              span.icon-prev(aria-hidden='true')
+              span.sr-only Previous
+            a.right.carousel-control(href='#event-slide', role='button', data-slide='next')
+              span.icon-next(aria-hidden='true')
+              span.sr-only Next
         .row
-          .col-xs.text-xs-center
+          .col-xs.text-xs-center.all-events-container
             span
               |Katso kaikki tapahtumat
             span

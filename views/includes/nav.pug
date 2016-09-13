@@ -1,33 +1,40 @@
-nav.navbar.navbar-light.bg-faded
+nav.navbar.navbar-light
   .container
     button.navbar-toggler.hidden-sm-up(type='button', data-toggle='collapse', data-target='#exCollapsingNavbar', aria-controls='exCollapsingNavbar', aria-expanded='false', aria-label='Toggle navigation')
       | ☰
     .collapse.navbar-toggleable-xs#exCollapsingNavbar  
       .row
-        .col-xs-5
-          |Kunta LOGO
+        .col-xs-5.logo-container
+          img.logo(src="/gfx/layout/mikkeli-logo.png")
         .col-xs-7.text-xs-right
           .row
-            .col-xs-6
-              |Haku 
-            .col-xs-3
-              |SOME
-            .col-xs-3
-              |KARTTA
+            .col-xs-7
+              .nav-search-container
+                input(placeholder="Hae...")
+                i.fa.fa-search(aria-hidden="true")
+            .col-xs-4.no-gutter-right
+              .nav-some-icons
+                i.fa.fa-facebook-official(aria-hidden="true")
+                i.fa.fa-twitter(aria-hidden="true")
+                i.fa.fa-instagram(aria-hidden="true")
+            .col-xs-1
+              .nav-quick-icons
+                i.fa.fa-map-marker(aria-hidden="true")
           .row
             .col-xs
-              |MUIKKU
-      nav.navbar.navbar-light.bg-faded.row
-        .col-xs-6.no-gutter-left
-          ul.nav.navbar-nav
+              .nav-muikku-container
+                img.logo(src="/gfx/layout/mikkeli-muikku.jpg")
+      nav.navbar.navbar-light.row
+        .col-xs-5.no-gutter-left
+          ul.nav.navbar-nav.nav-bar-primary
             li.nav-item
               a.nav-link(href='#')
                 | Palvelut
             li.nav-item
               a.nav-link(href='#') 
-                | Tietoa Kunnasta
-        .col-xs-6.no-gutter-right
-          ul.nav.navbar-nav.pull-xs-right
+                | Tietoa Mikkelistä
+        .col-xs-7.no-gutter-right
+          ul.nav.navbar-nav.pull-xs-right.nav-bar-secondary
             li.nav-item
               a.nav-link(href='#')
                 | Organisaatio 

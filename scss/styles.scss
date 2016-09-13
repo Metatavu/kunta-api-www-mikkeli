@@ -1,1 +1,124 @@
 @charset "UTF-8";
+
+@import 'fonts';
+@import 'vars';
+
+.logo-container {
+  padding-top: 54px;
+}
+
+nav.navbar {
+  padding-top: 26px;
+  padding-bottom: 3px;
+}
+
+.header-banner {
+  margin-bottom: 30px;
+}
+
+.nav-search-container {
+  
+  input {
+    border: 1px solid #ccc;
+    border-radius: 20px;
+    font-size: 12px;
+    padding-left: 10px;
+    padding-top: 4px;
+    padding-bottom: 4px;
+    width: 100%;
+    max-width: 190px;
+  }
+  
+  .fa {
+    margin-left: -25px;
+    color: #aaa;
+    font-size: 15px;
+  }
+  
+}
+
+.nav-some-icons {
+  
+  text-align: right;
+  
+ .fa {
+    color: #999;
+    font-size: 28px;
+    padding-left: 12px;
+  } 
+}
+
+.nav-muikku-container {
+  margin-top: 30px;
+}
+
+.nav-quick-icons {
+  
+  text-align: right;
+  
+  .fa {
+    color: #fff;
+    font-size: 16px;
+    background: #52b9e9;
+    width: 28px;
+    text-align: center;
+    padding-top: 6px;
+    padding-bottom: 6px;
+  }
+}
+
+.navbar-light .navbar-nav.nav-bar-primary {
+  
+  .nav-item {
+    margin-left: 20px;
+    
+    &:first-child {
+      margin-left: 0px;
+    }
+  }
+  
+  .nav-link {
+    @include font-ultra(25px);
+    color: #428ecc;
+    text-transform: uppercase;
+  }
+}
+
+.navbar-light .navbar-nav.nav-bar-secondary {
+  
+  .nav-link {
+    @include font-std(17px);
+    color: #aaa;
+    text-transform: uppercase;
+  }
+  
+}
+
+.horizontal-line {
+  height: 8px;
+  background-repeat: no-repeat;
+  background-image: url('/gfx/layout/mikkeli-banner-border.png');
+  width: 100%;
+}
+
+footer {
+  background: #c1147c;
+  height: 280px;
+  margin-top: 59px;
+  
+  &:before {
+    margin-top: 59px;
+    height: 59px;
+    background-position: left;
+    background-repeat: no-repeat;
+    background-image: url('/gfx/layout/mikkeli-silhouette.png');
+    top: -59px;
+    width: 100%;
+    left: 0px;
+    right: 0px;
+    position: absolute;
+    display: block;
+    content: '.';
+    color: transparent;
+  }
+}
