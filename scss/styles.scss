@@ -105,14 +105,33 @@ footer {
   background: #c1147c;
   height: 280px;
   margin-top: 59px;
+  color: #fff;
+  
+  .footer-logo-container {
+    margin-top: 64px;
+  }
+
+  .footer-address-container {
+    margin-top: 26px;
+  }
+  
+  h4 {
+    @include font-ultra(16px);
+    text-transform: uppercase;
+    margin-top: 62px;
+  }
+
+  p {
+    @include font-std(15px);
+  }
   
   &:before {
-    margin-top: 59px;
-    height: 59px;
+    margin-top: 58px;
+    height: 58px;
     background-position: left;
-    background-repeat: no-repeat;
+    background-repeat: repeat-x;
     background-image: url('/gfx/layout/mikkeli-silhouette.png');
-    top: -59px;
+    top: -57px;
     width: 100%;
     left: 0px;
     right: 0px;
