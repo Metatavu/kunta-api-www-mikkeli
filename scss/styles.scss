@@ -3,6 +3,10 @@
 @import 'fonts';
 @import 'vars';
 
+body {
+  overflow-x: hidden;
+}
+
 .logo-container {
   padding-top: 54px;
 }
