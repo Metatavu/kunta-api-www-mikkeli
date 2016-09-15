@@ -88,6 +88,10 @@ mixin tile(tile)
 block styles
   link(rel="stylesheet", href="/css/index.min.css")
 
+block scripts
+  script(defer="defer", type="text/javascript", src="https://cdnjs.cloudflare.com/ajax/libs/masonry/4.1.1/masonry.pkgd.min.js")
+  script(defer="defer", type="text/javascript", src="/js/index.js")
+
 block content
   .container-fluid.no-gutters
     .row
@@ -240,3 +244,23 @@ block content
                   .all-link-container
                     a.all-link(href="#") 
                       |Katso kaikki
+  .container
+    .social-media-items
+      .social-media-items-grid-sizer
+      each socialMediaItem in socialMediaItems
+        .social-media-item(data-source=socialMediaItem.source)
+          .header
+            case socialMediaItem.source
+              when 'twitter'
+                i.icon.fa.fa-twitter(aria-hidden="true")
+              when 'facebook'
+                i.icon.fa.fa-facebook-official(aria-hidden="true")
+              when 'instagram'
+                i.icon.fa.fa-instagram(aria-hidden="true")
+            a.link(href=socialMediaItem.link, target="_blank")
+              =socialMediaItem.shortDate
+          .content
+            if (socialMediaItem.image) 
+              img(src=socialMediaItem.image)
+            .text
+              !=socialMediaItem.text

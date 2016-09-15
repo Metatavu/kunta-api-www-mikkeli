@@ -5,6 +5,7 @@
   
   var EVENT_PAGES = 3;
   var EVENTS_PER_PAGE = 3;
+  var SOCIAL_MEDIA_POSTS = 4 * 3;
   
   module.exports = function(app, modules) {
   
@@ -15,6 +16,7 @@
         .news.latest(0, 9)
         .banners.list()
         .tiles.list()
+        .socialMedia.latest(SOCIAL_MEDIA_POSTS)
         .callback(function (data) {
           var events = _.clone(data[0]||[]).map(event => {
             return Object.assign(event, {
@@ -45,10 +47,17 @@
             });
           });
           
+          var socialMediaItems = _.clone(data[4]||[]).map(socialMediaItem => {
+            return Object.assign(socialMediaItem, {
+              "shortDate": moment(socialMediaItem.created).format("D.M.YYYY hh:mm")
+            });
+          });
+          
           res.render('pages/index.pug', { 
             eventPages: eventPages,
             banners: banners,
             tiles: tiles,
+            socialMediaItems: socialMediaItems,
             news: {
               top: news.splice(0, 1)[0],
               thumbs: news.splice(0, 4),
@@ -57,7 +66,7 @@
           });
          
         }, function (err) {
-          console.log(err);
+          console.error(err);
           res.status(500).send(err);
         });
     });
