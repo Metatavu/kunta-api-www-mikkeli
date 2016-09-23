@@ -1,6 +1,6 @@
 {
   "name": "kunta-api-www-mikkeli",
-  "version": "0.0.3",
+  "version": "0.0.4",
   "description": " Kunta API visualization layer implementation for Mikkeli",
   "main": "index.js",
   "scripts": {
@@ -12,14 +12,13 @@
   },
   "author": "",
   "license": "AGPL-3.0",
-  "dependencies": {
-    "lodash": "^4.15.0",
-    "moment": "^2.14.1",
+  "devDependencies": {
     "grunt": "^1.0.1",
     "grunt-contrib-sass": "^1.0.0",
     "load-grunt-tasks": "^3.5.2"
   },
-  "scripts": {
-    "postinstall": "grunt sass"
+  "dependencies": {
+    "lodash": "^4.15.0",
+    "moment": "^2.14.1"
   }
 }
