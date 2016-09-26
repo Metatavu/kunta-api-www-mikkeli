@@ -7,9 +7,10 @@
   var EVENTS_PER_PAGE = 3;
   var SOCIAL_MEDIA_POSTS = 4 * 3;
   
-  module.exports = function(app, modules) {
+  module.exports = function(app, config, ModulesClass) {
   
     app.get('/', function(req, res) {
+      var modules = new ModulesClass(config);
       
       modules
         .events.latest(EVENT_PAGES * EVENTS_PER_PAGE)
