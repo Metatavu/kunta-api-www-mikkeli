@@ -18,6 +18,7 @@
         .banners.list()
         .tiles.list()
         .socialMedia.latest(SOCIAL_MEDIA_POSTS)
+        .menus.list()
         .callback(function (data) {
           var events = _.clone(data[0]||[]).map(event => {
             return Object.assign(event, {
@@ -54,6 +55,8 @@
             });
           });
           
+          var menus = data[5]||{};
+          
           res.render('pages/index.pug', { 
             eventPages: eventPages,
             banners: banners,
@@ -63,7 +66,8 @@
               top: news.splice(0, 1)[0],
               thumbs: news.splice(0, 4),
               texts: news
-            }
+            },
+            menus: menus
           });
          
         }, function (err) {

@@ -27,20 +27,13 @@ nav.navbar.navbar-light
       nav.navbar.navbar-light.row
         .col-xs-5.no-gutter-left
           ul.nav.navbar-nav.nav-bar-primary
-            li.nav-item
-              a.nav-link(href='#')
-                | Palvelut
-            li.nav-item
-              a.nav-link(href='#') 
-                | Tietoa Mikkelistä
+            each item in menus['paavalikko'].items
+              li.nav-item
+                a.nav-link(href='#')
+                  = item.label 
         .col-xs-7.no-gutter-right
           ul.nav.navbar-nav.pull-xs-right.nav-bar-secondary
-            li.nav-item
-              a.nav-link(href='#')
-                | Organisaatio 
+            each item in menus['sisalto'].items
               li.nav-item
-                a.nav-link(href='#') Päätöksenteko
-              li.nav-item
-                a.nav-link(href='#') Talous ja strategia
-              li.nav-item
-                a.nav-link(href='#') Ota yhteyttä
+                a.nav-link(href='#')
+                  = item.label
