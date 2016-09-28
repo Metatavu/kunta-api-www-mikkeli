@@ -91,22 +91,34 @@
   
     app.get('/sisalto*', function(req, res) {
       var path = req.path.substring(9);
+      var preferLanguages = req.headers['accept-language'];
       
       new ModulesClass(config)
-        .pages.findByPath(path, req.headers['accept-language'])
+        .pages.findByPath(path, preferLanguages)
         .callback(function (data) {
           var page = data[0];
           if (!page) {
             res.status(404).send("Not Found");
             return;
           }
-         
-          res.render('pages/contents.pug', {
-            title: page.title,
-            contents: page.contents,
-            featuredImageSrc: page.featuredImageSrc,
-            menus: req.kuntaApi.data.menus
-          });
+          
+          new ModulesClass(config)  
+            .pages.getContent(page.id, preferLanguages)
+            .pages.resolveBreadcrumbs(page, preferLanguages)
+            .callback(function (pageData) {
+              var contents = pageData[0];
+              var breadcrumbs = pageData[1];
+              res.render('pages/contents.pug', {
+	            title: page.title,
+	            contents: contents,
+	            breadcrumbs: breadcrumbs,
+	            featuredImageSrc: page.featuredImageSrc,
+	            menus: req.kuntaApi.data.menus
+	          });
+            }, function (contentErr) {
+              console.error(contentErr);
+              res.status(500).send(contentErr);
+            });
           
         }, function (err) {
           console.error(err);

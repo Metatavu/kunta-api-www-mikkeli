@@ -4,17 +4,27 @@ block styles
   link(rel="stylesheet", href="/css/contents.min.css")
 
 block content
-  .container
+  .container.page-container
     .row
-      .col-xs-2.page-nav
+      .col-xs.breadcrumbs-container
+        a.breadcrumb-item(href="/")
+          |Etusivu
+        each breadcrumb in breadcrumbs
+          a.breadcrumb-item(href='/sisalto' + breadcrumb.path)
+            =breadcrumb.title
+        span.breadcrumb-item.active
+          !=title
+    .row
+      .col-xs-5.page-nav
         h3
           |Kulttuuri ja kirjasto
-      .col-xs-8
-        h1
-          !=title
-        .featured-image(style='background-image: url(' + featuredImageSrc + '?size=750)')
-        !=contents
-      .col-xs-2.sidebar
+      .col-xs-14
+        .page-content
+          h1
+            !=title
+          .featured-image(style='background-image: url(' + featuredImageSrc + '?size=750)')
+          !=contents
+      .col-xs-5.sidebar
         .sidebar-block
           h3
             |Palvelun tuottaa
