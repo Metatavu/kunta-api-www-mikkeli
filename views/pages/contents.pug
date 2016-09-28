@@ -1,0 +1,40 @@
+extends ../layout/contents.pug
+
+block styles
+  link(rel="stylesheet", href="/css/contents.min.css")
+
+block content
+  .container
+    .row
+      .col-xs-2.page-nav
+        h3
+          |Kulttuuri ja kirjasto
+      .col-xs-8
+        h1
+          !=title
+        .featured-image(style='background-image: url(' + featuredImageSrc + '?size=750)')
+        !=contents
+      .col-xs-2.sidebar
+        .sidebar-block
+          h3
+            |Palvelun tuottaa
+          p
+            |Yleiset kulttuuripalvelut
+            br
+            |Maaherrankatu 9-11 
+            br
+            |50100 Mikkeli PL 206
+            br
+            |50101 Mikkeli
+        .sidebar-block
+          h3
+            |Palvelun tuottaa
+          p
+            |Yleiset kulttuuripalvelut
+            br
+            |Maaherrankatu 9-11 
+            br
+            |50100 Mikkeli PL 206
+            br
+            |50101 Mikkeli
+        

@@ -1,0 +1,41 @@
+@charset "UTF-8";
+
+@import 'vars';
+
+h1 {
+  color: #bc177e;
+  text-transform: uppercase;
+  @include font-ultra(40px);
+}
+
+.featured-image {
+  height: 285px;
+  background-repeat: no-repeat;
+  background-size: cover;
+  background-position: center;
+}
+
+.page-nav {
+  
+  h3 {
+    @include font-ultra(14px);  	
+    text-transform: uppercase;
+    
+  }
+	
+}
+
+.sidebar {
+  background: #edeef2;
+  
+  .sidebar-block {
+  	
+  	h3 {
+      color: #bc177e;
+      @include font-ultra(28px);
+  	}
+  
+  
+  	
+  }
+}
