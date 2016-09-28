@@ -4,21 +4,21 @@ nav.navbar.navbar-light
       | ☰
     .collapse.navbar-toggleable-xs#exCollapsingNavbar  
       .row
-        .col-xs-5.logo-container
+        .col-xs-10.logo-container
           a(href="/")
             img.logo(src="/gfx/layout/mikkeli-logo.png")
-        .col-xs-7.text-xs-right
+        .col-xs-14.text-xs-right
           .row
-            .col-xs-7
+            .col-xs-14
               .nav-search-container
                 input(placeholder="Hae...")
                 i.fa.fa-search(aria-hidden="true")
-            .col-xs-4.no-gutter-right
+            .col-xs-8.no-gutter-right
               .nav-some-icons
                 i.fa.fa-facebook-official(aria-hidden="true")
                 i.fa.fa-twitter(aria-hidden="true")
                 i.fa.fa-instagram(aria-hidden="true")
-            .col-xs-1
+            .col-xs-2
               .nav-quick-icons
                 i.fa.fa-map-marker(aria-hidden="true")
           .row
@@ -26,13 +26,13 @@ nav.navbar.navbar-light
               .nav-muikku-container
                 img.logo(src="/gfx/layout/mikkeli-muikku.jpg")
       nav.navbar.navbar-light.row
-        .col-xs-5.no-gutter-left
+        .col-xs-10.no-gutter-left
           ul.nav.navbar-nav.nav-bar-primary
             each item in menus['paavalikko'].items
               li.nav-item
                 a.nav-link(href='#')
                   = item.label 
-        .col-xs-7.no-gutter-right
+        .col-xs-14.no-gutter-right
           ul.nav.navbar-nav.pull-xs-right.nav-bar-secondary
             each item in menus['sisalto'].items
               li.nav-item

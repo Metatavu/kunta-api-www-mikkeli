@@ -1,15 +1,15 @@
 extends ../layout/index.pug
 
 mixin event(event) 
-  .col-xs-4
+  .col-xs-8
     .event(style='background-image: url(' + event.imageSrc + '?size=480)')
       a.event-link(href=event.originalUrl,target="_blank")
       .details
         .row
-          .col-xs-5.no-gutter-right
+          .col-xs-10.no-gutter-right
             .date
               =event.shortDate
-          .col-xs-7
+          .col-xs-14
             .place
               =event.place    
             .name
@@ -102,7 +102,7 @@ block content
     .row
       .col-xs
         .row
-          .col-xs-9
+          .col-xs-18
             .row
               .col-xs.no-gutter-left.top-article-container
                 +newsArticleTop(news.top)
@@ -110,7 +110,7 @@ block content
               .col-xs.no-gutter-left.thumb-articles-container
                 .row
                   each newsArticle in news.thumbs
-                    .col-xs-6
+                    .col-xs-12
                       +newsArticleThumb(newsArticle)
             .row
               .col-xs.no-gutter-left.text-articles-container
@@ -118,7 +118,7 @@ block content
                   .row
                     .col-xs
                       +newsArticleText(newsArticle)
-          .col-xs-3.tiles.no-gutter-right
+          .col-xs-6.tiles.no-gutter-right
              each tile in tiles
                .row
                  .col-xs
@@ -175,7 +175,7 @@ block content
         .content-blocks-container
           .container
             .row
-              .col-xs-4
+              .col-xs-8
                 .content-block.info-block
                   .icon
                   .title
@@ -194,7 +194,7 @@ block content
                   .all-link-container
                     a.all-link(href="#") 
                       |Katso kaikki
-              .col-xs-4
+              .col-xs-8
                 .content-block.jobs-block
                   .icon
                   .title
@@ -219,7 +219,7 @@ block content
                   .all-link-container
                     a.all-link(href="#") 
                       |Katso kaikki
-              .col-xs-4
+              .col-xs-8
                 .content-block.announcements-block
                   .icon
                   .title
