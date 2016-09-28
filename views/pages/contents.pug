@@ -4,6 +4,14 @@ block styles
   link(rel="stylesheet", href="/css/contents.min.css")
 
 block content
+  .container-fluid.no-gutters
+    .row
+      .col-xs.banner-container
+        .banner-border-top
+        .banner(style='background-image: url(' + bannerSrc + ')')
+        .banner-silhouette
+        .banner-border-bottom
+        
   .container.page-container
     .row
       .col-xs.breadcrumbs-container
@@ -14,6 +22,7 @@ block content
             =breadcrumb.title
         span.breadcrumb-item.active
           !=title
+  .container.page-container
     .row
       .col-xs-5.page-nav
         h3

@@ -102,6 +102,8 @@
             return;
           }
           
+          // TODO: Banner should come from API
+          
           new ModulesClass(config)  
             .pages.getContent(page.id, preferLanguages)
             .pages.resolveBreadcrumbs(page, preferLanguages)
@@ -113,7 +115,8 @@
 	            contents: contents,
 	            breadcrumbs: breadcrumbs,
 	            featuredImageSrc: page.featuredImageSrc,
-	            menus: req.kuntaApi.data.menus
+	            menus: req.kuntaApi.data.menus,
+	            bannerSrc: '/gfx/layout/mikkeli-page-banner-default.jpg'
 	          });
             }, function (contentErr) {
               console.error(contentErr);
