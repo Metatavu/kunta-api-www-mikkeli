@@ -102,8 +102,6 @@
             return;
           }
           
-          // TODO: Banner should come from API
-          
           new ModulesClass(config)  
             .pages.getContent(page.id, preferLanguages)
             .pages.resolveBreadcrumbs(page, preferLanguages)
@@ -113,6 +111,9 @@
               var breadcrumbs = pageData[1];
               var siblings = pageData[2];
               var folderTitle = breadcrumbs.length ? breadcrumbs[breadcrumbs.length - 1].title : page.title;
+              var featuredImageSrc = page.featuredImageSrc ? page.featuredImageSrc + '?size=750' : '/gfx/layout/mikkeli-page-image-default.jpg';
+              // TODO: Banner should come from API
+              var bannerSrc = '/gfx/layout/mikkeli-page-banner-default.jpg';
               
               res.render('pages/contents.pug', {
                 id: page.id,
@@ -120,10 +121,10 @@
 	            folderTitle: folderTitle,
 	            contents: contents,
 	            breadcrumbs: breadcrumbs,
-	            featuredImageSrc: page.featuredImageSrc,
+	            featuredImageSrc: featuredImageSrc,
 	            menus: req.kuntaApi.data.menus,
 	            siblings: siblings,
-	            bannerSrc: '/gfx/layout/mikkeli-page-banner-default.jpg'
+	            bannerSrc: bannerSrc
 	          });
             }, function (contentErr) {
               console.error(contentErr);
