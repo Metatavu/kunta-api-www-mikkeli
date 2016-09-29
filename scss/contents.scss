@@ -105,9 +105,21 @@
   h3 {
     @include font-ultra(14px);  	
     text-transform: uppercase;
-    
   }
-	
+ 
+  .page-nav-item {
+  	display: block;
+  	padding-top: 15px;
+  	padding-bottom: 15px;
+  	border-bottom: 1px solid #ebebeb;
+  	color: #363636;
+  	
+  	&.active {
+  	  color: #bc177e;
+  	  font-weight: bold;
+  	}
+  }
+ 	
 }
 
 .sidebar {

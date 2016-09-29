@@ -107,15 +107,22 @@
           new ModulesClass(config)  
             .pages.getContent(page.id, preferLanguages)
             .pages.resolveBreadcrumbs(page, preferLanguages)
+            .pages.listMetaByParentId(page.parentId, preferLanguages)
             .callback(function (pageData) {
               var contents = pageData[0];
               var breadcrumbs = pageData[1];
+              var siblings = pageData[2];
+              var folderTitle = breadcrumbs.length ? breadcrumbs[breadcrumbs.length - 1].title : page.title;
+              
               res.render('pages/contents.pug', {
+                id: page.id,
 	            title: page.title,
+	            folderTitle: folderTitle,
 	            contents: contents,
 	            breadcrumbs: breadcrumbs,
 	            featuredImageSrc: page.featuredImageSrc,
 	            menus: req.kuntaApi.data.menus,
+	            siblings: siblings,
 	            bannerSrc: '/gfx/layout/mikkeli-page-banner-default.jpg'
 	          });
             }, function (contentErr) {

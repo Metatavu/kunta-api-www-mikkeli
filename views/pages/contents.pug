@@ -26,7 +26,14 @@ block content
     .row
       .col-xs-5.page-nav
         h3
-          |Kulttuuri ja kirjasto
+         =folderTitle
+        each sibling in siblings
+          if sibling.id == id
+            a.page-nav-item.active(href=sibling.slug)
+              =sibling.title
+          else
+            a.page-nav-item(href=sibling.slug)
+              =sibling.title
       .col-xs-14
         .page-content
           h1
