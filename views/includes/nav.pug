@@ -30,11 +30,11 @@ nav.navbar.navbar-light
           ul.nav.navbar-nav.nav-bar-primary
             each item in menus['paavalikko'].items
               li.nav-item
-                a.nav-link(href='#')
+                a.nav-link(href=item.url)
                   = item.label 
         .col-xs-14.no-gutter-right
           ul.nav.navbar-nav.pull-xs-right.nav-bar-secondary
             each item in menus['sisalto'].items
               li.nav-item
-                a.nav-link(href='#')
+                a.nav-link(href=item.url)
                   = item.label

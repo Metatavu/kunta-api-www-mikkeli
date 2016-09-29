@@ -14,9 +14,23 @@
       
       modules.menus.list()
        .callback(function (data) {
+         var menus = data[0];
+         
+         _.keys(menus).forEach(menuKey => {
+            var menu = menus[menuKey];
+         
+         	menu.items = menu.items.map(item => {
+              if (item.url && item.url.startsWith('/')) {
+                item.url = '/sisalto' + item.url;
+              }
+              
+              return item;
+            });
+         });
+       
           req.kuntaApi = {
             data: {
-              menus: data[0]
+              menus: menus
             }
           };
           
