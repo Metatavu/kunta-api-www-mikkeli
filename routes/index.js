@@ -133,6 +133,7 @@
               
               res.render('pages/contents.pug', {
                 id: page.id,
+                slug: page.slug,
                 title: page.title,
                 folderTitle: folderTitle,
                 contents: contents,
