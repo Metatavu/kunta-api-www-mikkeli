@@ -38,7 +38,7 @@
       case 'PATH':
         return util.format('%s%s', CONTENT_FOLDER, link);
       case 'RELATIVE':
-        return util.format('%s/%s', currentPage, link);
+        return util.format('%s/%s', currentPage.split('/').splice(-1), link);
       default:
     }
     
@@ -173,10 +173,12 @@
             .pages.getContent(page.id, preferLanguages)
             .pages.resolveBreadcrumbs(page, preferLanguages)
             .pages.listMetaByParentId(page.parentId, preferLanguages)
+            .pages.listMetaByParentId(page.id, preferLanguages)
             .callback(function (pageData) {
               var contents = pageData[0];
               var breadcrumbs = pageData[1];
               var siblings = pageData[2];
+              var children = pageData[3];
               var folderTitle = breadcrumbs.length ? breadcrumbs[breadcrumbs.length - 1].title : page.title;
               var featuredImageSrc = page.featuredImageSrc ? page.featuredImageSrc + '?size=750' : '/gfx/layout/mikkeli-page-image-default.jpg';
               // TODO: Banner should come from API
@@ -184,15 +186,18 @@
               
               res.render('pages/contents.pug', {
                 id: page.id,
-	            title: page.title,
-	            folderTitle: folderTitle,
-	            contents: processPageContent(path, contents),
-	            breadcrumbs: breadcrumbs,
-	            featuredImageSrc: featuredImageSrc,
-	            menus: req.kuntaApi.data.menus,
-	            siblings: siblings,
-	            bannerSrc: bannerSrc
-	          });
+                slug: page.slug,
+                title: page.title,
+                folderTitle: folderTitle,
+                contents: processPageContent(path, contents),
+                breadcrumbs: breadcrumbs,
+                featuredImageSrc: featuredImageSrc,
+                menus: req.kuntaApi.data.menus,
+                siblings: siblings,
+                children: children,
+                bannerSrc: bannerSrc
+              });
+              
             }, function (contentErr) {
               console.error(contentErr);
               res.status(500).send(contentErr);

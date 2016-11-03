@@ -40,6 +40,11 @@ block content
             !=title
           .featured-image(style='background-image: url(' + featuredImageSrc + ')')
           !=contents
+          ul
+            each child in children
+              li
+                a(href=slug+'/'+child.slug)
+                  =child.title
       .col-xs-5.sidebar
         .sidebar-block
           h3
