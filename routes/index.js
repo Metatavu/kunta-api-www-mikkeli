@@ -1,5 +1,6 @@
 (function() {
-  
+  'use strict';
+
   let util = require('util');
   let moment = require('moment');
   let _ = require('lodash');
