@@ -1,12 +1,65 @@
 (function() {
   
-  var moment = require('moment');
-  var _ = require('lodash');
+  let util = require('util');
+  let moment = require('moment');
+  let _ = require('lodash');
+  let cheerio = require('cheerio');
   
-  var EVENT_PAGES = 3;
-  var EVENTS_PER_PAGE = 3;
-  var SOCIAL_MEDIA_POSTS = 4 * 3;
+  let EVENT_PAGES = 3;
+  let EVENTS_PER_PAGE = 3;
+  let SOCIAL_MEDIA_POSTS = 4 * 3;
+  let CONTENT_FOLDER = '/sisalto';
+
+  function resolveLinkType(link) {
+    if (!link) {
+      return 'NONE';  
+    }
+    
+    if (link.startsWith('/')) {
+      return 'PATH';
+    } else if (link.match(/[a-zA-Z]*:\/\/.*/)) {
+      return 'ABSOLUTE';
+    }
+    
+    return 'RELATIVE';
+  }
   
+  function processLink(currentPage, text) {
+    if (!text) {
+      return null;
+    }
+    
+    var link = text.trim();
+    if (!link) {
+      return null;  
+    }
+    
+    switch (resolveLinkType(link)) {
+      case 'PATH':
+        return util.format('%s%s', CONTENT_FOLDER, link);
+      case 'RELATIVE':
+        return util.format('%s/%s', currentPage, link);
+      default:
+    }
+    
+    return link;
+  }
+    
+  function processPageContent(currentPage, content) {
+    if (!content) {
+      return '';
+    }
+   
+    let $ = cheerio.load(content);
+    
+    $('a[href]').each(function (index, link) {
+      var href = $(link).attr('href');
+      $(link).attr('href', processLink(currentPage, href));
+    });
+    
+    return $.html();
+  }
+    
   module.exports = function(app, config, ModulesClass) {
   
     app.use(function (req, res, next) {
@@ -20,8 +73,8 @@
             var menu = menus[menuKey];
          
          	menu.items = menu.items.map(item => {
-              if (item.url && item.url.startsWith('/')) {
-                item.url = '/sisalto' + item.url;
+              if (item.url) {
+                item.url = processLink(null, item.url);
               }
               
               return item;
@@ -103,7 +156,7 @@
         });
     });
   
-    app.get('/sisalto*', function(req, res) {
+    app.get(util.format('%s*', CONTENT_FOLDER), function(req, res) {
       var path = req.path.substring(9);
       var preferLanguages = req.headers['accept-language'];
       
@@ -133,7 +186,7 @@
                 id: page.id,
 	            title: page.title,
 	            folderTitle: folderTitle,
-	            contents: contents,
+	            contents: processPageContent(path, contents),
 	            breadcrumbs: breadcrumbs,
 	            featuredImageSrc: featuredImageSrc,
 	            menus: req.kuntaApi.data.menus,
