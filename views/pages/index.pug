@@ -1,15 +1,15 @@
 extends ../layout/index.pug
 
 mixin event(event) 
-  .col-xs-8
+  .swiper-slide.col-md-8
     .event(style='background-image: url(' + event.imageSrc + '?size=480)')
       a.event-link(href=event.originalUrl,target="_blank")
       .details
         .row
-          .col-xs-10.no-gutter-right
+          .col-xs-10.no-gutters
             .date
               =event.shortDate
-          .col-xs-14
+          .col-xs-14.no-gutters
             .place
               =event.place    
             .name
@@ -44,12 +44,13 @@ mixin newsArticleText(article)
       
 mixin banner(banner)
   .header-banner-item(style='background-image: url(' + banner.imageSrc + ')')
-    if banner.link
-      a.banner-link(href=banner.link,target="_blank")
-    h1
-      =banner.title
-    p
-      !=banner.contents
+    .container.banner-content-container
+      if banner.link
+        a.banner-link(href=banner.link,target="_blank")
+      h1
+        =banner.title
+      p
+        !=banner.contents
       
 mixin banners-slider(banners) 
   .header-banner
@@ -103,7 +104,7 @@ block content
     .row
       .col-xs
         .row
-          .col-xs-18
+          .col-md-18
             .row
               .col-xs.no-gutter-left.top-article-container
                 +newsArticleTop(news.top)
@@ -111,7 +112,7 @@ block content
               .col-xs.no-gutter-left.thumb-articles-container
                 .row
                   each newsArticle in news.thumbs
-                    .col-xs-12
+                    .col-md-12
                       +newsArticleThumb(newsArticle)
             .row
               .col-xs.no-gutter-left.text-articles-container
@@ -119,15 +120,15 @@ block content
                   .row
                     .col-xs
                       +newsArticleText(newsArticle)
-          .col-xs-6.tiles.no-gutter-right
+            .row
+              .col-xs.no-gutters
+                a.all-news-link(href="#")
+                  | > Katso kaikki uutiset
+          .col-md-6.tiles.no-gutter-right
              each tile in tiles
                .row
                  .col-xs
                    +tile(tile)
-        .row
-          .col-xs.no-gutters
-            a.all-news-link(href="#")
-              | > Katso kaikki uutiset
               
   .container-fluid.no-gutters
     .row
@@ -141,26 +142,13 @@ block content
           |Tulevia tapahtumia mikkelissä
     .row
       .col-xs
-        #event-slide.carousel.slide(data-ride='carousel')
-          .event-carousel-indicators
-            ol.carousel-indicators
-              each eventPage, pageIndex in eventPages
-                li(data-target='#event-slide', data-slide-to='#{pageIndex}')
-          .event-carousel-items
-            .carousel-inner(role='listbox')
-              each pageEvents, pageIndex in eventPages
-                - var itemClass=pageIndex == 0 ? "carousel-item active" : 'carousel-item'
-                div(class=itemClass)
-                  .row
-                    each event in pageEvents
-                      +event(event)
-          .event-carousel-controls
-            a.left.carousel-control(href='#event-slide', role='button', data-slide='prev')
-              span.icon-prev(aria-hidden='true')
-              span.sr-only Previous
-            a.right.carousel-control(href='#event-slide', role='button', data-slide='next')
-              span.icon-next(aria-hidden='true')
-              span.sr-only Next
+        .swiper-container
+          .swiper-wrapper
+            each event in events
+              +event(event)
+          .swiper-pagination
+          .swiper-button-next
+          .swiper-button-prev
         .row
           .col-xs.text-xs-center.all-events-container
             span
@@ -176,7 +164,7 @@ block content
         .content-blocks-container
           .container
             .row
-              .col-xs-8
+              .col-md-8
                 .content-block.info-block
                   .icon
                   .title
@@ -195,7 +183,7 @@ block content
                   .all-link-container
                     a.all-link(href="#") 
                       |Katso kaikki
-              .col-xs-8
+              .col-md-8
                 .content-block.jobs-block
                   .icon
                   .title
@@ -220,7 +208,7 @@ block content
                   .all-link-container
                     a.all-link(href="#") 
                       |Katso kaikki
-              .col-xs-8
+              .col-md-8
                 .content-block.announcements-block
                   .icon
                   .title

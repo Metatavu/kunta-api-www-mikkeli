@@ -34,41 +34,62 @@
     background-size: cover;
     background-repeat: no-repeat;
     position: relative;
+    @media (max-width: $break-small) { 
+      height: 300px;
+    }
+
+    .banner-content-container {
+      padding-left: 100px;
+      padding-right: 100px;
+      @media (max-width: $break-small) { 
+          padding-left: 15px;
+          padding-right: 15px;
+      }
+
+      a.banner-link {
+        position: absolute;
+        top: 0px;
+        left: 0px;
+        right: 0px;
+        bottom: 0px;
+        opacity: 0;
+        background: transparent;
+        z-index: 0;
+      }
     
-    a.banner-link {
-      position: absolute;
-      top: 0px;
-      left: 0px;
-      right: 0px;
-      bottom: 0px;
-      opacity: 0;
-      background: transparent;
-      z-index: 0;
-    }
-  
-    h1 {
-      @include font-ultra(70px);
-      padding-top: 145px;
-      font-weight: 900;
-      letter-spacing: 3px;
-    }
-  
-    p {
-      @include font-std(18px);
-      padding-top: 20px;
-    }
-  
-    p, h1 {
-      position: relative;
-      z-index: 1;
-      color: #fff;
-      padding-left: 500px;
+      h1 {
+        @include font-ultra(70px);
+        padding-top: 145px;
+        font-weight: 900;
+        letter-spacing: 3px;
+        @media (max-width: $break-small) { 
+          padding-top: 60px;
+        }
+        @media (max-width: $break-x-small) { 
+          @include font-ultra(40px);
+        }
+      }
+    
+      p {
+        @include font-std(18px);
+        padding-top: 20px;
+      }
+    
+      p, h1 {
+        position: relative;
+        z-index: 1;
+        color: #fff;
+      }
     }  
   }
 }
 
 .tiles {
-  
+  @media (max-width: $break-x-small) { 
+    padding-left: 25px;
+    padding-right: 25px; 
+  }
+
   .tile {
     width: 100%;
     height: 200px;
@@ -139,6 +160,27 @@
   }
 }
 
+.top-article-container {
+  @media (max-width: $break-x-small) { 
+    padding-left: 25px;
+    padding-right: 25px; 
+  }
+}
+
+.thumb-articles-container {
+  @media (max-width: $break-x-small) { 
+    padding-left: 25px;
+    padding-right: 25px; 
+  }
+}
+
+.text-articles-container {
+  @media (max-width: $break-x-small) { 
+    padding-left: 25px;
+    padding-right: 25px; 
+  }
+}
+
 .news-article {
   
   position: relative;
@@ -165,6 +207,9 @@
     .title {
       color: #bc177e;
       @include font-ultra(30px);
+      @media (max-width: $break-x-small) { 
+        @include font-ultra(24px);
+      }
     }
     
     .abstract {
@@ -176,6 +221,9 @@
   &.top-article {
     height: 458px;
     margin-bottom: 15px;
+    @media (max-width: $break-x-small) { 
+      height: 358px;
+    }
 
     .date {
       bottom: 155px;
@@ -190,6 +238,9 @@
         max-height: 80px;
         overflow: hidden;
         text-overflow: ellipsis;
+        @media (max-width: $break-x-small) { 
+          visibility: hidden;
+        }
       }
     }
   
@@ -211,6 +262,9 @@
   &.thumb-article {
     height: 287px;
     margin-bottom: 15px;
+    @media (max-width: $break-x-small) { 
+      height: 200px;
+    }
 
     .date {
       bottom: 120px;
@@ -288,7 +342,7 @@
   position: relative;
   background-size: cover;
   background-repeat: no-repeat;
-  
+
   .details {
     position: absolute;
     background: #50266f;
@@ -306,7 +360,7 @@
     .date  {
       @include font-ultra(55px);
       margin-top: 0px;
-      text-align: right;
+      text-align: center;
     }
 
     .name {
@@ -371,6 +425,9 @@
     padding-bottom: 35px;
     height: 455px;
     position: relative;
+    @media (max-width: $break-small) { 
+      height: 475px;
+    }
     
     .icon {
       height: 72px;
@@ -466,6 +523,9 @@
       bottom: -30px;
       left: 0;
       right: 0;
+      @media (max-width: $break-small) { 
+        bottom: 0px;
+      }
     }
   
     .all-link {

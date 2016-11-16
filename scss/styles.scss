@@ -110,7 +110,10 @@ footer {
   height: 280px;
   margin-top: 59px;
   color: #fff;
-  
+  @media (max-width: $break-small) { 
+    height: auto;
+  }
+
   .footer-logo-container {
     margin-top: 64px;
   }

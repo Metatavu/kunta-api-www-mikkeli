@@ -6,8 +6,7 @@
   let _ = require('lodash');
   let cheerio = require('cheerio');
   
-  let EVENT_PAGES = 3;
-  let EVENTS_PER_PAGE = 3;
+  let EVENT_COUNT = 9;
   let SOCIAL_MEDIA_POSTS = 4 * 3;
   let CONTENT_FOLDER = '/sisalto';
 
@@ -97,7 +96,7 @@
   
     app.get('/', function(req, res) {
       new ModulesClass(config)
-        .events.latest(EVENT_PAGES * EVENTS_PER_PAGE)
+        .events.latest(EVENT_COUNT)
         .news.latest(0, 9)
         .banners.list()
         .tiles.list()
@@ -108,11 +107,6 @@
               "shortDate": moment(event.start).format("D/M")
             });
           });
-          
-          var eventPages = [];
-          while (events.length) {
-            eventPages.push(events.splice(0, EVENTS_PER_PAGE));
-          }
 
           var news = _.clone(data[1]).map(newsArticle => {
             return Object.assign(newsArticle, {
@@ -139,7 +133,7 @@
           });
           
           res.render('pages/index.pug', { 
-            eventPages: eventPages,
+            events: events,
             banners: banners,
             tiles: tiles,
             socialMediaItems: socialMediaItems,
