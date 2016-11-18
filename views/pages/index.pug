@@ -189,22 +189,10 @@ block content
                   .title
                     |Kuntarekry
                   .content
-                    .content-block-row
-                      a(href='#', target='_blank') Avoin työtehtävä
-                      span
-                        Lorem ipsum dela rossen, Mikkeli
-                    .content-block-row
-                      a(href='#', target='_blank') Avoin työtehtävä
-                      span
-                        Lorem ipsum dela rossen, Mikkeli
-                    .content-block-row
-                      a(href='#', target='_blank') Avoin työtehtävä
-                      span
-                        Lorem ipsum dela rossen, Mikkeli
-                    .content-block-row
-                      a(href='#', target='_blank') Avoin työtehtävä
-                      span
-                        Lorem ipsum dela rossen, Mikkeli
+                    each job in jobs
+                      .content-block-row
+                        a(href=job.link, target='_blank') #{job.title}
+                        span #{job.employmentType}, #{job.taskArea}
                   .all-link-container
                     a.all-link(href="#") 
                       |Katso kaikki

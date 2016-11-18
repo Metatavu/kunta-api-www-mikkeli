@@ -7,6 +7,7 @@
   let cheerio = require('cheerio');
   
   let EVENT_COUNT = 9;
+  let JOB_COUNT = 5;
   let SOCIAL_MEDIA_POSTS = 4 * 3;
   let CONTENT_FOLDER = '/sisalto';
 
@@ -101,6 +102,7 @@
         .banners.list()
         .tiles.list()
         .socialMedia.latest(SOCIAL_MEDIA_POSTS)
+        .jobs.list(JOB_COUNT, 'PUBLICATION_END', 'ASCENDING')
         .callback(function (data) {
           var events = _.clone(data[0]||[]).map(event => {
             return Object.assign(event, {
@@ -132,11 +134,16 @@
             });
           });
           
+          var jobs = _.clone(data[5]||[]).map(job => {
+            return job;
+          });
+          
           res.render('pages/index.pug', { 
             events: events,
             banners: banners,
             tiles: tiles,
             socialMediaItems: socialMediaItems,
+            jobs: jobs,
             news: {
               top: news.splice(0, 1)[0],
               thumbs: news.splice(0, 4),
