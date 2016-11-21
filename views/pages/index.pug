@@ -1,19 +1,20 @@
 extends ../layout/index.pug
 
 mixin event(event) 
-  .swiper-slide.col-md-8
-    .event(style='background-image: url(' + event.imageSrc + '?size=480)')
-      a.event-link(href=event.originalUrl,target="_blank")
-      .details
-        .row
-          .col-xs-10.no-gutters
-            .date
-              =event.shortDate
-          .col-xs-14.no-gutters
-            .place
-              =event.place    
-            .name
-              =event.name 
+  .swiper-slide.col-lg-8.no-gutters
+    .event-container
+      .event(style='background-image: url(' + event.imageSrc + '?size=480)')
+        a.event-link(href=event.originalUrl,target="_blank")
+        .details
+          .row
+            .col-xs-10.no-gutters
+              .date
+                =event.shortDate
+            .col-xs-14.no-gutters
+              .place
+                =event.place    
+              .name
+                =event.name 
 
 mixin newsArticleTop(article)
   .news-article.top-article(style='background-image: url(' + article.imageSrc + '?size=350)')
@@ -141,7 +142,7 @@ block content
         span
           |Tulevia tapahtumia mikkelissä
     .row
-      .col-xs
+      .col-xs.events-container.no-gutters
         .swiper-container
           .swiper-wrapper
             each event in events
