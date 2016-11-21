@@ -202,7 +202,6 @@
     right: 0px;
     background: rgba(255, 255, 255, 0.5);
     padding-left: 24px;
-    overflow: hidden;
     
     .title {
       color: #bc177e;
@@ -260,20 +259,25 @@
   }
   
   &.thumb-article {
-    height: 287px;
+    min-height: 287px;
     margin-bottom: 15px;
-    @media (max-width: $break-x-small) { 
-      height: 200px;
-    }
-
-    .date {
-      bottom: 120px;
-      position: absolute;
-    }
     
     .details {
-      height: 120px;
+      min-height: 120px;
       padding-top: 6px;
+     
+      .date {
+        margin-top: -34px;
+        position: absolute;
+        left: 0px;
+      }
+      
+      .title {
+        font-size: 22px;
+        @media (max-width: $break-x-small) { 
+          font-size: 18px;
+        }
+      }
 
       .abstract {
         max-height: 45px;

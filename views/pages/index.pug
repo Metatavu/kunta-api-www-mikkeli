@@ -27,9 +27,9 @@ mixin newsArticleTop(article)
     .border
 mixin newsArticleThumb(article)
   .news-article.thumb-article(style='background-image: url(' + article.imageSrc + '?size=350)')
-    .date
-      =article.shortDate
     .details
+      .date
+        =article.shortDate
       .title
         !=article.title
       .abstract
@@ -104,7 +104,7 @@ block content
     .row
       .col-xs
         .row
-          .col-md-18
+          .col-lg-18
             .row
               .col-xs.no-gutter-left.top-article-container
                 +newsArticleTop(news.top)
@@ -124,7 +124,7 @@ block content
               .col-xs.no-gutters
                 a.all-news-link(href="#")
                   | > Katso kaikki uutiset
-          .col-md-6.tiles.no-gutter-right
+          .col-lg-6.tiles.no-gutter-right
              each tile in tiles
                .row
                  .col-xs
