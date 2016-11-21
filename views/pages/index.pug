@@ -17,9 +17,9 @@ mixin event(event)
 
 mixin newsArticleTop(article)
   .news-article.top-article(style='background-image: url(' + article.imageSrc + '?size=350)')
-    .date
-      =article.shortDate
     .details
+      .date
+        =article.shortDate
       .title
         !=article.title
       .abstract

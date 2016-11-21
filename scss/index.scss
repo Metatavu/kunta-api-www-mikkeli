@@ -202,6 +202,8 @@
     right: 0px;
     background: rgba(255, 255, 255, 0.5);
     padding-left: 24px;
+    padding-right: 24px;
+    padding-bottom: 19px;
     
     .title {
       color: #bc177e;
@@ -218,29 +220,18 @@
   }
 
   &.top-article {
-    height: 458px;
+    min-height: 458px;
     margin-bottom: 15px;
-    @media (max-width: $break-x-small) { 
-      height: 358px;
-    }
 
     .date {
-      bottom: 155px;
+      margin-top: -47px;
       position: absolute;
+      left: 0px;
     }
 
     .details {
-      height: 155px;
+      min-height: 155px;
       padding-top: 19px;
-      
-      .abstract {
-        max-height: 80px;
-        overflow: hidden;
-        text-overflow: ellipsis;
-        @media (max-width: $break-x-small) { 
-          visibility: hidden;
-        }
-      }
     }
   
     &:after {
