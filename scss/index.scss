@@ -437,16 +437,21 @@
   padding-bottom: 70px;
   background-image: url("/gfx/layout/mikkeli-index-blocks-background.jpg");
   margin-bottom: 30px;
+  background-repeat: no-repeat;
+  background-size: cover;
   
   .content-block {
     background: rgba(255, 255, 255, 0.8);
     text-align: center;
     padding-top: 20px;
     padding-bottom: 35px;
-    height: 455px;
+    min-height: 455px;
     position: relative;
-    @media (max-width: $break-small) { 
-      height: 475px;
+    margin-bottom: 60px;
+    padding-left: 15px;
+    padding-right: 15px;
+    @media (min-width: $break-large) { 
+      height: 100%;
     }
     
     .icon {
@@ -543,9 +548,6 @@
       bottom: -30px;
       left: 0;
       right: 0;
-      @media (max-width: $break-small) { 
-        bottom: 0px;
-      }
     }
   
     .all-link {
