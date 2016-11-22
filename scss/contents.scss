@@ -3,7 +3,25 @@
 @import 'vars';
 
 .page-container {
-  max-width: 1200px;
+  
+  @media (min-width: $break-large) { 
+    max-width: 1200px;
+  }
+  
+  .btn-primary {
+    background-color: #bc177e;
+    border-color: #bc177e;
+    position: absolute;
+    top: -2px;
+    right: 15px;
+    z-index: 9999;
+    
+    &:active:focus {
+      background-color: darken(#bc177e, 10%);
+      border-color: darken(#bc177e, 10%);
+    }
+  }
+  
 }
 
 .banner-container {
@@ -43,6 +61,10 @@
   margin-bottom: 75px;
   font-size: 14px;
 	
+  @media (max-width: $break-medium) {
+    margin-bottom: 15px;
+  }
+  
   .breadcrumb-item {
     text-transform: uppercase;  	
     color: #464646;
@@ -67,18 +89,18 @@
 }
 
 .page-content {
-
-  padding-left: 15px;
-  padding-right: 15px;
   font-size: 95%;
+  margin-bottom: 45px;
 
   h1 {
-	color: #bc177e;
+	  color: #bc177e;
   	text-transform: uppercase;
     @include font-ultra(40px);
     
     @media (max-width: $break-small) {
-      font-size: 30px;
+      font-size: 26px;
+      margin-right: 50px;
+      word-wrap: break-word;
     }
     
   }
@@ -113,6 +135,7 @@
 }
 
 .page-nav {
+  margin-bottom: 15px;
   
   h3 {
     @include font-ultra(14px);  	
@@ -144,6 +167,10 @@
   	padding-bottom: 15px;
   	border-bottom: 1px solid #ebebeb;
   	color: #363636;
+    
+    @media (max-width: $break-medium) {
+      margin-right: 50px;
+    }
   	
     a {
       color: #363636;
@@ -159,6 +186,7 @@
 
 .sidebar {
   background: #edeef2;
+  margin-bottom: 45px;
   
   .sidebar-block {
   	
