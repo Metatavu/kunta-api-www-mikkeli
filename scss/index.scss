@@ -13,7 +13,7 @@
   .header-border-top,
   .header-border-bottom {
     height: 8px;
-    background-repeat: no-repeat;
+    background-repeat: repeat-x;
     background-image: url('/gfx/layout/mikkeli-banner-border.png');
   }
 
@@ -240,7 +240,7 @@
       font-size: 0px;
       display: block;
       height: 8px;
-      background-repeat: no-repeat;
+      background-repeat: repeat-x;
       background-image: url('/gfx/layout/mikkeli-banner-border.png');
       position: absolute;
       bottom: 0px;
