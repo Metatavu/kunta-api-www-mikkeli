@@ -76,6 +76,11 @@
 	color: #bc177e;
   	text-transform: uppercase;
     @include font-ultra(40px);
+    
+    @media (max-width: $break-small) {
+      font-size: 30px;
+    }
+    
   }
  
   h2 {

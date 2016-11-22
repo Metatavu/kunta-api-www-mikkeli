@@ -24,7 +24,7 @@ block content
           !=title
   .container.page-container
     .row
-      .col-xs-5.page-nav
+      .col-xs-24.col-md-5.page-nav
         h3
          =folderTitle
         each sibling in siblings
@@ -40,13 +40,13 @@ block content
           else
             a.page-nav-item(href=sibling.slug)
               =sibling.title
-      .col-xs-14
+      .col-xs-24.col-md-14
         .page-content
           h1
             !=title
           .featured-image(style='background-image: url(' + featuredImageSrc + ')')
           !=contents
-      .col-xs-5.sidebar
+      .col-xs-24.col-md-5.sidebar
         .sidebar-block
           h3
             |Palvelun tuottaa
