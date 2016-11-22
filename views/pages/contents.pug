@@ -29,8 +29,14 @@ block content
          =folderTitle
         each sibling in siblings
           if sibling.id == id
-            a.page-nav-item.active(href=sibling.slug)
-              =sibling.title
+            .page-nav-item.active
+              a(href=sibling.slug)
+                =sibling.title
+              ul.child-pages
+                each child in children
+                  li
+                    a(href=slug+'/'+child.slug)
+                      =child.title
           else
             a.page-nav-item(href=sibling.slug)
               =sibling.title
@@ -40,11 +46,6 @@ block content
             !=title
           .featured-image(style='background-image: url(' + featuredImageSrc + ')')
           !=contents
-          ul
-            each child in children
-              li
-                a(href=slug+'/'+child.slug)
-                  =child.title
       .col-xs-5.sidebar
         .sidebar-block
           h3
