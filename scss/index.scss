@@ -24,7 +24,7 @@
     background-repeat: repeat-x;
     background-image: url('/gfx/layout/mikkeli-silhouette.png');
     bottom: 8px;
-    left: 0px;
+    left: 0;
     position: absolute;
     z-index: 2;
   }
@@ -48,10 +48,10 @@
 
       a.banner-link {
         position: absolute;
-        top: 0px;
-        left: 0px;
-        right: 0px;
-        bottom: 0px;
+        top: 0;
+        left: 0;
+        right: 0;
+        bottom: 0;
         opacity: 0;
         background: transparent;
         z-index: 0;
@@ -100,10 +100,10 @@
     
     a.tile-link {
       position: absolute;
-      top: 0px;
-      left: 0px;
-      right: 0px;
-      bottom: 0px;
+      top: 0;
+      left: 0;
+      right: 0;
+      bottom: 0;
       opacity: 0;
       background: transparent;
       z-index: 1;
@@ -111,9 +111,9 @@
     
     .details {
       position: absolute;
-      bottom: 0px;
-      left: 0px;
-      right: 0px;
+      bottom: 0;
+      left: 0;
+      right: 0;
       height: 125px;
       background: rgba(0, 0, 0, 0.2);
       padding-top: 20px;
@@ -197,9 +197,9 @@
 
   .details {
     position: absolute;
-    bottom: 0px;
-    left: 0px;
-    right: 0px;
+    bottom: 0;
+    left: 0;
+    right: 0;
     background: rgba(255, 255, 255, 0.5);
     padding-left: 24px;
     padding-right: 24px;
@@ -226,7 +226,7 @@
     .date {
       margin-top: -47px;
       position: absolute;
-      left: 0px;
+      left: 0;
     }
 
     .details {
@@ -237,15 +237,15 @@
     &:after {
       content: '.';
       color: transparent;
-      font-size: 0px;
+      font-size: 0;
       display: block;
       height: 8px;
       background-repeat: repeat-x;
       background-image: url('/gfx/layout/mikkeli-banner-border.png');
       position: absolute;
-      bottom: 0px;
-      left: 0px;
-      right: 0px;
+      bottom: 0;
+      left: 0;
+      right: 0;
     }
   }
   
@@ -260,7 +260,7 @@
       .date {
         margin-top: -34px;
         position: absolute;
-        left: 0px;
+        left: 0;
       }
       
       .title {
@@ -337,15 +337,15 @@
   margin-right: -15px;
   
   @media (max-width: $break-medium) { 
-    margin-left: 0px;
-    margin-right: 0px;
-    padding-left: 0px;
-    padding-right: 0px;
+    margin-left: 0;
+    margin-right: 0;
+    padding-left: 0;
+    padding-right: 0;
   }
   
   @media (max-width: $break-small) { 
-    margin-left: 0px;
-    margin-right: 0px;
+    margin-left: 0;
+    margin-right: 0;
     padding-left: 10px;
     padding-right: 10px;
   }
@@ -366,9 +366,9 @@
     position: absolute;
     background: #50266f;
     height: 90px;
-    left: 0px;
-    right: 0px;
-    bottom: 0px;
+    left: 0;
+    right: 0;
+    bottom: 0;
     padding-right: 15px;
     
     .date, 
@@ -378,7 +378,7 @@
   
     .date  {
       @include font-ultra(44px);
-      margin-top: 0px;
+      margin-top: 0;
       text-align: center;
       letter-spacing: 0.5px;
       padding-top: 8px;
@@ -414,7 +414,7 @@
     .icon-next, 
     .icon-prev {
       color: #c2c2c2;
-      line-height: 0px;
+      line-height: 0;
       font-size: 150px;
       font-family: serif;
       text-shadow: none;
