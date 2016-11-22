@@ -8,10 +8,12 @@ body {
 }
 
 .logo-container {
-  @media (min-width: $break-large) { 
+
+  @media (min-width: $break-large) {
      padding-top: 54px;
   }
-  @media (max-width: $break-small) { 
+  
+  @media (max-width: $break-small) {
      margin-bottom:26px;
   }
 }
@@ -24,9 +26,10 @@ nav.navbar {
 .navbar-toggler {
   padding-top: 4px;
   padding-left: 0;
+  
   .fa-bars {
     color: #5f626a;
-    font-size: 30;
+    font-size: 30px;
   }
 
   &:focus {
@@ -38,7 +41,7 @@ nav.navbar {
 }
 
 .header-banner {
-  margin-bottom: 30;
+  margin-bottom: 30px;
 }
 
 .nav-search-container {
@@ -46,15 +49,15 @@ nav.navbar {
   
   input {
     border: 1px solid #ccc;
-    border-radius: 20;
+    border-radius: 20px;
     font-size: 12px;
-    padding-left: 10;
-    padding-top: 4px;
     padding-bottom: 4px;
+    padding-left: 10px;
+    padding-top: 4px;
     width: 100%;
 
     @media (min-width: $break-small) {
-      max-width: 190;
+      max-width: 190px;
     }
   }
 
@@ -76,7 +79,7 @@ nav.navbar {
 }
 
 .nav-muikku-container {
-  margin-top: 30;
+  margin-top: 30px;
 }
 
 .nav-quick-icons {
@@ -96,11 +99,11 @@ nav.navbar {
 
 .navbar-light .navbar-nav {
   .nav-item {
-    margin-left: 20;
+    margin-left: 20px;
     
     @media (max-width: $break-medium) {
       margin-left: 0;
-      margin-right: 20;
+      margin-right: 20px;
     }
 
     @media (max-width: $break-small) {
@@ -141,7 +144,7 @@ nav.navbar {
 footer {
   color: #fff;
   margin-top: 59px;
-  min-height: 280;
+  min-height: 280px;
   background: #c1147c;
 
   .footer-logo-container {
