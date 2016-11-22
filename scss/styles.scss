@@ -23,21 +23,22 @@ nav.navbar {
 
 .navbar-toggler {
   padding-top: 4px;
-  padding-left: 0px;
+  padding-left: 0;
   .fa-bars {
     color: #5f626a;
-    font-size: 30px;
+    font-size: 30;
   }
-  
+
   &:focus {
-    outline-style:none;
-    box-shadow:none;
-    border-color:transparent;
+    box-shadow: none;
+    outline-style: none;
+    border-color: transparent;
   }
-  
+
 }
+
 .header-banner {
-  margin-bottom: 30px;
+  margin-bottom: 30;
 }
 
 .nav-search-container {
@@ -45,17 +46,18 @@ nav.navbar {
   
   input {
     border: 1px solid #ccc;
-    border-radius: 20px;
+    border-radius: 20;
     font-size: 12px;
-    padding-left: 10px;
+    padding-left: 10;
     padding-top: 4px;
     padding-bottom: 4px;
     width: 100%;
-    @media (min-width: $break-small) { 
-      max-width: 190px;
+
+    @media (min-width: $break-small) {
+      max-width: 190;
     }
   }
-  
+
   .fa {
     margin-left: -25px;
     color: #aaa;
@@ -74,7 +76,7 @@ nav.navbar {
 }
 
 .nav-muikku-container {
-  margin-top: 30px;
+  margin-top: 30;
 }
 
 .nav-quick-icons {
@@ -94,21 +96,22 @@ nav.navbar {
 
 .navbar-light .navbar-nav {
   .nav-item {
-    margin-left: 20px;
-    @media (max-width: $break-medium) { 
-      margin-left: 0px;
-      margin-right: 20px;
+    margin-left: 20;
+    
+    @media (max-width: $break-medium) {
+      margin-left: 0;
+      margin-right: 20;
     }
-    @media (max-width: $break-small) { 
-      margin-right: 0px;
+
+    @media (max-width: $break-small) {
+      margin-right: 0;
     }
   }
 }
 
 .navbar-light .navbar-nav.nav-bar-primary {
-  
   .nav-item:first-child {
-      margin-left: 0px;
+    margin-left: 0;
   }
   
   .nav-link {
@@ -136,11 +139,10 @@ nav.navbar {
 }
 
 footer {
-  background: #c1147c;
-  min-height: 280px;
-  margin-top: 59px;
   color: #fff;
-
+  margin-top: 59px;
+  min-height: 280;
+  background: #c1147c;
 
   .footer-logo-container {
     margin-top: 64px;
@@ -168,8 +170,8 @@ footer {
     background-image: url('/gfx/layout/mikkeli-silhouette.png');
     top: -57px;
     width: 100%;
-    left: 0px;
-    right: 0px;
+    left: 0;
+    right: 0;
     position: absolute;
     display: block;
     content: '.';
