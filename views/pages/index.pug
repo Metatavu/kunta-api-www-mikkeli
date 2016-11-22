@@ -1,25 +1,26 @@
 extends ../layout/index.pug
 
 mixin event(event) 
-  .swiper-slide.col-md-8
-    .event(style='background-image: url(' + event.imageSrc + '?size=480)')
-      a.event-link(href=event.originalUrl,target="_blank")
-      .details
-        .row
-          .col-xs-10.no-gutters
-            .date
-              =event.shortDate
-          .col-xs-14.no-gutters
-            .place
-              =event.place    
-            .name
-              =event.name 
+  .swiper-slide.col-lg-8.no-gutters
+    .event-container
+      .event(style='background-image: url(' + event.imageSrc + '?size=480)')
+        a.event-link(href=event.originalUrl,target="_blank")
+        .details
+          .row
+            .col-xs-10.no-gutters
+              .date
+                =event.shortDate
+            .col-xs-14.no-gutters
+              .place
+                =event.place    
+              .name
+                =event.name 
 
 mixin newsArticleTop(article)
   .news-article.top-article(style='background-image: url(' + article.imageSrc + '?size=350)')
-    .date
-      =article.shortDate
     .details
+      .date
+        =article.shortDate
       .title
         !=article.title
       .abstract
@@ -27,9 +28,9 @@ mixin newsArticleTop(article)
     .border
 mixin newsArticleThumb(article)
   .news-article.thumb-article(style='background-image: url(' + article.imageSrc + '?size=350)')
-    .date
-      =article.shortDate
     .details
+      .date
+        =article.shortDate
       .title
         !=article.title
       .abstract
@@ -104,7 +105,7 @@ block content
     .row
       .col-xs
         .row
-          .col-md-18
+          .col-lg-18
             .row
               .col-xs.no-gutter-left.top-article-container
                 +newsArticleTop(news.top)
@@ -124,7 +125,7 @@ block content
               .col-xs.no-gutters
                 a.all-news-link(href="#")
                   | > Katso kaikki uutiset
-          .col-md-6.tiles.no-gutter-right
+          .col-lg-6.tiles.no-gutters
              each tile in tiles
                .row
                  .col-xs
@@ -141,7 +142,7 @@ block content
         span
           |Tulevia tapahtumia mikkelissä
     .row
-      .col-xs
+      .col-xs.events-container.no-gutters
         .swiper-container
           .swiper-wrapper
             each event in events
@@ -164,7 +165,7 @@ block content
         .content-blocks-container
           .container
             .row
-              .col-md-8
+              .col-lg-8
                 .content-block.info-block
                   .icon
                   .title
@@ -177,13 +178,13 @@ block content
                     .content-block-row
                       a(href='https://www.kuntalaisaloite.fi/fi', style='line-height: 1.53em', target='_blank') Kuntalaisaloite.fi
                     .content-block-row
-                      a(href='https://www.nuortenideat.fi/fi/', target='_blank') https://www.nuortenideat.fi/fi/
+                      a(href='https://www.nuortenideat.fi/fi/', target='_blank') nuortenideat.fi
                     .content-block-row
-                      a(href='http://www.demokratia.fi/', target='_blank') http://www.demokratia.fi/
+                      a(href='http://www.demokratia.fi/', target='_blank') demokratia.fi
                   .all-link-container
                     a.all-link(href="#") 
                       |Katso kaikki
-              .col-md-8
+              .col-lg-8
                 .content-block.jobs-block
                   .icon
                   .title
@@ -196,7 +197,7 @@ block content
                   .all-link-container
                     a.all-link(href="#") 
                       |Katso kaikki
-              .col-md-8
+              .col-lg-8
                 .content-block.announcements-block
                   .icon
                   .title

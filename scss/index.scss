@@ -13,7 +13,7 @@
   .header-border-top,
   .header-border-bottom {
     height: 8px;
-    background-repeat: no-repeat;
+    background-repeat: repeat-x;
     background-image: url('/gfx/layout/mikkeli-banner-border.png');
   }
 
@@ -24,7 +24,7 @@
     background-repeat: repeat-x;
     background-image: url('/gfx/layout/mikkeli-silhouette.png');
     bottom: 8px;
-    left: 0px;
+    left: 0;
     position: absolute;
     z-index: 2;
   }
@@ -48,10 +48,10 @@
 
       a.banner-link {
         position: absolute;
-        top: 0px;
-        left: 0px;
-        right: 0px;
-        bottom: 0px;
+        top: 0;
+        left: 0;
+        right: 0;
+        bottom: 0;
         opacity: 0;
         background: transparent;
         z-index: 0;
@@ -100,10 +100,10 @@
     
     a.tile-link {
       position: absolute;
-      top: 0px;
-      left: 0px;
-      right: 0px;
-      bottom: 0px;
+      top: 0;
+      left: 0;
+      right: 0;
+      bottom: 0;
       opacity: 0;
       background: transparent;
       z-index: 1;
@@ -111,9 +111,9 @@
     
     .details {
       position: absolute;
-      bottom: 0px;
-      left: 0px;
-      right: 0px;
+      bottom: 0;
+      left: 0;
+      right: 0;
       height: 125px;
       background: rgba(0, 0, 0, 0.2);
       padding-top: 20px;
@@ -197,12 +197,13 @@
 
   .details {
     position: absolute;
-    bottom: 0px;
-    left: 0px;
-    right: 0px;
+    bottom: 0;
+    left: 0;
+    right: 0;
     background: rgba(255, 255, 255, 0.5);
     padding-left: 24px;
-    overflow: hidden;
+    padding-right: 24px;
+    padding-bottom: 19px;
     
     .title {
       color: #bc177e;
@@ -219,61 +220,55 @@
   }
 
   &.top-article {
-    height: 458px;
+    min-height: 458px;
     margin-bottom: 15px;
-    @media (max-width: $break-x-small) { 
-      height: 358px;
-    }
 
     .date {
-      bottom: 155px;
+      margin-top: -47px;
       position: absolute;
+      left: 0;
     }
 
     .details {
-      height: 155px;
+      min-height: 155px;
       padding-top: 19px;
-      
-      .abstract {
-        max-height: 80px;
-        overflow: hidden;
-        text-overflow: ellipsis;
-        @media (max-width: $break-x-small) { 
-          visibility: hidden;
-        }
-      }
     }
   
     &:after {
       content: '.';
       color: transparent;
-      font-size: 0px;
+      font-size: 0;
       display: block;
       height: 8px;
-      background-repeat: no-repeat;
+      background-repeat: repeat-x;
       background-image: url('/gfx/layout/mikkeli-banner-border.png');
       position: absolute;
-      bottom: 0px;
-      left: 0px;
-      right: 0px;
+      bottom: 0;
+      left: 0;
+      right: 0;
     }
   }
   
   &.thumb-article {
-    height: 287px;
+    min-height: 287px;
     margin-bottom: 15px;
-    @media (max-width: $break-x-small) { 
-      height: 200px;
-    }
-
-    .date {
-      bottom: 120px;
-      position: absolute;
-    }
     
     .details {
-      height: 120px;
+      min-height: 120px;
       padding-top: 6px;
+     
+      .date {
+        margin-top: -34px;
+        position: absolute;
+        left: 0;
+      }
+      
+      .title {
+        font-size: 22px;
+        @media (max-width: $break-x-small) { 
+          font-size: 18px;
+        }
+      }
 
       .abstract {
         max-height: 45px;
@@ -336,6 +331,30 @@
   margin-top: 15px;
   margin-bottom: 15px;
 }
+ 
+.events-container {
+  margin-left: -15px;
+  margin-right: -15px;
+  
+  @media (max-width: $break-medium) { 
+    margin-left: 0;
+    margin-right: 0;
+    padding-left: 0;
+    padding-right: 0;
+  }
+  
+  @media (max-width: $break-small) { 
+    margin-left: 0;
+    margin-right: 0;
+    padding-left: 10px;
+    padding-right: 10px;
+  }
+  
+  .event-container {
+    margin-left: 15px;
+    margin-right: 15px;
+  }
+}
 
 .event {
   height: 263px;
@@ -347,9 +366,9 @@
     position: absolute;
     background: #50266f;
     height: 90px;
-    left: 0px;
-    right: 0px;
-    bottom: 0px;
+    left: 0;
+    right: 0;
+    bottom: 0;
     padding-right: 15px;
     
     .date, 
@@ -358,9 +377,12 @@
     }
   
     .date  {
-      @include font-ultra(55px);
-      margin-top: 0px;
+      @include font-ultra(44px);
+      margin-top: 0;
       text-align: center;
+      letter-spacing: 0.5px;
+      padding-top: 8px;
+      padding-left: 15px;
     }
 
     .name {
@@ -379,6 +401,7 @@
     .place, .name {
       overflow: hidden;
       text-overflow: ellipsis;
+      padding-right: 15px;
     }
   }
 }
@@ -391,7 +414,7 @@
     .icon-next, 
     .icon-prev {
       color: #c2c2c2;
-      line-height: 0px;
+      line-height: 0;
       font-size: 150px;
       font-family: serif;
       text-shadow: none;
@@ -417,16 +440,21 @@
   padding-bottom: 70px;
   background-image: url("/gfx/layout/mikkeli-index-blocks-background.jpg");
   margin-bottom: 30px;
+  background-repeat: no-repeat;
+  background-size: cover;
   
   .content-block {
     background: rgba(255, 255, 255, 0.8);
     text-align: center;
     padding-top: 20px;
     padding-bottom: 35px;
-    height: 455px;
+    min-height: 455px;
     position: relative;
-    @media (max-width: $break-small) { 
-      height: 475px;
+    margin-bottom: 60px;
+    padding-left: 15px;
+    padding-right: 15px;
+    @media (min-width: $break-large) { 
+      height: 100%;
     }
     
     .icon {
@@ -523,9 +551,6 @@
       bottom: -30px;
       left: 0;
       right: 0;
-      @media (max-width: $break-small) { 
-        bottom: 0px;
-      }
     }
   
     .all-link {
