@@ -1,0 +1,22 @@
+extends ../layout/news.pug
+
+block styles
+  link(rel="stylesheet", href="/css/news.min.css")
+
+block content
+  .container-fluid.no-gutters
+    .row
+      .col-xs.banner-container
+        .banner-border-top
+        .banner(style='background-image: url(' + bannerSrc + ')')
+        .banner-silhouette
+        .banner-border-bottom
+  .container.page-container
+    .row
+      .col-xs-24.col-lg-14
+        .news-article-content
+          h1
+            !=title
+          .featured-image(style='background-image: url(' + imageSrc + ')')
+          !=contents
+        
