@@ -74,14 +74,14 @@
     }
    
     &:before {
-       content: '››';
+      content: '››';
     }
    
     &:first-child {
       color: #428ecc;
     }
   
-    &:first-child:before {
+    &:first-child::before {
       content: '';
     }
   }
@@ -109,14 +109,14 @@
     margin-top: 35px;
     margin-bottom: 25px;
     padding: 0;
-  font-size: 27px;
+    font-size: 27px;
   }
  
   h3 {
     margin-top: 35px;
     margin-bottom: 25px;
     padding: 0;
-  font-size: 24px;
+    font-size: 24px;
   }
  
   p {
@@ -159,9 +159,9 @@
         margin-left: -20px;
         content: "» ";
       }
-      
     }
   }
+  
   .page-nav-item {
     display: block;
     padding-top: 15px;
