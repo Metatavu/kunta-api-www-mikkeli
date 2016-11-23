@@ -174,7 +174,7 @@
 
           new ModulesClass(config)
             .pages.getContent(page.id, preferLanguages)
-            .pages.resolveBreadcrumbs(page, preferLanguages)
+            .pages.resolveBreadcrumbs(CONTENT_FOLDER + '/', page, preferLanguages)
             .pages.listMetaByParentId(page.parentId, preferLanguages)
             .pages.listMetaByParentId(page.id, preferLanguages)
             .callback(function(pageData) {
@@ -220,25 +220,28 @@
       }
 
       new ModulesClass(config)
+        .news.latest(0, 10)
         .news.findBySlug(slug)
         .callback(function(data) {
-          var newsArticle = data[0];
+          var newsArticle = data[1];
+          var siblings = data[0];
           if (!newsArticle) {
             res.status(404).send("Not Found");
             return;
           }
-
           // TODO: Banner should come from API
           var bannerSrc = '/gfx/layout/mikkeli-page-banner-default.jpg';
 
-          res.render('pages/news-article.pug', {
+           res.render('pages/news-article.pug', {
             id: newsArticle.id,
             slug: newsArticle.slug,
             title: newsArticle.title,
             contents: processPageContent('/', newsArticle.contents),
             imageSrc: newsArticle.imageSrc,
             menus: req.kuntaApi.data.menus,
-            bannerSrc: bannerSrc
+            bannerSrc: bannerSrc,
+            siblings: siblings,
+            breadcrumbs : [{path: util.format('%s/%s', NEWS_FOLDER, newsArticle.slug), title: newsArticle.title }]
           });
 
         }, function(err) {

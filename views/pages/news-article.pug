@@ -1,6 +1,9 @@
-extends ../layout/news.pug
+extends ../layout/contents.pug
+
+include ../includes/mixins.pug
 
 block styles
+  link(rel="stylesheet", href="/css/contents-common.min.css")
   link(rel="stylesheet", href="/css/news.min.css")
 
 block content
@@ -11,12 +14,64 @@ block content
         .banner(style='background-image: url(' + bannerSrc + ')')
         .banner-silhouette
         .banner-border-bottom
+      
   .container.page-container
     .row
+      +breadcrumbs(breadcrumbs)
+        
+  .container.page-container
+    .row
+      .col-lg-5.page-nav.no-gutters.hidden-md-down
+        h3
+          =folderTitle
+        each sibling in siblings
+          if sibling.id == id
+            .page-nav-item.active
+              a(href=sibling.slug)
+                =sibling.title
+          else
+            a.page-nav-item(href=sibling.slug)
+              =sibling.title
+      .col-xs-24.hidden-lg-up
+        a.btn.btn-primary(title='Näytä valikko', data-toggle='collapse', href='#collapse-menu', aria-expanded='false', aria-controls='collapse-menu')
+          i.fa.fa-bars
+        .collapse#collapse-menu
+          .col-xs-24.col-lg-5.page-nav.no-gutters
+            each sibling in siblings
+              if sibling.id == id
+                .page-nav-item.active
+                  a(href=sibling.slug)
+                    =sibling.title
+              else
+                a.page-nav-item(href=sibling.slug)
+                  =sibling.title
       .col-xs-24.col-lg-14
-        .news-article-content
+        .page-content
           h1
             !=title
           .featured-image(style='background-image: url(' + imageSrc + ')')
           !=contents
+      .col-xs-24.col-lg-5.sidebar
+        .sidebar-block
+          h3
+            |Palvelun tuottaa
+          p
+            |Yleiset kulttuuripalvelut
+            br
+            |Maaherrankatu 9-11 
+            br
+            |50100 Mikkeli PL 206
+            br
+            |50101 Mikkeli
+        .sidebar-block
+          h3
+            |Palvelun tuottaa
+          p
+            |Yleiset kulttuuripalvelut
+            br
+            |Maaherrankatu 9-11 
+            br
+            |50100 Mikkeli PL 206
+            br
+            |50101 Mikkeli
         
