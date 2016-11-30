@@ -380,6 +380,15 @@
   position: relative;
   background-size: cover;
   background-repeat: no-repeat;
+  
+  .event-link {
+    position: absolute;
+    left: 0;
+    top: 0;
+    right: 0;
+    bottom: 0;
+    z-index: 9999;
+  }
 
   .details {
     position: absolute;
