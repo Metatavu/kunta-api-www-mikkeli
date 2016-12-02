@@ -111,7 +111,8 @@ block content
           .col-lg-18
             .row
               .col-xs.no-gutter-left.top-article-container
-                +newsArticleTop(news.top)
+                if news.top
+                  +newsArticleTop(news.top)
             .row
               .col-xs.no-gutter-left.thumb-articles-container
                 .row
