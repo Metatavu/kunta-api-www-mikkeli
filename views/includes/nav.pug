@@ -33,13 +33,15 @@ nav.navbar.navbar-light
       nav.navbar.navbar-light.row
         .col-xs-24.col-lg-10.no-gutter-left.no-gutters-medium
           ul.nav.navbar-nav.nav-bar-primary
-            each item in menus['paavalikko'].items
-              li.nav-item
-                a.nav-link(href=item.url)
-                  = item.label 
+            if menus['paavalikko']
+              each item in menus['paavalikko'].items
+                li.nav-item
+                  a.nav-link(href=item.url)
+                    = item.label 
         .col-xs-24.col-lg-14.no-gutter-right.no-gutters-medium
           ul.nav.navbar-nav.pull-lg-right.nav-bar-secondary
-            each item in menus['sisalto'].items
-              li.nav-item
-                a.nav-link(href=item.url)
-                  = item.label
+            if menus['sisalto']
+              each item in menus['sisalto'].items
+                li.nav-item
+                  a.nav-link(href=item.url)
+                    = item.label
