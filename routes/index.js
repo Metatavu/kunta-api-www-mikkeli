@@ -62,6 +62,15 @@
     return $.html();
   }
 
+  function getSidebarContent(content) {
+    if (!content) {
+      return '';
+    }
+    
+    let $ = cheerio.load(content);
+    return $('aside').html();
+  }
+
   module.exports = function(app, config, ModulesClass) {
 
     app.use(function(req, res, next) {
@@ -193,6 +202,7 @@
                 title: page.title,
                 folderTitle: folderTitle,
                 contents: processPageContent(path, contents),
+                sidebarContents: getSidebarContent(contents),
                 breadcrumbs: breadcrumbs,
                 featuredImageSrc: featuredImageSrc,
                 menus: req.kuntaApi.data.menus,
