@@ -13,7 +13,7 @@
   let NEWS_FOLDER = '/uutiset';
 
   function resolveLinkType(link) {
-    if (!link) {
+    if (!link || link.startsWith('#')) {
       return 'NONE';
     }
 
