@@ -207,22 +207,11 @@ block content
                   .title
                     |Kuulutukset
                   .content
-                    .content-block-row
-                      a(href='#', target='_blank') 01.01.2010
-                      span
-                         |Kuuluuko, kuuluuko - kuuntelen.
-                    .content-block-row
-                      a(href='#', target='_blank') 01.01.2010
-                      span
-                         |Kuuluuko, kuuluuko - kuuntelen.
-                    .content-block-row
-                      a(href='#', target='_blank') 01.01.2010
-                      span
-                         |Kuuluuko, kuuluuko - kuuntelen.
-                    .content-block-row
-                      a(href='#', target='_blank') 01.01.2010
-                      span
-                         |Kuuluuko, kuuluuko - kuuntelen.
+                    each announcement in announcements
+                      .content-block-row
+                        a(href='#', target='_blank') #{announcement.title}
+                        span
+                           !=announcement.contents
                   .all-link-container
                     a.all-link(href="#") 
                       |Katso kaikki

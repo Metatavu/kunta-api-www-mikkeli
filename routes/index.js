@@ -8,6 +8,7 @@
 
   let EVENT_COUNT = 9;
   let JOB_COUNT = 5;
+  let ANNOUNCEMENT_COUNT = 5;
   let SOCIAL_MEDIA_POSTS = 4 * 3;
   let CONTENT_FOLDER = '/sisalto';
   let NEWS_FOLDER = '/uutiset';
@@ -104,6 +105,7 @@
         .tiles.list()
         .socialMedia.latest(SOCIAL_MEDIA_POSTS)
         .jobs.list(JOB_COUNT, 'PUBLICATION_END', 'ASCENDING')
+        .announcements.list(ANNOUNCEMENT_COUNT, 'PUBLICATION_DATE', 'DESCENDING')
         .callback(function(data) {
           var events = _.clone(data[0] || []).map(event => {
             return Object.assign(event, {
@@ -135,9 +137,8 @@
             });
           });
 
-          var jobs = _.clone(data[5] || []).map(job => {
-            return job;
-          });
+          var jobs = _.clone(data[5] || []);
+          var announcements = _.clone(data[6] || []);
 
           res.render('pages/index.pug', {
             events: events,
@@ -145,6 +146,7 @@
             tiles: tiles,
             socialMediaItems: socialMediaItems,
             jobs: jobs,
+            announcements: announcements,
             news: {
               top: news.splice(0, 1)[0],
               thumbs: news.splice(0, 4),
