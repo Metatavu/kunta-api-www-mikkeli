@@ -8,7 +8,14 @@ body {
 }
 
 .logo-container {
-  padding-top: 54px;
+
+  @media (min-width: $break-large) {
+     padding-top: 54px;
+  }
+  
+  @media (max-width: $break-small) {
+     margin-bottom: 26px;
+  }
 }
 
 nav.navbar {
@@ -16,23 +23,44 @@ nav.navbar {
   padding-bottom: 3px;
 }
 
+.navbar-toggler {
+  padding-top: 4px;
+  padding-left: 0;
+  
+  .fa-bars {
+    color: #5f626a;
+    font-size: 30px;
+  }
+
+  &:focus {
+    box-shadow: none;
+    outline-style: none;
+    border-color: transparent;
+  }
+
+}
+
 .header-banner {
   margin-bottom: 30px;
 }
 
 .nav-search-container {
+  padding-bottom: 15px;
   
   input {
     border: 1px solid #ccc;
     border-radius: 20px;
     font-size: 12px;
+    padding-bottom: 4px;
     padding-left: 10px;
     padding-top: 4px;
-    padding-bottom: 4px;
     width: 100%;
-    max-width: 190px;
+
+    @media (min-width: $break-small) {
+      max-width: 190px;
+    }
   }
-  
+
   .fa {
     margin-left: -25px;
     color: #aaa;
@@ -43,17 +71,11 @@ nav.navbar {
 
 .nav-some-icons {
   
-  text-align: right;
-  
  .fa {
     color: #999;
     font-size: 28px;
     padding-left: 12px;
   } 
-}
-
-.nav-muikku-container {
-  margin-top: 30px;
 }
 
 .nav-quick-icons {
@@ -71,14 +93,24 @@ nav.navbar {
   }
 }
 
-.navbar-light .navbar-nav.nav-bar-primary {
-  
+.navbar-light .navbar-nav {
   .nav-item {
     margin-left: 20px;
     
-    &:first-child {
-      margin-left: 0px;
+    @media (max-width: $break-medium) {
+      margin-left: 0;
+      margin-right: 20px;
     }
+
+    @media (max-width: $break-small) {
+      margin-right: 0;
+    }
+  }
+}
+
+.navbar-light .navbar-nav.nav-bar-primary {
+  .nav-item:first-child {
+    margin-left: 0;
   }
   
   .nav-link {
@@ -100,17 +132,17 @@ nav.navbar {
 
 .horizontal-line {
   height: 8px;
-  background-repeat: no-repeat;
+  background-repeat: repeat-x;
   background-image: url('/gfx/layout/mikkeli-banner-border.png');
   width: 100%;
 }
 
 footer {
-  background: #c1147c;
-  height: 280px;
-  margin-top: 59px;
   color: #fff;
-  
+  margin-top: 59px;
+  min-height: 280px;
+  background: #c1147c;
+
   .footer-logo-container {
     margin-top: 64px;
   }
@@ -137,8 +169,8 @@ footer {
     background-image: url('/gfx/layout/mikkeli-silhouette.png');
     top: -57px;
     width: 100%;
-    left: 0px;
-    right: 0px;
+    left: 0;
+    right: 0;
     position: absolute;
     display: block;
     content: '.';

@@ -1,5 +1,10 @@
 @charset "UTF-8";
 
+$break-small: 767px;
+$break-x-small: 543px;
+$break-medium: 991px;
+$break-large: 1199px;
+
 @mixin font-ultra($size) {
   font-family: 'Titillium Web', sans-serif;
   font-size: $size;

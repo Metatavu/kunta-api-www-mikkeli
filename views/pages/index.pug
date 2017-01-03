@@ -1,37 +1,40 @@
 extends ../layout/index.pug
 
 mixin event(event) 
-  .col-xs-8
-    .event(style='background-image: url(' + event.imageSrc + '?size=480)')
-      a.event-link(href=event.originalUrl,target="_blank")
-      .details
-        .row
-          .col-xs-10.no-gutter-right
-            .date
-              =event.shortDate
-          .col-xs-14
-            .place
-              =event.place    
-            .name
-              =event.name 
+  .swiper-slide.col-lg-8.no-gutters
+    .event-container
+      .event(style='background-image: url(' + event.imageSrc + '?size=480)')
+        a.event-link(href=event.originalUrl,target="_blank")
+        .details
+          .row
+            .col-xs-10.no-gutters
+              .date
+                =event.shortDate
+            .col-xs-14.no-gutters
+              .place
+                =event.place    
+              .name
+                =event.name 
 
 mixin newsArticleTop(article)
   .news-article.top-article(style='background-image: url(' + article.imageSrc + '?size=350)')
-    .date
-      =article.shortDate
     .details
+      .date
+        =article.shortDate
       .title
-        !=article.title
+        a(href='/uutiset/' + article.slug)
+          !=article.title
       .abstract
         !=article.abstract
     .border
 mixin newsArticleThumb(article)
   .news-article.thumb-article(style='background-image: url(' + article.imageSrc + '?size=350)')
-    .date
-      =article.shortDate
     .details
+      .date
+        =article.shortDate
       .title
-        !=article.title
+        a(href='/uutiset/' + article.slug)
+          !=article.title
       .abstract
         !=article.abstract
 
@@ -40,16 +43,18 @@ mixin newsArticleText(article)
     .date
       =article.shortDate
     .title
-      =article.title
+      a(href='/uutiset/' + article.slug)
+        !=article.title
       
 mixin banner(banner)
   .header-banner-item(style='background-image: url(' + banner.imageSrc + ')')
-    if banner.link
-      a.banner-link(href=banner.link,target="_blank")
-    h1
-      =banner.title
-    p
-      !=banner.contents
+    .container.banner-content-container
+      if banner.link
+        a.banner-link(href=banner.link,target="_blank")
+      h1
+        =banner.title
+      p
+        !=banner.contents
       
 mixin banners-slider(banners) 
   .header-banner
@@ -103,15 +108,16 @@ block content
     .row
       .col-xs
         .row
-          .col-xs-18
+          .col-lg-18
             .row
               .col-xs.no-gutter-left.top-article-container
-                +newsArticleTop(news.top)
+                if news.top
+                  +newsArticleTop(news.top)
             .row
               .col-xs.no-gutter-left.thumb-articles-container
                 .row
                   each newsArticle in news.thumbs
-                    .col-xs-12
+                    .col-md-12
                       +newsArticleThumb(newsArticle)
             .row
               .col-xs.no-gutter-left.text-articles-container
@@ -119,15 +125,15 @@ block content
                   .row
                     .col-xs
                       +newsArticleText(newsArticle)
-          .col-xs-6.tiles.no-gutter-right
+            .row
+              .col-xs.no-gutters
+                a.all-news-link(href="#")
+                  | > Katso kaikki uutiset
+          .col-lg-6.tiles.no-gutters
              each tile in tiles
                .row
                  .col-xs
                    +tile(tile)
-        .row
-          .col-xs.no-gutters
-            a.all-news-link(href="#")
-              | > Katso kaikki uutiset
               
   .container-fluid.no-gutters
     .row
@@ -140,27 +146,14 @@ block content
         span
           |Tulevia tapahtumia mikkelissä
     .row
-      .col-xs
-        #event-slide.carousel.slide(data-ride='carousel')
-          .event-carousel-indicators
-            ol.carousel-indicators
-              each eventPage, pageIndex in eventPages
-                li(data-target='#event-slide', data-slide-to='#{pageIndex}')
-          .event-carousel-items
-            .carousel-inner(role='listbox')
-              each pageEvents, pageIndex in eventPages
-                - var itemClass=pageIndex == 0 ? "carousel-item active" : 'carousel-item'
-                div(class=itemClass)
-                  .row
-                    each event in pageEvents
-                      +event(event)
-          .event-carousel-controls
-            a.left.carousel-control(href='#event-slide', role='button', data-slide='prev')
-              span.icon-prev(aria-hidden='true')
-              span.sr-only Previous
-            a.right.carousel-control(href='#event-slide', role='button', data-slide='next')
-              span.icon-next(aria-hidden='true')
-              span.sr-only Next
+      .col-xs.events-container.no-gutters
+        .swiper-container
+          .swiper-wrapper
+            each event in events
+              +event(event)
+          .swiper-pagination
+          .swiper-button-next
+          .swiper-button-prev
         .row
           .col-xs.text-xs-center.all-events-container
             span
@@ -176,7 +169,7 @@ block content
         .content-blocks-container
           .container
             .row
-              .col-xs-8
+              .col-lg-8
                 .content-block.info-block
                   .icon
                   .title
@@ -189,59 +182,36 @@ block content
                     .content-block-row
                       a(href='https://www.kuntalaisaloite.fi/fi', style='line-height: 1.53em', target='_blank') Kuntalaisaloite.fi
                     .content-block-row
-                      a(href='https://www.nuortenideat.fi/fi/', target='_blank') https://www.nuortenideat.fi/fi/
+                      a(href='https://www.nuortenideat.fi/fi/', target='_blank') nuortenideat.fi
                     .content-block-row
-                      a(href='http://www.demokratia.fi/', target='_blank') http://www.demokratia.fi/
+                      a(href='http://www.demokratia.fi/', target='_blank') demokratia.fi
                   .all-link-container
                     a.all-link(href="#") 
                       |Katso kaikki
-              .col-xs-8
+              .col-lg-8
                 .content-block.jobs-block
                   .icon
                   .title
                     |Kuntarekry
                   .content
-                    .content-block-row
-                      a(href='#', target='_blank') Avoin työtehtävä
-                      span
-                        Lorem ipsum dela rossen, Mikkeli
-                    .content-block-row
-                      a(href='#', target='_blank') Avoin työtehtävä
-                      span
-                        Lorem ipsum dela rossen, Mikkeli
-                    .content-block-row
-                      a(href='#', target='_blank') Avoin työtehtävä
-                      span
-                        Lorem ipsum dela rossen, Mikkeli
-                    .content-block-row
-                      a(href='#', target='_blank') Avoin työtehtävä
-                      span
-                        Lorem ipsum dela rossen, Mikkeli
+                    each job in jobs
+                      .content-block-row
+                        a(href=job.link, target='_blank') #{job.title}
+                        span #{job.employmentType}, #{job.taskArea}
                   .all-link-container
                     a.all-link(href="#") 
                       |Katso kaikki
-              .col-xs-8
+              .col-lg-8
                 .content-block.announcements-block
                   .icon
                   .title
                     |Kuulutukset
                   .content
-                    .content-block-row
-                      a(href='#', target='_blank') 01.01.2010
-                      span
-                         |Kuuluuko, kuuluuko - kuuntelen.
-                    .content-block-row
-                      a(href='#', target='_blank') 01.01.2010
-                      span
-                         |Kuuluuko, kuuluuko - kuuntelen.
-                    .content-block-row
-                      a(href='#', target='_blank') 01.01.2010
-                      span
-                         |Kuuluuko, kuuluuko - kuuntelen.
-                    .content-block-row
-                      a(href='#', target='_blank') 01.01.2010
-                      span
-                         |Kuuluuko, kuuluuko - kuuntelen.
+                    each announcement in announcements
+                      .content-block-row
+                        a(href='#', target='_blank') #{announcement.title}
+                        span
+                           !=announcement.contents
                   .all-link-container
                     a.all-link(href="#") 
                       |Katso kaikki
