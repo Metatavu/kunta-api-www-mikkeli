@@ -186,13 +186,11 @@
           new ModulesClass(config)
             .pages.getContent(page.id, preferLanguages)
             .pages.resolveBreadcrumbs(CONTENT_FOLDER + '/', page, preferLanguages)
-            .pages.listMetaByParentId(page.parentId, preferLanguages)
             .pages.listMetaByParentId(page.id, preferLanguages)
             .callback(function(pageData) {
               var contents = pageData[0];
               var breadcrumbs = pageData[1];
-              var siblings = pageData[2];
-              var children = pageData[3];
+              var children = pageData[2];
               var folderTitle = breadcrumbs.length ? breadcrumbs[breadcrumbs.length - 1].title : page.title;
               var featuredImageSrc = page.featuredImageSrc ? page.featuredImageSrc + '?size=750' : '/gfx/layout/mikkeli-page-image-default.jpg';
               // TODO: Banner should come from API
@@ -208,7 +206,6 @@
                 breadcrumbs: breadcrumbs,
                 featuredImageSrc: featuredImageSrc,
                 menus: req.kuntaApi.data.menus,
-                siblings: siblings,
                 children: children,
                 bannerSrc: bannerSrc
               });
