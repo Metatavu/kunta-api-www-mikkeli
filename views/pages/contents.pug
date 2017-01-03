@@ -24,37 +24,17 @@ block content
       .col-lg-5.page-nav.no-gutters.hidden-md-down
         h3
           =folderTitle
-        each sibling in siblings
-          if sibling.id == id
-            .page-nav-item.active
-              a(href=sibling.slug)
-                =sibling.title
-              ul.child-pages
-                each child in children
-                  li
-                    a(href=slug+'/'+child.slug)
-                      =child.title
-          else
-            a.page-nav-item(href=sibling.slug)
-              =sibling.title
+        each child in children
+          a.page-nav-item(href=slug+'/'+child.slug)
+            =child.title
       .col-xs-24.hidden-lg-up
         a.btn.btn-primary(title='Näytä valikko', data-toggle='collapse', href='#collapse-menu', aria-expanded='false', aria-controls='collapse-menu')
           i.fa.fa-bars
         .collapse#collapse-menu
           .col-xs-24.col-lg-5.page-nav.no-gutters
-            each sibling in siblings
-              if sibling.id == id
-                .page-nav-item.active
-                  a(href=sibling.slug)
-                    =sibling.title
-                  ul.child-pages
-                    each child in children
-                      li
-                        a(href=slug+'/'+child.slug)
-                          =child.title
-              else
-                a.page-nav-item(href=sibling.slug)
-                  =sibling.title
+            each child in children
+              a.page-nav-item(href=slug+'/'+child.slug)
+                =child.title
       .col-xs-24.col-lg-14
         .page-content
           h1
