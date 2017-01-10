@@ -7,6 +7,14 @@ body {
   overflow-x: hidden;
 }
 
+*[data-lazy-bg-image] {
+  background-image: url('/gfx/load.svg') !important;
+  background-size: 48px auto !important;
+  background-position: center center !important;
+  background-repeat: no-repeat !important;
+  background-color: #eee !important;
+}
+
 .logo-container {
 
   @media (min-width: $break-large) {
@@ -177,3 +185,4 @@ footer {
     color: transparent;
   }
 }
+
