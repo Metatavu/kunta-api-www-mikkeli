@@ -147,7 +147,11 @@
           });
 
           var jobs = _.clone(data[5] || []);
-          var announcements = _.clone(data[6] || []);
+          var announcements = _.clone(data[6] || []).map(announcement => {
+            return Object.assign(announcement, {
+              "shortDate": moment(announcement.published).format("D.M.YYYY")
+            });
+          });
 
           res.render('pages/index.pug', {
             events: events,
