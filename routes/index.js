@@ -178,6 +178,22 @@
           res.status(500).send(err);
         });
     });
+    
+    app.get('/ajax/pagenav', function (req, res) {
+      var pageId = req.query.pageId;
+      var preferLanguages = req.headers['accept-language'];
+      
+      console.log(pageId);
+      
+      new ModulesClass(config)
+        .pages.listMetaByParentId(pageId, preferLanguages)
+        .callback(function(data) {
+          var childPages = data[0];
+          res.render('ajax/pagenav.pug', {
+            childPages: childPages
+          });
+        });
+    });
 
     app.get(util.format('%s*', CONTENT_FOLDER), function(req, res) {
       var path = req.path.substring(9);

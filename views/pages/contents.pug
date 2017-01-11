@@ -2,6 +2,9 @@ extends ../layout/contents.pug
 
 include ../includes/mixins.pug
 
+block scripts
+  script(defer="defer",type="text/javascript", src="/js/contents.js")
+
 block styles
   link(rel="stylesheet", href="/css/contents-common.min.css")
   link(rel="stylesheet", href="/css/contents.min.css")
@@ -25,15 +28,17 @@ block content
         h3
           =folderTitle
         each child in children
-          a.page-nav-item(href=slug+'/'+child.slug)
-            =child.title
+          span.page-nav-item
+            a(href=slug + '/' + child.slug, data-page-id=child.id)
+              =child.title
+            ul.child-pages
       .col-xs-24.hidden-lg-up
         a.btn.btn-primary(title='Näytä valikko', data-toggle='collapse', href='#collapse-menu', aria-expanded='false', aria-controls='collapse-menu')
           i.fa.fa-bars
         .collapse#collapse-menu
           .col-xs-24.col-lg-5.page-nav.no-gutters
             each child in children
-              a.page-nav-item(href=slug+'/'+child.slug)
+              a.page-nav-item(href=slug + '/' + child.slug, data-page-id=child.id)
                 =child.title
       .col-xs-24.col-lg-14
         .page-content

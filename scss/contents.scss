@@ -1,3 +1,29 @@
 @charset "UTF-8";
 
 @import "vars";
+
+.child-pages>li {
+  display: none;
+}
+
+.open>.child-pages>li {
+  display: block;
+}
+
+.loading>.child-pages {
+  background-image: url('/gfx/load-2.svg');
+  background-position: center right;
+  background-repeat: no-repeat;
+}
+
+.page-nav-item.loading>.child-pages {
+  height: 32px;
+  margin-top: -32px;
+  background-size: 24px;
+}
+
+.page-nav-child.loading>.child-pages {
+  height: 20px;
+  margin-top: -20px;
+  background-size: 16px;
+}
