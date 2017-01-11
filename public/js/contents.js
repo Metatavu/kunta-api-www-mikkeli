@@ -4,8 +4,7 @@
   $.widget("custom.contentsNav", {
     
     _create : function() {
-      $(document).on('click', '.page-nav>.page-nav-item>a', $.proxy(this._onPageNavItemClick, this));
-      $(document).on('click', '.page-nav .child-pages a', $.proxy(this._onPageNavChildPageClick, this));
+      $(document).on('click', '.page-nav .page-nav-item .open-folder', $.proxy(this._onOpenFolderClick, this));
     },
     
     _loadItems: function (pageId, callback) {
@@ -19,9 +18,10 @@
       });
     },
     
-    _onPageNavItemClick: function (event) {
+    _onOpenFolderClick: function (event) {
       event.preventDefault();
-      var item = $(event.target).closest('.page-nav-item');
+      var openLink = $(event.target);
+      var item = openLink.closest('.page-nav-item');
       if (item.hasClass('open')) {
         item.addClass('closed').removeClass('open');
         return;
@@ -34,35 +34,7 @@
       
       item.addClass('loading');
 
-      var pageId = item.find('a').attr('data-page-id');
-      this._loadItems(pageId, function (err, html) {
-        if (err) {
-          console.error(err);
-        } else {
-          item.addClass('open')
-            .removeClass('loading')
-            .find('.child-pages')
-            .html(html);
-        }
-      });
-    },
-    
-    _onPageNavChildPageClick: function (event) {
-      event.preventDefault();
-      var item = $(event.target).closest('.page-nav-child');
-      if (item.hasClass('open')) {
-        item.addClass('closed').removeClass('open');
-        return;
-      }
-      
-      if (item.hasClass('closed')) {
-        item.addClass('open').removeClass('closed');
-        return;
-      }
-      
-      item.addClass('loading');
-      
-      var pageId = item.find('a').attr('data-page-id');
+      var pageId = openLink.attr('data-page-id');
       this._loadItems(pageId, function (err, html) {
         if (err) {
           console.error(err);
@@ -74,6 +46,7 @@
         }
       });
     }
+
   });
 
   $(document).ready(function () {

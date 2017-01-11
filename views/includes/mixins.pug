@@ -9,3 +9,17 @@ mixin breadcrumbs(breadcrumbs)
       else 
         a.breadcrumb-item(href=breadcrumb.path)
           =breadcrumb.title
+
+mixin pageMenuItem(item)
+  if item.hasChildren 
+    span.page-nav-item
+      a.open-folder(href="#", data-page-id=item.id)
+      a(href='#')
+        =item.title
+      ul.child-pages
+  else
+    span.page-nav-item
+      span.leaf-page
+        |»
+      a(href='#')
+        =item.title

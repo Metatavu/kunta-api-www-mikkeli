@@ -2,28 +2,51 @@
 
 @import "vars";
 
-.child-pages>li {
-  display: none;
+.child-pages {
+  padding-left: 10px;
+  margin-left: -10px;
+  > li {
+    display: none;
+  }
+  
+}
+
+.page-nav-item {
+  margin-left: 15px;
+  padding-right: 20px; 
+}
+
+.open-folder, .leaf-page {
+  padding-right: 10px;
+  position: absolute;
+  margin-left: -15px;
+  
+  &:hover, &:focus {
+    text-decoration: none;
+  }
+  
+}
+
+.open-folder:before {
+  content: '+';
+}
+
+.open>.open-folder:before {
+  content: '-';
+}
+
+.loading>.open-folder:before {
+  content: ' ';
+  background-image: url('/gfx/load-2.svg');
+  background-position: center;
+  background-repeat: no-repeat;
+  background-size: 100%;
+  display: inline-block;
+  width: 14px;
+  height: 25px;
+  margin-left:-4px;
 }
 
 .open>.child-pages>li {
   display: block;
-}
-
-.loading>.child-pages {
-  background-image: url('/gfx/load-2.svg');
-  background-position: center right;
-  background-repeat: no-repeat;
-}
-
-.page-nav-item.loading>.child-pages {
-  height: 32px;
-  margin-top: -32px;
-  background-size: 24px;
-}
-
-.page-nav-child.loading>.child-pages {
-  height: 20px;
-  margin-top: -20px;
-  background-size: 16px;
 }

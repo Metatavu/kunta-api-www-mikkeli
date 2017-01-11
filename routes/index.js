@@ -6,6 +6,7 @@
   const moment = require('moment');
   const _ = require('lodash');
   const cheerio = require('cheerio');
+  const async = require('async');
 
   const EVENT_COUNT = 9;
   const JOB_COUNT = 5;
@@ -15,7 +16,7 @@
   const CONTENT_FOLDER = '/sisalto';
   const NEWS_FOLDER = '/uutiset';
   const ANNOUNCEMENTS_FOLDER = '/kuulutukset';
-
+  
   function resolveLinkType(link) {
     if (!link || link.startsWith('#')) {
       return 'NONE';
@@ -78,6 +79,22 @@
   }
 
   module.exports = function(app, config, ModulesClass) {
+
+    function loadChildPages(pages, preferLanguages, callback) {
+      var module = new ModulesClass(config);
+      
+      pages.forEach((page) => {
+        module.pages.listMetaByParentId(page.id, preferLanguages);
+      });
+      
+      module.callback(function (data) {
+        pages.forEach((page, index) => {
+          pages[index].hasChildren = data[index] && data[index].length > 0;
+        });
+        
+        callback(pages);
+      });
+    }
 
     app.use(function(req, res, next) {
       var modules = new ModulesClass(config);
@@ -183,14 +200,13 @@
       var pageId = req.query.pageId;
       var preferLanguages = req.headers['accept-language'];
       
-      console.log(pageId);
-      
       new ModulesClass(config)
         .pages.listMetaByParentId(pageId, preferLanguages)
         .callback(function(data) {
-          var childPages = data[0];
-          res.render('ajax/pagenav.pug', {
-            childPages: childPages
+          loadChildPages(data[0], preferLanguages, (children) => {
+            res.render('ajax/pagenav.pug', {
+              childPages: children
+            });
           });
         });
     });
@@ -215,24 +231,25 @@
             .callback(function(pageData) {
               var contents = pageData[0];
               var breadcrumbs = pageData[1];
-              var children = pageData[2];
               var folderTitle = breadcrumbs.length ? breadcrumbs[breadcrumbs.length - 1].title : page.title;
               var featuredImageSrc = page.featuredImageSrc ? page.featuredImageSrc + '?size=750' : '/gfx/layout/mikkeli-page-image-default.jpg';
               // TODO: Banner should come from API
               var bannerSrc = '/gfx/layout/mikkeli-page-banner-default.jpg';
 
-              res.render('pages/contents.pug', {
-                id: page.id,
-                slug: page.slug,
-                title: page.title,
-                folderTitle: folderTitle,
-                contents: processPageContent(path, contents),
-                sidebarContents: getSidebarContent(contents),
-                breadcrumbs: breadcrumbs,
-                featuredImageSrc: featuredImageSrc,
-                menus: req.kuntaApi.data.menus,
-                children: children,
-                bannerSrc: bannerSrc
+              loadChildPages(pageData[2], preferLanguages, (children) => {
+                res.render('pages/contents.pug', {
+                  id: page.id,
+                  slug: page.slug,
+                  title: page.title,
+                  folderTitle: folderTitle,
+                  contents: processPageContent(path, contents),
+                  sidebarContents: getSidebarContent(contents),
+                  breadcrumbs: breadcrumbs,
+                  featuredImageSrc: featuredImageSrc,
+                  menus: req.kuntaApi.data.menus,
+                  children: children,
+                  bannerSrc: bannerSrc
+                });
               });
 
             }, function(contentErr) {

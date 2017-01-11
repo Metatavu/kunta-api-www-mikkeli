@@ -1,6 +1,5 @@
+include ../includes/mixins.pug
+
 each childPage in childPages
   li
-    span.page-nav-child
-      a(href='#', data-page-id=childPage.id)
-        =childPage.title
-      ul.child-pages
+    +pageMenuItem(childPage)
