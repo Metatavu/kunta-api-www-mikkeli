@@ -61,6 +61,8 @@
       var href = $(link).attr('href');
       $(link).attr('href', processLink(currentPage, href));
     });
+    
+    $('aside').remove();
 
     return $.html();
   }
@@ -253,6 +255,7 @@
             slug: newsArticle.slug,
             title: newsArticle.title,
             contents: processPageContent('/', newsArticle.contents),
+            sidebarContents: getSidebarContent(newsArticle.contents),
             imageSrc: newsArticle.imageSrc,
             menus: req.kuntaApi.data.menus,
             bannerSrc: bannerSrc,
@@ -292,6 +295,7 @@
             slug: announcement.slug,
             title: announcement.title,
             contents: processPageContent('/', announcement.contents),
+            sidebarContents: getSidebarContent(announcement.contents),
             menus: req.kuntaApi.data.menus,
             bannerSrc: bannerSrc,
             siblings: siblings,
