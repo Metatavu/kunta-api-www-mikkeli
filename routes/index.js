@@ -1,17 +1,20 @@
+/*jshint esversion: 6 */
 (function() {
   'use strict';
 
-  let util = require('util');
-  let moment = require('moment');
-  let _ = require('lodash');
-  let cheerio = require('cheerio');
+  const util = require('util');
+  const moment = require('moment');
+  const _ = require('lodash');
+  const cheerio = require('cheerio');
 
-  let EVENT_COUNT = 9;
-  let JOB_COUNT = 5;
-  let ANNOUNCEMENT_COUNT = 5;
-  let SOCIAL_MEDIA_POSTS = 4 * 3;
-  let CONTENT_FOLDER = '/sisalto';
-  let NEWS_FOLDER = '/uutiset';
+  const EVENT_COUNT = 9;
+  const JOB_COUNT = 5;
+  const ANNOUNCEMENT_COUNT = 5;
+  const ANNOUNCEMENT_COUNT_PAGE = 10;
+  const SOCIAL_MEDIA_POSTS = 4 * 3;
+  const CONTENT_FOLDER = '/sisalto';
+  const NEWS_FOLDER = '/uutiset';
+  const ANNOUNCEMENTS_FOLDER = '/kuulutukset';
 
   function resolveLinkType(link) {
     if (!link || link.startsWith('#')) {
@@ -53,12 +56,14 @@
       return '';
     }
 
-    let $ = cheerio.load(content);
+    const $ = cheerio.load(content);
 
     $('a[href]').each(function(index, link) {
       var href = $(link).attr('href');
       $(link).attr('href', processLink(currentPage, href));
     });
+    
+    $('aside').remove();
 
     return $.html();
   }
@@ -68,7 +73,7 @@
       return '';
     }
     
-    let $ = cheerio.load(content);
+    const $ = cheerio.load(content);
     return $('aside').html();
   }
 
@@ -229,7 +234,8 @@
       var slug = req.params.slug;
 
       if (!slug) {
-        res.status(400).send('slug is missing');
+        res.status(404).send('Not found');
+        return;
       }
 
       new ModulesClass(config)
@@ -250,11 +256,51 @@
             slug: newsArticle.slug,
             title: newsArticle.title,
             contents: processPageContent('/', newsArticle.contents),
+            sidebarContents: getSidebarContent(newsArticle.contents),
             imageSrc: newsArticle.imageSrc,
             menus: req.kuntaApi.data.menus,
             bannerSrc: bannerSrc,
             siblings: siblings,
             breadcrumbs : [{path: util.format('%s/%s', NEWS_FOLDER, newsArticle.slug), title: newsArticle.title }]
+          });
+
+        }, function(err) {
+          console.error(err);
+          res.status(500).send(err);
+        });
+    });
+
+    app.get(util.format('%s/:slug', ANNOUNCEMENTS_FOLDER), function(req, res) {
+      var slug = req.params.slug;
+
+      if (!slug) {
+        res.status(404).send('Not found');
+        return;
+      }
+      
+        new ModulesClass(config)
+        .announcements.list(ANNOUNCEMENT_COUNT_PAGE, 'PUBLICATION_DATE', 'DESCENDING')
+        .announcements.findBySlug(slug)
+        .callback(function(data) {
+          var announcement = data[1];
+          var siblings = data[0];
+          if (!announcement) {
+            res.status(404).send("Not Found");
+            return;
+          }
+          // TODO: Banner should come from API
+          var bannerSrc = '/gfx/layout/mikkeli-page-banner-default.jpg';
+
+           res.render('pages/announcement.pug', {
+            id: announcement.id,
+            slug: announcement.slug,
+            title: announcement.title,
+            contents: processPageContent('/', announcement.contents),
+            sidebarContents: getSidebarContent(announcement.contents),
+            menus: req.kuntaApi.data.menus,
+            bannerSrc: bannerSrc,
+            siblings: siblings,
+            breadcrumbs : [{path: util.format('%s/%s', ANNOUNCEMENTS_FOLDER, announcement.slug), title: announcement.title }]
           });
 
         }, function(err) {
