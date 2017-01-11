@@ -73,10 +73,9 @@
   });
 
   $(document).ready(function () {
-    $('.page-container')
-      .contentsNav({
-        rootPath: $('.rootPath').val()
-      });
+    $(document.body).contentsNav({
+      rootPath: $('.rootPath').val()
+    });
   });
   
 }).call(this);
