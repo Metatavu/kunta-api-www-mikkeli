@@ -209,9 +209,10 @@ block content
                   .content
                     each announcement in announcements
                       .content-block-row
-                        a(href='#', target='_blank') #{announcement.title}
-                        span
-                           !=announcement.contents
+                        a(href='#', target='_blank') 
+                          =announcement.shortDate
+                          |&nbsp;-&nbsp;
+                          =announcement.title
                   .all-link-container
                     a.all-link(href="#") 
                       |Katso kaikki
