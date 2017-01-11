@@ -210,6 +210,20 @@
           });
         });
     });
+    
+    function mapOpenChildren(children, activeIds, openTreeNodes) {
+      if (openTreeNodes.length > 0) {
+        for (var i = 0; i < children.length; i++) {
+          if (activeIds.indexOf(children[i].id) != -1) {
+            children[i].children = openTreeNodes.shift();
+            mapOpenChildren(children[i].children, activeIds, openTreeNodes);
+            break;
+          }
+        }
+      }
+      
+      return children;
+    }
 
     app.get(util.format('%s*', CONTENT_FOLDER), function(req, res) {
       var path = req.path.substring(9);
@@ -226,11 +240,12 @@
             res.status(404).send("Not Found");
             return;
           }
-
+          
           new ModulesClass(config)
             .pages.getContent(page.id, preferLanguages)
             .pages.resolveBreadcrumbs(CONTENT_FOLDER, page, preferLanguages)
             .pages.listMetaByParentId(rootPage.id, preferLanguages)
+            .pages.readTreeMetasWithChildren(rootPage.id, page.parentId, preferLanguages)
             .callback(function(pageData) {
               var contents = pageData[0];
               var breadcrumbs = pageData[1];
@@ -238,7 +253,11 @@
               var featuredImageSrc = page.featuredImageSrc ? page.featuredImageSrc : '/gfx/layout/mikkeli-page-image-default.jpg';
               // TODO: Banner should come from API
               var bannerSrc = '/gfx/layout/mikkeli-page-banner-default.jpg';
-
+              var openTreeNodes = pageData[3];
+              var activeIds = _.map(breadcrumbs, (breadcrumb) => {
+                return breadcrumb.id;
+              });
+              
               loadChildPages(pageData[2], preferLanguages, (children) => {
                 res.render('pages/contents.pug', {
                   id: page.id,
@@ -251,7 +270,9 @@
                   breadcrumbs: breadcrumbs,
                   featuredImageSrc: featuredImageSrc,
                   menus: req.kuntaApi.data.menus,
-                  children: children,
+                  activeIds: activeIds,
+                  children: mapOpenChildren(children, activeIds, openTreeNodes),
+                  openTreeNodes: openTreeNodes,
                   bannerSrc: bannerSrc
                 });
               });

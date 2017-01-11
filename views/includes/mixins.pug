@@ -9,16 +9,19 @@ mixin breadcrumbs(breadcrumbs)
       else 
         a.breadcrumb-item(href=breadcrumb.path)
           =breadcrumb.title
-
+          
 mixin pageMenuItem(item)
-  if item.hasChildren 
-    span.page-nav-item
+  if item.children || item.hasChildren 
+    span.page-nav-item(class=item.id == id ? 'active' : '')
       a.open-folder(href="#", data-page-id=item.id, data-slug=item.slug)
       a.page-nav-link(href='#')
         =item.title
       ul.child-pages
+        if item.children
+          each child in item.children
+            +pageMenuItem(child)
   else
-    span.page-nav-item
+    span.page-nav-item(class=item.id == id ? 'active' : '')
       span.leaf-page(data-page-id=item.id, data-slug=item.slug)
         |»
       a.page-nav-link(href='#')
