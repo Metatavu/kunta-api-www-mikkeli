@@ -3,11 +3,22 @@
   
   $.widget("custom.contentsNav", {
     
-    _create : function() {
-      $(document).on('click', '.page-nav .page-nav-item .open-folder', $.proxy(this._onOpenFolderClick, this));
+    options: {
+      rootPath: null  
     },
     
-    _loadItems: function (pageId, callback) {
+    _create : function() {
+      $(document).on('click', '.page-nav .page-nav-item .open-folder', $.proxy(this._onOpenFolderClick, this));
+      this._resolvePaths(document);
+    },
+    
+    _resolvePaths: function (container) {
+      $(container).find('.page-nav-link').each($.proxy(function (index, link) {
+        $(link).attr('href', this.options.rootPath + '/' + this._resolvePath(link));
+      }, this));
+    },
+    
+    _loadItems: function (path, pageId, callback) {
       $.ajax('/ajax/pagenav?pageId=' + pageId, {
         success: $.proxy(function (html) {
           callback(null, html);
@@ -16,6 +27,16 @@
           callback(textStatus);
         }, this)
       });
+    },
+    
+    _resolvePath: function (link) {
+      var slugs = [];
+      
+      $(link).parents('.page-nav-item').each(function (index, item) {
+        slugs.unshift($(item).find('[data-slug]').attr('data-slug'));
+      });
+      
+      return slugs.join('/');
     },
     
     _onOpenFolderClick: function (event) {
@@ -34,8 +55,9 @@
       
       item.addClass('loading');
 
+      var path = openLink.attr('data-path');
       var pageId = openLink.attr('data-page-id');
-      this._loadItems(pageId, function (err, html) {
+      this._loadItems(path, pageId, $.proxy(function (err, html) {
         if (err) {
           console.error(err);
         } else {
@@ -43,15 +65,18 @@
             .removeClass('loading')
             .find('.child-pages')
             .html(html);
+          this._resolvePaths(item);
         }
-      });
+      }, this));
     }
 
   });
 
   $(document).ready(function () {
-    $(document.body)
-      .contentsNav();
+    $('.page-container')
+      .contentsNav({
+        rootPath: $('.rootPath').val()
+      });
   });
   
 }).call(this);

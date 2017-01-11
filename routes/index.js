@@ -213,26 +213,29 @@
 
     app.get(util.format('%s*', CONTENT_FOLDER), function(req, res) {
       var path = req.path.substring(9);
+      var rootPath = path.split('/')[0];
       var preferLanguages = req.headers['accept-language'];
 
       new ModulesClass(config)
         .pages.findByPath(path, preferLanguages)
+        .pages.findByPath(rootPath, preferLanguages)
         .callback(function(data) {
           var page = data[0];
-          if (!page) {
+          var rootPage = data[1];
+          if (!page || !rootPage) {
             res.status(404).send("Not Found");
             return;
           }
 
           new ModulesClass(config)
             .pages.getContent(page.id, preferLanguages)
-            .pages.resolveBreadcrumbs(CONTENT_FOLDER + '/', page, preferLanguages)
-            .pages.listMetaByParentId(page.id, preferLanguages)
+            .pages.resolveBreadcrumbs(CONTENT_FOLDER, page, preferLanguages)
+            .pages.listMetaByParentId(rootPage.id, preferLanguages)
             .callback(function(pageData) {
               var contents = pageData[0];
               var breadcrumbs = pageData[1];
-              var folderTitle = breadcrumbs.length ? breadcrumbs[breadcrumbs.length - 1].title : page.title;
-              var featuredImageSrc = page.featuredImageSrc ? page.featuredImageSrc + '?size=750' : '/gfx/layout/mikkeli-page-image-default.jpg';
+              var rootFolderTitle = rootPage.title;
+              var featuredImageSrc = page.featuredImageSrc ? page.featuredImageSrc : '/gfx/layout/mikkeli-page-image-default.jpg';
               // TODO: Banner should come from API
               var bannerSrc = '/gfx/layout/mikkeli-page-banner-default.jpg';
 
@@ -240,8 +243,9 @@
                 res.render('pages/contents.pug', {
                   id: page.id,
                   slug: page.slug,
+                  rootPath: util.format("%s/%s", CONTENT_FOLDER, rootPath),
                   title: page.title,
-                  folderTitle: folderTitle,
+                  rootFolderTitle: rootFolderTitle,
                   contents: processPageContent(path, contents),
                   sidebarContents: getSidebarContent(contents),
                   breadcrumbs: breadcrumbs,

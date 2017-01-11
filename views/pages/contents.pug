@@ -26,7 +26,7 @@ block content
     .row
       .col-lg-5.page-nav.no-gutters.hidden-md-down
         h3
-          =folderTitle
+          =rootFolderTitle
         each child in children
           +pageMenuItem(child)
                   
@@ -47,3 +47,4 @@ block content
       .col-xs-24.col-lg-5.sidebar
         .sidebar-block
           !=sidebarContents
+    input.rootPath(type="hidden", value=rootPath)

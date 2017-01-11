@@ -13,13 +13,13 @@ mixin breadcrumbs(breadcrumbs)
 mixin pageMenuItem(item)
   if item.hasChildren 
     span.page-nav-item
-      a.open-folder(href="#", data-page-id=item.id)
-      a(href='#')
+      a.open-folder(href="#", data-page-id=item.id, data-slug=item.slug)
+      a.page-nav-link(href='#')
         =item.title
       ul.child-pages
   else
     span.page-nav-item
-      span.leaf-page
+      span.leaf-page(data-page-id=item.id, data-slug=item.slug)
         |»
-      a(href='#')
+      a.page-nav-link(href='#')
         =item.title
