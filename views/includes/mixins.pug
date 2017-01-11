@@ -19,7 +19,8 @@ mixin pageMenuItem(item)
       ul.child-pages
         if item.children
           each child in item.children
-            +pageMenuItem(child)
+            li
+              +pageMenuItem(child)
   else
     span.page-nav-item(class=item.id == id ? 'active' : '')
       span.leaf-page(data-page-id=item.id, data-slug=item.slug)
