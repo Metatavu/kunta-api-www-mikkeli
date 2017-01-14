@@ -50,3 +50,12 @@
 .open>.child-pages>li {
   display: block;
 }
+
+.subpage-list {
+  padding-left: 0;
+  margin-top: 20px;
+ 
+  li {
+    list-style: none;
+  }
+}
