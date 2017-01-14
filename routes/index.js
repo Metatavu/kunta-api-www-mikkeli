@@ -6,7 +6,6 @@
   const moment = require('moment');
   const _ = require('lodash');
   const cheerio = require('cheerio');
-  const async = require('async');
 
   const EVENT_COUNT = 9;
   const JOB_COUNT = 5;
@@ -211,7 +210,8 @@
         .callback(function(data) {
           loadChildPages(data[0], preferLanguages, (children) => {
             res.render('ajax/pagenav.pug', {
-              childPages: children
+              childPages: children,
+              activeIds: []
             });
           });
         });

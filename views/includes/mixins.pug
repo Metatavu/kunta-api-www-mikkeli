@@ -22,7 +22,7 @@ mixin pageMenuItem(item)
             li
               +pageMenuItem(child)
   else
-    span.page-nav-item(class=item.id == id ? 'active' : '')
+    span.page-nav-item(class=[activeIds.indexOf(item.id) != -1 ? 'active' : ''].join(' '))
       span.leaf-page(data-page-id=item.id, data-slug=item.slug)
         |»
       a.page-nav-link(href='#')
