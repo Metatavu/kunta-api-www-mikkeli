@@ -84,12 +84,18 @@
       var module = new ModulesClass(config);
       
       pages.forEach((page) => {
-        module.pages.listMetaByParentId(page.id, preferLanguages);
+        if (!page.meta || !page.meta.hideMenuChildren) {
+          module.pages.listMetaByParentId(page.id, preferLanguages);
+        }
       });
       
       module.callback(function (data) {
-        pages.forEach((page, index) => {
-          pages[index].hasChildren = data[index] && data[index].length > 0;
+        var index = 0;
+        pages.forEach((page) => {
+          if (!page.meta || !page.meta.hideMenuChildren) {
+            pages[index].hasChildren = data[index] && data[index].length > 0;
+            index++;
+          }
         });
         
         callback(pages);
@@ -245,7 +251,7 @@
             .pages.getContent(page.id, preferLanguages)
             .pages.resolveBreadcrumbs(CONTENT_FOLDER, page, preferLanguages)
             .pages.listMetaByParentId(rootPage.id, preferLanguages)
-            .pages.readTreeMetasWithChildren(rootPage.id, page.parentId, preferLanguages)
+            .pages.readMenuTree(rootPage.id, page.parentId, preferLanguages)
             .callback(function(pageData) {
               var contents = pageData[0];
               var breadcrumbs = pageData[1];

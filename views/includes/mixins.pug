@@ -11,7 +11,7 @@ mixin breadcrumbs(breadcrumbs)
           =breadcrumb.title
           
 mixin pageMenuItem(item)
-  if item.children || item.hasChildren 
+  if (item.meta && !item.meta.hideMenuChildren) && (item.children || item.hasChildren)
     span.page-nav-item(class=[item.id == id ? 'active' : '', item.children && item.children.length ? 'open' : ''].join(' '))
       a.open-folder(href="#", data-page-id=item.id, data-slug=item.slug)
       a.page-nav-link(href='#')
