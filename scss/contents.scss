@@ -5,10 +5,10 @@
 .child-pages {
   padding-left: 10px;
   margin-left: -10px;
+  
   > li {
     display: none;
   }
-  
 }
 
 .page-nav-item {
@@ -16,28 +16,29 @@
   padding-right: 20px; 
 }
 
-.open-folder, .leaf-page {
+.open-folder,
+.leaf-page {
   padding-right: 10px;
   position: absolute;
   margin-left: -15px;
   
-  &:hover, &:focus {
+  &:hover, 
+  &:focus {
     text-decoration: none;
   }
-  
 }
 
-.open-folder:before {
-  content: '+';
+.open-folder::before {
+  content: "+";
 }
 
-.open>.open-folder:before {
-  content: '-';
+.open>.open-folder::before {
+  content: "-";
 }
 
-.loading>.open-folder:before {
-  content: ' ';
-  background-image: url('/gfx/load-2.svg');
+.loading>.open-folder::before {
+  content: " ";
+  background-image: url("/gfx/load-2.svg");
   background-position: center;
   background-repeat: no-repeat;
   background-size: 100%;
