@@ -210,9 +210,9 @@ block content
                     each announcement in announcements
                       .content-block-row
                         a(href='/kuulutukset/' + announcement.slug)
-                          =announcement.shortDate
-                          |&nbsp;-&nbsp;
                           =announcement.title
+                        span
+                          =announcement.shortDate
                   .all-link-container
                     a.all-link(href="#") 
                       |Katso kaikki

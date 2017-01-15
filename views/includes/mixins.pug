@@ -9,3 +9,21 @@ mixin breadcrumbs(breadcrumbs)
       else 
         a.breadcrumb-item(href=breadcrumb.path)
           =breadcrumb.title
+          
+mixin pageMenuItem(item)
+  if (item.meta && !item.meta.hideMenuChildren) && (item.children || item.hasChildren)
+    span.page-nav-item(class=[item.id == id ? 'active' : '', item.children && item.children.length ? 'open' : ''].join(' '))
+      a.open-folder(href="#", data-page-id=item.id, data-slug=item.slug)
+      a.page-nav-link(href='#')
+        =item.title
+      ul.child-pages
+        if item.children
+          each child in item.children
+            li
+              +pageMenuItem(child)
+  else
+    span.page-nav-item(class=[activeIds.indexOf(item.id) != -1 ? 'active' : ''].join(' '))
+      span.leaf-page(data-page-id=item.id, data-slug=item.slug)
+        |»
+      a.page-nav-link(href='#')
+        =item.title

@@ -15,7 +15,7 @@
   const CONTENT_FOLDER = '/sisalto';
   const NEWS_FOLDER = '/uutiset';
   const ANNOUNCEMENTS_FOLDER = '/kuulutukset';
-
+  
   function resolveLinkType(link) {
     if (!link || link.startsWith('#')) {
       return 'NONE';
@@ -78,6 +78,28 @@
   }
 
   module.exports = function(app, config, ModulesClass) {
+
+    function loadChildPages(pages, preferLanguages, callback) {
+      var module = new ModulesClass(config);
+      
+      pages.forEach((page) => {
+        if (!page.meta || !page.meta.hideMenuChildren) {
+          module.pages.listMetaByParentId(page.id, preferLanguages);
+        }
+      });
+      
+      module.callback(function (data) {
+        var index = 0;
+        pages.forEach((page) => {
+          if (!page.meta || !page.meta.hideMenuChildren) {
+            pages[index].hasChildren = data[index] && data[index].length > 0;
+            index++;
+          }
+        });
+        
+        callback(pages);
+      });
+    }
 
     app.use(function(req, res, next) {
       var modules = new ModulesClass(config);
@@ -178,45 +200,87 @@
           res.status(500).send(err);
         });
     });
+    
+    app.get('/ajax/pagenav', function (req, res) {
+      var pageId = req.query.pageId;
+      var preferLanguages = req.headers['accept-language'];
+      
+      new ModulesClass(config)
+        .pages.listMetaByParentId(pageId, preferLanguages)
+        .callback(function(data) {
+          loadChildPages(data[0], preferLanguages, (children) => {
+            res.render('ajax/pagenav.pug', {
+              childPages: children,
+              activeIds: []
+            });
+          });
+        });
+    });
+    
+    function mapOpenChildren(children, activeIds, openTreeNodes) {
+      if (openTreeNodes.length > 0) {
+        for (var i = 0; i < children.length; i++) {
+          if (activeIds.indexOf(children[i].id) != -1) {
+            children[i].children = openTreeNodes.shift();
+            mapOpenChildren(children[i].children, activeIds, openTreeNodes);
+            break;
+          }
+        }
+      }
+      
+      return children;
+    }
 
     app.get(util.format('%s*', CONTENT_FOLDER), function(req, res) {
       var path = req.path.substring(9);
+      var rootPath = path.split('/')[0];
       var preferLanguages = req.headers['accept-language'];
 
       new ModulesClass(config)
         .pages.findByPath(path, preferLanguages)
+        .pages.findByPath(rootPath, preferLanguages)
         .callback(function(data) {
           var page = data[0];
-          if (!page) {
+          var rootPage = data[1];
+          if (!page || !rootPage) {
             res.status(404).send("Not Found");
             return;
           }
-
+          
           new ModulesClass(config)
             .pages.getContent(page.id, preferLanguages)
-            .pages.resolveBreadcrumbs(CONTENT_FOLDER + '/', page, preferLanguages)
-            .pages.listMetaByParentId(page.id, preferLanguages)
+            .pages.resolveBreadcrumbs(CONTENT_FOLDER, page, preferLanguages)
+            .pages.listMetaByParentId(rootPage.id, preferLanguages)
+            .pages.readMenuTree(rootPage.id, page.parentId, preferLanguages)
             .callback(function(pageData) {
               var contents = pageData[0];
               var breadcrumbs = pageData[1];
-              var children = pageData[2];
-              var folderTitle = breadcrumbs.length ? breadcrumbs[breadcrumbs.length - 1].title : page.title;
-              var featuredImageSrc = page.featuredImageSrc ? page.featuredImageSrc + '?size=750' : '/gfx/layout/mikkeli-page-image-default.jpg';
+              var rootFolderTitle = rootPage.title;
+              var featuredImageSrc = page.featuredImageSrc ? page.featuredImageSrc : '/gfx/layout/mikkeli-page-image-default.jpg';
               // TODO: Banner should come from API
               var bannerSrc = '/gfx/layout/mikkeli-page-banner-default.jpg';
-
-              res.render('pages/contents.pug', {
-                id: page.id,
-                slug: page.slug,
-                title: page.title,
-                folderTitle: folderTitle,
-                contents: processPageContent(path, contents),
-                sidebarContents: getSidebarContent(contents),
-                breadcrumbs: breadcrumbs,
-                featuredImageSrc: featuredImageSrc,
-                menus: req.kuntaApi.data.menus,
-                children: children,
-                bannerSrc: bannerSrc
+              var openTreeNodes = pageData[3];
+              var activeIds = _.map(breadcrumbs, (breadcrumb) => {
+                return breadcrumb.id;
+              });
+              
+              loadChildPages(pageData[2], preferLanguages, (children) => {
+                res.render('pages/contents.pug', {
+                  id: page.id,
+                  slug: page.slug,
+                  rootPath: util.format("%s/%s", CONTENT_FOLDER, rootPath),
+                  title: page.title,
+                  rootFolderTitle: rootFolderTitle,
+                  contents: processPageContent(path, contents),
+                  sidebarContents: getSidebarContent(contents),
+                  breadcrumbs: breadcrumbs,
+                  featuredImageSrc: featuredImageSrc,
+                  menus: req.kuntaApi.data.menus,
+                  activeIds: activeIds,
+                  children: mapOpenChildren(children, activeIds, openTreeNodes),
+                  openTreeNodes: openTreeNodes,
+                  bannerSrc: bannerSrc
+                });
               });
 
             }, function(contentErr) {
