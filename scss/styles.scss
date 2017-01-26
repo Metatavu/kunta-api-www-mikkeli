@@ -64,11 +64,13 @@ body {
       
       .file-page-link {
         margin-left: 5px;
+ 
+        .file-page-link .fa {
+          margin-top: 6px;
+        }
+      
       }
       
-      .file-page-link .fa {
-        margin-top: 6px;
-      }
     }
   }
 }
