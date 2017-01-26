@@ -9,7 +9,7 @@ body {
 
 .search-results {
   position: absolute;
-  right: 0px;
+  right: 0;
   width: 100%;
   z-index: 99999;
   background: rgba(255, 255, 255, 0.9);
@@ -29,12 +29,11 @@ body {
     padding: 5px;
     margin-left: -5px;
     margin-right: -5px;
-    margin-top: -5px;
     font-weight: bold;
     margin-top: 10px;
     
     &:first-of-type {
-      margin-top: 0px;
+      margin-top: 0;
     }
   }
   
@@ -65,10 +64,10 @@ body {
       
       .file-page-link {
         margin-left: 5px;
-        
-        .fa {
-          margin-top: 6px;
-        }
+      }
+      
+      .file-page-link .fa {
+        margin-top: 6px;
       }
     }
   }
