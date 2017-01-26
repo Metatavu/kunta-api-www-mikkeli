@@ -1,0 +1,19 @@
+if pages && pages.length
+  h3
+    |Sivut
+  ul
+    each page in pages
+      li
+        i.fa.fa-file-text-o(aria-hidden="true")
+        a(href="/redirect?pageId=" + page.id)
+          =page.title
+if files && files.length
+  h3
+    |Tiedostot
+  ul
+    each file in files
+      li
+        i.fa.fa-paperclip(aria-hidden="true")
+        a(href="/redirect?fileId=" + file.id)
+          =file.title
+        

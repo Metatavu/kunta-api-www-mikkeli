@@ -217,6 +217,26 @@
         });
     });
     
+    app.get('/ajax/search', function (req, res) {
+      var search = req.query.search;
+      var preferLanguages = req.headers['accept-language'];
+      
+      new ModulesClass(config)
+        .pages.search(search, preferLanguages)
+        .files.search(search, preferLanguages)
+        .callback(function(data) {
+          var pages = data[0];
+          var files = data[1];
+          
+          console.log(files);
+
+          res.render('ajax/search.pug', {
+            pages: pages,
+            files: files
+          });
+        });
+    });
+    
     function mapOpenChildren(children, activeIds, openTreeNodes) {
       if (openTreeNodes.length > 0) {
         for (var i = 0; i < children.length; i++) {
