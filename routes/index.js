@@ -245,7 +245,7 @@
             res
               .set('Content-Length', file.size)
               .set('Content-Type', file.contentType)
-              .set("content-disposition", util.format("attachment; filename=%s", file.slug))
+              .set("content-disposition", util.format("attachment; filename=%s", file.slug));
             stream.pipe(res);
           } else {
             res.status(500).send("Tiedoston lataus epäonnistui");
