@@ -201,6 +201,25 @@
         });
     });
     
+    app.get('/redirect/:type/:id', function (req, res) {
+      var type = req.params.type;
+      var id = req.params.id;
+      
+      if (type !== 'page') {
+        res.status(400).send('Invalid type'); 
+      }
+      
+      new ModulesClass(config)
+        .pages.resolvePath(id)
+        .callback((data) => {
+          if (data) {
+            res.redirect(util.format("%s/%s", CONTENT_FOLDER, data));  
+          } else {
+            res.redirect('/');
+          }
+        });
+    });
+    
     app.get('/ajax/pagenav', function (req, res) {
       var pageId = req.query.pageId;
       var preferLanguages = req.headers['accept-language'];
@@ -213,6 +232,26 @@
               childPages: children,
               activeIds: []
             });
+          });
+        });
+    });
+    
+    app.get('/ajax/search', function (req, res) {
+      var search = req.query.search;
+      var preferLanguages = req.headers['accept-language'];
+      
+      new ModulesClass(config)
+        .pages.search(search, preferLanguages)
+        .files.search(search, preferLanguages)
+        .callback(function(data) {
+          var pages = data[0];
+          var files = data[1];
+          
+          console.log(files);
+          
+          res.render('ajax/search.pug', {
+            pages: pages,
+            files: files
           });
         });
     });

@@ -1,6 +1,67 @@
 (function () {
   'use strict';
   
+  $.widget("custom.menuSearch", {
+    
+    _create : function() {
+      this._searching = false;
+      this.element.append($('<div>').addClass('search-results').hide());
+      this.element.find('input').on("keyup", $.proxy(this._onInputKeyUp, this));
+      this.element.find('input').on("focus", $.proxy(this._onInputFocus, this));
+      $(window).click($.proxy(this._onWindowClick, this));
+    },
+    
+    _getSearch: function () {
+      return $.trim(this.element.find('input').val());
+    },
+    
+    _search: function () {
+      var search = this._getSearch();
+      if (search) {
+        if (!this._searching) {
+          this._searching = true;
+          this.element.addClass('searching');
+          $.ajax({
+            url : '/ajax/search/',
+            data : {
+              search: search
+            },
+            success : $.proxy(function(data) {
+              this._searching = false;
+              this.element
+                .find('.search-results')
+                .html(data)
+                .show();
+              
+              if (search != this._getSearch()) {
+                this._search();
+              } else {
+                this.element.removeClass('searching');
+              }
+            }, this)
+          });
+        }
+      } else {
+        this.element.find('.search-results').hide();
+      }
+    },
+    
+    _onInputKeyUp: function () {
+      this._search();
+    },
+    
+    _onInputFocus: function () {
+      this._search();
+    },
+    
+    _onWindowClick: function (event) {
+      if (!$(event.target).closest('.nav-search-container').length) {
+        this.element.find('.search-results').hide();
+      }
+    }
+  
+  });
+  
   $.widget("custom.lazyBackgroundImage", {
     
     _create : function() {
@@ -39,6 +100,8 @@
     $('*[data-lazy-bg-image]').each(function (index, element) {
       $(element).lazyBackgroundImage();
     });
+    
+    $('.nav-search-container').menuSearch();
   });
   
 }).call(this);
