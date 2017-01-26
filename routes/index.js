@@ -12,6 +12,7 @@
   const ANNOUNCEMENT_COUNT = 5;
   const ANNOUNCEMENT_COUNT_PAGE = 10;
   const SOCIAL_MEDIA_POSTS = 4 * 3;
+  const FILES_FOLDER = '/tiedostot';
   const CONTENT_FOLDER = '/sisalto';
   const NEWS_FOLDER = '/uutiset';
   const ANNOUNCEMENTS_FOLDER = '/kuulutukset';
@@ -205,17 +206,49 @@
       var type = req.params.type;
       var id = req.params.id;
       
-      if (type !== 'page') {
-        res.status(400).send('Invalid type'); 
+      switch (type) {
+        case 'page':
+          new ModulesClass(config)
+            .pages.resolvePath(id)
+            .callback((data) => {
+              if (data) {
+                res.redirect(util.format("%s/%s", CONTENT_FOLDER, data));  
+              } else {
+                res.redirect('/');
+              }
+            });
+        break;
+        case 'file':
+          res.redirect(util.format("%s/%s", FILES_FOLDER, id));
+        break;
+        default:
+          res.status(400).send('Invalid type'); 
+        break;
+      }
+    });
+
+    app.get(util.format('%s/:id', FILES_FOLDER), function(req, res) {
+      var id = req.params.id;
+      if (!id) {
+        res.status(404).send('Not found');
+        return;
       }
       
       new ModulesClass(config)
-        .pages.resolvePath(id)
-        .callback((data) => {
-          if (data) {
-            res.redirect(util.format("%s/%s", CONTENT_FOLDER, data));  
+        .files.findById(id)
+        .files.streamData(id)
+        .callback((result) => {
+          var file = result[0];
+          var stream = result[1];
+          
+          if (file && stream) {
+            res
+              .set('Content-Length', file.size)
+              .set('Content-Type', file.contentType)
+              .set("content-disposition", util.format("attachment; filename=%s", file.slug))
+            stream.pipe(res);
           } else {
-            res.redirect('/');
+            res.status(500).send("Tiedoston lataus epäonnistui");
           }
         });
     });
@@ -246,8 +279,6 @@
         .callback(function(data) {
           var pages = data[0];
           var files = data[1];
-          
-          console.log(files);
           
           res.render('ajax/search.pug', {
             pages: pages,
