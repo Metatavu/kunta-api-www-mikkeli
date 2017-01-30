@@ -43,7 +43,8 @@ block content
             !=title
           .featured-image(data-lazy-bg-image=featuredImageSrc)
           !=contents
-      .col-xs-24.col-lg-5.sidebar
-        .sidebar-block
-          !=sidebarContents
+      if sidebarContents
+        .col-xs-24.col-lg-5.sidebar
+          .sidebar-block
+            !=sidebarContents
     input.rootPath(type="hidden", value=rootPath)
