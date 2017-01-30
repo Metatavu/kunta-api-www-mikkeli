@@ -24,6 +24,6 @@ mixin pageMenuItem(item)
   else
     span.page-nav-item(class=[activeIds.indexOf(item.id) != -1 ? 'active' : ''].join(' '))
       span.leaf-page(data-page-id=item.id, data-slug=item.slug)
-        |»
+        |&nbsp;
       a.page-nav-link(href='#')
         =item.title
