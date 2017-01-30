@@ -85,7 +85,7 @@
       .removeAttr('class')
       .removeAttr('height');
 
-    return $('aside').html();;
+    return $('aside').html();
   }
 
   module.exports = function(app, config, ModulesClass) {
