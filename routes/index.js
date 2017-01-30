@@ -75,7 +75,17 @@
     }
     
     const $ = cheerio.load(content);
-    return $('aside').html();
+    
+    $('aside').find('*[contenteditable]').removeAttr('contenteditable');
+
+    $('aside').find('img')
+      .removeAttr('srcset')
+      .removeAttr('width')
+      .removeAttr('sizes')
+      .removeAttr('class')
+      .removeAttr('height');
+
+    return $('aside').html();;
   }
 
   module.exports = function(app, config, ModulesClass) {
