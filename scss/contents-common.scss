@@ -167,7 +167,18 @@
 .sidebar {
   background: #edeef2;
   margin-bottom: 45px;
-  
+  padding-top: 15px;
+  word-wrap: break-word;
+
+  @media (max-width: $break-medium) {
+    padding-top: 45px;
+    padding-bottom: 35px;
+  }
+
+  img {
+    max-width: 100%;
+  }
+
   .sidebar-block {
     
     h3 {
