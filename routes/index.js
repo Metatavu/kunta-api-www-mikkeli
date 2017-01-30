@@ -146,7 +146,7 @@
 
     app.get('/', function(req, res) {
       new ModulesClass(config)
-        .events.latest(EVENT_COUNT)
+        .events.latest(EVENT_COUNT, 'START_DATE', 'DESCENDING')
         .news.latest(0, 9)
         .banners.list()
         .tiles.list()
