@@ -11,7 +11,7 @@ block content
     .row
       .col-xs.banner-container
         .banner-border-top
-        .banner(style='background-image: url(' + bannerSrc + ')')
+        .banner(data-lazy-bg-image=bannerSrc)
         .banner-silhouette
         .banner-border-bottom
       
@@ -49,29 +49,8 @@ block content
         .page-content
           h1
             !=title
-          .featured-image(style='background-image: url(' + imageSrc + ')')
+          .featured-image(data-lazy-bg-image=imageSrc)
           !=contents
-      .col-xs-24.col-lg-5.sidebar
-        .sidebar-block
-          h3
-            |Palvelun tuottaa
-          p
-            |Yleiset kulttuuripalvelut
-            br
-            |Maaherrankatu 9-11 
-            br
-            |50100 Mikkeli PL 206
-            br
-            |50101 Mikkeli
-        .sidebar-block
-          h3
-            |Palvelun tuottaa
-          p
-            |Yleiset kulttuuripalvelut
-            br
-            |Maaherrankatu 9-11 
-            br
-            |50100 Mikkeli PL 206
-            br
-            |50101 Mikkeli
-        
+      if sidebarContents
+        .col-xs-24.col-lg-5.sidebar
+          !=sidebarContents

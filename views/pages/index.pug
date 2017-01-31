@@ -3,7 +3,7 @@ extends ../layout/index.pug
 mixin event(event) 
   .swiper-slide.col-lg-8.no-gutters
     .event-container
-      .event(style='background-image: url(' + event.imageSrc + '?size=480)')
+      .event(data-lazy-bg-image=event.imageSrc)
         a.event-link(href=event.originalUrl,target="_blank")
         .details
           .row
@@ -17,7 +17,7 @@ mixin event(event)
                 =event.name 
 
 mixin newsArticleTop(article)
-  .news-article.top-article(style='background-image: url(' + article.imageSrc + '?size=350)')
+  .news-article.top-article(data-lazy-bg-image=article.imageSrc)
     .details
       .date
         =article.shortDate
@@ -28,7 +28,7 @@ mixin newsArticleTop(article)
         !=article.abstract
     .border
 mixin newsArticleThumb(article)
-  .news-article.thumb-article(style='background-image: url(' + article.imageSrc + '?size=350)')
+  .news-article.thumb-article(data-lazy-bg-image=article.imageSrc)
     .details
       .date
         =article.shortDate
@@ -47,7 +47,7 @@ mixin newsArticleText(article)
         !=article.title
       
 mixin banner(banner)
-  .header-banner-item(style='background-image: url(' + banner.imageSrc + ')')
+  .header-banner-item(data-lazy-bg-image=banner.imageSrc,data-lazy-bg-size='.carousel-inner')
     .container.banner-content-container
       if banner.link
         a.banner-link(href=banner.link,target="_blank")
@@ -81,7 +81,7 @@ mixin banners-slider(banners)
     .header-border-bottom
       
 mixin tile(tile)
-  .tile(style='background-image: url(' + tile.imageSrc + ')')
+  .tile(data-lazy-bg-image=tile.imageSrc)
     if tile.link
       a.tile-link(href=tile.link,target="_blank")
     .details
@@ -160,7 +160,7 @@ block content
               |Katso kaikki tapahtumat
             span
               | 
-            a(href="www.mikkelinyt.fi",target="_blank")
+            a(href="http://www.mikkelinyt.fi",target="_blank")
               |www.mikkelinyt.fi
               
   .container-fluid.no-gutters
@@ -209,9 +209,10 @@ block content
                   .content
                     each announcement in announcements
                       .content-block-row
-                        a(href='#', target='_blank') #{announcement.title}
+                        a(href='/kuulutukset/' + announcement.slug)
+                          =announcement.title
                         span
-                           !=announcement.contents
+                          =announcement.shortDate
                   .all-link-container
                     a.all-link(href="#") 
                       |Katso kaikki
