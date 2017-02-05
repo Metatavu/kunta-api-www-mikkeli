@@ -76,6 +76,8 @@
     $(document.body).contentsNav({
       rootPath: $('.rootPath').val()
     });
+    
+    $("img.lazy").lazyload();
   });
   
 }).call(this);
