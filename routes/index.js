@@ -512,6 +512,7 @@
           activeJob: activeJob,
           jobs: jobs,
           menus: req.kuntaApi.data.menus,
+          fragmentMap: req.kuntaApi.data.fragmentMap,
           bannerSrc: bannerSrc,
           breadcrumbs : [{path: util.format('%s/%s', JOBS_FOLDER, activeJob.id), title: activeJob.title }]
         });
