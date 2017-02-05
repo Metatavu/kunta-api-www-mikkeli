@@ -197,11 +197,12 @@ block content
                   .content
                     each job in jobs
                       .content-block-row
-                        a(href=job.link, target='_blank') #{job.title}
+                        a(href=/tyot/ + job.id) #{job.title}
                         span #{job.employmentType}, #{job.taskArea}
-                  .all-link-container
-                    a.all-link(href="#") 
-                      |Katso kaikki
+                  if jobs && jobs.length
+                    .all-link-container
+                      a.all-link(href=/tyot/ + jobs[0].id) 
+                        |Katso kaikki
               .col-lg-8
                 .content-block.announcements-block
                   .icon
