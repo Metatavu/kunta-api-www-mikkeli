@@ -115,10 +115,13 @@
     app.use(function(req, res, next) {
       var modules = new ModulesClass(config);
 
-      modules.menus.list()
+      modules
+        .menus.list()
+        .fragments.list()
         .callback(function(data) {
           var menus = data[0];
-
+          var fragments = data[1];
+          
           _.keys(menus).forEach(menuKey => {
             var menu = menus[menuKey];
 
@@ -130,10 +133,16 @@
               return item;
             });
           });
+          
+          var fragmentMap = {};
+          fragments.forEach((fragment) => {
+            fragmentMap[fragment.slug] = fragment.contents;
+          });
 
           req.kuntaApi = {
             data: {
-              menus: menus
+              menus: menus,
+              fragmentMap: fragmentMap
             }
           };
 
@@ -190,7 +199,7 @@
               "shortDate": moment(announcement.published).format("D.M.YYYY")
             });
           });
-
+          
           res.render('pages/index.pug', {
             events: events,
             banners: banners,
@@ -203,7 +212,8 @@
               thumbs: news.splice(0, 4),
               texts: news
             },
-            menus: req.kuntaApi.data.menus
+            menus: req.kuntaApi.data.menus,
+            fragmentMap: req.kuntaApi.data.fragmentMap
           });
 
         }, function(err) {
@@ -356,6 +366,7 @@
                   breadcrumbs: breadcrumbs,
                   featuredImageSrc: featuredImageSrc,
                   menus: req.kuntaApi.data.menus,
+                  fragmentMap: req.kuntaApi.data.fragmentMap,
                   activeIds: activeIds,
                   children: mapOpenChildren(children, activeIds, openTreeNodes),
                   openTreeNodes: openTreeNodes,
@@ -403,6 +414,7 @@
             sidebarContents: getSidebarContent(newsArticle.contents),
             imageSrc: newsArticle.imageSrc,
             menus: req.kuntaApi.data.menus,
+            fragmentMap: req.kuntaApi.data.fragmentMap,
             bannerSrc: bannerSrc,
             siblings: siblings,
             breadcrumbs : [{path: util.format('%s/%s', NEWS_FOLDER, newsArticle.slug), title: newsArticle.title }]
@@ -442,6 +454,7 @@
             contents: processPageContent('/', announcement.contents),
             sidebarContents: getSidebarContent(announcement.contents),
             menus: req.kuntaApi.data.menus,
+            fragmentMap: req.kuntaApi.data.fragmentMap,
             bannerSrc: bannerSrc,
             siblings: siblings,
             breadcrumbs : [{path: util.format('%s/%s', ANNOUNCEMENTS_FOLDER, announcement.slug), title: announcement.title }]
