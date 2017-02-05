@@ -16,6 +16,7 @@
   const CONTENT_FOLDER = '/sisalto';
   const NEWS_FOLDER = '/uutiset';
   const ANNOUNCEMENTS_FOLDER = '/kuulutukset';
+  const JOBS_FOLDER = '/tyot';
   
   function resolveLinkType(link) {
     if (!link || link.startsWith('#')) {
@@ -86,6 +87,17 @@
       .removeAttr('height');
 
     return $('aside').html();
+  }
+  
+  function plainTextParagraphs(text) {
+    var result = [];
+    var paragraphs = (text||'').split('\n');
+    
+    for (var i = 0; i < paragraphs.length; i++) {
+      result.push(util.format('<p>%s</p>', paragraphs[i]));
+    }
+    
+    return result.join('');
   }
 
   module.exports = function(app, config, ModulesClass) {
@@ -176,8 +188,19 @@
           });
 
           var banners = _.clone(data[2] || []).map(banner => {
+            var styles = [];
+            
+            if (banner.textColor) {
+              styles.push(util.format('color: %s', banner.textColor));
+            }
+
+            if (banner.backgroundColor) {
+              styles.push(util.format('background-color: %s', banner.backgroundColor));
+            }
+            
             return Object.assign(banner, {
-              imageSrc: banner.imageSrc ? banner.imageSrc : '/gfx/layout/mikkeli-banner-default.jpg'
+              imageSrc: banner.imageSrc ? banner.imageSrc : '/gfx/layout/mikkeli-banner-default.jpg',
+              style: styles.join(';')
             });
           });
 
@@ -464,6 +487,39 @@
           console.error(err);
           res.status(500).send(err);
         });
+    });
+
+    app.get(util.format('%s/:id', JOBS_FOLDER), function(req, res) {
+      var id = req.params.id;
+      if (!id) {
+        res.status(404).send('Not found');
+        return;
+      }
+      
+      new ModulesClass(config)
+      .jobs.findById(id)
+      .jobs.list(100, 'PUBLICATION_END', 'ASCENDING')
+      .callback((data) => {
+        var activeJob = Object.assign(data[0], {
+          "endTime": moment(data[0].publicationEnd).format('DD.MM.YYYY HH:mm'),
+          "description": plainTextParagraphs(data[0].description)
+        });
+        
+        var jobs = _.clone(data[1] || []);
+        var bannerSrc = '/gfx/layout/mikkeli-page-banner-default.jpg';
+        
+        res.render('pages/jobs.pug', {
+          activeJob: activeJob,
+          jobs: jobs,
+          menus: req.kuntaApi.data.menus,
+          bannerSrc: bannerSrc,
+          breadcrumbs : [{path: util.format('%s/%s', JOBS_FOLDER, activeJob.id), title: activeJob.title }]
+        });
+
+      }, (err) => {
+        console.error(err);
+        res.status(500).send(err);
+      });
     });
 
   };
