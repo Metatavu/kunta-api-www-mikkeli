@@ -24,8 +24,6 @@ mixin newsArticleTop(article)
       .title
         a(href='/uutiset/' + article.slug)
           !=article.title
-      .abstract
-        !=article.abstract
     .border
 mixin newsArticleThumb(article)
   .news-article.thumb-article(data-lazy-bg-image=article.imageSrc)
@@ -35,8 +33,6 @@ mixin newsArticleThumb(article)
       .title
         a(href='/uutiset/' + article.slug)
           !=article.title
-      .abstract
-        !=article.abstract
 
 mixin newsArticleText(article)
   .news-article.text-article
