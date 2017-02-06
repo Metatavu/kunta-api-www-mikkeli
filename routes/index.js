@@ -176,8 +176,19 @@
           });
 
           var banners = _.clone(data[2] || []).map(banner => {
+            var styles = [];
+            
+            if (banner.textColor) {
+              styles.push(util.format('color: %s', banner.textColor));
+            }
+
+            if (banner.backgroundColor) {
+              styles.push(util.format('background-color: %s', banner.backgroundColor));
+            }
+            
             return Object.assign(banner, {
-              imageSrc: banner.imageSrc ? banner.imageSrc : '/gfx/layout/mikkeli-banner-default.jpg'
+              imageSrc: banner.imageSrc ? banner.imageSrc : '/gfx/layout/mikkeli-banner-default.jpg',
+              style: styles.join(';')
             });
           });
 
