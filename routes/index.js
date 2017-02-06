@@ -16,6 +16,7 @@
   const CONTENT_FOLDER = '/sisalto';
   const NEWS_FOLDER = '/uutiset';
   const ANNOUNCEMENTS_FOLDER = '/kuulutukset';
+  const JOBS_FOLDER = '/tyot';
   
   function resolveLinkType(link) {
     if (!link || link.startsWith('#')) {
@@ -59,9 +60,18 @@
 
     const $ = cheerio.load(content);
 
-    $('a[href]').each(function(index, link) {
+    $('a[href]').each((index, link) => {
       var href = $(link).attr('href');
       $(link).attr('href', processLink(currentPage, href));
+    });
+
+    $('img[src]').each((index, img) => {
+      var src = $(img).attr('src');
+      $(img)
+        .addClass('lazy')
+        .removeAttr('src')
+        .removeAttr('srcset')
+        .attr('data-original', src);
     });
     
     $('aside').remove();
@@ -86,6 +96,17 @@
       .removeAttr('height');
 
     return $('aside').html();
+  }
+  
+  function plainTextParagraphs(text) {
+    var result = [];
+    var paragraphs = (text||'').split('\n');
+    
+    for (var i = 0; i < paragraphs.length; i++) {
+      result.push(util.format('<p>%s</p>', paragraphs[i]));
+    }
+    
+    return result.join('');
   }
 
   module.exports = function(app, config, ModulesClass) {
@@ -115,10 +136,13 @@
     app.use(function(req, res, next) {
       var modules = new ModulesClass(config);
 
-      modules.menus.list()
+      modules
+        .menus.list()
+        .fragments.list()
         .callback(function(data) {
           var menus = data[0];
-
+          var fragments = data[1];
+          
           _.keys(menus).forEach(menuKey => {
             var menu = menus[menuKey];
 
@@ -130,10 +154,16 @@
               return item;
             });
           });
+          
+          var fragmentMap = {};
+          fragments.forEach((fragment) => {
+            fragmentMap[fragment.slug] = fragment.contents;
+          });
 
           req.kuntaApi = {
             data: {
-              menus: menus
+              menus: menus,
+              fragmentMap: fragmentMap
             }
           };
 
@@ -191,8 +221,19 @@
           });
 
           var banners = _.clone(data[2] || []).map(banner => {
+            var styles = [];
+            
+            if (banner.textColor) {
+              styles.push(util.format('color: %s', banner.textColor));
+            }
+
+            if (banner.backgroundColor) {
+              styles.push(util.format('background-color: %s', banner.backgroundColor));
+            }
+            
             return Object.assign(banner, {
-              imageSrc: banner.imageSrc ? banner.imageSrc : '/gfx/layout/mikkeli-banner-default.jpg'
+              imageSrc: banner.imageSrc ? banner.imageSrc : '/gfx/layout/mikkeli-banner-default.jpg',
+              style: styles.join(';')
             });
           });
 
@@ -214,8 +255,8 @@
               "shortDate": moment(announcement.published).format("D.M.YYYY")
             });
           });
-
-          res.render('pages/index.pug', {
+          
+          res.render('pages/index.pug', Object.assign(req.kuntaApi.data, {
             events: events,
             banners: banners,
             tiles: tiles,
@@ -226,9 +267,8 @@
               top: news.splice(0, 1)[0],
               thumbs: news.splice(0, 4),
               texts: news
-            },
-            menus: req.kuntaApi.data.menus
-          });
+            }
+          }));
 
         }, (err) => {
           next({
@@ -368,7 +408,7 @@
             .pages.getContent(page.id, preferLanguages)
             .pages.resolveBreadcrumbs(CONTENT_FOLDER, page, preferLanguages)
             .pages.listMetaByParentId(rootPage.id, preferLanguages)
-            .pages.readMenuTree(rootPage.id, page.parentId, preferLanguages)
+            .pages.readMenuTree(rootPage.id, page.id, preferLanguages)
             .callback(function(pageData) {
               var contents = pageData[0];
               var breadcrumbs = pageData[1];
@@ -382,7 +422,7 @@
               });
               
               loadChildPages(pageData[2], preferLanguages, (children) => {
-                res.render('pages/contents.pug', {
+                res.render('pages/contents.pug', Object.assign(req.kuntaApi.data, {
                   id: page.id,
                   slug: page.slug,
                   rootPath: util.format("%s/%s", CONTENT_FOLDER, rootPath),
@@ -392,12 +432,11 @@
                   sidebarContents: getSidebarContent(contents),
                   breadcrumbs: breadcrumbs,
                   featuredImageSrc: featuredImageSrc,
-                  menus: req.kuntaApi.data.menus,
                   activeIds: activeIds,
                   children: mapOpenChildren(children, activeIds, openTreeNodes),
                   openTreeNodes: openTreeNodes,
                   bannerSrc: bannerSrc
-                });
+                }));
               });
 
             }, (contentErr) => {
@@ -440,18 +479,17 @@
           // TODO: Banner should come from API
           var bannerSrc = '/gfx/layout/mikkeli-page-banner-default.jpg';
 
-           res.render('pages/news-article.pug', {
+           res.render('pages/news-article.pug', Object.assign(req.kuntaApi.data, {
             id: newsArticle.id,
             slug: newsArticle.slug,
             title: newsArticle.title,
             contents: processPageContent('/', newsArticle.contents),
             sidebarContents: getSidebarContent(newsArticle.contents),
             imageSrc: newsArticle.imageSrc,
-            menus: req.kuntaApi.data.menus,
             bannerSrc: bannerSrc,
             siblings: siblings,
             breadcrumbs : [{path: util.format('%s/%s', NEWS_FOLDER, newsArticle.slug), title: newsArticle.title }]
-          });
+          }));
 
         }, (err) => {
           next({
@@ -486,17 +524,16 @@
           // TODO: Banner should come from API
           var bannerSrc = '/gfx/layout/mikkeli-page-banner-default.jpg';
 
-           res.render('pages/announcement.pug', {
+           res.render('pages/announcement.pug', Object.assign(req.kuntaApi.data, {
             id: announcement.id,
             slug: announcement.slug,
             title: announcement.title,
             contents: processPageContent('/', announcement.contents),
             sidebarContents: getSidebarContent(announcement.contents),
-            menus: req.kuntaApi.data.menus,
             bannerSrc: bannerSrc,
             siblings: siblings,
             breadcrumbs : [{path: util.format('%s/%s', ANNOUNCEMENTS_FOLDER, announcement.slug), title: announcement.title }]
-          });
+          }));
 
         }, function(err) {
           next({
@@ -505,8 +542,39 @@
           });
         });
     });
-
     
+    app.get(util.format('%s/:id', JOBS_FOLDER), (req, res) => {
+      var id = req.params.id;
+      if (!id) {
+        res.status(404).send('Not found');
+        return;
+      }
+      
+      new ModulesClass(config)
+      .jobs.findById(id)
+      .jobs.list(100, 'PUBLICATION_END', 'ASCENDING')
+      .callback((data) => {
+        var activeJob = Object.assign(data[0], {
+          "endTime": moment(data[0].publicationEnd).format('DD.MM.YYYY HH:mm'),
+          "description": plainTextParagraphs(data[0].description)
+        });
+        
+        var jobs = _.clone(data[1] || []);
+        var bannerSrc = '/gfx/layout/mikkeli-page-banner-default.jpg';
+        
+        res.render('pages/jobs.pug', Object.assign(req.kuntaApi.data, {
+          activeJob: activeJob,
+          jobs: jobs,
+          bannerSrc: bannerSrc,
+          breadcrumbs : [{path: util.format('%s/%s', JOBS_FOLDER, activeJob.id), title: activeJob.title }]
+        }));
+
+      }, (err) => {
+        console.error(err);
+        res.status(500).send(err);
+      });
+    });
+
     app.use((data, req, res, next) => {
       renderErrorPage(req, res, data.status || 500, data.message, data.error);
     });
