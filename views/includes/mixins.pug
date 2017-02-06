@@ -2,13 +2,14 @@ mixin breadcrumbs(breadcrumbs)
   .col-xs.breadcrumbs-container
     a.breadcrumb-item(href="/")
       |Etusivu
-    each breadcrumb, index in breadcrumbs
-      if(index === breadcrumbs.length - 1)
-        span.breadcrumb-item.active
-          !=title
-      else 
-        a.breadcrumb-item(href=breadcrumb.path)
-          =breadcrumb.title
+    if breadcrumbs && breadcrumbs.length
+      each breadcrumb, index in breadcrumbs
+        if(index === breadcrumbs.length - 1)
+          span.breadcrumb-item.active
+            !=title
+        else 
+          a.breadcrumb-item(href=breadcrumb.path)
+            =breadcrumb.title
           
 mixin pageMenuItem(item)
   if (item.meta && !item.meta.hideMenuChildren) && (item.children || item.hasChildren)
