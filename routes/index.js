@@ -188,6 +188,14 @@
         break;
       }
       
+      if (error) {
+        console.error(error);
+      }
+      
+      if (message) {
+        console.error(message);
+      }
+      
       var bannerSrc = '/gfx/layout/mikkeli-page-banner-default.jpg';
       
       res.status(status);
