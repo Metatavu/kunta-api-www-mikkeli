@@ -340,7 +340,7 @@
             .pages.getContent(page.id, preferLanguages)
             .pages.resolveBreadcrumbs(CONTENT_FOLDER, page, preferLanguages)
             .pages.listMetaByParentId(rootPage.id, preferLanguages)
-            .pages.readMenuTree(rootPage.id, page.parentId, preferLanguages)
+            .pages.readMenuTree(rootPage.id, page.id, preferLanguages)
             .callback(function(pageData) {
               var contents = pageData[0];
               var breadcrumbs = pageData[1];
