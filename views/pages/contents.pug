@@ -3,6 +3,7 @@ extends ../layout/contents.pug
 include ../includes/mixins.pug
 
 block scripts
+  script(defer="defer",type="text/javascript", src="//cdn.metatavu.io/libs/jquery-lazyload/1.9.7/jquery.lazyload.min.js")
   script(defer="defer",type="text/javascript", src="/js/contents.js")
 
 block styles

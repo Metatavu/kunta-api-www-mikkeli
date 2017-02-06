@@ -59,9 +59,18 @@
 
     const $ = cheerio.load(content);
 
-    $('a[href]').each(function(index, link) {
+    $('a[href]').each((index, link) => {
       var href = $(link).attr('href');
       $(link).attr('href', processLink(currentPage, href));
+    });
+
+    $('img[src]').each((index, img) => {
+      var src = $(img).attr('src');
+      $(img)
+        .addClass('lazy')
+        .removeAttr('src')
+        .removeAttr('srcset')
+        .attr('data-original', src);
     });
     
     $('aside').remove();
