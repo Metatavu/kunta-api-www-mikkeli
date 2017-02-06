@@ -1,0 +1,71 @@
+extends ../layout/contents.pug
+
+include ../includes/mixins.pug
+
+block styles
+  link(rel="stylesheet", href="/css/contents-common.min.css")
+  link(rel="stylesheet", href="/css/jobs.min.css")
+
+block content
+  .container-fluid.no-gutters
+    .row
+      .col-xs.banner-container
+        .banner-border-top
+        .banner(data-lazy-bg-image=bannerSrc)
+        .banner-silhouette
+        .banner-border-bottom
+      
+  .container.page-container
+    .row
+      +breadcrumbs(breadcrumbs)
+        
+  .container.page-container
+    .row
+      .col-lg-5.page-nav.no-gutters.hidden-md-down
+        h3
+          =folderTitle
+        each job in jobs
+          if job.id == activeJob.id
+            .page-nav-item.active
+              a(href=job.id)
+                =job.title
+          else
+            a.page-nav-item(href=job.id)
+              =job.title
+      .col-xs-24.hidden-lg-up
+        a.btn.btn-primary(title='Näytä valikko', data-toggle='collapse', href='#collapse-menu', aria-expanded='false', aria-controls='collapse-menu')
+          i.fa.fa-bars
+        .collapse#collapse-menu
+          .col-xs-24.col-lg-5.page-nav.no-gutters
+            each job in jobs
+              if job.id == activeJob.id
+                .page-nav-item.active
+                  a(href=job.id)
+                    =job.title
+              else
+                a.page-nav-item(href=job.id)
+                  =job.title
+      .col-xs-24.col-lg-14
+        .page-content
+          h1
+            =activeJob.title
+          h5
+            =activeJob.organisationalUnit
+          h6
+            =activeJob.location
+          h3
+            |Hakuaika päättyy
+          p
+            =activeJob.endTime
+          h3
+            |Työn luonne
+          p
+            =activeJob.duration
+          h3
+            |Työn kuvaus
+          p
+            !=activeJob.description
+          p
+            |Lisätietoja saat&nbsp;
+            a(href=activeJob.link, target='_blank')
+              |Kuntarekryn sivulta          
