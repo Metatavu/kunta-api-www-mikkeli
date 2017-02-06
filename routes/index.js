@@ -168,13 +168,37 @@
           };
 
           next();
-        }, function(err) {
-       	  console.error(err);
-          res.status(500).send(err);
+        }, (err) => {
+       	  next({
+       	    status: 500,
+       	    error: err
+       	  });
         });
     });
-
-    app.get('/', function(req, res) {
+    
+    function renderErrorPage(req, res, status, message, error) {
+      var page;
+      
+      switch (status) {
+        case 404:
+          page = status;
+        break;
+        default:
+          page = 500;
+        break;
+      }
+      
+      var bannerSrc = '/gfx/layout/mikkeli-page-banner-default.jpg';
+      
+      res.status(status);
+      res.render(util.format('error/%d', page), Object.assign(req.kuntaApi.data, {
+        bannerSrc: bannerSrc,
+        error: error,
+        message: message
+      }));
+    }
+    
+    app.get('/', (req, res, next) => {
       new ModulesClass(config)
         .events.latest(EVENT_COUNT, 'START_DATE', 'DESCENDING')
         .news.latest(0, 9)
@@ -232,7 +256,7 @@
             });
           });
           
-          res.render('pages/index.pug', {
+          res.render('pages/index.pug', Object.assign(req.kuntaApi.data, {
             events: events,
             banners: banners,
             tiles: tiles,
@@ -243,18 +267,18 @@
               top: news.splice(0, 1)[0],
               thumbs: news.splice(0, 4),
               texts: news
-            },
-            menus: req.kuntaApi.data.menus,
-            fragmentMap: req.kuntaApi.data.fragmentMap
-          });
+            }
+          }));
 
-        }, function(err) {
-          console.error(err);
-          res.status(500).send(err);
+        }, (err) => {
+          next({
+            status: 500,
+            error: err
+          });
         });
     });
     
-    app.get('/redirect/:type/:id', function (req, res) {
+    app.get('/redirect/:type/:id', (req, res, next) => {
       var type = req.params.type;
       var id = req.params.id;
       
@@ -274,15 +298,21 @@
           res.redirect(util.format("%s/%s", FILES_FOLDER, id));
         break;
         default:
-          res.status(400).send('Invalid type'); 
+          next({
+            status: 400,
+            message: 'Invalid type'
+          });
         break;
       }
     });
 
-    app.get(util.format('%s/:id', FILES_FOLDER), function(req, res) {
+    app.get(util.format('%s/:id', FILES_FOLDER), (req, res, next) => {
       var id = req.params.id;
       if (!id) {
-        res.status(404).send('Not found');
+        next({
+          status: 404
+        });
+        
         return;
       }
       
@@ -300,12 +330,15 @@
               .set("content-disposition", util.format("attachment; filename=%s", file.slug));
             stream.pipe(res);
           } else {
-            res.status(500).send("Tiedoston lataus epäonnistui");
+            next({
+              status: 500,
+              message: "Tiedoston lataus epäonnistui"
+            });
           }
         });
     });
     
-    app.get('/ajax/pagenav', function (req, res) {
+    app.get('/ajax/pagenav', (req, res) => {
       var pageId = req.query.pageId;
       var preferLanguages = req.headers['accept-language'];
       
@@ -321,7 +354,7 @@
         });
     });
     
-    app.get('/ajax/search', function (req, res) {
+    app.get('/ajax/search', (req, res) => {
       var search = req.query.search;
       var preferLanguages = req.headers['accept-language'];
       
@@ -353,7 +386,7 @@
       return children;
     }
 
-    app.get(util.format('%s*', CONTENT_FOLDER), function(req, res) {
+    app.get(util.format('%s*', CONTENT_FOLDER), (req, res, next) => {
       var path = req.path.substring(9);
       var rootPath = path.split('/')[0];
       var preferLanguages = req.headers['accept-language'];
@@ -365,7 +398,9 @@
           var page = data[0];
           var rootPage = data[1];
           if (!page || !rootPage) {
-            res.status(404).send("Not Found");
+            next({
+              status: 404
+            });
             return;
           }
           
@@ -387,7 +422,7 @@
               });
               
               loadChildPages(pageData[2], preferLanguages, (children) => {
-                res.render('pages/contents.pug', {
+                res.render('pages/contents.pug', Object.assign(req.kuntaApi.data, {
                   id: page.id,
                   slug: page.slug,
                   rootPath: util.format("%s/%s", CONTENT_FOLDER, rootPath),
@@ -397,31 +432,35 @@
                   sidebarContents: getSidebarContent(contents),
                   breadcrumbs: breadcrumbs,
                   featuredImageSrc: featuredImageSrc,
-                  menus: req.kuntaApi.data.menus,
-                  fragmentMap: req.kuntaApi.data.fragmentMap,
                   activeIds: activeIds,
                   children: mapOpenChildren(children, activeIds, openTreeNodes),
                   openTreeNodes: openTreeNodes,
                   bannerSrc: bannerSrc
-                });
+                }));
               });
 
-            }, function(contentErr) {
-              console.error(contentErr);
-              res.status(500).send(contentErr);
+            }, (contentErr) => {
+              next({
+                status: 500,
+                error: contentErr
+              });
             });
 
-        }, function(err) {
-          console.error(err);
-          res.status(500).send(err);
+        }, (err) => {
+          next({
+            status: 500,
+            error: err
+          });
         });
     });
 
-    app.get(util.format('%s/:slug', NEWS_FOLDER), function(req, res) {
+    app.get(util.format('%s/:slug', NEWS_FOLDER), (req, res, next) => {
       var slug = req.params.slug;
 
       if (!slug) {
-        res.status(404).send('Not found');
+        next({
+          status: 404
+        });
         return;
       }
 
@@ -432,37 +471,41 @@
           var newsArticle = data[1];
           var siblings = data[0];
           if (!newsArticle) {
-            res.status(404).send("Not Found");
+            next({
+              status: 404
+            });
             return;
           }
           // TODO: Banner should come from API
           var bannerSrc = '/gfx/layout/mikkeli-page-banner-default.jpg';
 
-           res.render('pages/news-article.pug', {
+           res.render('pages/news-article.pug', Object.assign(req.kuntaApi.data, {
             id: newsArticle.id,
             slug: newsArticle.slug,
             title: newsArticle.title,
             contents: processPageContent('/', newsArticle.contents),
             sidebarContents: getSidebarContent(newsArticle.contents),
             imageSrc: newsArticle.imageSrc,
-            menus: req.kuntaApi.data.menus,
-            fragmentMap: req.kuntaApi.data.fragmentMap,
             bannerSrc: bannerSrc,
             siblings: siblings,
             breadcrumbs : [{path: util.format('%s/%s', NEWS_FOLDER, newsArticle.slug), title: newsArticle.title }]
-          });
+          }));
 
-        }, function(err) {
-          console.error(err);
-          res.status(500).send(err);
+        }, (err) => {
+          next({
+            status: 500,
+            error: err
+          });
         });
     });
 
-    app.get(util.format('%s/:slug', ANNOUNCEMENTS_FOLDER), function(req, res) {
+    app.get(util.format('%s/:slug', ANNOUNCEMENTS_FOLDER), (req, res, next) => {
       var slug = req.params.slug;
 
       if (!slug) {
-        res.status(404).send('Not found');
+        next({
+          status: 404
+        });
         return;
       }
       
@@ -473,32 +516,34 @@
           var announcement = data[1];
           var siblings = data[0];
           if (!announcement) {
-            res.status(404).send("Not Found");
+            next({
+              status: 404
+            });
             return;
           }
           // TODO: Banner should come from API
           var bannerSrc = '/gfx/layout/mikkeli-page-banner-default.jpg';
 
-           res.render('pages/announcement.pug', {
+           res.render('pages/announcement.pug', Object.assign(req.kuntaApi.data, {
             id: announcement.id,
             slug: announcement.slug,
             title: announcement.title,
             contents: processPageContent('/', announcement.contents),
             sidebarContents: getSidebarContent(announcement.contents),
-            menus: req.kuntaApi.data.menus,
-            fragmentMap: req.kuntaApi.data.fragmentMap,
             bannerSrc: bannerSrc,
             siblings: siblings,
             breadcrumbs : [{path: util.format('%s/%s', ANNOUNCEMENTS_FOLDER, announcement.slug), title: announcement.title }]
-          });
+          }));
 
         }, function(err) {
-          console.error(err);
-          res.status(500).send(err);
+          next({
+            status: 500,
+            error: err
+          });
         });
     });
-
-    app.get(util.format('%s/:id', JOBS_FOLDER), function(req, res) {
+    
+    app.get(util.format('%s/:id', JOBS_FOLDER), (req, res) => {
       var id = req.params.id;
       if (!id) {
         res.status(404).send('Not found');
@@ -517,19 +562,26 @@
         var jobs = _.clone(data[1] || []);
         var bannerSrc = '/gfx/layout/mikkeli-page-banner-default.jpg';
         
-        res.render('pages/jobs.pug', {
+        res.render('pages/jobs.pug', Object.assign(req.kuntaApi.data, {
           activeJob: activeJob,
           jobs: jobs,
-          menus: req.kuntaApi.data.menus,
-          fragmentMap: req.kuntaApi.data.fragmentMap,
           bannerSrc: bannerSrc,
           breadcrumbs : [{path: util.format('%s/%s', JOBS_FOLDER, activeJob.id), title: activeJob.title }]
-        });
+        }));
 
       }, (err) => {
         console.error(err);
         res.status(500).send(err);
       });
+    });
+
+    app.use((data, req, res, next) => {
+      renderErrorPage(req, res, data.status || 500, data.message, data.error);
+    });
+    
+    app.use((req, res, next) => {
+      // Catch all for unhandled routes
+      renderErrorPage(req, res, 404);      
     });
 
   };
