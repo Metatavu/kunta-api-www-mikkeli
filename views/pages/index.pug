@@ -83,7 +83,8 @@ mixin tile(tile)
       a.tile-link(href=tile.link,target="_blank")
     .details
       h3
-        !=tile.title
+        span
+          !=tile.title
       p
         !=tile.contents
       
@@ -91,6 +92,7 @@ block styles
   link(rel="stylesheet", href="/css/index.min.css")
 
 block scripts
+  script(defer="defer", type="text/javascript", src="//cdn.metatavu.io/libs/bigtext/0.1.8/bigtext.js")
   script(defer="defer", type="text/javascript", src="https://cdnjs.cloudflare.com/ajax/libs/masonry/4.1.1/masonry.pkgd.min.js")
   script(defer="defer", type="text/javascript", src="https://cdnjs.cloudflare.com/ajax/libs/jquery.imagesloaded/4.1.1/imagesloaded.pkgd.min.js")
   script(defer="defer", type="text/javascript", src="/js/index.js")

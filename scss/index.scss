@@ -144,9 +144,9 @@
       }
     
       h3 {
+        @include font-ultra(10px);
         text-transform: uppercase;
         color: #fff;
-        @include font-ultra(29px);
         max-height: 60px;
         position: relative;
         overflow: hidden;
