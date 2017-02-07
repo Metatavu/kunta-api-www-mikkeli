@@ -3,6 +3,10 @@
 
   $(document).ready(function () {
 
+    $('.tile h3').bigtext({
+      maxfontsize: 28
+    });
+
     new Swiper('.swiper-container', {
       pagination: '.swiper-pagination',
       nextButton: '.swiper-button-next',
