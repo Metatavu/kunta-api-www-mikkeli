@@ -14,6 +14,7 @@
   const SOCIAL_MEDIA_POSTS = 4 * 3;
   const FILES_FOLDER = '/tiedostot';
   const CONTENT_FOLDER = '/sisalto';
+  const PAGE_IMAGES_FOLDER = '/pageImages';
   const NEWS_FOLDER = '/uutiset';
   const ANNOUNCEMENTS_FOLDER = '/kuulutukset';
   const JOBS_FOLDER = '/tyot';
@@ -393,7 +394,49 @@
       
       return children;
     }
+    
+    app.get(util.format('%s/:pageId/:type', PAGE_IMAGES_FOLDER), (req, res, next) => {
+      var pageId = req.params.pageId;
+      var type = req.params.type;
+      var defaultImage;
+      
+      switch (type) {
+        case 'featured':
+          defaultImage = __dirname + '/../public/gfx/layout/mikkeli-page-image-default.jpg';
+        break;
+        case 'banner':
+          defaultImage = __dirname + '/../public/gfx/layout/mikkeli-page-banner-default.jpg';
+        break;
+      }
+      
+      new ModulesClass(config)
+        .pages.streamPageImageByType(pageId, type, defaultImage)
+        .callback((data) => {
+          if (data[0]) {
+            var stream = data[0].stream;
+            var attachment = data[0].attachment;
+            
+            if (attachment) {
+              res.set('Content-Length', attachment.size);
+            }
 
+            res.set('Content-Type', attachment ? attachment.contentType : 'image/jpeg');
+
+            if (stream) {
+              stream.pipe(res);
+            } else {
+              next({
+                status: 404
+              });
+            }
+          } else {
+            next({
+              status: 404
+            });
+          }
+        });
+    });
+    
     app.get(util.format('%s*', CONTENT_FOLDER), (req, res, next) => {
       var path = req.path.substring(9);
       var rootPath = path.split('/')[0];
@@ -421,9 +464,8 @@
               var contents = pageData[0];
               var breadcrumbs = pageData[1];
               var rootFolderTitle = rootPage.title;
-              var featuredImageSrc = page.featuredImageSrc ? page.featuredImageSrc : '/gfx/layout/mikkeli-page-image-default.jpg';
-              // TODO: Banner should come from API
-              var bannerSrc = '/gfx/layout/mikkeli-page-banner-default.jpg';
+              var featuredImageSrc = util.format('%s/%s/%s', PAGE_IMAGES_FOLDER, page.id, 'featured');
+              var bannerSrc = util.format('%s/%s/%s', PAGE_IMAGES_FOLDER, page.id, 'banner');
               var openTreeNodes = pageData[3];
               var activeIds = _.map(breadcrumbs, (breadcrumb) => {
                 return breadcrumb.id;
