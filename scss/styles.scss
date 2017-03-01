@@ -232,7 +232,9 @@ footer {
   min-height: 280px;
   background: #c1147c;
   
-  a, a:hover, a:visited {
+  a,
+  a:hover,
+  a:visited {
     color: #fff;
     text-decoration: underline;
   }
