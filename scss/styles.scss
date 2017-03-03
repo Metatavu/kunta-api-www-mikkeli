@@ -3,8 +3,10 @@
 @import 'fonts';
 @import 'vars';
 
-body {
+.content-container {
   overflow-x: hidden;
+  overflow: hidden;
+  width: 100vw;
 }
 
 .search-results {
