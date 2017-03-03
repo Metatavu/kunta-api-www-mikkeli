@@ -70,14 +70,14 @@
       cursor: pointer;
     }
   
-    > h3:after {
+    > h3::after {
       float: right;
-      content: '+';    
+      content: "+";    
     }
     
     &.open {
-      > h3:after {
-        content: '-';    
+      > h3::after {
+        content: "-";    
       }
     }
     
