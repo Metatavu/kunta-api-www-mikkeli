@@ -71,11 +71,29 @@
     }
 
   });
+  
+  $.widget("custom.casemHistoryTopic", {
+    
+    _create : function() {
+      this.element.on('click', '> h3', $.proxy(this._onHeaderClick, this));
+      this.element.find('.casem-history-topic-contents').hide();
+      this.element.find('> h3').text('Näytä aikaisempi käsittely');
+    },
+    
+    _onHeaderClick: function (event) {
+      event.preventDefault();
+      this.element.toggleClass('open');
+      this.element.find('.casem-history-topic-contents').slideToggle();
+    }
+  
+  });
 
   $(document).ready(function () {
     $(document.body).contentsNav({
       rootPath: $('.rootPath').val()
     });
+    
+    $('.casem-history-topic').casemHistoryTopic();
     
     $("img.lazy").lazyload();
   });

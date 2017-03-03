@@ -60,3 +60,31 @@
     list-style: none;
   }
 }
+
+.page-content {
+  .casem-history-topic {
+    > h3 {
+      display: block;
+      border-bottom: 1px solid #000;
+      padding-bottom: 4px;
+      cursor: pointer;
+    }
+  
+    > h3:after {
+      float: right;
+      content: '+';    
+    }
+    
+    &.open {
+      > h3:after {
+        content: '-';    
+      }
+    }
+    
+    .casem-history-topic-contents {
+      border-bottom: 1px solid #000;
+      padding-bottom: 4px;
+    }
+  }
+  
+}
