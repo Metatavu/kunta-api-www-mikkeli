@@ -1,7 +1,7 @@
 @charset "UTF-8";
 
-@import 'fonts';
-@import 'vars';
+@import "fonts";
+@import "vars";
 
 body {
   overflow-x: hidden;
@@ -32,8 +32,9 @@ body {
     font-size: 18px;
   }
   
-  td, th {
-    border-top: none;
+  td, 
+  th {
+    border-top: 0;
   }
   
 }
