@@ -64,9 +64,7 @@
       stopIndex++;
     }
   }
-  
-  map.fitBounds(new L.featureGroup(stopMarkers).getBounds());
-  
+
   setInterval(function (){
     $('.current-time').text(moment().format('HH:mm'));
     updateTimetableRows();
@@ -79,6 +77,8 @@
   }, 1000 * 60 * 60);
   
   function updateTimeTable() {
+    map.fitBounds(new L.featureGroup(stopMarkers).getBounds());
+    
     $.ajax({
       url: getTimetableUrl(),
       dataType: 'html',
