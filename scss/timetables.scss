@@ -1,0 +1,56 @@
+@charset "UTF-8";
+
+@import "fonts";
+@import "vars";
+
+body {
+  overflow-x: hidden;
+  background-color: #000;
+  color: #fff;
+}
+
+#map {
+  height: calc(100vh - 138px);
+  width: 100%;
+}
+
+.timetable-container {
+  height: calc(100vh - 138px);
+  width: 100%;
+  overflow: hidden;
+}
+
+.table-inverse {
+  color: #fff;
+  background-color: #000;
+  
+  th {
+    @include font-ultra(24px);
+  }
+  
+  td {
+    font-size: 18px;
+  }
+  
+  td, 
+  th {
+    border-top: 0;
+  }
+  
+}
+
+.header {
+  padding-top: 25px;
+  padding-bottom: 25px;
+  padding-right: 20px;
+  
+  h1 {
+    @include font-ultra(72px);
+  }
+  
+  .title {
+    h1 {
+      text-align: center;
+    }
+  }
+}
