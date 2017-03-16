@@ -18,7 +18,6 @@
 
       modules
         .shortlinks.list()
-        .fragments.list()
         .callback((data) => {
           this.refreshShortlinks(data[0]);
           setTimeout(() => {
