@@ -678,6 +678,8 @@
         });
     });
 
+    require(__dirname + '/shortlinks')(app, config, ModulesClass);
+
     app.use((data, req, res, next) => {
       renderErrorPage(req, res, data.status || 500, data.message, data.error);
     });
@@ -686,7 +688,6 @@
       // Catch all for unhandled routes
       renderErrorPage(req, res, 404);      
     });
-
   };
 
 }).call(this);
