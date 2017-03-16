@@ -36,56 +36,60 @@
     }
   ];
   
-  var map = new L.Map("map", {
-      center: new L.LatLng(61.688727, 27.272146),
-      zoom: 12,
-      maxZoom: 17
+  var stops = JSON.parse($('#stops-json').val());
+  
+  $(document).ready(function() {
+    var map = new L.Map("map", {
+        center: new L.LatLng(61.688727, 27.272146),
+        zoom: 12,
+        maxZoom: 17
+    });
+
+    L.tileLayer('https://stamen-tiles.a.ssl.fastly.net/toner/{z}/{x}/{y}.png', {
+      attribution: [
+        'Map tiles by <a href="http://stamen.com/">Stamen Design</a>, ',
+        'under <a href="http://creativecommons.org/licenses/by/3.0">CC BY 3.0</a>. ',
+        'Data by <a href="http://openstreetmap.org/">OpenStreetMap</a>, ',
+        'under <a href="http://creativecommons.org/licenses/by-sa/3.0">CC BY SA</a>.'
+      ].join("")
+    }).addTo(map);
+
+    var stopIndex = 0;
+    var stopMarkers = [];
+    for (var stopId in stops) {
+      if (stops.hasOwnProperty((stopId))) {
+        var stop = stops[stopId];
+        stop.color = colors[stopIndex % colors.length];
+
+        var marker = L.marker([stop.lat, stop.lng], {
+          icon: L.AwesomeMarkers.icon({
+            icon: 'bus',
+            markerColor: stop.color.name,
+            prefix: 'fa'
+          })
+        }).addTo(map);
+
+        stopMarkers.push(marker);
+        stopIndex++;
+      }
+    }
+
+    map.fitBounds(new L.featureGroup(stopMarkers).getBounds());
+
+    setInterval(function (){
+      $('.current-time').text(moment().format('HH:mm'));
+      updateTimetableRows();
+    }, 1000);
+
+    updateTimeTable();
+
+    setInterval(function (){
+      updateTimeTable();
+    }, 1000 * 60 * 60);
+    
   });
   
-  L.tileLayer('https://stamen-tiles.a.ssl.fastly.net/toner/{z}/{x}/{y}.png', {
-    attribution: [
-      'Map tiles by <a href="http://stamen.com/">Stamen Design</a>, ',
-      'under <a href="http://creativecommons.org/licenses/by/3.0">CC BY 3.0</a>. ',
-      'Data by <a href="http://openstreetmap.org/">OpenStreetMap</a>, ',
-      'under <a href="http://creativecommons.org/licenses/by-sa/3.0">CC BY SA</a>.'
-    ].join("")
-  }).addTo(map);
-  
-  var stops = JSON.parse($('#stops-json').val());
-  var stopIndex = 0;
-  var stopMarkers = [];
-  for (var stopId in stops) {
-    if (stops.hasOwnProperty((stopId))) {
-      var stop = stops[stopId];
-      stop.color = colors[stopIndex % colors.length];
-      
-      var marker = L.marker([stop.lat, stop.lng], {
-        icon: L.AwesomeMarkers.icon({
-          icon: 'bus',
-          markerColor: stop.color.name,
-          prefix: 'fa'
-        })
-      }).addTo(map);
-      
-      stopMarkers.push(marker);
-      stopIndex++;
-    }
-  }
-
-  setInterval(function (){
-    $('.current-time').text(moment().format('HH:mm'));
-    updateTimetableRows();
-  }, 1000);
-  
-  updateTimeTable();
-  
-  setInterval(function (){
-    updateTimeTable();
-  }, 1000 * 60 * 60);
-  
   function updateTimeTable() {
-    map.fitBounds(new L.featureGroup(stopMarkers).getBounds());
-    
     $.ajax({
       url: getTimetableUrl(),
       dataType: 'html',
