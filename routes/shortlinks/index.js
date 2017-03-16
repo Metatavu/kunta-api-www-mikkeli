@@ -1,4 +1,5 @@
-(function () {
+/*jshint esversion: 6 */
+(function() {
   'use strict';
   
   const UPDATE_INTERVAL = 1000 * 60;
