@@ -219,6 +219,7 @@
         .callback(function(data) {
           var events = _.clone(data[0] || []).map(event => {
             return Object.assign(event, {
+              "imageSrc": event.imageId ? util.format('/eventImages/%s/%s', event.id, event.imageId) : null,
               "shortDate": moment(event.start).format("D/M")
             });
           });
@@ -680,6 +681,7 @@
 
     require(__dirname + '/shortlinks')(app, config, ModulesClass);
     require(__dirname + '/banners')(app, config, ModulesClass);
+    require(__dirname + '/events')(app, config, ModulesClass);
 
     app.use((data, req, res, next) => {
       renderErrorPage(req, res, data.status || 500, data.message, data.error);
