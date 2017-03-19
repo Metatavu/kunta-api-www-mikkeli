@@ -241,7 +241,7 @@
             }
             
             return Object.assign(banner, {
-              imageSrc: banner.imageSrc ? banner.imageSrc : '/gfx/layout/mikkeli-banner-default.jpg',
+              imageSrc: banner.imageId ? util.format('/bannerImages/%s/%s', banner.id, banner.imageId) : '/gfx/layout/mikkeli-banner-default.jpg',
               style: styles.join(';')
             });
           });
@@ -679,6 +679,7 @@
     });
 
     require(__dirname + '/shortlinks')(app, config, ModulesClass);
+    require(__dirname + '/banners')(app, config, ModulesClass);
 
     app.use((data, req, res, next) => {
       renderErrorPage(req, res, data.status || 500, data.message, data.error);
