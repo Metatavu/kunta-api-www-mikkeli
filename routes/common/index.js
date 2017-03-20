@@ -9,7 +9,7 @@
   class Common {
     
     static get CONTENT_FOLDER() { 
-      return '/sisalto' 
+      return '/sisalto';
     }
     
     static get PAGE_IMAGES_FOLDER() { 
