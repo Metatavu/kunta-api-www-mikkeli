@@ -1,0 +1,30 @@
+extends ../layout/timetables.pug
+
+block scripts
+  script(defer="defer",type="text/javascript", src="//cdn.metatavu.io/libs/chosen/1.6.2/chosen.jquery.min.js")
+  script(defer="defer",type="text/javascript", src="/js/timetable-create.js")
+
+block styles
+  link(rel="stylesheet", href="//cdn.metatavu.io/libs/chosen/1.6.2/chosen.min.css")
+  link(rel="stylesheet", href="/css/timetable-create.min.css")
+
+block content
+  .container
+    .row.header
+      .col-xs-24.title
+        h1 Aikataulun luonti
+    .row
+      .col-xs-24
+        h3 Valitse pysäkit
+    .row
+      .col-xs-24
+        select.stop-select(multiple=true)
+          each stop in stops
+            option(value=stop.id)
+              =stop.name
+    .row
+      .col-xs-24
+        h3 Linkki
+    .row
+      .col-xs-24
+        a.timetable-link(href="#",target="_blank")
