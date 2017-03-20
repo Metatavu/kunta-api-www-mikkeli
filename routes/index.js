@@ -5,100 +5,8 @@
   const util = require('util');
   const moment = require('moment');
   const _ = require('lodash');
-  const cheerio = require('cheerio');
+  const Common = require(__dirname + '/common');
 
-  const EVENT_COUNT = 9;
-  const JOB_COUNT = 5;
-  const ANNOUNCEMENT_COUNT = 5;
-  const ANNOUNCEMENT_COUNT_PAGE = 10;
-  const SOCIAL_MEDIA_POSTS = 4 * 3;
-  const FILES_FOLDER = '/tiedostot';
-  const CONTENT_FOLDER = '/sisalto';
-  const PAGE_IMAGES_FOLDER = '/pageImages';
-  const NEWS_FOLDER = '/uutiset';
-  const ANNOUNCEMENTS_FOLDER = '/kuulutukset';
-  const JOBS_FOLDER = '/tyot';
-  
-  function resolveLinkType(link) {
-    if (!link || link.startsWith('#')) {
-      return 'NONE';
-    }
-
-    if (link.startsWith('/')) {
-      return 'PATH';
-    } else if (link.match(/[a-zA-Z]*:\/\/.*/)) {
-      return 'ABSOLUTE';
-    }
-
-    return 'RELATIVE';
-  }
-
-  function processLink(currentPage, text) {
-    if (!text) {
-      return null;
-    }
-
-    var link = text.trim();
-    if (!link) {
-      return null;
-    }
-
-    switch (resolveLinkType(link)) {
-      case 'PATH':
-        return util.format('%s%s', CONTENT_FOLDER, link);
-      case 'RELATIVE':
-        return util.format('%s/%s', currentPage.split('/').splice(-1), link);
-      default:
-    }
-
-    return link;
-  }
-
-  function processPageContent(currentPage, content) {
-    if (!content) {
-      return '';
-    }
-
-    const $ = cheerio.load(content);
-
-    $('a[href]').each((index, link) => {
-      var href = $(link).attr('href');
-      $(link).attr('href', processLink(currentPage, href));
-    });
-
-    $('img[src]').each((index, img) => {
-      var src = $(img).attr('src');
-      $(img)
-        .addClass('lazy')
-        .removeAttr('src')
-        .removeAttr('srcset')
-        .attr('data-original', src);
-    });
-    
-    $('aside').remove();
-
-    return $.html();
-  }
-
-  function getSidebarContent(content) {
-    if (!content) {
-      return '';
-    }
-    
-    const $ = cheerio.load(content);
-    
-    $('aside').find('*[contenteditable]').removeAttr('contenteditable');
-
-    $('aside').find('img')
-      .removeAttr('srcset')
-      .removeAttr('width')
-      .removeAttr('sizes')
-      .removeAttr('class')
-      .removeAttr('height');
-
-    return $('aside').html();
-  }
-  
   function plainTextParagraphs(text) {
     var result = [];
     var paragraphs = (text||'').split('\n');
@@ -111,28 +19,6 @@
   }
 
   module.exports = function(app, config, ModulesClass) {
-
-    function loadChildPages(pages, preferLanguages, callback) {
-      var module = new ModulesClass(config);
-      
-      pages.forEach((page) => {
-        if (!page.meta || !page.meta.hideMenuChildren) {
-          module.pages.listMetaByParentId(page.id, preferLanguages);
-        }
-      });
-      
-      module.callback(function (data) {
-        var index = 0;
-        pages.forEach((page) => {
-          if (!page.meta || !page.meta.hideMenuChildren) {
-            pages[index].hasChildren = data[index] && data[index].length > 0;
-            index++;
-          }
-        });
-        
-        callback(pages);
-      });
-    }
 
     app.use(function(req, res, next) {
       var modules = new ModulesClass(config);
@@ -149,7 +35,7 @@
 
             menu.items = menu.items.map(item => {
               if (item.url) {
-                item.url = processLink(null, item.url);
+                item.url = Common.processLink(null, item.url);
               }
 
               return item;
@@ -209,16 +95,17 @@
     
     app.get('/', (req, res, next) => {
       new ModulesClass(config)
-        .events.latest(EVENT_COUNT, 'START_DATE', 'DESCENDING')
+        .events.latest(Common.EVENT_COUNT, 'START_DATE', 'DESCENDING')
         .news.latest(0, 9)
         .banners.list()
         .tiles.list()
-        .socialMedia.latest(SOCIAL_MEDIA_POSTS)
-        .jobs.list(JOB_COUNT, 'PUBLICATION_END', 'ASCENDING')
-        .announcements.list(ANNOUNCEMENT_COUNT, 'PUBLICATION_DATE', 'DESCENDING')
+        .socialMedia.latest(Common.SOCIAL_MEDIA_POSTS)
+        .jobs.list(Common.JOB_COUNT, 'PUBLICATION_END', 'ASCENDING')
+        .announcements.list(Common.ANNOUNCEMENT_COUNT, 'PUBLICATION_DATE', 'DESCENDING')
         .callback(function(data) {
           var events = _.clone(data[0] || []).map(event => {
             return Object.assign(event, {
+              "imageSrc": event.imageId ? util.format('/eventImages/%s/%s', event.id, event.imageId) : null,
               "shortDate": moment(event.start).format("D/M")
             });
           });
@@ -241,14 +128,14 @@
             }
             
             return Object.assign(banner, {
-              imageSrc: banner.imageSrc ? banner.imageSrc : '/gfx/layout/mikkeli-banner-default.jpg',
+              imageSrc: banner.imageId ? util.format('/bannerImages/%s/%s', banner.id, banner.imageId) : '/gfx/layout/mikkeli-banner-default.jpg',
               style: styles.join(';')
             });
           });
 
           var tiles = _.clone(data[3] || []).map(tile => {
             return Object.assign(tile, {
-              imageSrc: tile.imageSrc ? tile.imageSrc : '/gfx/layout/mikkeli-tile-default.jpg'
+              imageSrc: tile.imageId ? util.format('/tileImages/%s/%s', tile.id, tile.imageId) : '/gfx/layout/mikkeli-tile-default.jpg'
             });
           });
 
@@ -297,14 +184,14 @@
             .pages.resolvePath(id)
             .callback((data) => {
               if (data) {
-                res.redirect(util.format("%s/%s", CONTENT_FOLDER, data));  
+                res.redirect(util.format("%s/%s", Common.CONTENT_FOLDER, data));  
               } else {
                 res.redirect('/');
               }
             });
         break;
         case 'file':
-          res.redirect(util.format("%s/%s", FILES_FOLDER, id));
+          res.redirect(util.format("%s/%s", Common.FILES_FOLDER, id));
         break;
         default:
           next({
@@ -315,7 +202,7 @@
       }
     });
 
-    app.get(util.format('%s/:id', FILES_FOLDER), (req, res, next) => {
+    app.get(util.format('%s/:id', Common.FILES_FOLDER), (req, res, next) => {
       var id = req.params.id;
       if (!id) {
         next({
@@ -347,22 +234,6 @@
         });
     });
     
-    app.get('/ajax/pagenav', (req, res) => {
-      var pageId = req.query.pageId;
-      var preferLanguages = req.headers['accept-language'];
-      
-      new ModulesClass(config)
-        .pages.listMetaByParentId(pageId, preferLanguages)
-        .callback(function(data) {
-          loadChildPages(data[0], preferLanguages, (children) => {
-            res.render('ajax/pagenav.pug', {
-              childPages: children,
-              activeIds: []
-            });
-          });
-        });
-    });
-    
     app.get('/ajax/search', (req, res) => {
       var search = req.query.search;
       var preferLanguages = req.headers['accept-language'];
@@ -380,131 +251,8 @@
           });
         });
     });
-    
-    function mapOpenChildren(children, activeIds, openTreeNodes) {
-      if (openTreeNodes.length > 0) {
-        for (var i = 0; i < children.length; i++) {
-          if (activeIds.indexOf(children[i].id) != -1) {
-            children[i].children = openTreeNodes.shift();
-            mapOpenChildren(children[i].children, activeIds, openTreeNodes);
-            break;
-          }
-        }
-      }
-      
-      return children;
-    }
-    
-    app.get(util.format('%s/:pageId/:type', PAGE_IMAGES_FOLDER), (req, res, next) => {
-      var pageId = req.params.pageId;
-      var type = req.params.type;
-      var defaultImage;
-      
-      switch (type) {
-        case 'featured':
-          defaultImage = __dirname + '/../public/gfx/layout/mikkeli-page-image-default.jpg';
-        break;
-        case 'banner':
-          defaultImage = __dirname + '/../public/gfx/layout/mikkeli-page-banner-default.jpg';
-        break;
-      }
-      
-      new ModulesClass(config)
-        .pages.streamPageImageByType(pageId, type, defaultImage)
-        .callback((data) => {
-          if (data[0]) {
-            var stream = data[0].stream;
-            var attachment = data[0].attachment;
-            
-            if (attachment) {
-              res.set('Content-Length', attachment.size);
-            }
 
-            res.set('Content-Type', attachment ? attachment.contentType : 'image/jpeg');
-
-            if (stream) {
-              stream.pipe(res);
-            } else {
-              next({
-                status: 404
-              });
-            }
-          } else {
-            next({
-              status: 404
-            });
-          }
-        });
-    });
-    
-    app.get(util.format('%s*', CONTENT_FOLDER), (req, res, next) => {
-      var path = req.path.substring(9);
-      var rootPath = path.split('/')[0];
-      var preferLanguages = req.headers['accept-language'];
-
-      new ModulesClass(config)
-        .pages.findByPath(path, preferLanguages)
-        .pages.findByPath(rootPath, preferLanguages)
-        .callback(function(data) {
-          var page = data[0];
-          var rootPage = data[1];
-          if (!page || !rootPage) {
-            next({
-              status: 404
-            });
-            return;
-          }
-          
-          new ModulesClass(config)
-            .pages.getContent(page.id, preferLanguages)
-            .pages.resolveBreadcrumbs(CONTENT_FOLDER, page, preferLanguages)
-            .pages.listMetaByParentId(rootPage.id, preferLanguages)
-            .pages.readMenuTree(rootPage.id, page.id, preferLanguages)
-            .callback(function(pageData) {
-              var contents = pageData[0];
-              var breadcrumbs = pageData[1];
-              var rootFolderTitle = rootPage.title;
-              var featuredImageSrc = util.format('%s/%s/%s', PAGE_IMAGES_FOLDER, page.id, 'featured');
-              var bannerSrc = util.format('%s/%s/%s', PAGE_IMAGES_FOLDER, page.id, 'banner');
-              var openTreeNodes = pageData[3];
-              var activeIds = _.map(breadcrumbs, (breadcrumb) => {
-                return breadcrumb.id;
-              });
-              
-              loadChildPages(pageData[2], preferLanguages, (children) => {
-                res.render('pages/contents.pug', Object.assign(req.kuntaApi.data, {
-                  id: page.id,
-                  slug: page.slug,
-                  rootPath: util.format("%s/%s", CONTENT_FOLDER, rootPath),
-                  title: page.title,
-                  rootFolderTitle: rootFolderTitle,
-                  contents: processPageContent(path, contents),
-                  sidebarContents: getSidebarContent(contents),
-                  breadcrumbs: breadcrumbs,
-                  featuredImageSrc: featuredImageSrc,
-                  activeIds: activeIds,
-                  children: mapOpenChildren(children, activeIds, openTreeNodes),
-                  openTreeNodes: openTreeNodes,
-                  bannerSrc: bannerSrc
-                }));
-              });
-
-            }, (contentErr) => {
-              next({
-                status: 500,
-                error: contentErr
-              });
-            });
-
-        }, (err) => {
-          next({
-            status: 500,
-            error: err
-          });
-        });
-    });
-
-    app.get(util.format('%s/:slug', NEWS_FOLDER), (req, res, next) => {
+    app.get(util.format('%s/:slug', Common.NEWS_FOLDER), (req, res, next) => {
       var slug = req.params.slug;
 
       if (!slug) {
@@ -533,12 +281,12 @@
             id: newsArticle.id,
             slug: newsArticle.slug,
             title: newsArticle.title,
-            contents: processPageContent('/', newsArticle.contents),
-            sidebarContents: getSidebarContent(newsArticle.contents),
+            contents: Common.processPageContent('/', newsArticle.contents),
+            sidebarContents: Common.getSidebarContent(newsArticle.contents),
             imageSrc: newsArticle.imageSrc,
             bannerSrc: bannerSrc,
             siblings: siblings,
-            breadcrumbs : [{path: util.format('%s/%s', NEWS_FOLDER, newsArticle.slug), title: newsArticle.title }]
+            breadcrumbs : [{path: util.format('%s/%s', Common.NEWS_FOLDER, newsArticle.slug), title: newsArticle.title }]
           }));
 
         }, (err) => {
@@ -549,7 +297,7 @@
         });
     });
 
-    app.get(util.format('%s/:slug', ANNOUNCEMENTS_FOLDER), (req, res, next) => {
+    app.get(util.format('%s/:slug', Common.ANNOUNCEMENTS_FOLDER), (req, res, next) => {
       var slug = req.params.slug;
 
       if (!slug) {
@@ -560,7 +308,7 @@
       }
       
         new ModulesClass(config)
-        .announcements.list(ANNOUNCEMENT_COUNT_PAGE, 'PUBLICATION_DATE', 'DESCENDING')
+        .announcements.list(Common.ANNOUNCEMENT_COUNT_PAGE, 'PUBLICATION_DATE', 'DESCENDING')
         .announcements.findBySlug(slug)
         .callback(function(data) {
           var announcement = data[1];
@@ -578,11 +326,11 @@
             id: announcement.id,
             slug: announcement.slug,
             title: announcement.title,
-            contents: processPageContent('/', announcement.contents),
-            sidebarContents: getSidebarContent(announcement.contents),
+            contents: Common.processPageContent('/', announcement.contents),
+            sidebarContents: Common.getSidebarContent(announcement.contents),
             bannerSrc: bannerSrc,
             siblings: siblings,
-            breadcrumbs : [{path: util.format('%s/%s', ANNOUNCEMENTS_FOLDER, announcement.slug), title: announcement.title }]
+            breadcrumbs : [{path: util.format('%s/%s', Common.ANNOUNCEMENTS_FOLDER, announcement.slug), title: announcement.title }]
           }));
 
         }, function(err) {
@@ -593,7 +341,7 @@
         });
     });
     
-    app.get(util.format('%s/:id', JOBS_FOLDER), (req, res) => {
+    app.get(util.format('%s/:id', Common.JOBS_FOLDER), (req, res) => {
       var id = req.params.id;
       if (!id) {
         res.status(404).send('Not found');
@@ -616,7 +364,7 @@
           activeJob: activeJob,
           jobs: jobs,
           bannerSrc: bannerSrc,
-          breadcrumbs : [{path: util.format('%s/%s', JOBS_FOLDER, activeJob.id), title: activeJob.title }]
+          breadcrumbs : [{path: util.format('%s/%s', Common.JOBS_FOLDER, activeJob.id), title: activeJob.title }]
         }));
 
       }, (err) => {
@@ -679,6 +427,10 @@
     });
 
     require(__dirname + '/shortlinks')(app, config, ModulesClass);
+    require(__dirname + '/banners')(app, config, ModulesClass);
+    require(__dirname + '/events')(app, config, ModulesClass);
+    require(__dirname + '/pages')(app, config, ModulesClass);
+    require(__dirname + '/tiles')(app, config, ModulesClass);
 
     app.use((data, req, res, next) => {
       renderErrorPage(req, res, data.status || 500, data.message, data.error);
