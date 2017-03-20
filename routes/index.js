@@ -135,7 +135,7 @@
 
           var tiles = _.clone(data[3] || []).map(tile => {
             return Object.assign(tile, {
-              imageSrc: tile.imageSrc ? tile.imageSrc : '/gfx/layout/mikkeli-tile-default.jpg'
+              imageSrc: tile.imageId ? util.format('/tileImages/%s/%s', tile.id, tile.imageId) : '/gfx/layout/mikkeli-tile-default.jpg'
             });
           });
 
@@ -430,6 +430,7 @@
     require(__dirname + '/banners')(app, config, ModulesClass);
     require(__dirname + '/events')(app, config, ModulesClass);
     require(__dirname + '/pages')(app, config, ModulesClass);
+    require(__dirname + '/tiles')(app, config, ModulesClass);
 
     app.use((data, req, res, next) => {
       renderErrorPage(req, res, data.status || 500, data.message, data.error);
