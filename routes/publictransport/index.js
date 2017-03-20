@@ -3,7 +3,6 @@
   'use strict';
 
   const _ = require('lodash');
-  const Common = require(__dirname + '/../common');
 
   module.exports = (app, config, ModulesClass) => {
 
