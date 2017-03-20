@@ -59,6 +59,34 @@
           });
         });
     });
+
+    app.get('/pageImages/:pageId/:imageId', (req, res, next) => {
+      var pageId = req.params.pageId;
+      var imageId = req.params.imageId;
+      
+      if (!pageId || !imageId) {
+        next({
+          status: 404
+        });
+        
+        return;
+      }
+      
+      new ModulesClass(config)
+        .pages.streamImageData(pageId, imageId, req.query, req.headers)
+        .callback((result) => {
+          var stream = result[0];
+          
+          if (stream) {
+            stream.pipe(res);
+          } else {
+            next({
+              status: 500,
+              message: "Kuvan lataus epäonnistui"
+            });
+          }
+        });
+    });
     
     app.get(util.format('%s*', Common.CONTENT_FOLDER), (req, res, next) => {
       var path = req.path.substring(9);
@@ -83,16 +111,29 @@
             .pages.resolveBreadcrumbs(Common.CONTENT_FOLDER, page, preferLanguages)
             .pages.listMetaByParentId(rootPage.id, preferLanguages)
             .pages.readMenuTree(rootPage.id, page.id, preferLanguages)
+            .pages.listImages(page.id)
             .callback(function(pageData) {
               var contents = pageData[0];
               var breadcrumbs = pageData[1];
               var rootFolderTitle = rootPage.title;
-              var featuredImageSrc = util.format('%s/%s/%s', Common.PAGE_IMAGES_FOLDER, page.id, 'featured');
-              var bannerSrc = util.format('%s/%s/%s', Common.PAGE_IMAGES_FOLDER, page.id, 'banner');
               var openTreeNodes = pageData[3];
+              var images = pageData[4];
               var activeIds = _.map(breadcrumbs, (breadcrumb) => {
                 return breadcrumb.id;
               });
+              
+              var featuredImageId = null;
+              var bannerImageId = null;
+              (images||[]).forEach((image) => {
+                if (image.type === 'featured') {
+                  featuredImageId = image.id;
+                } else if (image.type === 'banner') {
+                  bannerImageId = image.id;
+                }
+              });
+              
+              var featuredImageSrc = featuredImageId ? util.format('/pageImages/%s/%s', page.id, featuredImageId) : '/gfx/layout/mikkeli-page-image-default.jpg';
+              var bannerSrc = bannerImageId ? util.format('/pageImages/%s/%s', page.id, bannerImageId) : '/gfx/layout/mikkeli-page-banner-default.jpg';
               
               loadChildPages(pageData[2], preferLanguages, (children) => {
                 res.render('pages/contents.pug', Object.assign(req.kuntaApi.data, {
@@ -124,48 +165,6 @@
             status: 500,
             error: err
           });
-        });
-    });
-    
-    app.get(util.format('%s/:pageId/:type', Common.PAGE_IMAGES_FOLDER), (req, res, next) => {
-      var pageId = req.params.pageId;
-      var type = req.params.type;
-      var defaultImage;
-      
-      switch (type) {
-        case 'featured':
-          defaultImage = __dirname + '/../../public/gfx/layout/mikkeli-page-image-default.jpg';
-        break;
-        case 'banner':
-          defaultImage = __dirname + '/../../public/gfx/layout/mikkeli-page-banner-default.jpg';
-        break;
-      }
-      
-      new ModulesClass(config)
-        .pages.streamPageImageByType(pageId, type, defaultImage, req)
-        .callback((data) => {
-          if (data[0]) {
-            var stream = data[0].stream;
-            var attachment = data[0].attachment;
-            
-            if (attachment) {
-              res.set('Content-Length', attachment.size);
-            }
-
-            res.set('Content-Type', attachment ? attachment.contentType : 'image/jpeg');
-
-            if (stream) {
-              stream.pipe(res);
-            } else {
-              next({
-                status: 404
-              });
-            }
-          } else {
-            next({
-              status: 404
-            });
-          }
         });
     });
     
