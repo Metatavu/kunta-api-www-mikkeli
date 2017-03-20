@@ -42,7 +42,7 @@
     var map = new L.Map("map", {
         center: new L.LatLng(61.688727, 27.272146),
         zoom: 12,
-        maxZoom: 17
+        maxZoom: 16
     });
 
     L.tileLayer('https://stamen-tiles.a.ssl.fastly.net/toner/{z}/{x}/{y}.png', {
@@ -74,7 +74,7 @@
       }
     }
 
-    map.fitBounds(new L.featureGroup(stopMarkers).getBounds());
+    map.fitBounds(new L.featureGroup(stopMarkers).getBounds().pad(0.1));
 
     setInterval(function (){
       $('.current-time').text(moment().format('HH:mm'));

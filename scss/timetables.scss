@@ -18,6 +18,13 @@ body {
   height: calc(100vh - 138px);
   width: 100%;
   overflow: hidden;
+  
+  .loader {
+    margin-left: auto;
+    margin-right: auto;
+    margin-top: 150px;
+    display: block;
+  }
 }
 
 .table-inverse {
