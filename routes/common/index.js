@@ -52,6 +52,10 @@
       return '/tyot';
     }
     
+    static get TIMETABLE_ROWS() {
+      return 15;
+    }
+    
     static resolveLinkType(link) {
       if (!link || link.startsWith('#')) {
         return 'NONE';
