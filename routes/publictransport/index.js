@@ -3,6 +3,7 @@
   'use strict';
 
   const _ = require('lodash');
+  const moment = require('moment');
 
   module.exports = (app, config, ModulesClass) => {
 
