@@ -42,7 +42,7 @@
     var map = new L.Map("map", {
         center: new L.LatLng(61.688727, 27.272146),
         zoom: 12,
-        maxZoom: 16
+        maxZoom: 18
     });
 
     L.tileLayer('https://stamen-tiles.a.ssl.fastly.net/toner/{z}/{x}/{y}.png', {
@@ -74,7 +74,9 @@
       }
     }
 
-    map.fitBounds(new L.featureGroup(stopMarkers).getBounds().pad(0.1));
+    map.fitBounds(new L.featureGroup(stopMarkers).getBounds().pad(0.1), {
+      maxZoom: parseInt($('#zoom-level').val(), 10)
+    });
 
     setInterval(function (){
       $('.current-time').text(moment().format('HH:mm'));
@@ -85,7 +87,7 @@
 
     setInterval(function (){
       updateTimeTable();
-    }, 1000 * 60 * 60);
+    }, 1000 * 60 * 15);
     
   });
   

@@ -24,6 +24,11 @@
         }).join('&');
         
         var link = window.location.protocol + '//' + window.location.host + '/timetable?' + query;
+        var zoom = this.element.find('.zoom-select').val();
+        
+        if (zoom && zoom != '') {
+          link += '&zoom=' + zoom;
+        }
         
         this.element.find('.timetable-link')
           .attr('href', link)

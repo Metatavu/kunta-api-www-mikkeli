@@ -37,6 +37,10 @@ body {
   
   td {
     font-size: 18px;
+    
+    &:last-of-type {
+      white-space: nowrap;
+    }
   }
   
   td, 

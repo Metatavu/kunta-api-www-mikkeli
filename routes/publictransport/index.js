@@ -12,6 +12,8 @@
 
     app.get('/timetable', (req, res) => {
       var stopIds = req.query.stopId;
+      var zoom = req.query.zoom || 17;
+      
       if (!Array.isArray(stopIds)) {
         stopIds = [ stopIds ];
       }
@@ -21,6 +23,7 @@
         .callback((data) => {
           var stopMap = _.keyBy(data[0], 'id');
           res.render('pages/timetable.pug', {
+            zoom: zoom,
             stops: stopMap
           });
         });
