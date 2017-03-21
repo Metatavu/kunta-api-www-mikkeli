@@ -26,7 +26,7 @@
         var link = window.location.protocol + '//' + window.location.host + '/timetable?' + query;
         var zoom = this.element.find('.zoom-select').val();
         
-        if (zoom && zoom != '') {
+        if (zoom && zoom !== '') {
           link += '&zoom=' + zoom;
         }
         
