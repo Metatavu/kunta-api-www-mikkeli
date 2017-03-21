@@ -38,7 +38,7 @@
   
   var stops = JSON.parse($('#stops-json').val());
   
-  $(document).ready(function() {
+  $(window).on('load', function() {
     var map = new L.Map("map", {
         center: new L.LatLng(61.688727, 27.272146),
         zoom: 12,
