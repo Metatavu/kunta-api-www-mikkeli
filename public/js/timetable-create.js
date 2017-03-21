@@ -9,6 +9,7 @@
     _create : function() {
       this.element.find('.stop-select').chosen({width: "100%"});
       this.element.on('change', '.stop-select', $.proxy(this._onStopSelectChange, this));
+      this.element.on('change', '.zoom-select', $.proxy(this._onZoomChange, this));
       this._updateLink();
     },
     
@@ -39,7 +40,10 @@
           .text('Valitse pysäkit'); 
       }
     },
-    
+
+    _onZoomChange: function ()  {
+      this._updateLink();
+    },
     _onStopSelectChange: function ()  {
       this._updateLink();
     }
