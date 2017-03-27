@@ -7,17 +7,6 @@
   const _ = require('lodash');
   const Common = require(__dirname + '/common');
 
-  function plainTextParagraphs(text) {
-    var result = [];
-    var paragraphs = (text||'').split('\n');
-    
-    for (var i = 0; i < paragraphs.length; i++) {
-      result.push(util.format('<p>%s</p>', paragraphs[i]));
-    }
-    
-    return result.join('');
-  }
-
   module.exports = function(app, config, ModulesClass) {
 
     app.use(function(req, res, next) {
@@ -354,7 +343,7 @@
       .callback((data) => {
         var activeJob = Object.assign(data[0], {
           "endTime": moment(data[0].publicationEnd).format('DD.MM.YYYY HH:mm'),
-          "description": plainTextParagraphs(data[0].description)
+          "description": Common.plainTextParagraphs(data[0].description)
         });
         
         var jobs = _.clone(data[1] || []);
