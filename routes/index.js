@@ -108,38 +108,6 @@
         break;
       }
     });
-
-    app.get(util.format('%s/:id', Common.FILES_FOLDER), (req, res, next) => {
-      var id = req.params.id;
-      if (!id) {
-        next({
-          status: 404
-        });
-        
-        return;
-      }
-      
-      new ModulesClass(config)
-        .files.findById(id)
-        .files.streamData(id)
-        .callback((result) => {
-          var file = result[0];
-          var stream = result[1];
-          
-          if (file && stream) {
-            res
-              .set('Content-Length', file.size)
-              .set('Content-Type', file.contentType)
-              .set("content-disposition", util.format("attachment; filename=%s", file.slug));
-            stream.pipe(res);
-          } else {
-            next({
-              status: 500,
-              message: "Tiedoston lataus epäonnistui"
-            });
-          }
-        });
-    });
     
     app.get('/ajax/search', (req, res) => {
       var search = req.query.search;
@@ -164,6 +132,7 @@
     require(__dirname + '/banners')(app, config, ModulesClass);
     require(__dirname + '/events')(app, config, ModulesClass);
     require(__dirname + '/pages')(app, config, ModulesClass);
+    require(__dirname + '/files')(app, config, ModulesClass);
     require(__dirname + '/tiles')(app, config, ModulesClass);
     require(__dirname + '/publictransport')(app, config, ModulesClass);
     require(__dirname + '/jobs')(app, config, ModulesClass);
