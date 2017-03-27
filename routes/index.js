@@ -205,50 +205,6 @@
         });
     });
 
-    app.get(util.format('%s/:slug', Common.ANNOUNCEMENTS_FOLDER), (req, res, next) => {
-      var slug = req.params.slug;
-
-      if (!slug) {
-        next({
-          status: 404
-        });
-        return;
-      }
-      
-        new ModulesClass(config)
-        .announcements.list(Common.ANNOUNCEMENT_COUNT_PAGE, 'PUBLICATION_DATE', 'DESCENDING')
-        .announcements.findBySlug(slug)
-        .callback(function(data) {
-          var announcement = data[1];
-          var siblings = data[0];
-          if (!announcement) {
-            next({
-              status: 404
-            });
-            return;
-          }
-          // TODO: Banner should come from API
-          var bannerSrc = '/gfx/layout/mikkeli-page-banner-default.jpg';
-
-           res.render('pages/announcement.pug', Object.assign(req.kuntaApi.data, {
-            id: announcement.id,
-            slug: announcement.slug,
-            title: announcement.title,
-            contents: Common.processPageContent('/', announcement.contents),
-            sidebarContents: Common.getSidebarContent(announcement.contents),
-            bannerSrc: bannerSrc,
-            siblings: siblings,
-            breadcrumbs : [{path: util.format('%s/%s', Common.ANNOUNCEMENTS_FOLDER, announcement.slug), title: announcement.title }]
-          }));
-
-        }, function(err) {
-          next({
-            status: 500,
-            error: err
-          });
-        });
-    });
-
     require(__dirname + '/root')(app, config, ModulesClass);
     require(__dirname + '/shortlinks')(app, config, ModulesClass);
     require(__dirname + '/banners')(app, config, ModulesClass);
@@ -257,6 +213,7 @@
     require(__dirname + '/tiles')(app, config, ModulesClass);
     require(__dirname + '/publictransport')(app, config, ModulesClass);
     require(__dirname + '/jobs')(app, config, ModulesClass);
+    require(__dirname + '/announcements')(app, config, ModulesClass);
 
     app.use((data, req, res, next) => {
       renderErrorPage(req, res, data.status || 500, data.message, data.error);
