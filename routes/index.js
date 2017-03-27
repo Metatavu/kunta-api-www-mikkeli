@@ -51,36 +51,6 @@
         });
     });
     
-    function renderErrorPage(req, res, status, message, error) {
-      var page;
-      
-      switch (status) {
-        case 404:
-          page = status;
-        break;
-        default:
-          page = 500;
-        break;
-      }
-      
-      if (error) {
-        console.error(error);
-      }
-      
-      if (message) {
-        console.error(message);
-      }
-      
-      var bannerSrc = '/gfx/layout/mikkeli-page-banner-default.jpg';
-      
-      res.status(status);
-      res.render(util.format('error/%d', page), Object.assign(req.kuntaApi.data, {
-        bannerSrc: bannerSrc,
-        error: error,
-        message: message
-      }));
-    }
-    
     app.get('/redirect/:type/:id', (req, res, next) => {
       var type = req.params.type;
       var id = req.params.id;
@@ -108,6 +78,8 @@
         break;
       }
     });
+    
+    // Register routes
 
     require(__dirname + '/root')(app, config, ModulesClass);
     require(__dirname + '/shortlinks')(app, config, ModulesClass);
@@ -121,15 +93,10 @@
     require(__dirname + '/announcements')(app, config, ModulesClass);
     require(__dirname + '/news')(app, config, ModulesClass);
     require(__dirname + '/search')(app, config, ModulesClass);
-
-    app.use((data, req, res, next) => {
-      renderErrorPage(req, res, data.status || 500, data.message, data.error);
-    });
     
-    app.use((req, res, next) => {
-      // Catch all for unhandled routes
-      renderErrorPage(req, res, 404);      
-    });
+    // Register error routes. Keep these as last to ensure catch all functionality
+    
+    require(__dirname + '/error')(app, config, ModulesClass);
   };
 
 }).call(this);
