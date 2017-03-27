@@ -3,7 +3,6 @@
   'use strict';
 
   const util = require('util');
-  const moment = require('moment');
   const _ = require('lodash');
   const Common = require(__dirname + '/common');
 
@@ -160,51 +159,6 @@
         });
     });
 
-    app.get(util.format('%s/:slug', Common.NEWS_FOLDER), (req, res, next) => {
-      var slug = req.params.slug;
-
-      if (!slug) {
-        next({
-          status: 404
-        });
-        return;
-      }
-
-      new ModulesClass(config)
-        .news.latest(0, 10)
-        .news.findBySlug(slug)
-        .callback(function(data) {
-          var newsArticle = data[1];
-          var siblings = data[0];
-          if (!newsArticle) {
-            next({
-              status: 404
-            });
-            return;
-          }
-          // TODO: Banner should come from API
-          var bannerSrc = '/gfx/layout/mikkeli-page-banner-default.jpg';
-
-           res.render('pages/news-article.pug', Object.assign(req.kuntaApi.data, {
-            id: newsArticle.id,
-            slug: newsArticle.slug,
-            title: newsArticle.title,
-            contents: Common.processPageContent('/', newsArticle.contents),
-            sidebarContents: Common.getSidebarContent(newsArticle.contents),
-            imageSrc: newsArticle.imageSrc,
-            bannerSrc: bannerSrc,
-            siblings: siblings,
-            breadcrumbs : [{path: util.format('%s/%s', Common.NEWS_FOLDER, newsArticle.slug), title: newsArticle.title }]
-          }));
-
-        }, (err) => {
-          next({
-            status: 500,
-            error: err
-          });
-        });
-    });
-
     require(__dirname + '/root')(app, config, ModulesClass);
     require(__dirname + '/shortlinks')(app, config, ModulesClass);
     require(__dirname + '/banners')(app, config, ModulesClass);
@@ -214,6 +168,7 @@
     require(__dirname + '/publictransport')(app, config, ModulesClass);
     require(__dirname + '/jobs')(app, config, ModulesClass);
     require(__dirname + '/announcements')(app, config, ModulesClass);
+    require(__dirname + '/news')(app, config, ModulesClass);
 
     app.use((data, req, res, next) => {
       renderErrorPage(req, res, data.status || 500, data.message, data.error);
