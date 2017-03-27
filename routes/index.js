@@ -248,38 +248,6 @@
           });
         });
     });
-    
-    app.get(util.format('%s/:id', Common.JOBS_FOLDER), (req, res) => {
-      var id = req.params.id;
-      if (!id) {
-        res.status(404).send('Not found');
-        return;
-      }
-      
-      new ModulesClass(config)
-      .jobs.findById(id)
-      .jobs.list(100, 'PUBLICATION_END', 'ASCENDING')
-      .callback((data) => {
-        var activeJob = Object.assign(data[0], {
-          "endTime": moment(data[0].publicationEnd).format('DD.MM.YYYY HH:mm'),
-          "description": Common.plainTextParagraphs(data[0].description)
-        });
-        
-        var jobs = _.clone(data[1] || []);
-        var bannerSrc = '/gfx/layout/mikkeli-page-banner-default.jpg';
-        
-        res.render('pages/jobs.pug', Object.assign(req.kuntaApi.data, {
-          activeJob: activeJob,
-          jobs: jobs,
-          bannerSrc: bannerSrc,
-          breadcrumbs : [{path: util.format('%s/%s', Common.JOBS_FOLDER, activeJob.id), title: activeJob.title }]
-        }));
-
-      }, (err) => {
-        console.error(err);
-        res.status(500).send(err);
-      });
-    });
 
     require(__dirname + '/root')(app, config, ModulesClass);
     require(__dirname + '/shortlinks')(app, config, ModulesClass);
@@ -288,6 +256,7 @@
     require(__dirname + '/pages')(app, config, ModulesClass);
     require(__dirname + '/tiles')(app, config, ModulesClass);
     require(__dirname + '/publictransport')(app, config, ModulesClass);
+    require(__dirname + '/jobs')(app, config, ModulesClass);
 
     app.use((data, req, res, next) => {
       renderErrorPage(req, res, data.status || 500, data.message, data.error);
