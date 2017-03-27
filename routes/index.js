@@ -108,24 +108,6 @@
         break;
       }
     });
-    
-    app.get('/ajax/search', (req, res) => {
-      var search = req.query.search;
-      var preferLanguages = req.headers['accept-language'];
-      
-      new ModulesClass(config)
-        .pages.search(search, preferLanguages)
-        .files.search(search, preferLanguages)
-        .callback(function(data) {
-          var pages = data[0];
-          var files = data[1];
-          
-          res.render('ajax/search.pug', {
-            pages: pages,
-            files: files
-          });
-        });
-    });
 
     require(__dirname + '/root')(app, config, ModulesClass);
     require(__dirname + '/shortlinks')(app, config, ModulesClass);
@@ -138,6 +120,7 @@
     require(__dirname + '/jobs')(app, config, ModulesClass);
     require(__dirname + '/announcements')(app, config, ModulesClass);
     require(__dirname + '/news')(app, config, ModulesClass);
+    require(__dirname + '/search')(app, config, ModulesClass);
 
     app.use((data, req, res, next) => {
       renderErrorPage(req, res, data.status || 500, data.message, data.error);
