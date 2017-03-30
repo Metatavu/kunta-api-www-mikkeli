@@ -9,10 +9,10 @@
   background-size: cover;
   
   .date {
+    @include font-std(16px);
     background: #bc177e;
     color: #fff;
     display: inline-block;
-    @include font-std(16px);
     padding: 2px 15px;
   }
 
@@ -27,8 +27,12 @@
     min-height: 70px;
     
     .title {
+      @include font-ultra(18px);
       color: #bc177e;
-      
+      overflow: hidden;
+      text-overflow: ellipsis;
+      white-space: nowrap;
+
       a {
         color: #bc177e;
         text-decoration: none;
@@ -37,17 +41,6 @@
           text-decoration: underline;
         }
       }
-      
-      overflow: hidden;
-      text-overflow: ellipsis;
-      white-space: nowrap;
-      
-      @include font-ultra(18px);
-    }
-      
-    .abstract {
-      color: #000;
-      @include font-std(15px);
     }
   }
   
@@ -66,5 +59,4 @@
     }
   }
    
-    
 }
