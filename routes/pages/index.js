@@ -132,7 +132,7 @@
                 }
               });
               
-              var featuredImageSrc = featuredImageId ? util.format('/pageImages/%s/%s', page.id, featuredImageId) : '/gfx/layout/mikkeli-page-image-default.jpg';
+              var featuredImageSrc = featuredImageId ? util.format('/pageImages/%s/%s', page.id, featuredImageId) : null;
               var bannerSrc = bannerImageId ? util.format('/pageImages/%s/%s', page.id, bannerImageId) : '/gfx/layout/mikkeli-page-banner-default.jpg';
               
               loadChildPages(pageData[2], preferLanguages, (children) => {
