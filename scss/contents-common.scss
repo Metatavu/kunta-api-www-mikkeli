@@ -130,10 +130,14 @@
     text-transform: uppercase;
   }
   
+  ul {
+    margin-bottom: 0;
+  }
+  
   .page-nav-item {
     display: block;
-    padding-top: 10px;
-    padding-bottom: 10px;
+    padding-top: 5px;
+    padding-bottom: 5px;
     color: #363636;
     
     @media (max-width: $break-medium) {
