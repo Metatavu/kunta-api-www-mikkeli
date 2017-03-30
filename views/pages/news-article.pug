@@ -47,10 +47,22 @@ block content
                   =sibling.title
       .col-xs-24.col-lg-14
         .page-content
-          h1
-            !=title
-          .featured-image(data-lazy-bg-image=imageSrc)
-          !=contents
+          .row
+            .col-xs-24.title-container
+              h1
+                !=title
+          .row
+            .col-xs-24.image-container
+              .featured-image(data-lazy-bg-image=imageSrc)
+          .row
+            .col-xs-24.tags
+               each tag in tags
+                a.tag(href='/uutiset/?tag=' + tag)
+                  =tag
+          .row
+            .col-xs-24
+              !=contents
+          
       if sidebarContents
         .col-xs-24.col-lg-5.sidebar
           !=sidebarContents
