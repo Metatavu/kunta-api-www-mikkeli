@@ -42,7 +42,8 @@ block content
         .page-content
           h1
             !=title
-          .featured-image(data-lazy-bg-image=featuredImageSrc)
+          if featuredImageSrc
+            .featured-image(data-lazy-bg-image=featuredImageSrc)
           !=contents
       if sidebarContents
         .col-xs-24.col-lg-5.sidebar
