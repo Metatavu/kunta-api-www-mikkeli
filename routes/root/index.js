@@ -28,10 +28,11 @@
 
           var news = _.clone(data[1]).map(newsArticle => {
             return Object.assign(newsArticle, {
-              "shortDate": moment(newsArticle.published).format("D.M.YYYY")
+              "shortDate": moment(newsArticle.published).format("D.M.YYYY"),
+              "imageSrc": newsArticle.imageId ? util.format('/newsArticleImages/%s/%s', newsArticle.id, newsArticle.imageId) : null
             });
           });
-
+          
           var banners = _.clone(data[2] || []).map(banner => {
             var styles = [];
             
