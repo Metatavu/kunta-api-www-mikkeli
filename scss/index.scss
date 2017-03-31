@@ -16,19 +16,6 @@
     background-repeat: repeat-x;
     background-image: url('/gfx/layout/mikkeli-banner-border.png');
   }
-
-  .header-silhouette {
-    height: 58px;
-    width: 100%;
-    max-width: 804px;
-    background-position: left;
-    background-repeat: repeat-x;
-    background-image: url('/gfx/layout/mikkeli-silhouette.png');
-    bottom: 8px;
-    left: 0;
-    position: absolute;
-    z-index: 2;
-  }
   
   .header-banner-item {
     height: 560px;
