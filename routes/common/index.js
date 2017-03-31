@@ -52,6 +52,10 @@
       return '/tyot';
     }
     
+    static get TIMETABLE_ROWS() {
+      return 15;
+    }
+    
     static resolveLinkType(link) {
       if (!link || link.startsWith('#')) {
         return 'NONE';
@@ -130,6 +134,17 @@
         .removeAttr('height');
 
       return $('aside').html();
+    }
+    
+    static plainTextParagraphs(text) {
+      var result = [];
+      var paragraphs = (text||'').split('\n');
+      
+      for (var i = 0; i < paragraphs.length; i++) {
+        result.push(util.format('<p>%s</p>', paragraphs[i]));
+      }
+      
+      return result.join('');
     }
   }
 

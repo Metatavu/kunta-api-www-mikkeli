@@ -204,9 +204,10 @@ block content
                           =announcement.title
                         span
                           =announcement.shortDate
-                  .all-link-container
-                    a.all-link(href="#") 
-                      |Katso kaikki
+                  if announcements && announcements.length
+                    .all-link-container
+                      a.all-link(href='/kuulutukset/' + announcements[0].slug) 
+                        |Katso kaikki
   .container
     .social-media-items
       .social-media-items-grid-sizer

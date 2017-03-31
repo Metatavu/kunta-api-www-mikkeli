@@ -74,19 +74,6 @@
     background-image: url("/gfx/layout/mikkeli-banner-border.png");
   }
 
-  .banner-silhouette {
-    height: 58px;
-    width: 100%;
-    max-width: 804px;
-    background-position: left;
-    background-repeat: repeat-x;
-    background-image: url("/gfx/layout/mikkeli-silhouette.png");
-    bottom: 8px;
-    left: 0;
-    position: absolute;
-    z-index: 2;
-  }
-
 }
 
 .page-content {
@@ -143,10 +130,14 @@
     text-transform: uppercase;
   }
   
+  ul {
+    margin-bottom: 0;
+  }
+  
   .page-nav-item {
     display: block;
-    padding-top: 10px;
-    padding-bottom: 10px;
+    padding-top: 5px;
+    padding-bottom: 5px;
     color: #363636;
     
     @media (max-width: $break-medium) {

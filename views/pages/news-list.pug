@@ -1,0 +1,63 @@
+extends ../layout/contents.pug
+
+include ../includes/mixins.pug
+
+block styles
+  link(rel="stylesheet", href="/css/contents-common.min.css")
+  link(rel="stylesheet", href="/css/news-list.min.css")
+
+mixin newsArticle(article)
+  .news-article.thumb-article(data-lazy-bg-image=article.imageSrc)
+    .details
+      .date
+        =article.shortDate
+      .title
+        a(href='/uutiset/' + article.slug)
+          !=article.title
+
+block content
+  .container-fluid.no-gutters
+    .row
+      .col-xs.banner-container
+        .banner-border-top
+        .banner(data-lazy-bg-image=bannerSrc)
+        .banner-border-bottom
+      
+  .container.page-container
+    .row
+      +breadcrumbs(breadcrumbs)
+        
+  .container.page-container
+    .row
+      .col-lg-5.page-nav.no-gutters.hidden-md-down
+        h3
+          =folderTitle
+        each latestArticle in latestArticles
+          if latestArticle.id == id
+            .page-nav-item.active
+              a(href=latestArticle.slug)
+                =latestArticle.title
+          else
+            a.page-nav-item(href=latestArticle.slug)
+              =latestArticle.title
+      .col-xs-24.hidden-lg-up
+        a.btn.btn-primary(title='Näytä valikko', data-toggle='collapse', href='#collapse-menu', aria-expanded='false', aria-controls='collapse-menu')
+          i.fa.fa-bars
+        .collapse#collapse-menu
+          .col-xs-24.col-lg-5.page-nav.no-gutters
+            each latestArticle in latestArticles
+              if latestArticle.id == id
+                .page-nav-item.active
+                  a(href=latestArticle.slug)
+                    =latestArticle.title
+              else
+                a.page-nav-item(href=latestArticle.slug)
+                  =latestArticle.title
+      .col-xs-24.col-lg-19
+        .page-content
+          .row
+            .col-xs.thumb-articles-container
+              .row
+                each newsArticle in newsArticles
+                  .col-md-8
+                    +newsArticle(newsArticle)
