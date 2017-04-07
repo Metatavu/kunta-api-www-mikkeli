@@ -723,9 +723,9 @@
     padding: 25px;
     
     h3 {
+      @include font-ultra(24px);
       color: #fff;
       margin-bottom: 10px;
-      @include font-ultra(24px);
     }
     
     ul {
@@ -742,9 +742,9 @@
     }
   
     a {
+      @include font-ultra(20px);
       color: #fff;
       text-decoration: none;
-      @include font-ultra(20px);
     }
   }  
 }
