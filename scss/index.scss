@@ -705,4 +705,48 @@
     width: calc(25% - 10px);
     display: inline-block;
   }
-}  
+}
+
+@media screen and (max-width: 1200px) {
+  .banner-popular {
+    display: none;
+  }
+}
+
+@media screen and (min-width: 1199px) {
+  .banner-popular {
+    position: absolute;
+    top: 45px;
+    right: 200px;
+    background: rgba(0, 0, 0, 0.5);
+    z-index: 999;
+    padding: 25px;
+    
+    h3 {
+      color: #fff;
+      margin-bottom: 10px;
+      @include font-ultra(24px);
+    }
+    
+    ul {
+      margin-left: 0;
+      margin-bottom: 0;
+      padding-left: 0;
+      padding-bottom: 0;
+    }
+     
+    .nav-item {
+      padding-top: 10px; 
+      display: block;
+      list-style: none;
+    }
+  
+    a {
+      color: #fff;
+      text-decoration: none;
+      @include font-ultra(20px);
+    }
+  }  
+}
+
+
