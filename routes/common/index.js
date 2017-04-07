@@ -56,6 +56,10 @@
       return 15;
     }
     
+    static get SEARCH_RESULTS_PER_TYPE() {
+      return 5;
+    }
+    
     static resolveLinkType(link) {
       if (!link || link.startsWith('#')) {
         return 'NONE';
