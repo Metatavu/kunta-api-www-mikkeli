@@ -55,6 +55,15 @@ mixin banner(banner)
       
 mixin banners-slider(banners) 
   .header-banner
+    if menus['suositut']
+      .banner-popular
+        h3
+          |Suosituimmat      
+        ul
+        each item in menus['suositut'].items
+          li.nav-item
+            a.nav-link(href=item.url)
+              =item.label
     .header-border-top
     #banner-slide.carousel.slide(data-ride='carousel')
       .banner-carousel-indicators
@@ -75,7 +84,7 @@ mixin banners-slider(banners)
           span.icon-next(aria-hidden='true')
           span.sr-only Next
     .header-border-bottom
-      
+    
 mixin tile(tile)
   .tile(data-lazy-bg-image=tile.imageSrc)
     if tile.link
@@ -99,9 +108,9 @@ block scripts
 block content
   .container-fluid.no-gutters
     .row
-      .col-xs
+      .col-xs-24
         +banners-slider(banners)
-
+        
   .container.no-gutters
     .row
       .col-xs
