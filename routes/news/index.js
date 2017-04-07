@@ -108,7 +108,9 @@
           res.render('pages/news-list.pug', Object.assign(req.kuntaApi.data, {
             newsArticles: newsArticles,
             latestArticles: latestArticles,
-            bannerSrc: bannerSrc
+            bannerSrc: bannerSrc,
+            tag: tag,
+            breadcrumbs : [{path: util.format('%s/?tag=%s', Common.NEWS_FOLDER, tag), title: util.format("Uutiset tagilla '%s'", tag) }]
           }));
         }, (err) => {
           next({
