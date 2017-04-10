@@ -107,6 +107,18 @@
         $(link).attr('href', Common.processLink(currentPage, href));
       });
 
+      $('.kunta-api-image[data-image-type="content-image"]').each((index, img) => {
+        var pageId = $(img).attr('data-page-id');
+        var imageId = $(img).attr('data-attachment-id');
+        var src = util.format('/pageImages/%s/%s', pageId, imageId);
+        $(img)
+          .removeAttr('data-page-id')
+          .removeAttr('data-attachment-id')
+          .removeAttr('data-organization-id')
+          .removeAttr('data-image-type')
+          .attr('src', src);
+      });
+
       $('img[src]').each((index, img) => {
         var src = $(img).attr('src');
         $(img)
