@@ -34,10 +34,13 @@
             fragmentMap[fragment.slug] = fragment.contents;
           });
 
+          var googleAnalytics = config.get('googleAnalytics:code');
+
           req.kuntaApi = {
             data: {
               menus: menus,
-              fragmentMap: fragmentMap
+              fragmentMap: fragmentMap,
+              googleAnalytics: googleAnalytics
             }
           };
 
