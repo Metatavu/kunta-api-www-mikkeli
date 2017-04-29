@@ -6,3 +6,5 @@
 /.settings/
 /.externalToolBuilders/
 /nbproject/private/
+project.xml
+project.properties
