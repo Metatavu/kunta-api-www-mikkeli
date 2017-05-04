@@ -1,6 +1,6 @@
 {
   "name": "kunta-api-www-mikkeli",
-  "version": "0.0.47",
+  "version": "0.0.48",
   "description": " Kunta API visualization layer implementation for Mikkeli",
   "main": "index.js",
   "scripts": {
@@ -8,7 +8,7 @@
   },
   "repository": {
     "type": "git",
-    "url": "git@github.com:otavanopisto/kunta-api-www-mikkeli.git"
+    "url": "git@github.com:Metatavu/kunta-api-www-mikkeli.git"
   },
   "author": "",
   "license": "AGPL-3.0",
