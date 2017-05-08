@@ -32,6 +32,10 @@
       return 10;
     }
     
+    static get NEWS_COUNT_PAGE() { 
+      return 10;
+    }
+    
     static get SOCIAL_MEDIA_POSTS() { 
       return 4 * 3;
     }
