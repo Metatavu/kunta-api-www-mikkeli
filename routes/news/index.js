@@ -82,35 +82,31 @@
     });
 
     app.get(Common.NEWS_FOLDER + '/', (req, res, next) => {
-      var tag = req.query.tag;
-
-      if (!tag) {
-        next({
-          status: 404
-        });
-        return;
-      }
-
-      new ModulesClass(config)
-        .news.listByTag(tag)
-        .news.latest(0, 10)
-        .callback(function(data) {
-          var newsArticles = data[0].map(newsArticle => {
+      const prePage = Common.NEWS_COUNT_PAGE;
+      let tag = req.query.tag;
+      let page = tag ? null : parseInt(req.query.page)||0;
+      let module = new ModulesClass(config);
+        
+      (tag ? module.news.listByTag(tag) : module.news.latest(page * prePage, prePage + 1))
+        .callback((data) => {
+          let lastPage = data[0].length < prePage + 1;
+          let newsArticles = data[0].splice(0, prePage).map(newsArticle => {
             return Object.assign(newsArticle, {
               "shortDate": moment(newsArticle.published).format("D.M.YYYY"),
               "imageSrc": newsArticle.imageId ? util.format('/newsArticleImages/%s/%s', newsArticle.id, newsArticle.imageId) : null
             });
           });
 
-          var latestArticles  = data[1];
-          var bannerSrc = '/gfx/layout/mikkeli-page-banner-default.jpg';
+          let bannerSrc = '/gfx/layout/mikkeli-page-banner-default.jpg';
+         
           
           res.render('pages/news-list.pug', Object.assign(req.kuntaApi.data, {
+            page: page,
+            lastPage: lastPage,
             newsArticles: newsArticles,
-            latestArticles: latestArticles,
             bannerSrc: bannerSrc,
             tag: tag,
-            breadcrumbs : [{path: util.format('%s/?tag=%s', Common.NEWS_FOLDER, tag), title: util.format("Uutiset tagilla '%s'", tag) }]
+            breadcrumbs : [{path: util.format('%s/?tag=%s', Common.NEWS_FOLDER, tag), title: tag ? util.format("Uutiset tagilla '%s'", tag) : 'Uutiset'}]
           }));
         }, (err) => {
           next({

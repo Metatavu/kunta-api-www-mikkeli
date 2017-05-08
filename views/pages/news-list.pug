@@ -29,9 +29,12 @@ block content
           .col-xs-24
             .row
               h1
-                |Uutiset tagilla '
-                =tag
-                |'
+                if tag
+                  |Uutiset tagilla '
+                  =tag
+                  |'
+                else
+                  |Uutiset
           .col-xs-24.articles-container
             .row
               each newsArticle in newsArticles
@@ -50,3 +53,20 @@ block content
                       .row
                         .col-xs-24
                           !=newsArticle.abstract
+          if page !== undefined
+            .col-xs-24.pages-container.no-gutters
+              if page > 0
+                a.page-prev(href="?page=" + (page - 1))
+                  |Edellinen sivu
+              else
+                span.page-prev
+                  |Edellinen sivu
+              span.page-number
+                |Sivu 
+                =page + 1
+              if !lastPage
+                a.page-next(href="?page=" + (page + 1))
+                  |Seuraava sivu
+              else
+                span.page-next
+                  |Seuraava sivu
