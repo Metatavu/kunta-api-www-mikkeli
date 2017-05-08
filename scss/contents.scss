@@ -96,15 +96,15 @@
       
       .service-hour-valid {
         font-size: 16px;
+      }
         
-        &::before {
-          content: ' (';
-          margin-right: -3px;
-        }
+      .service-hour-valid::before {
+        content: " (";
+        margin-right: -3px;
+      }
         
-        &::after {
-          content: ')';
-        }
+      .service-hour-valid::after {
+        content: ")";
       }
     }
     
