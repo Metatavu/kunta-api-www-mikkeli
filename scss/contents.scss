@@ -87,4 +87,27 @@
     }
   }
   
+  .service-hour {
+  
+    margin-bottom: 10px;
+    
+    h4 {
+      font-size: 18px;
+      
+      .service-hour-valid {
+        font-size: 16px;
+      }
+        
+      .service-hour-valid::before {
+        content: " (";
+        margin-right: -3px;
+      }
+        
+      .service-hour-valid::after {
+        content: ")";
+      }
+    }
+    
+  }
+  
 }
