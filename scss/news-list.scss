@@ -44,7 +44,7 @@
     padding-right: 15px;
     
     &::before {
-      content: '< ';
+      content: "< ";
     }
   }
 
@@ -52,7 +52,7 @@
     padding-left: 15px;
     
     &::after {
-      content: ' >';
+      content: " >";
     }
   }
 }
