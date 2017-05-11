@@ -2,7 +2,7 @@ if newsArticles.length
   each newsArticle in newsArticles
     .col-xs-24
       .row.search-result.news-article
-        .col-xs-24.col-md-6.col-lg-3
+        .col-xs-24.col-md-6.col-lg-3.hidden-sm-down
           .search-result-image-container
             if newsArticle.imageSrc
               .search-result-image(style="background-image: url(" + newsArticle.imageSrc + '?size=120)')
@@ -15,7 +15,7 @@ if newsArticles.length
                 =newsArticle.shortDate
               a.title(href='/uutiset/' + newsArticle.slug)
                 !=newsArticle.title
-          .row
+          .row.hidden-sm-down
             .col-xs-24
               !=newsArticle.abstract
   .col-xs-24.pages-container.no-gutters

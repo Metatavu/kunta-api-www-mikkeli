@@ -31,6 +31,7 @@ $slim-result-icon-size: 25px;
     background-repeat: no-repeat !important;
   }
   
+  
 }
 
 .results-container {
@@ -102,6 +103,10 @@ $slim-result-icon-size: 25px;
   .title {
     @include font-std(18px);
   }
+   
+  .details-container {
+    padding-bottom: 10px;
+  }
   
   &.search-result-slim {
     
@@ -150,3 +155,16 @@ $slim-result-icon-size: 25px;
   padding-top: 20px;
 }
 
+@media (max-width: $break-small) { 
+  .page-content {
+    .nav-link {
+      padding: 10px 10px;
+    }
+    
+    .search-result {
+      .details-container {
+        padding: 0;
+      }
+    }
+  }
+}

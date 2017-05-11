@@ -2,7 +2,7 @@ if files.length
   each file in files
     .col-xs-24
       .row.search-result.search-result-slim
-        .col-xs-24.col-md-6.col-lg-1
+        .col-xs-24.col-md-6.col-lg-1.hidden-sm-down
           .search-result-image-container
             i.fa.fa-paperclip.search-result-image-placeholder(aria-hidden="true")
         .col-xs-24.col-md-18.col-lg-23
@@ -15,10 +15,6 @@ if files.length
                 br
                 a.title(href='/redirect/page/' + file.pageId)
                   |Näytä sivu, joka sisältää liitteen
-              
-          .row
-            .col-xs-24
-              !=file.excerpt
   .col-xs-24.pages-container.no-gutters
     if page > 0
       a.page-prev(href="#p" + (page - 1))
