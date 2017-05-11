@@ -1,0 +1,57 @@
+extends ../layout/contents.pug
+
+include ../includes/mixins.pug
+
+block scripts
+  script(defer="defer",type="text/javascript", src="//cdn.metatavu.io/libs/async/2.1.4/async.min.js")
+  script(defer="defer",type="text/javascript", src="/js/search.js")
+
+block styles
+  link(rel="stylesheet", href="/css/contents-common.min.css")
+  link(rel="stylesheet", href="/css/search.min.css")
+
+block content
+  .container-fluid.no-gutters
+    .row
+      .col-xs.banner-container
+        .banner-border-top
+        .banner(data-lazy-bg-image=bannerSrc)
+        .banner-border-bottom
+      
+  .container.page-container
+    .row
+      +breadcrumbs(breadcrumbs)
+        
+  .container.page-container
+    .row
+      .col-xs-24
+        .page-content
+          .col-xs-24
+            h1
+              |Haku
+          .col-xs-24.search-container
+            .row
+              .col-xs-24
+                input.form-control(type="text", name="query", value=search)
+            .row
+              .col-xs-24
+                input.btn.btn-lg.btn-primary(type="submit", name="search",value="Hae")
+            .row
+              .col-xs-24.results-container
+                .col-xs-24.search-hint-container.no-gutters(style="display:none")
+                  |Kirjoita hakulause kenttään ja paina "Hae" -painiketta.
+                .col-xs-24.search-results-container.no-gutters(style="display:none")
+                  ul.nav.nav-tabs.search-results-tabs(role="tablist")
+                    li.nav-item
+                      a.nav-link.pages-tab.active(data-toggle="tab", href="#pages-tab", role="tab")
+                        |Sivut
+                    li.nav-item
+                      a.nav-link.news-tab(data-toggle="tab", href="#news-tab", role="tab")
+                        |Uutiset
+                    li.nav-item
+                      a.nav-link.files-tab(data-toggle="tab", href="#files-tab", role="tab")
+                        |Tiedostot
+                  .tab-content.search-results-tab-content
+                    .tab-pane#pages-tab(role="tabpanel")
+                    .tab-pane#news-tab(role="tabpanel")
+                    .tab-pane#files-tab(role="tabpanel")

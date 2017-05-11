@@ -1,4 +1,5 @@
 /*jshint esversion: 6 */
+/*global __dirname */
 (function() {
   'use strict';
 
@@ -82,15 +83,15 @@
     });
 
     app.get(Common.NEWS_FOLDER + '/', (req, res, next) => {
-      const prePage = Common.NEWS_COUNT_PAGE;
+      const perPage = Common.NEWS_COUNT_PAGE;
       let tag = req.query.tag;
       let page = tag ? null : parseInt(req.query.page)||0;
       let module = new ModulesClass(config);
         
-      (tag ? module.news.listByTag(tag) : module.news.latest(page * prePage, prePage + 1))
+      (tag ? module.news.listByTag(tag) : module.news.latest(page * perPage, perPage + 1))
         .callback((data) => {
-          let lastPage = data[0].length < prePage + 1;
-          let newsArticles = data[0].splice(0, prePage).map(newsArticle => {
+          let lastPage = data[0].length < perPage + 1;
+          let newsArticles = data[0].splice(0, perPage).map(newsArticle => {
             return Object.assign(newsArticle, {
               "shortDate": moment(newsArticle.published).format("D.M.YYYY"),
               "imageSrc": newsArticle.imageId ? util.format('/newsArticleImages/%s/%s', newsArticle.id, newsArticle.imageId) : null
@@ -99,7 +100,6 @@
 
           let bannerSrc = '/gfx/layout/mikkeli-page-banner-default.jpg';
          
-          
           res.render('pages/news-list.pug', Object.assign(req.kuntaApi.data, {
             page: page,
             lastPage: lastPage,
