@@ -129,7 +129,10 @@
     });
     
     app.get(util.format('%s/', Common.SEARCH_PATH), (req, res, next) => {
+      const bannerSrc = '/gfx/layout/mikkeli-page-banner-default.jpg';
+          
       res.render('pages/search.pug', Object.assign(req.kuntaApi.data, {
+        bannerSrc: bannerSrc,
         breadcrumbs : [{path: util.format('%s/', Common.SEARCH_PATH), title: 'Haku'}]
       }));
     });
