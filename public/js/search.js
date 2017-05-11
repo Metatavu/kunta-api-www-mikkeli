@@ -8,6 +8,7 @@
     _create : function() {
       this._searching = false;
       this.element.on('click', 'input[name="search"]', $.proxy(this._onSearchClick, this));
+      this.element.on('keyup', 'input[name="query"]', $.proxy(this._onSearchKeyDown, this));
       this.element.on('click', '#pages-tab a.page-prev', $.proxy(this._onPagesPrevPageClick, this));
       this.element.on('click', '#pages-tab a.page-next', $.proxy(this._onPagesNextPageClick, this));
       this.element.on('click', '#files-tab a.page-prev', $.proxy(this._onFilesPrevPageClick, this));
@@ -211,6 +212,13 @@
     _onSearchClick: function (event) {
       event.preventDefault();
       this._search();
+    },
+    
+    _onSearchKeyDown: function (event) {
+      if (event.which === 13) {
+        event.preventDefault();
+        this._search();
+      }
     },
     
     _onPagesPrevPageClick: function (event) {
