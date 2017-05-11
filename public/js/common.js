@@ -22,7 +22,7 @@
           this._searching = true;
           this.element.addClass('searching');
           $.ajax({
-            url : '/ajax/search/',
+            url : '/ajax/menuSearch/',
             data : {
               search: search
             },
@@ -33,7 +33,7 @@
                 .html(data)
                 .show();
               
-              if (search != this._getSearch()) {
+              if (search !== this._getSearch()) {
                 this._search();
               } else {
                 this.element.removeClass('searching');
@@ -46,8 +46,12 @@
       }
     },
     
-    _onInputKeyUp: function () {
-      this._search();
+    _onInputKeyUp: function (event) {
+      if (event.which === 13) {
+        window.location.href= "/haku?search=" + this._getSearch();
+      } else {
+        this._search();
+      }
     },
     
     _onInputFocus: function () {

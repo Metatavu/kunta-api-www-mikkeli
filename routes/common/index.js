@@ -8,6 +8,10 @@
   
   class Common {
     
+    static get SEARCH_PATH() {
+      return '/haku';
+    }
+    
     static get CONTENT_FOLDER() { 
       return '/sisalto';
     }
@@ -61,6 +65,18 @@
     }
     
     static get SEARCH_RESULTS_PER_TYPE() {
+      return 5;
+    }
+    
+    static get SEARCH_PAGES_PER_PAGE() {
+      return 5;
+    }
+    
+    static get SEARCH_FILES_PER_PAGE() {
+      return 10;
+    }
+    
+    static get SEARCH_NEWS_PER_PAGE() {
       return 5;
     }
     
@@ -165,6 +181,11 @@
       }
       
       return result.join('');
+    }
+    
+    static htmlToText(html) {
+      const $ = cheerio.load(html);
+      return $.text().replace(/\s+/g, ' ');
     }
   }
 

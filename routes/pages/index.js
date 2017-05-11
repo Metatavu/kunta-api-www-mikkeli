@@ -33,7 +33,7 @@
     function mapOpenChildren(children, activeIds, openTreeNodes) {
       if (openTreeNodes.length > 0) {
         for (var i = 0; i < children.length; i++) {
-          if (activeIds.indexOf(children[i].id) != -1) {
+          if (activeIds.indexOf(children[i].id) !== -1) {
             children[i].children = openTreeNodes.shift();
             mapOpenChildren(children[i].children, activeIds, openTreeNodes);
             break;

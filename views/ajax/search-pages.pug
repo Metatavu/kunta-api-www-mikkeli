@@ -1,0 +1,37 @@
+if pages.length
+  each page in pages
+    .col-xs-24
+      .row.search-result
+        .col-xs-24.col-md-6.col-lg-3.hidden-sm-down
+          .search-result-image-container
+            if page.imageSrc
+              .search-result-image(style="background-image: url(" + page.imageSrc + '?size=120)')
+            else
+              i.fa.fa-file-text-o.search-result-image-placeholder(aria-hidden="true")
+        .col-xs-24.col-md-18.col-lg-21
+          .row
+            .col-xs-24.details-container
+              a.title(href='/redirect/page/' + page.id)
+                =page.title
+          .row.hidden-sm-down
+            .col-xs-24
+              !=page.excerpt
+  .col-xs-24.pages-container.no-gutters
+    if page > 0
+      a.page-prev(href="#p" + (page - 1))
+        |Edellinen sivu
+    else
+      span.page-prev
+        |Edellinen sivu
+    span.page-number
+      |Sivu 
+      =page + 1
+    if !lastPage
+      a.page-next(href="#p" + (page + 1))
+        |Seuraava sivu
+    else
+      span.page-next
+        |Seuraava sivu
+else
+  p.no-search-results
+    |Hakuehdolla ei löytynyt sivuja
