@@ -11,6 +11,8 @@
       this.element.on('keyup', 'input[name="query"]', $.proxy(this._onSearchKeyDown, this));
       this.element.on('click', '#pages-tab a.page-prev', $.proxy(this._onPagesPrevPageClick, this));
       this.element.on('click', '#pages-tab a.page-next', $.proxy(this._onPagesNextPageClick, this));
+      this.element.on('click', '#news-tab a.page-prev', $.proxy(this._onNewsPrevPageClick, this));
+      this.element.on('click', '#news-tab a.page-next', $.proxy(this._onNewsNextPageClick, this));
       this.element.on('click', '#files-tab a.page-prev', $.proxy(this._onFilesPrevPageClick, this));
       this.element.on('click', '#files-tab a.page-next', $.proxy(this._onFilesNextPageClick, this));
       
@@ -57,46 +59,40 @@
       });
     },
     
+    _searchNews: function (page, callback) {
+      var search = this._getSearch();
+      
+      $.ajax({
+        url : '/ajax/search/news',
+        data : {
+          search: search,
+          page: page
+        },
+        success : function(data) {
+          callback(null, data); 
+        },
+        error: function (jqXHR, textStatus) {
+          callback(jqXHR.responseText || jqXHR.statusText || textStatus || 'error');
+        }
+      });
+    },
+    
     _createPageSearch: function (page) {
       return $.proxy(function (callback) {
         this._searchPages(page, callback);
       }, this);
     },
     
-    _createFileSearch: function () {
-      var search = this._getSearch();
-      return function (callback) {
-        $.ajax({
-          url : '/ajax/search/files',
-          data : {
-            search: search
-          },
-          success : function(data) {
-            callback(null, data); 
-          },
-          error: function (jqXHR, textStatus) {
-            callback(jqXHR.responseText || jqXHR.statusText || textStatus || 'error');
-          }
-        });
-      };
+    _createFileSearch: function (page) {
+      return $.proxy(function (callback) {
+        this._searchFiles(page, callback);
+      }, this);
     },
     
-    _createNewsSearch: function () {
-      var search = this._getSearch();
-      return function (callback) {
-        $.ajax({
-          url : '/ajax/search/news',
-          data : {
-            search: search
-          },
-          success : function(data) {
-            callback(null, data); 
-          },
-          error: function (jqXHR, textStatus) {
-            callback(jqXHR.responseText || jqXHR.statusText || textStatus || 'error');
-          }
-        });
-      };
+    _createNewsSearch: function (page) {
+      return $.proxy(function (callback) {
+        this._searchNews(page, callback);
+      }, this);
     },
     
     _search: function () {
@@ -205,6 +201,29 @@
       }, this));
     },
     
+    _loadNews: function (page) {
+      var height = this.element
+        .find('#news-tab')
+        .height();
+      
+      this.element
+        .find('#news-tab')
+        .empty()
+        .css('height', height)
+        .addClass('searching');
+      
+      this._searchNews(page, $.proxy(function (err, html) {
+        if (err) {
+          this._handleError(err); 
+        } else {
+          this.element.find('#news-tab')
+            .css('height', 'auto')
+            .removeClass('searching')
+            .html(html);
+        }
+      }, this));
+    },
+    
     _getSearch()  {
       return this.element.find('input[name="query"]').val(); 
     },
@@ -236,6 +255,24 @@
       var href = $(event.target).attr('href');
       if (href.startsWith('#p')) {
         this._loadPages(parseInt(href.substring(2)));
+      }
+    },
+
+    _onNewsPrevPageClick: function (event) {
+      event.preventDefault();
+      
+      var href = $(event.target).attr('href');
+      if (href.startsWith('#p')) {
+        this._loadNews(parseInt(href.substring(2)));
+      }
+    },
+    
+    _onNewsNextPageClick: function (event) {
+      event.preventDefault();
+      
+      var href = $(event.target).attr('href');
+      if (href.startsWith('#p')) {
+        this._loadNews(parseInt(href.substring(2)));
       }
     },
 
