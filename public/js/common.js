@@ -22,7 +22,7 @@
           this._searching = true;
           this.element.addClass('searching');
           $.ajax({
-            url : '/ajax/search/',
+            url : '/ajax/menuSearch/',
             data : {
               search: search
             },
