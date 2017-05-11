@@ -28,13 +28,16 @@
       new ModulesClass(config)
         .pages.search(search, preferLanguages, 0, Common.SEARCH_RESULTS_PER_TYPE)
         .files.search(search, 0, Common.SEARCH_RESULTS_PER_TYPE)
+        .news.search(search, 0, Common.SEARCH_RESULTS_PER_TYPE)
         .callback((data) => {
-          var pages = data[0];
-          var files = data[1];
+          const pages = data[0];
+          const files = data[1];
+          const newsArticles = data[2];
           
           res.render('ajax/menu-search.pug', {
             pages: pages,
-            files: files
+            files: files,
+            newsArticles: newsArticles
           });
         });
     });
