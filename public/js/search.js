@@ -224,7 +224,7 @@
       }, this));
     },
     
-    _getSearch()  {
+    _getSearch: function ()  {
       return this.element.find('input[name="query"]').val(); 
     },
     

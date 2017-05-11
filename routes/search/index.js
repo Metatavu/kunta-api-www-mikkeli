@@ -116,7 +116,7 @@
             return Object.assign(newsArticle, {
               "shortDate": moment(newsArticle.published).format("D.M.YYYY"),
               "imageSrc": newsArticle.imageId ? util.format('/newsArticleImages/%s/%s', newsArticle.id, newsArticle.imageId) : null,
-              "abstract": Common.htmlToText(newsArticle['abstract'])
+              "abstract": Common.htmlToText(newsArticle.abstract)
             });
           });
           
