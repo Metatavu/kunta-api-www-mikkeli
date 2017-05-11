@@ -130,9 +130,11 @@
     
     app.get(util.format('%s/', Common.SEARCH_PATH), (req, res, next) => {
       const bannerSrc = '/gfx/layout/mikkeli-page-banner-default.jpg';
+      const search = req.query.search;
           
       res.render('pages/search.pug', Object.assign(req.kuntaApi.data, {
         bannerSrc: bannerSrc,
+        search: search,
         breadcrumbs : [{path: util.format('%s/', Common.SEARCH_PATH), title: 'Haku'}]
       }));
     });

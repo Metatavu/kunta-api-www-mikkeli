@@ -22,11 +22,15 @@ $slim-result-icon-size: 25px;
   min-height: 200px;
 }
 
-.searching {
-  background-image: url('/gfx/load.svg') !important;
-  background-size: 64px auto !important;
-  background-position: center center !important;
-  background-repeat: no-repeat !important;
+.page-content {
+  
+  .searching {
+    background-image: url('/gfx/load.svg') !important;
+    background-size: 64px auto !important;
+    background-position: center center !important;
+    background-repeat: no-repeat !important;
+  }
+  
 }
 
 .results-container {
@@ -121,8 +125,9 @@ $slim-result-icon-size: 25px;
 
 .pages-container {
   text-align: center;
-  padding-top: 20px;
   white-space: nowrap;
+  padding-top: 40px;
+  padding-bottom: 60px;
   
   .page-prev {
     padding-right: 15px;

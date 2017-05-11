@@ -145,6 +145,10 @@ nav.navbar {
     color: #aaa;
     font-size: 15px;
     margin-top: 1px;
+    
+    &:hover {
+      text-decoration: none;
+    }
   }
   
   &.searching {
