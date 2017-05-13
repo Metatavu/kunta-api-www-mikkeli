@@ -184,6 +184,10 @@
     }
     
     static htmlToText(html) {
+      if (!html) {
+        return '';
+      }
+      
       const $ = cheerio.load(html);
       return $.text().replace(/\s+/g, ' ');
     }
