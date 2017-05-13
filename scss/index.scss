@@ -151,16 +151,16 @@
         overflow: hidden;
         text-overflow: ellipsis;
         
-        &:last-of-type {
-          margin-bottom: 0;
-        }
-        
         a {
           position: relative;
           z-index: 2;
           color: #fff;
           text-decoration: underline;
         }
+      }
+      
+      p:last-of-type {
+        margin-bottom: 0;
       }
     }
   }
