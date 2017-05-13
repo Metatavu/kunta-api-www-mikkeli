@@ -127,6 +127,8 @@
       padding-top: 20px;
       padding-left: 16px;
       padding-right: 16px;
+      padding-bottom: 10px;
+      visibility: hidden;
       
       *:empty {
         display: none;
@@ -155,6 +157,10 @@
           color: #fff;
           text-decoration: underline;
         }
+      }
+      
+      p:last-of-type {
+        margin-bottom: 0;
       }
     }
   }

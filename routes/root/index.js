@@ -1,4 +1,5 @@
 /*jshint esversion: 6 */
+/*global __dirname*/
 (function() {
   'use strict';
 

@@ -89,17 +89,18 @@ mixin tile(tile)
   .tile(data-lazy-bg-image=tile.imageSrc)
     if tile.link
       a.tile-link(href=tile.link,target="_blank")
-    .details
+    .details  
       h3
         span
           !=tile.title
-      p
+      .tile-text
         !=tile.contents
       
 block styles
   link(rel="stylesheet", href="/css/index.min.css")
 
 block scripts
+  script(defer="defer", type="text/javascript", src="//cdnjs.cloudflare.com/ajax/libs/textfit/2.3.1/textFit.min.js")
   script(defer="defer", type="text/javascript", src="//cdn.metatavu.io/libs/bigtext/0.1.8/bigtext.js")
   script(defer="defer", type="text/javascript", src="https://cdnjs.cloudflare.com/ajax/libs/masonry/4.1.1/masonry.pkgd.min.js")
   script(defer="defer", type="text/javascript", src="https://cdnjs.cloudflare.com/ajax/libs/jquery.imagesloaded/4.1.1/imagesloaded.pkgd.min.js")
