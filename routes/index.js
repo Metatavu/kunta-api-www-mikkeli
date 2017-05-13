@@ -25,6 +25,7 @@
     require(__dirname + '/news')(app, config, ModulesClass);
     require(__dirname + '/search')(app, config, ModulesClass);
     require(__dirname + '/redirect')(app, config, ModulesClass);
+    require(__dirname + '/incidents')(app, config, ModulesClass);
     
     // Register error routes. Keep these as last to ensure catch all functionality
     
