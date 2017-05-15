@@ -4,6 +4,7 @@
 
   const _ = require('lodash');
   const Common = require(__dirname + '/../common');
+  const util = require('util');
 
   module.exports = (app, config, ModulesClass) => {
 
@@ -36,11 +37,29 @@
 
           var googleAnalytics = config.get('googleAnalytics:code');
 
+          var incidentUrls = [];
+          var incidentsConfig = config.get('incidents:urls');
+          var incidentsPollInterval = config.get('incidents:pollInterval') || 30000;
+          var incidentScriptVersion = config.get('incidents:scriptVersion');
+          
+          if (Array.isArray(incidentsConfig)) {
+            for (let i = 0; i < incidentsConfig.length; i++) {
+              var incidentUrl = incidentsConfig[i].url;
+              if (incidentsConfig[i].area) {
+                incidentUrl += util.format('?area=%s', encodeURIComponent(incidentsConfig[i].area));
+              }
+              incidentUrls.push(incidentUrl);
+            }
+          }
+
           req.kuntaApi = {
             data: {
               menus: menus,
               fragmentMap: fragmentMap,
-              googleAnalytics: googleAnalytics
+              googleAnalytics: googleAnalytics,
+              incidentUrls: incidentUrls.join(','),
+              incidentsPollInterval: incidentsPollInterval,
+              incidentScriptVersion: incidentScriptVersion
             }
           };
 
