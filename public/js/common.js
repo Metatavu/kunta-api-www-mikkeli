@@ -108,8 +108,6 @@
     $('.nav-search-container').menuSearch();
     
     $('.page-nav-item.active').parents('.page-nav-item.open').addClass('active');
-    
-    $('.rsbtn_play').attr('href', $('.rsbtn_play').attr('href') + '&url=' + window.location.href);
   });
   
 }).call(this);
