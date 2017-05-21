@@ -1,0 +1,21 @@
+{
+    "implementation": "../../index.js",
+    "cache": {
+        "redisUrl": "redis://127.0.0.1:6379",
+        "request": {
+                "defaultExpiration": 60
+        },
+        "failsafe": {
+                "defaultExpiration": 86400
+        }
+    },
+    "api": {
+            "basePath": "https://staging-api.kunta-api.fi/v1"
+    },
+    "defaults-mikkeli-staging": {
+            "organizationId": "430b4ecc-135c-42be-84f9-31ff9baa5b99"
+    },
+    "defaults": {
+            "organizationId": "430b4ecc-135c-42be-84f9-31ff9baa5b99"
+    }
+}

@@ -1,0 +1,27 @@
+[
+   {
+      "id": "jobid1",
+      "title": "Programming job",
+      "employmentType": "Full time",
+      "description": "Programming job open. Apply now.",
+      "location": "Mikkeli",
+      "organisationalUnit": "Mikkeli city",
+      "duration": "1 Year",
+      "taskArea": "Programming",
+      "publicationStart": "2014-01-07T09:00:00Z",
+      "publicationEnd": "2020-12-31T21:59:00Z",
+      "link": "linktojob.org"
+   },{
+      "id": "jobid2",
+      "title": "Cleaning job",
+      "employmentType": "Part time",
+      "description": "Cleaning job open. Apply now.",
+      "location": "Mikkeli",
+      "organisationalUnit": "Mikkeli city",
+      "duration": "4 Year",
+      "taskArea": "Cleaning",
+      "publicationStart": "2014-01-07T09:00:00Z",
+      "publicationEnd": "2020-12-31T21:59:00Z",
+      "link": "linktojob2.org"
+   }
+]

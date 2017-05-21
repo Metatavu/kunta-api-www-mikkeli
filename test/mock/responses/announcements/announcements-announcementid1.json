@@ -1,0 +1,10 @@
+[
+   {
+      "id": "announcementid1",
+      "slug": "lorem-ipsum-dorom",
+      "title": "This is a great title",
+      "contents": "Lorem dorolium ipsum",
+        "published": "2017-05-11T07:50:55Z",
+      "abstract": null
+   }
+]
