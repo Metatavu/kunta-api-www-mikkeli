@@ -10,7 +10,7 @@
     }
   },
   "api": {
-    "basePath": "https://staging-api.kunta-api.fi/v1/organizations"
+    "basePath": "https://test-api.kunta-api.fi/v1/organizations"
   },
   "defaults": {
     "organizationId": "testId"

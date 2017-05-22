@@ -10,16 +10,15 @@
   class NockController {
     static nockSettings(url, method, route) {
       const routeParts = route.split('/');
-      let fileName = '';
+      let fileName = [];
       
       for (let i = 0; i < routeParts.length; i++) {
         if (routeParts[i].length > 0) {
-          fileName += routeParts[i] + '-';
+          fileName.push(routeParts[i]);
         } 
       }
       
-      fileName = fileName.substring(0, fileName.length - 1);
-      const filePath = __dirname + '/responses/' + routeParts[1] + '/' + fileName + '.json';
+      const filePath = __dirname + '/responses/' + routeParts[1] + '/' + fileName.join('-') + '.json';
       
       switch (method) {
         case 'GET':

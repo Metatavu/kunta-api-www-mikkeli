@@ -10,7 +10,7 @@
         }
     },
     "api": {
-            "basePath": "https://staging-api.kunta-api.fi/v1"
+            "basePath": "https://test-api.kunta-api.fi/v1"
     },
     "defaults-mikkeli-staging": {
             "organizationId": "430b4ecc-135c-42be-84f9-31ff9baa5b99"
