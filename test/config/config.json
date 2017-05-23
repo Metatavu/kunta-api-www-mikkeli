@@ -1,5 +1,5 @@
 {
-  "implementation": "../kunta-api-www-mikkeli",
+  "implementation": "../../../kunta-api-www-mikkeli",
   "cache": {
     "redisUrl": "redis://127.0.0.1:6379",
     "request": {
