@@ -7,6 +7,8 @@
   const clearRequire = require('clear-require');
   const Promise = require('bluebird');
   const http = require('http');
+  const path = require('path');
+  const express = require('express');
   const webdriver = require('selenium-webdriver');
   
   process.on('unhandledRejection', (error, promise) => {

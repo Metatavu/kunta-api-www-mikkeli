@@ -37,10 +37,12 @@
 
           var googleAnalytics = config.get('googleAnalytics:code');
 
-          var incidentUrls = [];
-          var incidentsConfig = config.get('incidents:urls');
-          var incidentsPollInterval = config.get('incidents:pollInterval') || 30000;
-          var incidentScriptVersion = config.get('incidents:scriptVersion');
+          const incidentUrls = [];
+          const incidentsConfig = config.get('incidents:urls');
+          const incidentsPollInterval = config.get('incidents:pollInterval') || 30000;
+          const incidentScriptVersion = config.get('incidents:scriptVersion');
+          const readSpeakerCustomerId = config.get('readSpeaker:customerId');
+          const readSpeakerUrl = encodeURIComponent(req.protocol + '://' + req.get('host') + req.originalUrl);
           
           if (Array.isArray(incidentsConfig)) {
             for (let i = 0; i < incidentsConfig.length; i++) {
@@ -57,6 +59,8 @@
               menus: menus,
               fragmentMap: fragmentMap,
               googleAnalytics: googleAnalytics,
+              readSpeakerCustomerId: readSpeakerCustomerId,
+              readSpeakerUrl: readSpeakerUrl,
               incidentUrls: incidentUrls.join(','),
               incidentsPollInterval: incidentsPollInterval,
               incidentScriptVersion: incidentScriptVersion

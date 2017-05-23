@@ -8,18 +8,23 @@
   const Promise = require('bluebird');
   
   class NockController {
+    static getShortlinks(url, route, filePath) {
+      const mock = nock('https://test-api.kunta-api.fi/v1')
+        .get('/organizations/testId/shortlinks')
+        .replyWithFile(200, __dirname + '/responses/shortlinks/shortlinks.json');
+    }
+    
     static nockSettings(url, method, route) {
       const routeParts = route.split('/');
-      let fileName = '';
+      let fileName = [];
       
       for (let i = 0; i < routeParts.length; i++) {
         if (routeParts[i].length > 0) {
-          fileName += routeParts[i] + '-';
+          fileName.push(routeParts[i]);
         } 
       }
       
-      fileName = fileName.substring(0, fileName.length - 1);
-      const filePath = __dirname + '/responses/' + routeParts[1] + '/' + fileName + '.json';
+      const filePath = __dirname + '/responses/' + routeParts[1] + '/' + fileName.join('-') + '.json';
       
       switch (method) {
         case 'GET':

@@ -43,6 +43,10 @@ block content
             !=title
           if featuredImageSrc
             .featured-image(data-lazy-bg-image=featuredImageSrc)
+          if readSpeakerCustomerId
+            .read-speaker-container
+              +readSpeaker(readSpeakerCustomerId)
+        .rs_read_this_class
           !=contents
       if sidebarContents
         .col-xs-24.col-lg-5.sidebar
