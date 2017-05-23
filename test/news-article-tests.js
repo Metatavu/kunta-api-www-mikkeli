@@ -19,7 +19,13 @@
   chai.use(require('chai-as-promised'));
   
   describe('Mocking news article requests', function () {
+    
+    before(() => {
+      NockController.getShortlinks();
+    });
+    
     this.timeout(60000);
+    
     it('Should return all news', () => {
       const expectedResponse = require(__dirname + '/mock/responses/news/news.json');
       const baseUrl = 'https://staging-api.kunta-api.fi/v1/organizations';

@@ -7,7 +7,7 @@
   const clearRequire = require('clear-require');
   const Promise = require('bluebird');
   const http = require('http');
-  var path = require('path');
+  const path = require('path');
   const express = require('express');
   const webdriver = require('selenium-webdriver');
   
@@ -18,11 +18,10 @@
   class TestUtils {
     static startServer(configFile) {
       const config = require('nconf');
+      config.file({ file: __dirname + '/../config/config.json' });
       const app = require('../../node_modules/kunta-api-www/index');
       const Modules = require('../../node_modules/kunta-api-www/modules');
       const implementation = require('../../index')();
-      
-      config.file({ file: __dirname + '/../config/config.json' });
 
       app.set('views',implementation.views);
       app.use(express.static(implementation.static));
