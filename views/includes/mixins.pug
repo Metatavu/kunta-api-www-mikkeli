@@ -28,3 +28,11 @@ mixin pageMenuItem(item)
         |&nbsp;
       a.page-nav-link(href='#')
         =item.title
+
+mixin readSpeaker(customerId)
+  #readspeaker_button1.rs_skip.rsbtn.rs_preserve
+    a.rsbtn_play(rel='nofollow', accesskey='L', title='Kuuntele ReadSpeakerilla', href='//app-eu.readspeaker.com/cgi-bin/rsent?customerid=' + customerId + '&readclass=rs_read_this_class&lang=fi_fi&url=' + readSpeakerUrl)
+      span.rsbtn_left.rsimg.rspart
+        span.rsbtn_text
+          span Kuuntele
+      span.rsbtn_right.rsimg.rsplay.rspart
