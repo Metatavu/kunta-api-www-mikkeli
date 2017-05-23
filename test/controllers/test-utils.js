@@ -19,17 +19,9 @@
     static startServer(configFile) {
       const config = require('nconf');
       config.file({ file: __dirname + '/../config/config.json' });
-      const app = require('../../node_modules/kunta-api-www/index');
-      const Modules = require('../../node_modules/kunta-api-www/modules');
-      const implementation = require('../../index')();
-
-      app.set('views',implementation.views);
-      app.use(express.static(implementation.static));
-      app.use(express.static(path.join(__dirname, 'public')));
-      implementation.routes(app, config, Modules);
+      const server = require('../../node_modules/kunta-api-www/index')(config); 
       
       return new Promise((resolve, reject) => {
-        const server = http.createServer(app);
         server.listen(3000, () => {
           resolve(server);
         });
