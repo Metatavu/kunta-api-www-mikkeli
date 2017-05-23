@@ -27,7 +27,6 @@
         clearRequire.all();
         done();
       });
-   
     });
     
     it('Should return all announcements', () => {

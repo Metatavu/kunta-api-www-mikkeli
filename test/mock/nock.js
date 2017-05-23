@@ -11,6 +11,7 @@
     static getShortlinks(url, route, filePath) {
       const mock = nock('https://test-api.kunta-api.fi/v1')
         .get('/organizations/testId/shortlinks')
+        .delay(30000)
         .replyWithFile(200, __dirname + '/responses/shortlinks/shortlinks.json');
     }
     
@@ -39,6 +40,8 @@
     }
     
     static nockGet(url, route, filePath) {
+      NockController.getShortlinks();
+      
       const mock = nock(url)
         .get(route)
         .replyWithFile(200, filePath);
