@@ -15,11 +15,12 @@
   
   class TestUtils {
     static startServer(configFile) {
-      const app = require('kunta-api-www');
+      const config = require('nconf');
+      config.file({ file: __dirname + '/../config/config.json' });
+      const app = require('../../node_modules/kunta-api-www/index')(config); 
       
       return new Promise((resolve, reject) => {
-        const server = http.createServer(app);
-        server.listen(3000, () => {
+        const server = app.listen(3000, () => {
           resolve(server);
         });
       });

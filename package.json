@@ -1,10 +1,11 @@
 {
   "name": "kunta-api-www-mikkeli",
-  "version": "0.0.53",
+  "version": "0.0.54-alpha5",
   "description": " Kunta API visualization layer implementation for Mikkeli",
   "main": "index.js",
   "scripts": {
-    "test": "nyc --reporter=lcov -- mocha"
+    "test": "nyc --reporter=lcov -- mocha",
+    "test-coverage": "nyc --reporter=lcov -- mocha && cat ./coverage/lcov.info | coveralls"
   },
   "repository": {
     "type": "git",
@@ -16,10 +17,12 @@
     "chai": "^3.5.0",
     "chai-as-promised": "^6.0.0",
     "clear-require": "^2.0.0",
+    "coveralls": "^2.13.1",
     "grunt": "^1.0.1",
     "grunt-contrib-sass": "^1.0.0",
-    "kunta-api-www": "^0.1.2",
+    "kunta-api-www": "^0.1.4",
     "load-grunt-tasks": "^3.5.2",
+    "mocha": "^3.4.1",
     "nock": "^9.0.13",
     "nyc": "^10.3.2",
     "request": "^2.81.0",
