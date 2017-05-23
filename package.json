@@ -20,7 +20,7 @@
     "coveralls": "^2.13.1",
     "grunt": "^1.0.1",
     "grunt-contrib-sass": "^1.0.0",
-    "kunta-api-www": "^0.1.2",
+    "kunta-api-www": "^0.1.3",
     "load-grunt-tasks": "^3.5.2",
     "nock": "^9.0.13",
     "nyc": "^10.3.2",

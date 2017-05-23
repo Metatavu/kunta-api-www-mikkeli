@@ -18,7 +18,7 @@
   class TestUtils {
     static startServer(configFile) {
       const config = require('nconf');
-      const app = require('kunta-api-www');
+      const app = require('../../node_modules/kunta-api-www/index');
       const Modules = require('../../node_modules/kunta-api-www/modules');
       const implementation = require('../../index')();
       
