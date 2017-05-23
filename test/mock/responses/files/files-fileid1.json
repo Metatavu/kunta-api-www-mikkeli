@@ -1,0 +1,10 @@
+[
+   {
+      "id": "fileid1",
+      "pageId": "pageid1",
+      "slug": "attatchment_something",
+      "title": "this_is_pdf.pdf",
+      "contentType": "application/pdf",
+      "size": 125726
+   }
+]
