@@ -7,6 +7,8 @@
   const clearRequire = require('clear-require');
   const Promise = require('bluebird');
   const http = require('http');
+  var path = require('path');
+  const express = require('express');
   const webdriver = require('selenium-webdriver');
   
   process.on('unhandledRejection', (error, promise) => {
@@ -15,7 +17,17 @@
   
   class TestUtils {
     static startServer(configFile) {
+      const config = require('nconf');
       const app = require('kunta-api-www');
+      const Modules = require('../../node_modules/kunta-api-www/modules');
+      const implementation = require('../../index')();
+      
+      config.file({ file: __dirname + '/../config/config.json' });
+
+      app.set('views',implementation.views);
+      app.use(express.static(implementation.static));
+      app.use(express.static(path.join(__dirname, 'public')));
+      implementation.routes(app, config, Modules);
       
       return new Promise((resolve, reject) => {
         const server = http.createServer(app);

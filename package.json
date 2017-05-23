@@ -17,6 +17,7 @@
     "chai": "^3.5.0",
     "chai-as-promised": "^6.0.0",
     "clear-require": "^2.0.0",
+    "coveralls": "^2.13.1",
     "grunt": "^1.0.1",
     "grunt-contrib-sass": "^1.0.0",
     "kunta-api-www": "^0.1.2",
