@@ -40,7 +40,7 @@
           app = server;
           NockController.nockSettings(baseUrl, httpMethod, route);
       
-          request.get(baseUrl + route, ((err, res, body) => {
+          request.get(baseUrl + route, ((err, res, body) => { 
             resolve(JSON.parse(body));
           }));
         });
