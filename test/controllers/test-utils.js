@@ -10,19 +10,16 @@
   const path = require('path');
   const express = require('express');
   const webdriver = require('selenium-webdriver');
-  
-  process.on('unhandledRejection', (error, promise) => {
-    console.error("UNHANDLED REJECTION", error.stack);
-  });
+  const NockController = require(__dirname + '/../mock/nock.js');
   
   class TestUtils {
     static startServer(configFile) {
       const config = require('nconf');
       config.file({ file: __dirname + '/../config/config.json' });
-      const server = require('../../node_modules/kunta-api-www/index')(config); 
+      const app = require('../../node_modules/kunta-api-www/index')(config);
       
       return new Promise((resolve, reject) => {
-        server.listen(3000, () => {
+        const server = app.listen(3000, () => {
           resolve(server);
         });
       });

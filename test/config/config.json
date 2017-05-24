@@ -1,5 +1,6 @@
 {
   "implementation": "../../../kunta-api-www-mikkeli",
+  "disable-shortlink-sync": true,
   "cache": {
     "redisUrl": "redis://127.0.0.1:6379",
     "request": {
