@@ -7,6 +7,7 @@
   const clearRequire = require('clear-require');
   const config = require('nconf');
   const chai = require('chai');
+  const util = require('util');
   const expect = chai.expect;
   const webdriver = require('selenium-webdriver');
   const By = webdriver.By;
@@ -20,10 +21,10 @@
   
   describe('Mocking banner requests', function () {
     this.timeout(60000);
-    let app;
+    let runningServer;
     
     afterEach((done) => {
-      app.close(() => {
+      runningServer.close(() => {
         clearRequire.all();
         done();
       });
@@ -37,10 +38,10 @@
       
       const result = expect(new Promise((resolve, reject) => {
         TestUtils.startServer().then((server) => {
-          app = server;
+          runningServer = server;
           NockController.nockSettings(baseUrl, httpMethod, route);
       
-          request.get(baseUrl + route, ((err, res, body) => {
+          request.get(util.format('%s%s', baseUrl, route), ((err, res, body) => {
             resolve(JSON.parse(body));
           }));
         });
@@ -60,10 +61,10 @@
       
       const result = expect(new Promise((resolve, reject) => {
         TestUtils.startServer().then((server) => {
-          app = server;
+          runningServer = server;
           NockController.nockSettings(baseUrl, httpMethod, route);
       
-          request.get(baseUrl + route, ((err, res, body) => {
+          request.get(util.format('%s%s', baseUrl, route), ((err, res, body) => {
             resolve(JSON.parse(body));
           }));
         });
@@ -83,10 +84,10 @@
       
       const result = expect(new Promise((resolve, reject) => {
         TestUtils.startServer().then((server) => {
-          app = server;
+          runningServer = server;
           NockController.nockSettings(baseUrl, httpMethod, route);
       
-          request.get(baseUrl + route, ((err, res, body) => {
+          request.get(util.format('%s%s', baseUrl, route), ((err, res, body) => {
             resolve(JSON.parse(body));
           }));
         });

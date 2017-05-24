@@ -11,7 +11,7 @@
       this.ModulesClass = ModulesClass;
       this.shortlinks = {};
       
-      if(!config.get('disable-shortlink-sync')) {
+      if (!config.get('disable-shortlink-sync')) {
         this.updateShortlinks();
       }
     }
