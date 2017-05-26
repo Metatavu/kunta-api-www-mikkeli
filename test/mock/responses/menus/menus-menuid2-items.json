@@ -1,0 +1,29 @@
+[
+   {
+      "id": "item1",
+      "label": "guugle",
+      "parentItemId": null,
+      "type": "LINK",
+      "pageId": null,
+      "fileId": null,
+      "externalUrl": "http://google.com"
+   },
+   {
+      "id": "item2",
+      "label": "#120 (no title)",
+      "parentItemId": null,
+      "type": "PAGE",
+      "pageId": null,
+      "fileId": null,
+      "externalUrl": null
+   },
+   {
+      "id": "item3",
+      "label": "#0 (no title)",
+      "parentItemId": null,
+      "type": "PAGE",
+      "pageId": null,
+      "fileId": null,
+      "externalUrl": null
+   }
+]

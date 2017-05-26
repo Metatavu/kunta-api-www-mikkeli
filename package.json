@@ -6,7 +6,8 @@
   "scripts": {
     "test": "nyc --reporter=lcov -- mocha",
     "test-coverage": "nyc --reporter=lcov -- mocha && cat ./coverage/lcov.info | coveralls",
-    "test-announcement": "nyc --reporter=lcov -- mocha --grep announcement"
+    "test-mock": "nyc --reporter=lcov -- mocha --grep Mocking",
+    "test-browser": "nyc --reporter=lcov -- mocha --grep browser"
   },
   "repository": {
     "type": "git",
@@ -17,8 +18,10 @@
   "devDependencies": {
     "chai": "^3.5.0",
     "chai-as-promised": "^6.0.0",
+    "chromedriver": "^2.29.0",
     "clear-require": "^2.0.0",
     "coveralls": "^2.13.1",
+    "geckodriver": "^1.6.1",
     "grunt": "^1.0.1",
     "grunt-contrib-sass": "^1.0.0",
     "kunta-api-www": "^0.1.4",
@@ -33,6 +36,7 @@
     "bluebird": "^3.5.0",
     "cheerio": "^0.22.0",
     "lodash": "^4.17.4",
-    "moment": "^2.17.1"
+    "moment": "^2.17.1",
+    "phantomjs": "^2.1.7"
   }
 }

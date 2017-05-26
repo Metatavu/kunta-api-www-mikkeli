@@ -1,5 +1,5 @@
 /* jshint esversion:6 */
-/* global __dirname */
+/* global __dirname, process*/
 
 (function() {
   'use strict';
@@ -11,46 +11,60 @@
   const expect = chai.expect;
   const webdriver = require('selenium-webdriver');
   const By = webdriver.By;
+  const nock = require('nock');
   const until = webdriver.until;
   const Promise = require('bluebird');
   const TestUtils = require(__dirname + '/controllers/test-utils');
   const NockController = require(__dirname + '/mock/nock.js');
   const request = require('request');
+  const browser = process.env.KUNTA_API_BROWSER || 'firefox';
   
   chai.use(require('chai-as-promised'));
   
-  describe('Mocking news article requests', function () {
+  process.on('unhandledRejection', function(error, promise) {
+    console.error("UNHANDLED REJECTION", error.stack);
+  });
+  
+  describe('Tiles tests in browser', function () {
     this.timeout(60000);
     let runningServer;
+    let driver;
+    
+    before((done) => {
+      NockController.nockEverything();
+      done();
+    });
     
     afterEach((done) => {
+      if (driver) {
+        driver.close();
+        driver = null;
+      }
+      
       runningServer.close(() => {
         clearRequire.all();
         done();
       });
     });
     
-    it('Should return all news', () => {
-      const expectedResponse = require(__dirname + '/mock/responses/news/news.json');
-      const baseUrl = 'https://staging-api.kunta-api.fi/v1/organizations';
-      const route = '/news';
-      const httpMethod = 'GET';
-      
+    it('Should find all (1) tiles', () => {
       const result = expect(new Promise((resolve, reject) => {
         TestUtils.startServer().then((server) => {
           runningServer = server;
-          NockController.nockSettings(baseUrl, httpMethod, route);
-      
-          request.get(util.format('%s%s', baseUrl, route), ((err, res, body) => {
-            resolve(JSON.parse(body));
-          }));
+          
+          driver = TestUtils.createDriver(browser);
+          driver.get('http://localhost:3000');
+          
+          driver.wait(until.elementLocated(webdriver.By.className('tile'))).then(() => {
+            resolve(1);
+          });
         });
       }));
       
       return result
         .to
         .eventually
-        .eql(expectedResponse);
+        .eql(1);
     });
   });
 })();
