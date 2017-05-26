@@ -45,16 +45,16 @@
       for (let i = 0; i < fileNames.length; i++) {
         let body = require(__dirname + '/responses/' + fileNames[i].split('-')[0] + '/' + fileNames[i] + '.json');
         nock('https://test-api.kunta-api.fi/v1/organizations/testId')
-        .get('/' + allRoutes[i].route)
-        .times(10)
-        .query(true)
-        .reply(function(uri, requestBody) {
-          return [
-            200,
-            body,
-            {'header': 'value'}
-          ];
-        }); 
+          .get('/' + allRoutes[i].route)
+          .times(10)
+          .query(true)
+          .reply(function(uri, requestBody) {
+            return [
+              200,
+              body,
+              {'header': 'value'}
+            ];
+          }); 
       }
     }
     
