@@ -40,7 +40,7 @@
             '--no-sandbox',
             '--test-type=ui'
           ]
-      };
+        };
         capabilities.set('chromeOptions', chromeOptions);
         
         driver = new webdriver.Builder()
