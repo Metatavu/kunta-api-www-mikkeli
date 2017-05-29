@@ -4,4 +4,6 @@ node_js:
   - "7"
 env:
   - KUNTA_API_BROWSER=phantomjs
-script: npm run test
+script: 
+ -grunt
+ -npm run test

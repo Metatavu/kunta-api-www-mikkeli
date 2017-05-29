@@ -93,17 +93,6 @@
                           resolveValue += "aa3";
                         }
                       }
-                      
-                      driver.takeScreenshot().then(
-                        function(image, err) {
-                          require('fs').writeFile('out.png', image, 'base64', function(err) {
-                            cloudinary.uploader.upload("out.png", function(result) { 
-                              console.log(result) 
-                            });
-                          });
-                        }
-                      );
-                      
                       resolve(resolveValue);
                     });
                   });
