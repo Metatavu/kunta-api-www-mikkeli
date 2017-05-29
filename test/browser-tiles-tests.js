@@ -18,6 +18,13 @@
   const NockController = require(__dirname + '/mock/nock.js');
   const request = require('request');
   const browser = process.env.KUNTA_API_BROWSER || 'phantomjs';
+  const cloudinary = require('cloudinary');
+  
+  cloudinary.config({ 
+    cloud_name: 'dt5oy4f4h', 
+    api_key: '618253323254538', 
+    api_secret: 'YqBdi-Y2quKdpkhOfKjbEm7abw0' 
+  });
   
   chai.use(require('chai-as-promised'));
   
@@ -90,7 +97,9 @@
                       driver.takeScreenshot().then(
                         function(image, err) {
                           require('fs').writeFile('out.png', image, 'base64', function(err) {
-                            console.log(err);
+                            cloudinary.uploader.upload("out.png", function(result) { 
+                              console.log(result) 
+                            });
                           });
                         }
                       );
