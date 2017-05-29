@@ -18,13 +18,6 @@
   const NockController = require(__dirname + '/mock/nock.js');
   const request = require('request');
   const browser = process.env.KUNTA_API_BROWSER || 'phantomjs';
-  const cloudinary = require('cloudinary');
-  
-  cloudinary.config({ 
-    cloud_name: 'dt5oy4f4h', 
-    api_key: '618253323254538', 
-    api_secret: 'YqBdi-Y2quKdpkhOfKjbEm7abw0' 
-  });
   
   chai.use(require('chai-as-promised'));
   
@@ -75,7 +68,7 @@
                   
                   for (let i = 0; i < headerSizes.length; i++) {
                     if (headerSizes[i].width > (tileSizes[i].width - 32)) {
-                      resolveValue += "aa1";
+                      resolveValue = 1;
                       break;
                     } 
                   }
@@ -86,11 +79,11 @@
                       const tileTextSizes = sizes;
                       for (let i = 0; i < detailSizes.length; i++) {
                         if (tileTextSizes[i].height > (detailSizes[i].height - 30 - headerSizes[i].height)) {
-                          resolveValue += "aa2";
+                          resolveValue = 1;
                         }
                         
                         if (tileTextSizes[i].width > (detailSizes[i].width - 32)) {
-                          resolveValue += "aa3";
+                          resolveValue = 1;
                         }
                       }
                       resolve(resolveValue);
