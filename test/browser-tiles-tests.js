@@ -67,7 +67,7 @@
                   
                   for (let i = 0; i < headerSizes.length; i++) {
                     if (headerSizes[i].width > (tileSizes[i].width - 32)) {
-                      resolveValue = 1;
+                      resolveValue += "aa1";
                       break;
                     } 
                   }
@@ -78,11 +78,11 @@
                       const tileTextSizes = sizes;
                       for (let i = 0; i < detailSizes.length; i++) {
                         if (tileTextSizes[i].height > (detailSizes[i].height - 30 - headerSizes[i].height)) {
-                          resolveValue = 1;
+                          resolveValue += "aa2";
                         }
                         
                         if (tileTextSizes[i].width > (detailSizes[i].width - 32)) {
-                          resolveValue = 1;
+                          resolveValue += "aa3";
                         }
                       }
                       resolve(resolveValue);
