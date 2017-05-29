@@ -54,6 +54,57 @@
       }
       return driver;
     }
+  
+    static getElementSizes(driver, locateType, locateWord) {
+      return new Promise((resolve, reject) => {
+        driver.executeScript(
+          function (locateWord, locateType) {
+            switch (locateType) {
+              case 'class':
+                var elements = document.getElementsByClassName(locateWord);
+                return multipleElements(elements);
+                break;
+              case 'css':
+                var elements = document.querySelectorAll(locateWord);
+                return multipleElements(elements);
+                break;
+              case 'id':
+                var elements = document.getElementById(locateWord);
+                return oneElement(elements);
+                break;
+              default:
+                break;
+            };
+
+            function multipleElements(elements) {
+              var elementSizes = [];
+              
+              for (var i = 0; i < elements.length; i++) {
+                var sizes = {
+                  'width': elements[i].offsetWidth,
+                  'height': elements[i].offsetHeight
+                };
+
+                elementSizes.push(sizes);
+              };
+              return elementSizes;
+            };
+          
+            function oneElement(element) {
+              var sizes = {
+                'width': element.offsetWidth,
+                'height': element.offsetHeight
+              };
+              return sizes;
+            };
+
+          },
+          locateWord, locateType
+        ).then(function (obj) {
+           resolve(obj);
+        });
+      });
+    }
   }
   
   module.exports = TestUtils;
