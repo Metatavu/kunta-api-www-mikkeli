@@ -17,7 +17,7 @@
   const TestUtils = require(__dirname + '/controllers/test-utils');
   const NockController = require(__dirname + '/mock/nock.js');
   const request = require('request');
-  const browser = process.env.KUNTA_API_BROWSER || 'chrome';
+  const browser = process.env.KUNTA_API_BROWSER || 'phantomjs';
   
   chai.use(require('chai-as-promised'));
   
@@ -57,6 +57,7 @@
           driver = TestUtils.createDriver(browser);
           driver.manage().timeouts().setScriptTimeout(60000);
           driver.get('http://localhost:3000');
+          driver.manage().window().setSize(1600, 900);
           
           driver.wait(until.elementLocated(webdriver.By.className('tile'))).then(() => {
             driver.findElements(webdriver.By.className('tile')).then((elements) => {
@@ -85,6 +86,15 @@
                           resolveValue += "aa3";
                         }
                       }
+                      
+                      driver.takeScreenshot().then(
+                        function(image, err) {
+                          require('fs').writeFile('out.png', image, 'base64', function(err) {
+                            console.log(err);
+                          });
+                        }
+                      );
+                      
                       resolve(resolveValue);
                     });
                   });
