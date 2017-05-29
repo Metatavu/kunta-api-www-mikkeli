@@ -55,28 +55,12 @@
       return driver;
     }
   
-    static getElementSizes(driver, locateType, locateWord) {
+    static getElementSizes(driver, selector) {
       return new Promise((resolve, reject) => {
         driver.executeScript(
-          function (locateWord, locateType) {
-            switch (locateType) {
-              case 'class':
-                var elements = document.getElementsByClassName(locateWord);
-                return multipleElements(elements);
-                break;
-              case 'css':
-                var elements = document.querySelectorAll(locateWord);
-                return multipleElements(elements);
-                break;
-              case 'id':
-                var elements = document.getElementById(locateWord);
-                return oneElement(elements);
-                break;
-              default:
-                break;
-            };
-
-            function multipleElements(elements) {
+          function (selector) {
+            var elements = document.querySelectorAll(selector);
+            return function (elements) {
               var elementSizes = [];
               
               for (var i = 0; i < elements.length; i++) {
@@ -84,22 +68,12 @@
                   'width': elements[i].offsetWidth,
                   'height': elements[i].offsetHeight
                 };
-
                 elementSizes.push(sizes);
               };
               return elementSizes;
             };
-          
-            function oneElement(element) {
-              var sizes = {
-                'width': element.offsetWidth,
-                'height': element.offsetHeight
-              };
-              return sizes;
-            };
-
           },
-          locateWord, locateType
+          selector
         ).then(function (obj) {
            resolve(obj);
         });
