@@ -19,6 +19,7 @@
       const username = process.env.SAUCELABS_USERNAME;
       const accessKey = process.env.SAUCELABS_KEY;
       const server = "http://" + username + ":" + accessKey + "@ondemand.saucelabs.com:80/wd/hub";
+      const tunnelId = process.env.TRAVIS_JOB_NUMBER;
 
       if (!username || !accessKey){
         console.log("Saucelabs username or key missing");
@@ -36,7 +37,8 @@
         'version': version,
         'username': username,
         'accessKey': accessKey,
-        'name': testname
+        'name': testname,
+        'tunnel-identifier': tunnelId
       };
 
       this.driver = new webdriver.Builder().
