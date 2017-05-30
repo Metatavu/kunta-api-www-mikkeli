@@ -11,13 +11,8 @@ matrix:
   fast_finish: true
 env:
   matrix:
-    - BROWSER='chrome' VERSION='54' PLATFORM='Windows 10'
-    - BROWSER='chrome' VERSION='53' PLATFORM='Windows 10'
-    - BROWSER='chrome' VERSION='52' PLATFORM='Windows 10'
-    - BROWSER='chrome' VERSION='54' PLATFORM='Windows 8'
-    - BROWSER='chrome' VERSION='53' PLATFORM='Windows 8'
-    - BROWSER='chrome' VERSION='52' PLATFORM='Windows 8'
+    - BROWSER="chrome" VERSION="54" PLATFORM="Windows 10"
+    - BROWSER="chrome" VERSION="54" PLATFORM="Windows 8"
 script: 
  - grunt
  - npm run test
- - npm run test-browser
