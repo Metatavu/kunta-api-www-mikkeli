@@ -1,8 +1,8 @@
 @charset "UTF-8";
 
-@import 'colors';
-@import 'fonts';
-@import 'vars';
+@import "colors";
+@import "fonts";
+@import "vars";
 
 .content-container {
   overflow-x: hidden;
@@ -220,7 +220,7 @@ nav.navbar {
 .horizontal-line {
   height: 8px;
   background-repeat: repeat-x;
-  background-image: url('/gfx/layout/mikkeli-banner-border.png');
+  background-image: url("/gfx/layout/mikkeli-banner-border.png");
   width: 100%;
 }
 
