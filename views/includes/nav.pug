@@ -33,17 +33,10 @@ nav.navbar.navbar-light
                 a(href="http://kartta.mikkeli.fi/kartta/", target="_blank")
                   i.fa.fa-map-marker(aria-hidden="true")
       nav.navbar.navbar-light.row
-        .col-xs-24.col-lg-10.no-gutter-left.no-gutters-medium
+        .col-xs-24.no-gutter-left.no-gutters-medium
           ul.nav.navbar-nav.nav-bar-primary
             if menus['paavalikko']
-              each item in menus['paavalikko'].items
-                li.nav-item
-                  a.nav-link(href=item.url)
-                    = item.label 
-        .col-xs-24.col-lg-14.no-gutter-right.no-gutters-medium
-          ul.nav.navbar-nav.pull-lg-right.nav-bar-secondary
-            if menus['sisalto']
-              each item in menus['sisalto'].items
+              each item in menus['paavalikko'].items.concat(menus['sisalto'].items||[])
                 li.nav-item
                   a.nav-link(href=item.url)
                     = item.label

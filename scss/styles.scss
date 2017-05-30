@@ -204,26 +204,17 @@ nav.navbar {
   }
 }
 
-.navbar-light .navbar-nav.nav-bar-primary {
-  .nav-item:first-child {
-    margin-left: 0;
-  }
-  
-  .nav-link {
-    @include font-ultra(25px);
-    color: #428ecc;
-    text-transform: uppercase;
-  }
-}
-
+.navbar-light .navbar-nav.nav-bar-primary,
 .navbar-light .navbar-nav.nav-bar-secondary {
-  
   .nav-link {
     @include font-std(17px);
     color: #aaa;
     text-transform: uppercase;
   }
-  
+
+  .nav-item:first-child {
+    margin-left: 0;
+  }
 }
 
 .horizontal-line {

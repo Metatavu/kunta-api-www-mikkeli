@@ -124,7 +124,7 @@
       left: 0;
       right: 0;
       height: 125px;
-      background: rgba(0, 0, 0, 0.2);
+      background: transparentize($musta, 0.5);
       padding-top: 20px;
       padding-left: 16px;
       padding-right: 16px;
@@ -215,7 +215,7 @@
     bottom: 0;
     left: 0;
     right: 0;
-    background: rgba(255, 255, 255, 0.75);
+    background: transparentize($musta, 0.5);
     padding-left: 24px;
     padding-right: 24px;
     padding-bottom: 19px;
@@ -223,7 +223,7 @@
     .title {
       
       a {
-        color: $musta;
+        color: $valkoinen;
         text-decoration: none;
         
         &:hover {
@@ -407,7 +407,7 @@
 
   .details {
     position: absolute;
-    background: $musta;
+    background: $kallio;
     height: 90px;
     left: 0;
     right: 0;
@@ -416,7 +416,7 @@
     
     .date, 
     .place {
-      color: $valkoinen;
+      color: #000;
     }
   
     .date  {
@@ -430,7 +430,7 @@
 
     .name {
       @include font-std(14px);       
-      color: $valkoinen;
+      color: #000;
       white-space: nowrap;
     }
   
@@ -470,6 +470,13 @@
     &.right {
       right: -15%;  
     }
+  }
+  
+}
+
+.swiper-pagination {
+  .swiper-pagination-bullet-active {
+    background: $musta;
   }
 }
 
