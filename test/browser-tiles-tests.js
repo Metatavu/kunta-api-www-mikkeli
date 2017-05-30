@@ -34,21 +34,20 @@
     
     beforeEach(function(done) {
       NockController.nockEverything();
-      //sauceController = new SauceController();
-      //driver = sauceController.initSauce(this.title);
-      driver = TestUtils.createDriver();
+      sauceController = new SauceController();
+      driver = sauceController.initSauce(this.title);
       done();
     });
     
     afterEach(function(done) {
-     /* const passed = this.currentTest.state === 'failed' ? false : true;
-      sauceController.updateJobState(passed,() => {*/
+     const passed = this.currentTest.state === 'failed' ? false : true;
+      sauceController.updateJobState(passed,() => {
         driver.quit();
         driver = null;
         runningServer.close();
         clearRequire.all();
         done();
-      //});
+      });
     });
     
     it('Tile text and header should fit in tile box', () => {

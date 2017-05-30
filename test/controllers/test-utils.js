@@ -24,26 +24,6 @@
         });
       });
     }
-    
-    static createDriver(browser) {
-      const username = "vKoivukangas";
-      const accessKey = "c6be1ba0-d392-446f-b0f5-689b597cb005";
-      let driver;
-      
-      driver = new webdriver.Builder().
-        withCapabilities({
-          'browserName': 'chrome',
-          'platform': 'Windows 10',
-          'version': '54',
-          'username': username,
-          'accessKey': accessKey,
-        }).
-        usingServer("http://" + username + ":" + accessKey +
-                    "@ondemand.saucelabs.com:80/wd/hub").
-        build();
-      
-      return driver;
-    }
   
     static getElementSizes(driver, selector) {
       return new Promise((resolve, reject) => {
