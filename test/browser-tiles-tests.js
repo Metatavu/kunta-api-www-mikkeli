@@ -44,7 +44,7 @@
       sauceController.updateJobState(passed,() => {
         driver.quit();
         driver = null;
-        runningServer.close()
+        runningServer.close();
         clearRequire.all();
         done();
       });
