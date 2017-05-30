@@ -54,6 +54,31 @@
       }
       return driver;
     }
+  
+    static getElementSizes(driver, selector) {
+      return new Promise((resolve, reject) => {
+        driver.executeScript(
+          function (selector) {
+            var elements = document.querySelectorAll(selector);
+            return function (elements) {
+              var elementSizes = [];
+              
+              for (var i = 0; i < elements.length; i++) {
+                var sizes = {
+                  'width': elements[i].offsetWidth,
+                  'height': elements[i].offsetHeight
+                };
+                elementSizes.push(sizes);
+              };
+              return elementSizes;
+            };
+          },
+          selector
+        ).then(function (obj) {
+           resolve(obj);
+        });
+      });
+    }
   }
   
   module.exports = TestUtils;

@@ -48,6 +48,9 @@
         "route": "tiles/tileid1/images"
     },
     {
+        "route": "tiles/tileid2/images"
+    },
+    {
         "route": "news/newsid2/images"
     },
     {
