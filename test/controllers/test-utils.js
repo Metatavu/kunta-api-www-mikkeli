@@ -33,11 +33,10 @@
             return function (elements) {
               var elementSizes = [];
               for (var i = 0; i < elements.length; i++) {
-                var sizes = {
+                elementSizes.push({
                   'width': elements[i].offsetWidth,
                   'height': elements[i].offsetHeight
-                };
-                elementSizes.push(sizes);
+                });
               };
               return elementSizes;
             };

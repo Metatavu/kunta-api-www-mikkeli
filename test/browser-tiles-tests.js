@@ -66,7 +66,7 @@
                 const tileSizes = sizes;
                 TestUtils.getElementSizes(driver, 'h3.bigtext-line0').then((sizes) => {
                   const headerSizes = sizes;
-                  
+                  console.log("HEADER SIZES: ", headerSizes);
                   for (let i = 0; i < headerSizes.length; i++) {
                     if (headerSizes[i].width > (tileSizes[i].width - 32)) {
                       resolveValue = 1;
