@@ -62,9 +62,9 @@
           
           driver.wait(until.elementLocated(webdriver.By.className('tile'))).then(() => {
             driver.findElements(webdriver.By.className('tile')).then((elements) => {
-              TestUtils.getElementSizes(driver, 'div.tile').then((sizes) => {
+              TestUtils.getElementSizes(driver, '.tile').then((sizes) => {
                 const tileSizes = sizes;
-                TestUtils.getElementSizes(driver, 'h3.bigtext-line0').then((sizes) => {
+                TestUtils.getElementSizes(driver, '.bigtext-line0').then((sizes) => {
                   const headerSizes = sizes;
                   
                   for (let i = 0; i < headerSizes.length; i++) {
@@ -74,9 +74,9 @@
                     } 
                   }
                   
-                  TestUtils.getElementSizes(driver, 'div.tile > div.details').then((sizes) => {
+                  TestUtils.getElementSizes(driver, '.div.details').then((sizes) => {
                     const detailSizes = sizes;
-                    TestUtils.getElementSizes(driver, 'div.tile-text').then((sizes) => {
+                    TestUtils.getElementSizes(driver, '.tile-text').then((sizes) => {
                       const tileTextSizes = sizes;
                       for (let i = 0; i < detailSizes.length; i++) {
                         if (tileTextSizes[i].height > (detailSizes[i].height - 30 - headerSizes[i].height)) {
