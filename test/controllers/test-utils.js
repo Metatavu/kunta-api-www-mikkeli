@@ -30,9 +30,9 @@
         driver.executeScript(
           function (selector) {
             var elements = document.querySelectorAll(selector);
-            var allSizes = kala(elements);
+            var allSizes = findElements(elements);
             
-            function kala(elements) {
+            function findElements(elements) {
               var elementSizes = [];
               for (var i = 0; i < elements.length; i++) {
                 elementSizes.push({
