@@ -16,6 +16,7 @@
   const Promise = require('bluebird');
   const TestUtils = require(__dirname + '/controllers/test-utils');
   const NockController = require(__dirname + '/mock/nock.js');
+  const SauceController = require(__dirname + '/controllers/saucelabs.js');
   const request = require('request');
   const browser = process.env.KUNTA_API_BROWSER || 'phantomjs';
   
@@ -28,20 +29,22 @@
   describe('Tiles tests in browser', function () {
     this.timeout(60000);
     let runningServer;
+    let sauceController;
     let driver;
     
-    before((done) => {
+    beforeEach(function(done) {
       NockController.nockEverything();
+      sauceController = new SauceController();
+      driver = sauceController.initSauce(this.title);
       done();
     });
     
-    afterEach((done) => {
-      if (driver) {
-        driver.close();
+    afterEach(function(done) {
+      const passed = this.currentTest.state === 'failed' ? false : true;
+      sauceController.updateJobState(passed,() => {
+        driver.quit();
         driver = null;
-      }
-      
-      runningServer.close(() => {
+        runningServer.close()
         clearRequire.all();
         done();
       });
@@ -54,10 +57,8 @@
         TestUtils.startServer().then((server) => {
           runningServer = server;
           
-          driver = TestUtils.createDriver(browser);
           driver.manage().timeouts().setScriptTimeout(60000);
           driver.get('http://localhost:3000');
-          driver.manage().window().setSize(1600, 900);
           
           driver.wait(until.elementLocated(webdriver.By.className('tile'))).then(() => {
             driver.findElements(webdriver.By.className('tile')).then((elements) => {
