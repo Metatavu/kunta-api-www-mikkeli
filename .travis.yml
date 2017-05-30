@@ -11,12 +11,12 @@ matrix:
   fast_finish: true
 env:
   matrix:
-    - SAUCELABS_BROWSER='chrome' SAUCELABS_VERSION='54' SAUCELABS_PLATFORM='Windows 10'
-    - SAUCELABS_BROWSER='chrome' SAUCELABS_VERSION='53' SAUCELABS_PLATFORM='Windows 10'
-    - SAUCELABS_BROWSER='chrome' SAUCELABS_VERSION='52' SAUCELABS_PLATFORM='Windows 10'
-    - SAUCELABS_BROWSER='chrome' SAUCELABS_VERSION='54' SAUCELABS_PLATFORM='Windows 8'
-    - SAUCELABS_BROWSER='chrome' SAUCELABS_VERSION='53' SAUCELABS_PLATFORM='Windows 8'
-    - SAUCELABS_BROWSER='chrome' SAUCELABS_VERSION='52' SAUCELABS_PLATFORM='Windows 8'
+    - BROWSER='chrome' VERSION='54' PLATFORM='Windows 10'
+    - BROWSER='chrome' VERSION='53' PLATFORM='Windows 10'
+    - BROWSER='chrome' VERSION='52' PLATFORM='Windows 10'
+    - BROWSER='chrome' VERSION='54' PLATFORM='Windows 8'
+    - BROWSER='chrome' VERSION='53' PLATFORM='Windows 8'
+    - BROWSER='chrome' VERSION='52' PLATFORM='Windows 8'
 script: 
  - grunt
  - npm run test
