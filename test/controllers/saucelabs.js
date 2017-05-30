@@ -16,8 +16,8 @@
       const browser = process.env.BROWSER;
       const version = process.env.VERSION;
       const platform = process.env.PLATFORM;
-      const username = process.env.SAUCELABS_USERNAME;
-      const accessKey = process.env.SAUCELABS_KEY;
+      const username = process.env.SAUCE_USERNAME;
+      const accessKey = process.env.SAUCE_ACCESS_KEY;
       const server = "http://" + username + ":" + accessKey + "@ondemand.saucelabs.com:80/wd/hub";
       const tunnelId = process.env.TRAVIS_JOB_NUMBER;
 
@@ -38,7 +38,7 @@
         'username': username,
         'accessKey': accessKey,
         'name': testname,
-        'tunnel-identifier': tunnelId
+        'tunnel-identifier': process.env.TRAVIS_JOB_NUMBER
       };
 
       this.driver = new webdriver.Builder().
