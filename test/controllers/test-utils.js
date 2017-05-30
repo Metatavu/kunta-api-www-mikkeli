@@ -24,13 +24,35 @@
         });
       });
     }
+    
+    static createDriver(browser) {
+      const username = "vKoivukangas";
+      const accessKey = "c6be1ba0-d392-446f-b0f5-689b597cb005";
+      let driver;
+      
+      driver = new webdriver.Builder().
+        withCapabilities({
+          'browserName': 'chrome',
+          'platform': 'Windows 10',
+          'version': '54',
+          'username': username,
+          'accessKey': accessKey,
+        }).
+        usingServer("http://" + username + ":" + accessKey +
+                    "@ondemand.saucelabs.com:80/wd/hub").
+        build();
+      
+      return driver;
+    }
   
     static getElementSizes(driver, selector) {
       return new Promise((resolve, reject) => {
         driver.executeScript(
           function (selector) {
             var elements = document.querySelectorAll(selector);
-            return function (elements) {
+            var allSizes = kala(elements);
+            
+            function kala(elements) {
               var elementSizes = [];
               for (var i = 0; i < elements.length; i++) {
                 elementSizes.push({
@@ -40,6 +62,7 @@
               };
               return elementSizes;
             };
+            return allSizes;
           },
           selector
         ).then(function (obj) {

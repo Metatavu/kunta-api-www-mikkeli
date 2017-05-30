@@ -34,20 +34,21 @@
     
     beforeEach(function(done) {
       NockController.nockEverything();
-      sauceController = new SauceController();
-      driver = sauceController.initSauce(this.title);
+      //sauceController = new SauceController();
+      //driver = sauceController.initSauce(this.title);
+      driver = TestUtils.createDriver();
       done();
     });
     
     afterEach(function(done) {
-      const passed = this.currentTest.state === 'failed' ? false : true;
-      sauceController.updateJobState(passed,() => {
+     /* const passed = this.currentTest.state === 'failed' ? false : true;
+      sauceController.updateJobState(passed,() => {*/
         driver.quit();
         driver = null;
         runningServer.close();
         clearRequire.all();
         done();
-      });
+      //});
     });
     
     it('Tile text and header should fit in tile box', () => {
@@ -64,9 +65,8 @@
             driver.findElements(webdriver.By.className('tile')).then((elements) => {
               TestUtils.getElementSizes(driver, 'div.tile').then((sizes) => {
                 const tileSizes = sizes;
-                TestUtils.getElementSizes(driver, 'h3.bigtext-line0').then((sizes) => {
+                TestUtils.getElementSizes(driver, '.bigtext-line0').then((sizes) => {
                   const headerSizes = sizes;
-                  console.log("HEADER SIZES: ", headerSizes);
                   for (let i = 0; i < headerSizes.length; i++) {
                     if (headerSizes[i].width > (tileSizes[i].width - 32)) {
                       resolveValue = 1;
