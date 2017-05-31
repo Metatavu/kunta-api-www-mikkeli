@@ -175,7 +175,9 @@
               driver.wait(until.elementLocated(webdriver.By.className('title'))).then(() => {
                 driver.wait(until.elementLocated(webdriver.By.linkText('Edellinen sivu'))).then((element) => {
                   element.click();
-                  resolve(driver.getCurrentUrl());
+                  driver.wait(until.elementLocated(webdriver.By.className('title'))).then(() => {
+                    resolve(driver.getCurrentUrl());
+                  });
                 });
               });
             });
