@@ -1,6 +1,7 @@
 @charset "UTF-8";
 
 @import "vars";
+@import "colors";
 
 $result-row-height: 120px;
 $result-icon-size: 50px;
@@ -8,13 +9,13 @@ $slim-result-row-height: 50px;
 $slim-result-icon-size: 25px;
 
 .btn-primary.btn-lg {
-  background-color: #bc177e;
-  border-color: #bc177e;
+  background-color: $musta;
+  border-color: $musta;
   margin-top: 10px;
   
   &:active:focus {
-    background-color: darken(#bc177e, 10%);
-    border-color: darken(#bc177e, 10%);
+    background-color: darken($musta, 10%);
+    border-color: darken($musta, 10%);
   }
 }
 
@@ -50,7 +51,7 @@ $slim-result-icon-size: 25px;
       color: #000;
       
       &.active {
-        color: #bc177e;
+        color: $musta;
       }
     }
   }  
