@@ -46,7 +46,7 @@
         let body = require(__dirname + '/responses/' + fileNames[i].split('-')[0] + '/' + fileNames[i] + '.json');
         nock('https://test-api.kunta-api.fi/v1/organizations/testId')
           .get('/' + allRoutes[i].route)
-          .times(10)
+          .times(25)
           .query(true)
           .reply(function(uri, requestBody) {
             return [

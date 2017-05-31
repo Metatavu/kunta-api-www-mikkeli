@@ -51,10 +51,10 @@
         "route": "tiles/tileid2/images"
     },
     {
-        "route": "news/newsid2/images"
+        "route": "news/newsid1/images"
     },
     {
-        "route": "news/newsid1/images"
+        "route": "news/newsid2/images"
     },
     {
         "route": "events/eventid1/images"
