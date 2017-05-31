@@ -7,6 +7,22 @@ env:
 before_install: 
  - npm install -g grunt
  - gem install sass
+matrix:
+  fast_finish: true
+env:
+  matrix:
+    - BROWSER="chrome" VERSION="latest" PLATFORM="linux"
+    - BROWSER="chrome" VERSION="latest-1" PLATFORM="linux"
+    - BROWSER="firefox" VERSION="latest" PLATFORM="Windows 10"
+    - BROWSER="internet explorer" VERSION="latest" PLATFORM="Windows 10"
+    - BROWSER="microsoftedge" VERSION="latest" PLATFORM="Windows 10"
+    - BROWSER="firefox" VERSION="latest" PLATFORM="Windows 8"
+    - BROWSER="internet explorer" VERSION="latest" PLATFORM="Windows 8"
+    - BROWSER="safari" VERSION="latest" PLATFORM="macOS 10.12"
+    - BROWSER="safari" VERSION="latest" PLATFORM="OS X 10.11"
+    - BROWSER="safari" VERSION="latest" PLATFORM="OS X 10.10"
+addons:
+  sauce_connect: true
 script: 
  - grunt
  - npm run test

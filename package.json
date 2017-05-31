@@ -30,6 +30,7 @@
     "nock": "^9.0.13",
     "nyc": "^10.3.2",
     "request": "^2.81.0",
+    "saucelabs": "^1.4.0",
     "selenium-webdriver": "^3.4.0"
   },
   "dependencies": {
