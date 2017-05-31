@@ -190,6 +190,38 @@
         .eventually
         .eql('http://localhost:3000/uutiset/?page=0');
     });
+    
+    it('Pagination links should change news', () => {
+      const result = expect(new Promise((resolve, reject) => {
+        TestUtils.startServer().then((server) => {
+          runningServer = server;
+          
+          driver.manage().timeouts().setScriptTimeout(60000);
+          driver.get('http://localhost:3000/uutiset/');
+          
+          driver.wait(until.elementLocated(webdriver.By.className('title'))).then(() => {
+            driver.wait(until.elementLocated(webdriver.By.linkText('This should be on page 1.'))).then(() => {
+              driver.wait(until.elementLocated(webdriver.By.linkText('Seuraava sivu'))).then((element) => {
+                element.click();
+                driver.wait(until.elementLocated(webdriver.By.linkText('This should be on page 2.'))).then(() => {
+                  driver.wait(until.elementLocated(webdriver.By.linkText('Edellinen sivu'))).then((element) => {
+                    element.click();
+                    driver.wait(until.elementLocated(webdriver.By.linkText('This should be on page 1.'))).then(() => {
+                      resolve(driver.getCurrentUrl());
+                    });
+                  });
+                });
+              });
+            });
+          });
+        });
+      }));
+      
+      return result
+        .to
+        .eventually
+        .eql('http://localhost:3000/uutiset/?page=0');
+    });
   });
 })();
 

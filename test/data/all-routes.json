@@ -1,77 +1,138 @@
 [
     {
-        "route": "announcements"
+        "route": "announcements",
+        "query": true,
+        "response": "/responses/announcements/announcements.json"
     },
     {
-        "route": "banners"
+        "route": "banners",
+        "query": true,
+        "response": "/responses/banners/banners.json"
     },
     {
-        "route": "events"
+        "route": "events",
+        "query": true,
+        "response": "/responses/events/events.json"
     },
     {
-        "route": "files"
+        "route": "files",
+        "query": true,
+        "response": "/responses/files/files.json"
     },
     {
-        "route": "fragments"
+        "route": "fragments",
+        "query": true,
+        "response": "/responses/fragments/fragments.json"
     },
     {
-        "route": "incidents"
+        "route": "incidents",
+        "query": true,
+        "response": "/responses/incidents/incidents.json"
     },
     {
-        "route": "jobs"
+        "route": "jobs",
+        "query": true,
+        "response": "/responses/jobs/jobs.json"
     },
     {
-        "route": "menus"
+        "route": "menus",
+        "query": true,
+        "response": "/responses/menus/menus.json"
     },
     {
-        "route": "news"
+        "route": "news",
+        "query": {
+            "firstResult": 0,
+            "maxResults": 9
+        },
+        "response": "/responses/news/news-first10.json"
     },
     {
-        "route": "shortlinks"
+        "route": "news",
+        "query": {
+            "firstResult": 0,
+            "maxResults": 11
+        },
+        "response": "/responses/news/news-first11.json"
     },
     {
-        "route": "tiles"
+        "route": "news",
+        "query": {
+            "firstResult": 10,
+            "maxResults": 11
+        },
+        "response": "/responses/news/news-10-21.json"
     },
     {
-        "route": "menus/menuid1/items"
+        "route": "shortlinks",
+        "response": "/responses/shortlinks/shortlinks.json"
     },
     {
-        "route": "menus/menuid2/items"
+        "route": "tiles",
+        "response": "/responses/tiles/tiles.json"
     },
     {
-        "route": "banners/bannerid1/images"
+        "route": "menus/menuid1/items",
+        "response": "/responses/menus/menus-menuid1-items.json"
     },
     {
-        "route": "banners/bannerid2/images"
+        "route": "menus/menuid2/items",
+        "response": "/responses/menus/menus-menuid2-items.json"
     },
     {
-        "route": "tiles/tileid1/images"
+        "route": "banners/bannerid1/images",
+        "response": "/responses/banners/banners-bannerid1-images.json"
     },
     {
-        "route": "tiles/tileid2/images"
+        "route": "banners/bannerid2/images",
+        "response": "/responses/banners/banners-bannerid2-images.json"
     },
     {
-        "route": "news/newsid1/images"
+        "route": "tiles/tileid1/images",
+        "response": "/responses/tiles/tiles-tileid1-images.json"
     },
     {
-        "route": "news/newsid2/images"
+        "route": "tiles/tileid2/images",
+        "response": "/responses/tiles/tiles-tileid2-images.json"
     },
     {
-        "route": "events/eventid1/images"
+        "route": "news/newsid1/images",
+        "response": "/responses/news/news-newsid1-images.json"
     },
     {
-        "route": "events/eventid2/images"
+        "route": "news/newsid2/images",
+        "response": "/responses/news/news-newsid2-images.json"
     },
     {
-        "route": "banners/bannerid1/images/bannerid1/data"
+        "route": "events/eventid1/images",
+        "response": "/responses/events/events-eventid1-images.json"
     },
     {
-        "route": "banners/bannerid2/images/bannerid2/data"
+        "route": "events/eventid2/images",
+        "response": "/responses/events/events-eventid2-images.json"
     },
     {
-        "route": "events/eventid1/images/eventid1/data"
+        "route": "banners/bannerid1/images/bannerid1/data",
+        "query": {
+            "size": 1050
+        },
+        "response": "/responses/banners/banners-bannerid1-images-bannerid1-data.json"
     },
     {
-        "route": "events/eventid2/images/eventid2/data"
+        "route": "banners/bannerid2/images/bannerid2/data",
+        "query": {
+            "size": 1050
+        },
+        "response": "/responses/banners/banners-bannerid2-images-bannerid2-data.json"
+    },
+    {
+        "route": "events/eventid1/images/eventid1/data",
+        "query": true,
+        "response": "/responses/events/events-eventid1-images-eventid1-data.json"
+    },
+    {
+        "route": "events/eventid2/images/eventid2/data",
+        "query": true,
+        "response": "/responses/events/events-eventid2-images-eventid2-data.json"
     }
 ]
