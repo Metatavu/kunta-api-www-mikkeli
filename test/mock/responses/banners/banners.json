@@ -1,0 +1,18 @@
+[
+  {
+    "id": "bannerid1",
+    "title": "Test title",
+    "contents": "",
+    "link": "",
+    "textColor": null,
+    "backgroundColor": null
+  },
+  {
+     "id": "bannerid2",
+     "title": "Another title",
+     "contents": "",
+     "link": null,
+     "textColor": null,
+     "backgroundColor": null
+  }
+]

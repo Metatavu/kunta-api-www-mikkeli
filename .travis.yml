@@ -1,0 +1,12 @@
+language: node_js
+node_js:
+  - "6"
+  - "7"
+env:
+  - KUNTA_API_BROWSER=phantomjs
+before_install: 
+ - npm install -g grunt
+ - gem install sass
+script: 
+ - grunt
+ - npm run test

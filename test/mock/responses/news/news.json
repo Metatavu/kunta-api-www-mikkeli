@@ -1,0 +1,21 @@
+[
+  {
+      "id": "newsid1",
+      "title": "Lorem ipsum dolor sit amet, consectetur adipiscing elit.",
+      "slug": "Lorem-ipsum-dolor-sit-amet-consectetur-adipiscing-elit.",
+      "contents": "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Fusce quis ultrices odio, sit amet varius arcu. Pellentesque molestie condimentum sem, vel ornare dui pellentesque quis. Mauris viverra elit id est rhoncus, semper malesuada enim rutrum. Fusce laoreet neque ac vulputate consequat. Pellentesque dapibus lorem at orci accumsan pellentesque. Nam eget nisi felis. Suspendisse convallis auctor turpis nec dapibus. Vestibulum nec leo euismod, volutpat nibh scelerisque, venenatis diam. Ut sodales, nunc a gravida vulputate, sem ante consectetur erat, a fermentum ipsum risus et lectus. Duis hendrerit est ut libero vehicula rhoncus ut at orci. Duis vitae eros in orci ornare suscipit. In tortor mauris, elementum ac metus at, congue bibendum ante. Sed ipsum odio, lobortis sit amet metus et, pretium gravida eros.",
+        "published": "2017-05-18T12:47:00Z",
+      "tags": [
+         "Dolor"
+      ]
+  }, {
+      "id": "newsid2",
+      "title": "Lorem ipsum dolor sit amet, consectetur adipiscing elit.",
+      "slug": "Lorem-ipsum-dolor-sit-amet-consectetur-adipiscing-elit.",
+      "contents": "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Fusce quis ultrices odio, sit amet varius arcu. Pellentesque molestie condimentum sem, vel ornare dui pellentesque quis. Mauris viverra elit id est rhoncus, semper malesuada enim rutrum. Fusce laoreet neque ac vulputate consequat. Pellentesque dapibus lorem at orci accumsan pellentesque. Nam eget nisi felis. Suspendisse convallis auctor turpis nec dapibus. Vestibulum nec leo euismod, volutpat nibh scelerisque, venenatis diam. Ut sodales, nunc a gravida vulputate, sem ante consectetur erat, a fermentum ipsum risus et lectus. Duis hendrerit est ut libero vehicula rhoncus ut at orci. Duis vitae eros in orci ornare suscipit. In tortor mauris, elementum ac metus at, congue bibendum ante. Sed ipsum odio, lobortis sit amet metus et, pretium gravida eros.",
+        "published": "2017-05-18T12:47:00Z",
+      "tags": [
+         "Dolor"
+      ]
+  }
+]

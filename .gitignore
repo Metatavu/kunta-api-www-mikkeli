@@ -8,3 +8,5 @@
 /nbproject/private/
 project.xml
 project.properties
+/coverage
+/.nyc_output

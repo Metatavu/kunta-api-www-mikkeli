@@ -1,0 +1,77 @@
+[
+    {
+        "route": "announcements"
+    },
+    {
+        "route": "banners"
+    },
+    {
+        "route": "events"
+    },
+    {
+        "route": "files"
+    },
+    {
+        "route": "fragments"
+    },
+    {
+        "route": "incidents"
+    },
+    {
+        "route": "jobs"
+    },
+    {
+        "route": "menus"
+    },
+    {
+        "route": "news"
+    },
+    {
+        "route": "shortlinks"
+    },
+    {
+        "route": "tiles"
+    },
+    {
+        "route": "menus/menuid1/items"
+    },
+    {
+        "route": "menus/menuid2/items"
+    },
+    {
+        "route": "banners/bannerid1/images"
+    },
+    {
+        "route": "banners/bannerid2/images"
+    },
+    {
+        "route": "tiles/tileid1/images"
+    },
+    {
+        "route": "tiles/tileid2/images"
+    },
+    {
+        "route": "news/newsid2/images"
+    },
+    {
+        "route": "news/newsid1/images"
+    },
+    {
+        "route": "events/eventid1/images"
+    },
+    {
+        "route": "events/eventid2/images"
+    },
+    {
+        "route": "banners/bannerid1/images/bannerid1/data"
+    },
+    {
+        "route": "banners/bannerid2/images/bannerid2/data"
+    },
+    {
+        "route": "events/eventid1/images/eventid1/data"
+    },
+    {
+        "route": "events/eventid2/images/eventid2/data"
+    }
+]

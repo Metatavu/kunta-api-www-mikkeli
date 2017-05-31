@@ -1,0 +1,19 @@
+{
+  "implementation": "../../../kunta-api-www-mikkeli",
+  "disable-shortlink-sync": true,
+  "cache": {
+    "redisUrl": "redis://127.0.0.1:6379",
+    "request": {
+      "defaultExpiration": 60
+    },
+    "failsafe": {
+      "defaultExpiration": 86400
+    }
+  },
+  "api": {
+    "basePath": "https://test-api.kunta-api.fi/v1"
+  },
+  "defaults": {
+    "organizationId": "testId"
+  }
+}

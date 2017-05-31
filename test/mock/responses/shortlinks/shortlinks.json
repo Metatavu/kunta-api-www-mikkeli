@@ -1,0 +1,14 @@
+[
+    {
+      "id": "shortlinkid1",
+      "name": "Bus stops",
+      "path": "/some-path",
+      "url": "http://example.com"
+    },
+    {
+      "id": "shortlinkid2",
+      "name": "Testing things",
+      "path": "/some-path2",
+      "url": "http://example.com"
+    }
+]

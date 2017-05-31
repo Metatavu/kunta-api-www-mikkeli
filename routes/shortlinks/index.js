@@ -10,7 +10,10 @@
       this.config = config;
       this.ModulesClass = ModulesClass;
       this.shortlinks = {};
-      this.updateShortlinks();
+      
+      if (!config.get('disable-shortlink-sync')) {
+        this.updateShortlinks();
+      }
     }
 
     updateShortlinks() {
