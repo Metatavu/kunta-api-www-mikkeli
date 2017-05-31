@@ -18,7 +18,7 @@
   const NockController = require(__dirname + '/mock/nock.js');
   const SauceController = require(__dirname + '/controllers/saucelabs.js');
   const request = require('request');
-  const browser = process.env.KUNTA_API_BROWSER || 'phantomjs';
+  const browser = process.env.KUNTA_API_BROWSER || 'chrome';
   
   chai.use(require('chai-as-promised'));
   
@@ -34,20 +34,33 @@
     
     beforeEach(function(done) {
       NockController.nockEverything();
-      sauceController = new SauceController();
-      driver = sauceController.initSauce(this.title);
+      
+      if (!process.env.LOCAL_TESTS) {
+        sauceController = new SauceController();
+        driver = sauceController.initSauce(this.title);
+      } else {
+        driver = TestUtils.createDriver(browser);
+      }
       done();
     });
     
     afterEach(function(done) {
-     const passed = this.currentTest.state === 'failed' ? false : true;
-      sauceController.updateJobState(passed,() => {
+      if (!process.env.LOCAL_TESTS) {
+        const passed = this.currentTest.state === 'failed' ? false : true;
+        sauceController.updateJobState(passed,() => {
+          driver.quit();
+          driver = null;
+          runningServer.close();
+          clearRequire.all();
+          done();
+        });
+      } else {
         driver.quit();
         driver = null;
         runningServer.close();
         clearRequire.all();
         done();
-      });
+      }
     });
     
     it('Tile text and header should fit in tile box', () => {

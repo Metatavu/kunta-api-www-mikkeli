@@ -24,6 +24,36 @@
         });
       });
     }
+    
+    static createDriver(browser) {
+      let driver;
+      
+      if (browser === 'chrome') {
+        let capabilities = webdriver.Capabilities.chrome();
+        let chromeOptions = {
+          'args': [
+            '--disable-gpu',
+            '--disable-impl-side-painting',
+            '--disable-gpu-sandbox',
+            '--disable-accelerated-2d-canvas',
+            '--disable-accelerated-jpeg-decoding',
+            '--no-sandbox',
+            '--test-type=ui'
+          ]
+        };
+        capabilities.set('chromeOptions', chromeOptions);
+        
+        driver = new webdriver.Builder()
+          .forBrowser(browser)
+          .withCapabilities(capabilities)
+          .build();
+      } else {
+        driver = new webdriver.Builder()
+          .forBrowser(browser)
+          .build();
+      }
+      return driver;
+    }
   
     static getElementSizes(driver, selector) {
       return new Promise((resolve, reject) => {
