@@ -19,7 +19,7 @@
       const platform = process.env.PLATFORM;
       const username = process.env.SAUCE_USERNAME;
       const accessKey = process.env.SAUCE_ACCESS_KEY;
-      const server = util.format('http://%s:%s@@ondemand.saucelabs.com:80/wd/hub', username, accessKey);
+      const server = util.format('http://%s:%s@ondemand.saucelabs.com:80/wd/hub', username, accessKey);
       const tunnelId = process.env.TRAVIS_JOB_NUMBER;
 
       if (!username || !accessKey){
