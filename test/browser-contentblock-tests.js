@@ -90,21 +90,25 @@
                 .css('.content-blocks-container > .container > .row > div:nth-of-type(2) > div > div:nth-of-type(3) > div:nth-of-type(1)'))
                 .getText()
                 .then((elements) => {
+                  console.log(elements);
                   if (elements.includes("PROGRAMMING JOB")) {
                     driver.findElement(webdriver.By
                     .css('.content-blocks-container > .container > .row > div:nth-of-type(2) > div > div:nth-of-type(3) > div:nth-of-type(2)'))
                     .getText()
                     .then((elements) => {
+                      console.log(elements);
                       if (elements.includes("CLEANING JOB")) {
                         driver.findElement(webdriver.By
                         .css('.content-blocks-container > .container > .row > div:nth-of-type(3) > div > div:nth-of-type(3) > div:nth-of-type(1)'))
                         .getText()
                         .then((elements) => {
+                          console.log(elements);
                           if (elements.includes("TITLE1")) {
                             driver.findElement(webdriver.By
                             .css('.content-blocks-container > .container > .row > div:nth-of-type(3) > div > div:nth-of-type(3) > div:nth-of-type(2)'))
                             .getText()
                             .then((elements) => {
+                              console.log(elements);
                               if (elements.includes("TITLE2")) {
                                 resolve(0);
                               } else {
