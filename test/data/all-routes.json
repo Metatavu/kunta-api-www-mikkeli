@@ -81,10 +81,12 @@
     },
     {
         "route": "banners/bannerid1/images",
+        "query": true,
         "response": "/responses/banners/banners-bannerid1-images.json"
     },
     {
         "route": "banners/bannerid2/images",
+        "query": true,
         "response": "/responses/banners/banners-bannerid2-images.json"
     },
     {
