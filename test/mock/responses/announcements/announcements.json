@@ -2,14 +2,14 @@
    {
       "id": "announcementid1",
       "slug": "lorem-ipsum-dorom",
-      "title": "This is a great title",
+      "title": "title1",
       "contents": "Lorem dorolium ipsum",
         "published": "2017-05-11T07:50:55Z",
       "abstract": null
    },{
       "id": "announcementid2",
       "slug": "lorem-doritos-dorom",
-      "title": "This is a great title",
+      "title": "title2",
       "contents": "This is some great content",
         "published": "2017-05-11T07:50:55Z",
       "abstract": null

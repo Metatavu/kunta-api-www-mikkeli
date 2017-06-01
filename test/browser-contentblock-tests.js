@@ -81,24 +81,47 @@
                 for (let i = 0; i < blockSizes.length; i++) {
                   for (let j = 0; j < rowSizes.length; j++) {
                     if (rowSizes[j].width > (blockSizes[i].width - 30)) {
-                      resolve(0);
+                      resolve(1);
                       break;
                     }  
                   }
                 }
-                driver.findElements(webdriver.By.linkText('PROGRAMMING JOB')).then((elements1) => {
-                  driver.findElements(webdriver.By.linkText('CLEANING JOB')).then((elements2) => {
-                    driver.findElements(webdriver.By.linkText('THIS IS A GREAT TITLE')).then((elements3) => {
-                      if(elements1.length === 1 && elements2.length === 1 && elements3.length === 2) {
-                        resolve(0);
+                driver.findElement(webdriver.By
+                .css('.content-blocks-container > .container > .row > div:nth-of-type(2) > div > div:nth-of-type(3) > div:nth-of-type(1)'))
+                .getText()
+                .then((elements) => {
+                  if (elements.includes("PROGRAMMING JOB")) {
+                    driver.findElement(webdriver.By
+                    .css('.content-blocks-container > .container > .row > div:nth-of-type(2) > div > div:nth-of-type(3) > div:nth-of-type(2)'))
+                    .getText()
+                    .then((elements) => {
+                      if (elements.includes("CLEANING JOB")) {
+                        driver.findElement(webdriver.By
+                        .css('.content-blocks-container > .container > .row > div:nth-of-type(3) > div > div:nth-of-type(3) > div:nth-of-type(1)'))
+                        .getText()
+                        .then((elements) => {
+                          if (elements.includes("TITLE1")) {
+                            driver.findElement(webdriver.By
+                            .css('.content-blocks-container > .container > .row > div:nth-of-type(3) > div > div:nth-of-type(3) > div:nth-of-type(2)'))
+                            .getText()
+                            .then((elements) => {
+                              if (elements.includes("TITLE2")) {
+                                resolve(0);
+                              } else {
+                                resolve(1);
+                              }
+                            });
+                          } else {
+                            resolve(1);
+                          }
+                        });
                       } else {
-                        console.log(elements1.length);
-                        console.log(elements2.length);
-                        console.log(elements3.length);
                         resolve(1);
                       }
                     });
-                  });
+                  } else {
+                    resolve(1);
+                  }
                 });
               });
             });
@@ -113,6 +136,4 @@
     });
   });
 })();
-
-
 
