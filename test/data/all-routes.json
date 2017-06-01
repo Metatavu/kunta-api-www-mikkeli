@@ -121,9 +121,23 @@
         "response": "/responses/banners/banners-bannerid1-images-bannerid1-data.json"
     },
     {
+        "route": "banners/bannerid1/images/bannerid1/data",
+        "query": {
+            "size": 1024
+        },
+        "response": "/responses/banners/banners-bannerid1-images-bannerid1-data.json"
+    },
+    {
         "route": "banners/bannerid2/images/bannerid2/data",
         "query": {
             "size": 1050
+        },
+        "response": "/responses/banners/banners-bannerid2-images-bannerid2-data.json"
+    },
+    {
+        "route": "banners/bannerid2/images/bannerid2/data",
+        "query": {
+            "size": 1024
         },
         "response": "/responses/banners/banners-bannerid2-images-bannerid2-data.json"
     },
