@@ -7,7 +7,8 @@
     "test": "nyc --reporter=lcov -- mocha",
     "test-coverage": "nyc --reporter=lcov -- mocha && cat ./coverage/lcov.info | coveralls",
     "test-mock": "nyc --reporter=lcov -- mocha --grep Mocking",
-    "test-browser": "nyc --reporter=lcov -- mocha --grep browser"
+    "test-browser": "nyc --reporter=lcov -- mocha --grep browser",
+    "test-browser-menus": "nyc --reporter=lcov -- mocha --grep browser-menus"
   },
   "repository": {
     "type": "git",
