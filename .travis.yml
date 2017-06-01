@@ -25,3 +25,4 @@ addons:
 script: 
  - grunt
  - npm run test
+ - npm run test-coverage
