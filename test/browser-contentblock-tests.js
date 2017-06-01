@@ -92,6 +92,9 @@
                       if(elements1.length === 1 && elements2.length === 1 && elements3.length === 2) {
                         resolve(0);
                       } else {
+                        console.log(elements1.length);
+                        console.log(elements2.length);
+                        console.log(elements3.length);
                         resolve(1);
                       }
                     });
