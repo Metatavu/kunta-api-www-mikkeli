@@ -6,7 +6,7 @@
       "link": "http://www.example.com"
    },{
       "id": "tileid2",
-      "title": "short",
+      "title": "shortt",
       "contents": "<p>This is short content</p>",
       "link": "http://www.example.com"
    }
