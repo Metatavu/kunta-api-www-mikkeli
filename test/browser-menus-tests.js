@@ -87,24 +87,24 @@
                      */
                     driver.findElements(webdriver.By
                     .css('.navbar-toggleable-xs > nav'))
-                    then((elements) => {
+                    .then((elements) => {
                       console.log("Elements1: ", elements.length);
                     });
                     
                     driver.findElements(webdriver.By
                     .css('.navbar-toggleable-xs > nav > div'))
-                    then((elements) => {
+                    .then((elements) => {
                       console.log("Elements2: ", elements.length);
                     });
                     
                     driver.findElements(webdriver.By
                     .css('.navbar-toggleable-xs > nav > div:nth-of-type(2) > ul'))
-                    then((elements) => {
+                    .then((elements) => {
                       console.log("Elements3: ", elements.length);
                     });
                     driver.findElements(webdriver.By
                     .css('.navbar-toggleable-xs > nav > div:nth-of-type(2) > ul > li:nth-of-type(1)'))
-                    then((elements) => {
+                    .then((elements) => {
                       console.log("Elements4: ", elements.length);
                     });
                     
