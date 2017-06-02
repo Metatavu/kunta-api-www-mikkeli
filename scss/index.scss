@@ -1,6 +1,7 @@
 @charset "UTF-8";
 
-@import 'vars';
+@import "vars";
+@import "colors";
 
 .carousel-indicators {
   bottom: initial;
@@ -86,7 +87,7 @@
       p, h1 {
         position: relative;
         z-index: 1;
-        color: #fff;
+        color: $valkoinen;
       }
     }  
   }
@@ -123,7 +124,7 @@
       left: 0;
       right: 0;
       height: 125px;
-      background: rgba(0, 0, 0, 0.2);
+      background: transparentize($valkoinen, 0.25);
       padding-top: 20px;
       padding-left: 16px;
       padding-right: 16px;
@@ -137,7 +138,7 @@
       h3 {
         @include font-ultra(10px);
         text-transform: uppercase;
-        color: #fff;
+        color: $musta;
         max-height: 60px;
         position: relative;
         overflow: hidden;
@@ -146,7 +147,7 @@
       }
       
       p {
-        color: #fff;
+        color: $musta;
         @include font-std(18px);
         overflow: hidden;
         text-overflow: ellipsis;
@@ -154,7 +155,7 @@
         a {
           position: relative;
           z-index: 2;
-          color: #fff;
+          color: $musta;
           text-decoration: underline;
         }
       }
@@ -202,8 +203,8 @@
   background-size: cover;
   
   .date {
-    background: #bc177e;
-    color: #fff;
+    background: $musta;
+    color: $valkoinen;
     display: inline-block;
     @include font-std(16px);
     padding: 2px 15px;
@@ -214,7 +215,7 @@
     bottom: 0;
     left: 0;
     right: 0;
-    background: rgba(255, 255, 255, 0.5);
+    background: transparentize($valkoinen, 0.25);
     padding-left: 24px;
     padding-right: 24px;
     padding-bottom: 19px;
@@ -222,7 +223,7 @@
     .title {
       
       a {
-        color: #bc177e;
+        color: $musta;
         text-decoration: none;
         
         &:hover {
@@ -308,8 +309,8 @@
     padding-bottom: 7px;
       
     .date {
-      background: #bc177e;
-      color: #fff;
+      background: $musta;
+      color: $valkoinen;
       display: inline-block;
       @include font-std(16px);
     }
@@ -337,15 +338,15 @@
 .all-news-link {
   margin-top: 15px;
   margin-bottom: 30px;
-  background: #bc177e;
-  color: #fff;
+  background: $musta;
+  color: $valkoinen;
   display: inline-block;
   @include font-ultra(20px);
   padding: 20px 24px;
   line-height: 20px;
   
   &:hover {
-    color: #fff;
+    color: $valkoinen;
   }
 }
 
@@ -358,7 +359,7 @@
 }
 
 .events-title {
-  color: #bc177e;
+  color: $musta;
   @include font-ultra(30px);
   text-transform: uppercase;
   margin-top: 15px;
@@ -406,7 +407,7 @@
 
   .details {
     position: absolute;
-    background: #50266f;
+    background: $kallio;
     height: 90px;
     left: 0;
     right: 0;
@@ -415,7 +416,7 @@
     
     .date, 
     .place {
-      color: #bf167d;
+      color: #000;
     }
   
     .date  {
@@ -429,7 +430,7 @@
 
     .name {
       @include font-std(14px);       
-      color: #fff;
+      color: #000;
       white-space: nowrap;
     }
   
@@ -469,6 +470,13 @@
     &.right {
       right: -15%;  
     }
+  }
+  
+}
+
+.swiper-pagination {
+  .swiper-pagination-bullet-active {
+    background: $musta;
   }
 }
 
@@ -557,7 +565,7 @@
       }
     
       .title, .content a {
-        color: #bc177e;
+        color: $musta;
       }
     
       .content a {
@@ -565,7 +573,7 @@
       }
     
       .all-link {
-        background-color: #bc177e;
+        background-color: $musta;
       }
     }
     
@@ -603,7 +611,7 @@
       display: inline-block;
       line-height: 20px;
       @include font-ultra(20px);
-      color: #fff;
+      color: $valkoinen;
     }
   }
 }
@@ -629,10 +637,10 @@
   
   &[data-source="twitter"] {
     background: #55acee;
-    color: #fff;
+    color: $valkoinen;
     
     .link {
-      color: #fff;
+      color: $valkoinen;
     }
   
     .text a {
@@ -642,7 +650,7 @@
   }
   
   &[data-source="instagram"] {
-    background: #fff;
+    background: $valkoinen;
     color: #696969;
     
     .link {
@@ -682,7 +690,7 @@
     }
   
     &.fa-twitter {
-      color: #fff;
+      color: $valkoinen;
     }
   }
 
@@ -731,7 +739,7 @@
     
     h3 {
       @include font-ultra(24px);
-      color: #fff;
+      color: $valkoinen;
       margin-bottom: 10px;
     }
     
@@ -750,7 +758,7 @@
   
     a {
       @include font-ultra(20px);
-      color: #fff;
+      color: $valkoinen;
       text-decoration: none;
     }
   }  
