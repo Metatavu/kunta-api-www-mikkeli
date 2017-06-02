@@ -74,18 +74,15 @@
           
           driver.wait(until.elementLocated(webdriver.By.css('body'))).then(() => {
             TestUtils.getElementSizes(driver, 'div.banner-carousel-items').then((sizes) => {
-              if (sizes[0].width === 1000 && sizes[0].height === 560) {
-                driver.manage().window().setSize(500, 1000);
-                TestUtils.getElementSizes(driver, 'div.banner-carousel-items').then((sizes) => {
-                  if (sizes[0].width === 500 && sizes[0].height === 300) {
-                    resolve(0);
-                  } else {
-                    resolve(1);
-                  }
-                });
-              } else{
-                resolve(1);
-              }
+              let firstSize = sizes;
+              driver.manage().window().setSize(500, 1000);
+              TestUtils.getElementSizes(driver, 'div.banner-carousel-items').then((sizes) => {
+                if (sizes[0].width < firstSize[0].width && sizes[0].height < firstSize[0].height) {
+                  resolve(0);
+                } else {
+                  resolve(1);
+                }
+              });
             });
           });
         });
