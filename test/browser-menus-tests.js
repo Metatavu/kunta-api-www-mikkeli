@@ -83,18 +83,18 @@
                 .then((element) => {
                   if (element.toUpperCase() === 'BAR') {
                     driver.wait(until.elementLocated(webdriver.By
-                    .css('.navbar-toggleable-xs > nav > div:nth-of-type(2) > ul > li:nth-of-type(1)')))
+                    .css('.navbar-toggleable-xs > nav > div:nth-of-type(1) > ul > li:nth-of-type(3)')))
                     .then(() => {
                       driver.findElement(webdriver.By
-                      .css('.navbar-toggleable-xs > nav > div:nth-of-type(2) > ul > li:nth-of-type(1)'))
+                      .css('.navbar-toggleable-xs > nav > div:nth-of-type(1) > ul > li:nth-of-type(3)'))
                       .getText()
                       .then((element) => {
                         if (element.toUpperCase() === 'FOO') {
                           driver.wait(until.elementLocated(webdriver.By
-                          .css('.navbar-toggleable-xs > nav > div:nth-of-type(2) > ul > li:nth-of-type(2)')))
+                          .css('.navbar-toggleable-xs > nav > div:nth-of-type(1) > ul > li:nth-of-type(4)')))
                           .then(() => {
                             driver.findElement(webdriver.By
-                            .css('.navbar-toggleable-xs > nav > div:nth-of-type(2) > ul > li:nth-of-type(2)'))
+                            .css('.navbar-toggleable-xs > nav > div:nth-of-type(1) > ul > li:nth-of-type(4)'))
                             .getText()
                             .then((element) => {
                               if (element.toUpperCase() === 'BAR') {
@@ -144,7 +144,7 @@
                 driver.get('http://localhost:3000');
                 driver.wait(until.elementLocated(webdriver.By.css('body'))).then(() => {
                   driver.findElement(webdriver.By
-                  .css('.navbar-toggleable-xs > nav > div:nth-of-type(2) > ul > li:nth-of-type(1)'))
+                  .css('.navbar-toggleable-xs > nav > div:nth-of-type(1) > ul > li:nth-of-type(3)'))
                   .then((element) => {
                     element.click();
                     driver.wait(until.titleIs('Google')).then(() => {
@@ -181,7 +181,7 @@
                 driver.get('http://localhost:3000');
                 driver.wait(until.elementLocated(webdriver.By.css('body'))).then(() => {
                   driver.findElement(webdriver.By
-                  .css('.navbar-toggleable-xs > nav > div:nth-of-type(2) > ul > li:nth-of-type(2)'))
+                  .css('.navbar-toggleable-xs > nav > div:nth-of-type(1) > ul > li:nth-of-type(4)'))
                   .then((element) => {
                     element.click();
                     driver.wait(until.titleIs('Example Domain')).then(() => {
