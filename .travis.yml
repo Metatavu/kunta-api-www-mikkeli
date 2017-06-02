@@ -21,7 +21,9 @@ env:
     - BROWSER="safari" VERSION="latest" PLATFORM="OS X 10.11"
     - BROWSER="safari" VERSION="latest" PLATFORM="OS X 10.10"
 addons:
-  sauce_connect: true
+  sauce_connect:
+    username: "vKoivukangas"
+    vm-version: dev-varnish
 script: 
  - grunt
  - npm run test-coverage
