@@ -17,14 +17,8 @@ env:
     - BROWSER="microsoftedge" VERSION="latest" PLATFORM="Windows 10"
     - BROWSER="firefox" VERSION="latest" PLATFORM="Windows 8"
     - BROWSER="internet explorer" VERSION="latest" PLATFORM="Windows 8"
-    - BROWSER="safari" VERSION="latest" PLATFORM="macOS 10.12"
-    - BROWSER="safari" VERSION="latest" PLATFORM="OS X 10.11"
-    - BROWSER="safari" VERSION="latest" PLATFORM="OS X 10.10"
 addons:
-  sauce_connect:
-    username: "vKoivukangas"
-    vm-version: dev-varnish
-    direct_domains: example.org,*.google.com
+  sauce_connect: true
 script: 
  - grunt
  - npm run test-coverage
