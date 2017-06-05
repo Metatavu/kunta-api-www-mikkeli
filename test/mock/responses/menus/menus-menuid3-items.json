@@ -1,0 +1,20 @@
+[
+   {
+      "id": "item1",
+      "label": "Google",
+      "parentItemId": null,
+      "type": "LINK",
+      "pageId": null,
+      "fileId": null,
+      "externalUrl": "http://google.com"
+   },
+   {
+      "id": "item2",
+      "label": "Youtube",
+      "parentItemId": null,
+      "type": "PAGE",
+      "pageId": null,
+      "fileId": null,
+      "externalUrl": "http://www.youtube.com"
+   }
+]

@@ -80,6 +80,10 @@
         "response": "/responses/menus/menus-menuid2-items.json"
     },
     {
+        "route": "menus/menuid3/items",
+        "response": "/responses/menus/menus-menuid3-items.json"
+    },
+    {
         "route": "banners/bannerid1/images",
         "query": true,
         "response": "/responses/banners/banners-bannerid1-images.json"
@@ -87,14 +91,16 @@
     {
         "route": "banners/bannerid2/images",
         "query": true,
-        "response": "/responses/banners/banners-bannerid2-images.json"
+        "response": "/responses/banners/banners-bannerid2.jpg-images.json"
     },
     {
         "route": "tiles/tileid1/images",
+        "query": true,
         "response": "/responses/tiles/tiles-tileid1-images.json"
     },
     {
         "route": "tiles/tileid2/images",
+        "query": true,
         "response": "/responses/tiles/tiles-tileid2-images.json"
     },
     {
@@ -114,68 +120,12 @@
         "response": "/responses/events/events-eventid2-images.json"
     },
     {
-        "route": "banners/bannerid1/images/bannerid1/data",
-        "query": {
-            "size": 1050
-        },
-        "response": "/responses/banners/banners-bannerid1-images-bannerid1-data.json"
-    },
-    {
-        "route": "banners/bannerid1/images/bannerid1/data",
-        "query": {
-            "size": 1024
-        },
-        "response": "/responses/banners/banners-bannerid1-images-bannerid1-data.json"
-    },
-    {
-        "route": "banners/bannerid1/images/bannerid1/data",
-        "query": {
-            "size": 1008
-        },
-        "response": "/responses/banners/banners-bannerid1-images-bannerid1-data.json"
-    },
-    {
-        "route": "banners/bannerid1/images/bannerid1/data",
-        "query": {
-            "size": 1410
-        },
-        "response": "/responses/banners/banners-bannerid1-images-bannerid1-data.json"
-    },
-    {
-        "route": "banners/bannerid1/images/bannerid1/data",
+        "route": "banners/bannerid1/images/bannerid1.jpeg/data",
         "query": true,
         "response": "/responses/banners/banners-bannerid1-images-bannerid1-data.json"
     },
     {
-        "route": "banners/bannerid2/images/bannerid2/data",
-        "query": {
-            "size": 1050
-        },
-        "response": "/responses/banners/banners-bannerid2-images-bannerid2-data.json"
-    },
-    {
-        "route": "banners/bannerid2/images/bannerid2/data",
-        "query": {
-            "size": 1410
-        },
-        "response": "/responses/banners/banners-bannerid2-images-bannerid2-data.json"
-    },
-    {
-        "route": "banners/bannerid2/images/bannerid2/data",
-        "query": {
-            "size": 1024
-        },
-        "response": "/responses/banners/banners-bannerid2-images-bannerid2-data.json"
-    },
-    {
-        "route": "banners/bannerid2/images/bannerid2/data",
-        "query": {
-            "size": 1008
-        },
-        "response": "/responses/banners/banners-bannerid2-images-bannerid2-data.json"
-    },
-    {
-        "route": "banners/bannerid2/images/bannerid2/data",
+        "route": "banners/bannerid2/images/bannerid2.jpeg/data",
         "query": true,
         "response": "/responses/banners/banners-bannerid2-images-bannerid2-data.json"
     },
