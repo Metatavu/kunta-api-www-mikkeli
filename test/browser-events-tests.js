@@ -116,11 +116,12 @@
             driver.findElement(webdriver.By
             .css('div.events-container > div:nth-of-type(1) > div:nth-of-type(1) > .swiper-slide-active'))
             .then((element) => {
-              element.click();
-              driver.getAllWindowHandles().then((allhandles) => {
-                driver.switchTo().window(allhandles[allhandles.length - 1]);
-                driver.wait(until.titleIs('Example Domain')).then(() => {
-                  resolve(0);
+              element.click().then(() => {
+                driver.getAllWindowHandles().then((allhandles) => {
+                  driver.switchTo().window(allhandles[allhandles.length - 1]);
+                  driver.wait(until.titleIs('Example Domain')).then(() => {
+                    resolve(0);
+                  });
                 });
               });
             });
