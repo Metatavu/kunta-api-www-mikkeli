@@ -91,7 +91,7 @@
     {
         "route": "banners/bannerid2/images",
         "query": true,
-        "response": "/responses/banners/banners-bannerid2.jpg-images.json"
+        "response": "/responses/banners/banners-bannerid2-images.json"
     },
     {
         "route": "tiles/tileid1/images",
@@ -116,8 +116,28 @@
         "response": "/responses/events/events-eventid1-images.json"
     },
     {
+        "route": "events/eventid1/images/eventid1",
+        "response": "/responses/events/eventid2.jpeg"
+    },
+    {
+        "route": "events/eventid1/images/eventid1/data",
+        "query": true,
+        "response": "/responses/events/eventid2.jpeg"
+    },
+    {
         "route": "events/eventid2/images",
+        "query": true,
         "response": "/responses/events/events-eventid2-images.json"
+    },
+    {
+        "route": "events/eventid2/images/eventid2",
+        "query": true,
+        "response": "/responses/events/events-eventid2-images.json"
+    },
+    {
+        "route": "events/eventid2/images/eventid2/data",
+        "query": true,
+        "response": "/responses/events/eventid2.jpeg"
     },
     {
         "route": "banners/bannerid1/images/bannerid1.jpeg/data",

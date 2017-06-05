@@ -7,6 +7,7 @@
   const nock = require('nock');
   const Promise = require('bluebird');
   const util = require('util');
+  const fs = require('fs');
   
   class NockController {
     
@@ -43,18 +44,27 @@
       }
       
       for (let i = 0; i < fileNames.length; i++) {
-        let body = require(__dirname + allRoutes[i].response);
+        let header;
+        let body;
+        let response;
+        
+        if(allRoutes[i].response.split('.')[allRoutes[i].response.split('.').length - 1] === 'jpeg') {
+          response = fs.readFileSync(__dirname + allRoutes[i].response);
+          header = {
+            'Content-Type': 'image/jpeg'
+          };
+        } else {
+          body = require(__dirname + allRoutes[i].response);
+          header = {'header': 'test'};
+          
+          response = body;
+        }
+
         nock('https://test-api.kunta-api.fi/v1/organizations/testId')
           .get('/' + allRoutes[i].route)
           .times(25)
           .query(allRoutes[i].query)
-          .reply(function(uri, requestBody) {
-            return [
-              200,
-              body,
-              {'header': 'value'}
-            ];
-          }); 
+          .reply(200, response, header); 
       }
     }
     
