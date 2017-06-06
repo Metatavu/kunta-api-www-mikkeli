@@ -142,7 +142,7 @@
               element.click();
               driver.wait(until.titleIs('Google')).then(() => {
                 driver.get('http://localhost:3000');
-                driver.wait(until.elementLocated(webdriver.By.css('body'))).then(() => {
+                driver.wait(until.elementLocated(webdriver.By.css('navbar-toggleable-xs'))).then(() => {
                   driver.findElement(webdriver.By
                   .css('.navbar-toggleable-xs > nav > div:nth-of-type(1) > ul > li:nth-of-type(3)'))
                   .then((element) => {
