@@ -108,7 +108,6 @@
       const result = expect(new Promise((resolve, reject) => {
         TestUtils.startServer().then((server) => {
           runningServer = server;
-          let firstText;
           driver.manage().timeouts().setScriptTimeout(60000);
           driver.get('http://localhost:3000');
           
@@ -139,7 +138,7 @@
       const result = expect(new Promise((resolve, reject) => {
         TestUtils.startServer().then((server) => {
           runningServer = server;
-          let firstText;
+          
           driver.manage().timeouts().setScriptTimeout(60000);
           driver.get('http://localhost:3000');
           
@@ -158,17 +157,18 @@
                       }
                     });
                   } else {
-                    function waitLazyBg() {
-                      setTimeOut(() => {
-                        element.getAttribute('style').then((style) => {
-                          if (style.includes('background-image:')) {
-                            resolve(0);
-                          } else {
-                            waitLazyBg();
-                          }
-                        });
-                      }, 1000);
-                    };
+                    waitLazyBg();
+                  }
+                  function waitLazyBg() {
+                    setTimeOut(() => {
+                      element.getAttribute('style').then((style) => {
+                        if (style.includes('background-image:')) {
+                          resolve(0);
+                        } else {
+                          waitLazyBg();
+                        }
+                      });
+                    }, 1000);
                   }
                 });
               }); 
