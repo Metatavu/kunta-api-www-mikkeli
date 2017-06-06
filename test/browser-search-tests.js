@@ -81,16 +81,16 @@
                 driver.wait(until.elementLocated(webdriver.By
                 .linkText('Uutiset')))
                 .then((element) => {
-                  element.click();
-                  
-                  driver.wait(until.elementLocated(webdriver.By.css('div.search-result'))).then(() => {
-                    driver.findElements(webdriver.By.css('div.search-result')).then((elements) => {
-                      elements[1].getText().then((text) => {
-                        if (text.includes('This should be on page 1')) {
-                          resolve(0);
-                        } else {
-                          resolve(1);
-                        }
+                  element.click().then(() => {
+                    driver.wait(until.elementLocated(webdriver.By.css('div.search-result'))).then(() => {
+                      driver.findElements(webdriver.By.css('div.search-result')).then((elements) => {
+                        elements[1].getText().then((text) => {
+                          if (text.includes('This should be on page 1')) {
+                            resolve(0);
+                          } else {
+                            resolve(1);
+                          }
+                        });
                       });
                     });
                   });
