@@ -40,6 +40,11 @@
         "response": "/responses/menus/menus.json"
     },
     {
+        "route": "search/news",
+        "query": true,
+        "response": "/responses/news/news-first10.json"
+    },
+    {
         "route": "news",
         "query": {
             "firstResult": 0,
@@ -117,12 +122,14 @@
     },
     {
         "route": "events/eventid1/images/eventid1",
-        "response": "/responses/events/eventid2.jpeg"
+        "response": "/responses/events/eventid2.jpeg",
+        "content": "image/jpeg"
     },
     {
         "route": "events/eventid1/images/eventid1/data",
         "query": true,
-        "response": "/responses/events/eventid2.jpeg"
+        "response": "/responses/events/eventid2.jpeg",
+        "content": "image/jpeg"
     },
     {
         "route": "events/eventid2/images",
@@ -137,7 +144,8 @@
     {
         "route": "events/eventid2/images/eventid2/data",
         "query": true,
-        "response": "/responses/events/eventid2.jpeg"
+        "response": "/responses/events/eventid2.jpeg",
+        "content": "image/jpeg"
     },
     {
         "route": "banners/bannerid1/images/bannerid1.jpeg/data",
@@ -158,5 +166,164 @@
         "route": "events/eventid2/images/eventid2/data",
         "query": true,
         "response": "/responses/events/events-eventid2-images-eventid2-data.json"
+    },
+    {
+        "route": "search",
+        "query": true,
+        "response": "/responses/news/news.json"
+    },
+    {
+        "route": "news",
+        "query": {
+            "search": "foo",
+            "sortBy": "SCORE",
+            "sortDir": "ASC",
+            "firstResult": 0,
+            "maxResults": 6
+        },
+        "response": "/responses/news/news.json"
+    },
+    {
+        "route": "news",
+        "query": {
+            "search": "fo",
+            "sortBy": "SCORE",
+            "sortDir": "ASC",
+            "firstResult": 0,
+            "maxResults": 6
+        },
+        "response": "/responses/news/news.json"
+    },
+    {
+        "route": "news",
+        "query": {
+            "search": "f",
+            "sortBy": "SCORE",
+            "sortDir": "ASC",
+            "firstResult": 0,
+            "maxResults": 6
+        },
+        "response": "/responses/news/news.json"
+    },
+    {
+        "route": "news",
+        "query": {
+            "search": "foo",
+            "sortBy": "SCORE",
+            "sortDir": "DESC",
+            "firstResult": 0,
+            "maxResults": 6
+        },
+        "response": "/responses/news/news.json"
+    },
+    {
+        "route": "news",
+        "query": {
+            "search": "foo",
+            "sortBy": "SCORE",
+            "sortDir": "ASC",
+            "firstResult": 0,
+            "maxResults": 6
+        },
+        "response": "/responses/news/news.json"
+    },
+    {
+        "route": "news",
+        "query": {
+            "search": "foo",
+            "sortBy": "SCORE",
+            "sortDir": "DESC",
+            "firstResult": 0,
+            "maxResults": 5
+        },
+        "response": "/responses/events/events-eventid1-images-eventid1-data.json"
+    },
+    {
+        "route": "news",
+        "query": {
+            "search": "fo",
+            "sortBy": "SCORE",
+            "sortDir": "DESC",
+            "firstResult": 0,
+            "maxResults": 5
+        },
+        "response": "/responses/news/news.json"
+    },
+    {
+        "route": "news",
+        "query": {
+            "search": "f",
+            "sortBy": "SCORE",
+            "sortDir": "DESC",
+            "firstResult": 0,
+            "maxResults": 6
+        },
+        "response": "/responses/news/news.json"
+    },
+    {
+        "route": "news",
+        "query": {
+            "search": "f",
+            "sortBy": "SCORE",
+            "sortDir": "DESC",
+            "firstResult": 0,
+            "maxResults": 5
+        },
+        "response": "/responses/events/events-eventid1-images-eventid1-data.json"
+    },
+    {
+        "route": "pages",
+        "query": {
+            "search": "foo",
+            "sortBy": "SCORE",
+            "sortDir": "ASC",
+            "firstResult": 0,
+            "maxResults": 6
+        },
+        "response": "/responses/events/events-eventid1-images-eventid1-data.json"
+    },
+    {
+        "route": "pages",
+        "query": {
+            "search": "foo",
+            "sortBy": "SCORE",
+            "sortDir": "ASC",
+            "firstResult": 0,
+            "maxResults": 5
+        },
+        "response": "/responses/news/news.json"
+    },
+    {
+        "route": "pages",
+        "query": {
+            "search": "fo",
+            "sortBy": "SCORE",
+            "sortDir": "ASC",
+            "firstResult": 0,
+            "maxResults": 5
+        },
+        "response": "/responses/news/news.json"
+    },
+    {
+        "route": "pages",
+        "query": {
+            "search": "f",
+            "sortBy": "SCORE",
+            "sortDir": "ASC",
+            "firstResult": 0,
+            "maxResults": 5
+        },
+        "response": "/responses/news/news.json"
+    },
+    {
+        "route": "pages",
+        "query": {
+            "search": "fo",
+            "sortBy": "SCORE",
+            "sortDir": "DESC",
+            "firstResult": 0,
+            "maxResults": 5
+        },
+        "response": "/responses/news/news.json"
     }
 ]

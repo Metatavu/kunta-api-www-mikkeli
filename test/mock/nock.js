@@ -48,16 +48,31 @@
         let body;
         let response;
         
-        if(allRoutes[i].response.split('.')[allRoutes[i].response.split('.').length - 1] === 'jpeg') {
-          response = fs.readFileSync(__dirname + allRoutes[i].response);
+        if(allRoutes[i].content) {
           header = {
-            'Content-Type': 'image/jpeg'
+            'Content-Type': allRoutes[i].content
           };
         } else {
-          body = require(__dirname + allRoutes[i].response);
-          header = {'header': 'test'};
-          
-          response = body;
+          header = {
+            'header': 'test'
+          };
+        }
+        
+        if(allRoutes[i].content === 'image/jpeg') {
+          response = fs.readFileSync(__dirname + allRoutes[i].response);
+        } 
+        else if (allRoutes[i].content === 'text/html') {
+          fs.exists(__dirname + allRoutes[i].response, function(fileok){
+            if (fileok) {
+              fs.readFile(__dirname + allRoutes[i].response, function(error, data) {
+                response = data;
+              });
+            } else {
+              console.log("file not found");
+            }
+          });
+        } else {
+          response = require(__dirname + allRoutes[i].response);
         }
 
         nock('https://test-api.kunta-api.fi/v1/organizations/testId')

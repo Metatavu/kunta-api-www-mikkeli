@@ -9,7 +9,8 @@
     "test-mock": "nyc --reporter=lcov -- mocha --grep Mocking",
     "test-browser": "nyc --reporter=lcov -- mocha --grep browser",
     "test-browser-events": "nyc --reporter=lcov -- mocha --grep Events",
-    "test-browser-menus": "nyc --reporter=lcov -- mocha --grep browser-menus"
+    "test-browser-menus": "nyc --reporter=lcov -- mocha --grep browser-menus",
+    "test-browser-search": "nyc --reporter=lcov -- mocha --grep browser-search"
   },
   "repository": {
     "type": "git",
