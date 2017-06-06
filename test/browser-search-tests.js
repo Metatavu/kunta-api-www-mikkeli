@@ -81,8 +81,8 @@
                 driver.wait(until.elementLocated(webdriver.By
                 .linkText('Uutiset')))
                 .then(() => {
-                  TestUtils.scrollToElement(driver, 'search-results-tabs').then(() => {
                     driver.findElement(webdriver.By.linkText('Uutiset')).then((element) => {
+                      TestUtils.scrollToElement(driver, 'search-results-tabs').then(() => {
                       element.click().then(() => {
                         driver.wait(until.elementLocated(webdriver.By.css('div.search-result'))).then(() => {
                           driver.findElements(webdriver.By.css('div.search-result')).then((elements) => {
