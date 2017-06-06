@@ -81,6 +81,21 @@
       });
     }
     
+    static scrollToElement(driver, selector) {
+      return new Promise((resolve, reject) => {
+        driver.executeScript(
+          function (selector) {
+            var elements = document.getElementsByClassName(selector);
+            elements[0].scrollIntoView();
+            return true;
+          },
+          selector
+        ).then(function (done) {
+           resolve(done);
+        });
+      });
+    }
+    
     static waitAnimation(duration) {
       return new Promise((resolve, reject) => {
         setTimeout(() => {
