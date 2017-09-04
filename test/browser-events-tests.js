@@ -26,7 +26,7 @@
     console.error("UNHANDLED REJECTION", error.stack);
   });
   
-  describe('Menus tests on browser-menus', function () {
+  describe('Events tests on browser', function () {
     this.timeout(60000);
     let runningServer;
     let sauceController;
@@ -63,59 +63,36 @@
       }
     });
     
-    it('Menus should have total of 4 links', () => {
+    it('Event carousel should work ', () => {
       const result = expect(new Promise((resolve, reject) => {
         TestUtils.startServer().then((server) => {
           runningServer = server;
+          let firstText;
           
           driver.manage().timeouts().setScriptTimeout(60000);
           driver.get('http://localhost:3000');
           
           driver.wait(until.elementLocated(webdriver.By.css('body'))).then(() => {
             driver.findElement(webdriver.By
-            .css('.navbar-toggleable-xs > nav > div:nth-of-type(1) > ul > li:nth-of-type(1)'))
+            .css('div.events-container > div:nth-of-type(1) > div:nth-of-type(1) > .swiper-slide-active'))
             .getText()
-            .then((element) => {
-              if (element.toUpperCase() === 'FOO') {
+            .then((text) => {
+              firstText = text;
+              const firstEvent = driver.findElement(webdriver.By
+              .css('div.events-container > div:nth-of-type(1) > div:nth-of-type(1) > .swiper-slide-active'));
+              
+              driver.wait(until.elementIsNotVisible(firstEvent)).then(() => {
                 driver.findElement(webdriver.By
-                .css('.navbar-toggleable-xs > nav > div:nth-of-type(1) > ul > li:nth-of-type(2)'))
+                .css('div.events-container > div:nth-of-type(1) > div:nth-of-type(1) > .swiper-slide-active'))
                 .getText()
-                .then((element) => {
-                  if (element.toUpperCase() === 'BAR') {
-                    driver.wait(until.elementLocated(webdriver.By
-                    .css('.navbar-toggleable-xs > nav > div:nth-of-type(1) > ul > li:nth-of-type(3)')))
-                    .then(() => {
-                      driver.findElement(webdriver.By
-                      .css('.navbar-toggleable-xs > nav > div:nth-of-type(1) > ul > li:nth-of-type(3)'))
-                      .getText()
-                      .then((element) => {
-                        if (element.toUpperCase() === 'FOO') {
-                          driver.wait(until.elementLocated(webdriver.By
-                          .css('.navbar-toggleable-xs > nav > div:nth-of-type(1) > ul > li:nth-of-type(4)')))
-                          .then(() => {
-                            driver.findElement(webdriver.By
-                            .css('.navbar-toggleable-xs > nav > div:nth-of-type(1) > ul > li:nth-of-type(4)'))
-                            .getText()
-                            .then((element) => {
-                              if (element.toUpperCase() === 'BAR') {
-                                resolve(0);
-                              } else {
-                                resolve(1);
-                              }
-                            });
-                          });
-                        } else {
-                          resolve(1);
-                        }
-                      });
-                    });
-                  } else {
+                .then((text) => {
+                  if(text === firstText) {
                     resolve(1);
+                  } else {
+                    resolve(0);
                   }
                 });
-              } else {
-                resolve(1);
-              }
+              });
             });
           });
         });
@@ -127,29 +104,22 @@
         .eql(0);
     });
     
-    it('FOO links should direct to google.com', () => {
+    it('Event link should work', () => {
       const result = expect(new Promise((resolve, reject) => {
         TestUtils.startServer().then((server) => {
           runningServer = server;
-          
           driver.manage().timeouts().setScriptTimeout(60000);
           driver.get('http://localhost:3000');
           
           driver.wait(until.elementLocated(webdriver.By.css('body'))).then(() => {
             driver.findElement(webdriver.By
-            .css('.navbar-toggleable-xs > nav > div:nth-of-type(1) > ul > li:nth-of-type(1)'))
+            .css('div.events-container > div:nth-of-type(1) > div:nth-of-type(1) > .swiper-slide-active'))
             .then((element) => {
-              element.click();
-              driver.wait(until.titleIs('Google')).then(() => {
-                driver.get('http://localhost:3000');
-                driver.wait(until.elementLocated(webdriver.By.css('.navbar-toggleable-xs'))).then(() => {
-                  driver.findElement(webdriver.By
-                  .css('.navbar-toggleable-xs > nav > div:nth-of-type(1) > ul > li:nth-of-type(3)'))
-                  .then((element) => {
-                    element.click();
-                    driver.wait(until.titleIs('Google')).then(() => {
-                      resolve(0);
-                    });
+              element.click().then(() => {
+                driver.getAllWindowHandles().then((allhandles) => {
+                  driver.switchTo().window(allhandles[allhandles.length - 1]);
+                  driver.wait(until.titleIs('Example Domain')).then(() => {
+                    resolve(0);
                   });
                 });
               });
@@ -164,7 +134,7 @@
         .eql(0);
     });
     
-    it('BAR links should direct to example.com', () => {
+    it('Event pictures should work', () => {
       const result = expect(new Promise((resolve, reject) => {
         TestUtils.startServer().then((server) => {
           runningServer = server;
@@ -173,23 +143,35 @@
           driver.get('http://localhost:3000');
           
           driver.wait(until.elementLocated(webdriver.By.css('body'))).then(() => {
-            driver.findElement(webdriver.By
-            .css('.navbar-toggleable-xs > nav > div:nth-of-type(1) > ul > li:nth-of-type(2)'))
-            .then((element) => {
-              element.click();
-              driver.wait(until.titleIs('Example Domain')).then(() => {
-                driver.get('http://localhost:3000');
-                driver.wait(until.elementLocated(webdriver.By.css('.navbar-toggleable-xs'))).then(() => {
-                  driver.findElement(webdriver.By
-                  .css('.navbar-toggleable-xs > nav > div:nth-of-type(1) > ul > li:nth-of-type(4)'))
-                  .then((element) => {
-                    element.click();
-                    driver.wait(until.titleIs('Example Domain')).then(() => {
-                      resolve(0);
+            TestUtils.waitAnimation(3000).then(() => {
+              driver.findElement(webdriver.By
+              .css('div.events-container > div:nth-of-type(1) > div:nth-of-type(1) > .swiper-slide-active > div:nth-of-type(1) > div:nth-of-type(1)'))
+              .then((element) => {
+                element.getAttribute('lazy-bg-image').then((lazybg) => {
+                  if (!lazybg) {
+                    element.getAttribute('style').then((style) => {
+                      if (style.includes('background-image:')) {
+                        resolve(0);
+                      } else {
+                        resolve(1);
+                      }
                     });
-                  });
+                  } else {
+                    waitLazyBg();
+                  }
+                  function waitLazyBg() {
+                    setTimeOut(() => {
+                      element.getAttribute('style').then((style) => {
+                        if (style.includes('background-image:')) {
+                          resolve(0);
+                        } else {
+                          waitLazyBg();
+                        }
+                      });
+                    }, 1000);
+                  }
                 });
-              });
+              }); 
             });
           });
         });
