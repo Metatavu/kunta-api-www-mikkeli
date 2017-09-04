@@ -6,5 +6,9 @@
    {
       "id": "menuid2",
       "slug": "sisalto"
+   },
+   {
+      "id": "menuid3",
+      "slug": "suositut"
    }
 ]

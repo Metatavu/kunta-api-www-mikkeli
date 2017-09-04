@@ -16,8 +16,9 @@
   const Promise = require('bluebird');
   const TestUtils = require(__dirname + '/controllers/test-utils');
   const NockController = require(__dirname + '/mock/nock.js');
+  const SauceController = require(__dirname + '/controllers/saucelabs.js');
   const request = require('request');
-  const browser = process.env.KUNTA_API_BROWSER || 'phantomjs';
+  const browser = process.env.KUNTA_API_BROWSER || 'chrome';
   
   chai.use(require('chai-as-promised'));
   
@@ -28,23 +29,38 @@
   describe('Tiles tests in browser', function () {
     this.timeout(60000);
     let runningServer;
+    let sauceController;
     let driver;
     
-    before((done) => {
+    beforeEach(function(done) {
       NockController.nockEverything();
+      
+      if (!process.env.LOCAL_TESTS) {
+        sauceController = new SauceController();
+        driver = sauceController.initSauce(this.title);
+      } else {
+        driver = TestUtils.createDriver(browser);
+      }
       done();
     });
     
-    afterEach((done) => {
-      if (driver) {
-        driver.close();
+    afterEach(function(done) {
+      if (!process.env.LOCAL_TESTS) {
+        const passed = this.currentTest.state === 'failed' ? false : true;
+        sauceController.updateJobState(passed,() => {
+          driver.quit();
+          driver = null;
+          runningServer.close();
+          clearRequire.all();
+          done();
+        });
+      } else {
+        driver.quit();
         driver = null;
-      }
-      
-      runningServer.close(() => {
+        runningServer.close();
         clearRequire.all();
         done();
-      });
+      }
     });
     
     it('Tile text and header should fit in tile box', () => {
@@ -54,18 +70,15 @@
         TestUtils.startServer().then((server) => {
           runningServer = server;
           
-          driver = TestUtils.createDriver(browser);
           driver.manage().timeouts().setScriptTimeout(60000);
           driver.get('http://localhost:3000');
-          driver.manage().window().setSize(1600, 900);
           
           driver.wait(until.elementLocated(webdriver.By.className('tile'))).then(() => {
             driver.findElements(webdriver.By.className('tile')).then((elements) => {
               TestUtils.getElementSizes(driver, 'div.tile').then((sizes) => {
                 const tileSizes = sizes;
-                TestUtils.getElementSizes(driver, 'h3.bigtext-line0').then((sizes) => {
+                TestUtils.getElementSizes(driver, '.bigtext-line0').then((sizes) => {
                   const headerSizes = sizes;
-                  
                   for (let i = 0; i < headerSizes.length; i++) {
                     if (headerSizes[i].width > (tileSizes[i].width - 32)) {
                       resolveValue = 1;

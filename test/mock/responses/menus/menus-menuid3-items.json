@@ -1,7 +1,7 @@
 [
    {
       "id": "item1",
-      "label": "Foo",
+      "label": "Google",
       "parentItemId": null,
       "type": "LINK",
       "pageId": null,
@@ -10,11 +10,11 @@
    },
    {
       "id": "item2",
-      "label": "Bar",
+      "label": "Youtube",
       "parentItemId": null,
       "type": "PAGE",
       "pageId": null,
       "fileId": null,
-      "externalUrl": "http://www.example.com"
+      "externalUrl": "http://www.youtube.com"
    }
 ]

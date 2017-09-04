@@ -7,7 +7,10 @@
     "test": "nyc --reporter=lcov -- mocha",
     "test-coverage": "nyc --reporter=lcov -- mocha && cat ./coverage/lcov.info | coveralls",
     "test-mock": "nyc --reporter=lcov -- mocha --grep Mocking",
-    "test-browser": "nyc --reporter=lcov -- mocha --grep browser"
+    "test-browser": "nyc --reporter=lcov -- mocha --grep browser",
+    "test-browser-events": "nyc --reporter=lcov -- mocha --grep Events",
+    "test-browser-menus": "nyc --reporter=lcov -- mocha --grep browser-menus",
+    "test-browser-search": "nyc --reporter=lcov -- mocha --grep browser-search"
   },
   "repository": {
     "type": "git",
@@ -30,6 +33,7 @@
     "nock": "^9.0.13",
     "nyc": "^10.3.2",
     "request": "^2.81.0",
+    "saucelabs": "^1.4.0",
     "selenium-webdriver": "^3.4.0"
   },
   "dependencies": {

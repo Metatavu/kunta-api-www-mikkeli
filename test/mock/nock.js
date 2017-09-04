@@ -7,6 +7,7 @@
   const nock = require('nock');
   const Promise = require('bluebird');
   const util = require('util');
+  const fs = require('fs');
   
   class NockController {
     
@@ -43,18 +44,42 @@
       }
       
       for (let i = 0; i < fileNames.length; i++) {
-        let body = require(__dirname + '/responses/' + fileNames[i].split('-')[0] + '/' + fileNames[i] + '.json');
+        let header;
+        let body;
+        let response;
+        
+        if(allRoutes[i].content) {
+          header = {
+            'Content-Type': allRoutes[i].content
+          };
+        } else {
+          header = {
+            'header': 'test'
+          };
+        }
+        
+        if(allRoutes[i].content === 'image/jpeg') {
+          response = fs.readFileSync(__dirname + allRoutes[i].response);
+        } 
+        else if (allRoutes[i].content === 'text/html') {
+          fs.exists(__dirname + allRoutes[i].response, function(fileok){
+            if (fileok) {
+              fs.readFile(__dirname + allRoutes[i].response, function(error, data) {
+                response = data;
+              });
+            } else {
+              console.log("file not found");
+            }
+          });
+        } else {
+          response = require(__dirname + allRoutes[i].response);
+        }
+
         nock('https://test-api.kunta-api.fi/v1/organizations/testId')
           .get('/' + allRoutes[i].route)
-          .times(10)
-          .query(true)
-          .reply(function(uri, requestBody) {
-            return [
-              200,
-              body,
-              {'header': 'value'}
-            ];
-          }); 
+          .times(25)
+          .query(allRoutes[i].query)
+          .reply(200, response, header); 
       }
     }
     
