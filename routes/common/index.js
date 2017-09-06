@@ -114,6 +114,20 @@
 
       return link;
     }
+    
+    static resolvePageCasemMeta(content) {
+      const result = {};
+      
+      const $ = cheerio.load(content);
+      
+      $('.casem-meta').each((index, metaElement) => {
+        const name = $(metaElement).attr('data-meta-name');
+        const value = $(metaElement).attr('data-meta-value');
+        result[name] = value;
+      });
+      
+      return result;
+    }
 
     static processPageContent(currentPage, content) {
       if (!content) {
@@ -121,7 +135,6 @@
       }
 
       const $ = cheerio.load(content);
-
       $('a[href]').each((index, link) => {
         var href = $(link).attr('href');
         $(link).attr('href', Common.processLink(currentPage, href));

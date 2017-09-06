@@ -1,4 +1,6 @@
 /*jshint esversion: 6 */
+/* global __dirname */
+
 (function() {
   'use strict';
 
@@ -132,15 +134,22 @@
                 }
               });
               
-              var featuredImageSrc = featuredImageId ? util.format('/pageImages/%s/%s', page.id, featuredImageId) : null;
-              var bannerSrc = bannerImageId ? util.format('/pageImages/%s/%s', page.id, bannerImageId) : '/gfx/layout/mikkeli-page-banner-default.jpg';
+              const featuredImageSrc = featuredImageId ? util.format('/pageImages/%s/%s', page.id, featuredImageId) : null;
+              const bannerSrc = bannerImageId ? util.format('/pageImages/%s/%s', page.id, bannerImageId) : '/gfx/layout/mikkeli-page-banner-default.jpg';
+              const pageCasemMeta = Common.resolvePageCasemMeta(contents);
+              let title = page.title;
+              
+              if (pageCasemMeta['casem-type'] === 'meeting-item') {
+                // If page is a CaseM meeting item, we use meeting title as page's title
+                title = pageCasemMeta['meeting-title'];
+              }
               
               loadChildPages(pageData[2], preferLanguages, (children) => {
                 res.render('pages/contents.pug', Object.assign(req.kuntaApi.data, {
                   id: page.id,
                   slug: page.slug,
                   rootPath: util.format("%s/%s", Common.CONTENT_FOLDER, rootPath),
-                  title: page.title,
+                  title: title,
                   rootFolderTitle: rootFolderTitle,
                   contents: Common.processPageContent(path, contents),
                   sidebarContents: Common.getSidebarContent(contents),
