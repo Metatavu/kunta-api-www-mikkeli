@@ -1,7 +1,7 @@
 [
    {
       "id": "item1",
-      "label": "guugle",
+      "label": "Foo",
       "parentItemId": null,
       "type": "LINK",
       "pageId": null,
@@ -10,20 +10,11 @@
    },
    {
       "id": "item2",
-      "label": "#120 (no title)",
+      "label": "Bar",
       "parentItemId": null,
       "type": "PAGE",
       "pageId": null,
       "fileId": null,
-      "externalUrl": null
-   },
-   {
-      "id": "item3",
-      "label": "#0 (no title)",
-      "parentItemId": null,
-      "type": "PAGE",
-      "pageId": null,
-      "fileId": null,
-      "externalUrl": null
+      "externalUrl": "http://www.example.com"
    }
 ]

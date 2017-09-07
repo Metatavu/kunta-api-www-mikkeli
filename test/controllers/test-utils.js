@@ -60,23 +60,47 @@
         driver.executeScript(
           function (selector) {
             var elements = document.querySelectorAll(selector);
-            return function (elements) {
+            var allSizes = findElements(elements);
+            
+            function findElements(elements) {
               var elementSizes = [];
-              
               for (var i = 0; i < elements.length; i++) {
-                var sizes = {
+                elementSizes.push({
                   'width': elements[i].offsetWidth,
                   'height': elements[i].offsetHeight
-                };
-                elementSizes.push(sizes);
+                });
               };
               return elementSizes;
             };
+            return allSizes;
           },
           selector
         ).then(function (obj) {
            resolve(obj);
         });
+      });
+    }
+    
+    static scrollToElement(driver, selector) {
+      return new Promise((resolve, reject) => {
+        driver.executeScript(
+          function (selector) {
+            var elements = document.getElementsByClassName(selector);
+            elements[0].scrollIntoView();
+            return true;
+          },
+          selector
+        ).then(function (done) {
+           resolve(done);
+        });
+      });
+    }
+    
+    static waitAnimation(duration) {
+      return new Promise((resolve, reject) => {
+        setTimeout(() => {
+          resolve();
+        }, duration);
       });
     }
   }
