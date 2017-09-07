@@ -118,13 +118,15 @@
     static resolvePageCasemMeta(content) {
       const result = {};
       
-      const $ = cheerio.load(content);
-      
-      $('.casem-meta').each((index, metaElement) => {
-        const name = $(metaElement).attr('data-meta-name');
-        const value = $(metaElement).attr('data-meta-value');
-        result[name] = value;
-      });
+      if (content && _.trim(content)) {
+        const $ = cheerio.load(content);
+
+        $('.casem-meta').each((index, metaElement) => {
+          const name = $(metaElement).attr('data-meta-name');
+          const value = $(metaElement).attr('data-meta-value');
+          result[name] = value;
+        });
+      }
       
       return result;
     }
