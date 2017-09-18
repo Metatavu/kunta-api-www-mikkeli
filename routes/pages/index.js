@@ -134,7 +134,7 @@
                 }
               });
               
-              const featuredImageSrc = featuredImageId ? util.format('/pageImages/%s/%s', page.id, featuredImageId) : null;
+              const featuredImageSrc = featuredImageId ? util.format('/pageImages/%s/%s?size=670', page.id, featuredImageId) : null;
               const bannerSrc = bannerImageId ? util.format('/pageImages/%s/%s', page.id, bannerImageId) : '/gfx/layout/mikkeli-page-banner-default.jpg';
               const pageCasemMeta = Common.resolvePageCasemMeta(contents);
               let title = page.title;
