@@ -42,7 +42,7 @@ block content
           h1
             !=title
           if featuredImageSrc
-            .featured-image(data-lazy-bg-image=featuredImageSrc)
+            img.page-featured-img.lazy(data-original=featuredImageSrc)
           if readSpeakerCustomerId
             .read-speaker-container
               +readSpeaker(readSpeakerCustomerId)

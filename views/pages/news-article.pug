@@ -2,6 +2,10 @@ extends ../layout/contents.pug
 
 include ../includes/mixins.pug
 
+block scripts
+  script(defer="defer",type="text/javascript", src="//cdn.metatavu.io/libs/jquery-lazyload/1.9.7/jquery.lazyload.min.js")
+  script(defer="defer",type="text/javascript", src="/js/news-article.js")
+
 block styles
   link(rel="stylesheet", href="/css/contents-common.min.css")
   link(rel="stylesheet", href="/css/news.min.css")
@@ -52,7 +56,7 @@ block content
                 !=title
           .row
             .col-xs-24.image-container
-              .featured-image(data-lazy-bg-image=imageSrc)
+              img.article-img.lazy(data-original=imageSrc)
           .row
             .col-xs-24
               !=contents

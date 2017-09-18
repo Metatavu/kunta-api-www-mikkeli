@@ -68,7 +68,7 @@
             tags: newsArticle.tags,
             contents: Common.processPageContent('/', newsArticle.contents),
             sidebarContents: Common.getSidebarContent(newsArticle.contents),
-            imageSrc: newsArticle.imageId ? util.format('/newsArticleImages/%s/%s', newsArticle.id, newsArticle.imageId) : null,
+            imageSrc: newsArticle.imageId ? util.format('/newsArticleImages/%s/%s?size=670', newsArticle.id, newsArticle.imageId) : null,
             bannerSrc: bannerSrc,
             siblings: siblings,
             breadcrumbs : [{path: util.format('%s/%s', Common.NEWS_FOLDER, newsArticle.slug), title: newsArticle.title }]
