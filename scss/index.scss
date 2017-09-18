@@ -28,6 +28,7 @@
     
     @media (max-width: $break-small) { 
       height: 300px;
+      padding-top: 0;
     }
 
     .banner-content-container {
@@ -59,7 +60,8 @@
         margin-top: -10px;
         margin-right: -10px;
         
-        @media (max-width: $break-small) { 
+        @media (max-width: $break-small) {
+          @include font-ultra(40px);
           padding-top: 60px;
         }
         
@@ -137,7 +139,6 @@
     
       h3 {
         @include font-ultra(10px);
-        text-transform: uppercase;
         color: $musta;
         max-height: 60px;
         position: relative;
