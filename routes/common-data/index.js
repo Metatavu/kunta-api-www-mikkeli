@@ -35,7 +35,8 @@
             fragmentMap[fragment.slug] = fragment.contents;
           });
 
-          var googleAnalytics = config.get('googleAnalytics:code');
+          const googleAnalytics = config.get('googleAnalytics:code');
+          const liveChat = config.get('liveChat:license');
 
           const incidentUrls = [];
           const incidentsConfig = config.get('incidents:urls');
@@ -59,6 +60,7 @@
               menus: menus,
               fragmentMap: fragmentMap,
               googleAnalytics: googleAnalytics,
+              liveChat: liveChat,
               readSpeakerCustomerId: readSpeakerCustomerId,
               readSpeakerUrl: readSpeakerUrl,
               incidentUrls: incidentUrls.join(','),

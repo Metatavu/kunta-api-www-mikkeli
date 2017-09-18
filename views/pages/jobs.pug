@@ -27,10 +27,10 @@ block content
           if job.id == activeJob.id
             .page-nav-item.active
               a(href=job.id)
-                =job.title
+                !=job.title
           else
             a.page-nav-item(href=job.id)
-              =job.title
+              !=job.title
       .col-xs-24.hidden-lg-up
         a.btn.btn-primary.btn-menu(title='Näytä valikko', data-toggle='collapse', href='#collapse-menu', aria-expanded='false', aria-controls='collapse-menu')
           i.fa.fa-bars
@@ -40,10 +40,10 @@ block content
               if job.id == activeJob.id
                 .page-nav-item.active
                   a(href=job.id)
-                    =job.title
+                    !=job.title
               else
                 a.page-nav-item(href=job.id)
-                  =job.title
+                  !=job.title
       .col-xs-24.col-lg-14
         .page-content
           h1
