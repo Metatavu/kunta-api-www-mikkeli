@@ -44,6 +44,15 @@ head
       })(window,document,'script','https://www.google-analytics.com/analytics.js','ga');
       ga('create', '#{googleAnalytics}', 'auto');
       ga('send', 'pageview');
+  if liveChat
+    script(type='text/javascript').
+      window.__lc = window.__lc || {};
+      window.__lc.license = #{liveChat};
+      (function() {
+      var lc = document.createElement('script'); lc.type = 'text/javascript'; lc.async = true;
+      lc.src = ('https:' == document.location.protocol ? 'https://' : 'http://') + 'cdn.livechatinc.com/tracking.js';
+      var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(lc, s);
+      })();
   block styles
   block scripts
   

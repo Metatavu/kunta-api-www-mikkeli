@@ -9,14 +9,14 @@ mixin breadcrumbs(breadcrumbs)
             !=breadcrumb.title
         else 
           a.breadcrumb-item(href=breadcrumb.path)
-            =breadcrumb.title
+            !=breadcrumb.title
             
 mixin pageMenuItem(item)
   if (item.meta && !item.meta.hideMenuChildren) && ((item.children && item.children.length) || item.hasChildren)
     span.page-nav-item(class=[item.id == id ? 'active' : '', item.children && item.children.length ? 'open' : ''].join(' '))
       a.open-folder(href="#", data-page-id=item.id, data-slug=item.slug)
       a.page-nav-link(href='#')
-        =item.title
+        !=item.title
       ul.child-pages
         if item.children
           each child in item.children
@@ -27,7 +27,7 @@ mixin pageMenuItem(item)
       span.leaf-page(data-page-id=item.id, data-slug=item.slug)
         |&nbsp;
       a.page-nav-link(href='#')
-        =item.title
+        !=item.title
 
 mixin readSpeaker(customerId)
   #readspeaker_button1.rs_skip.rsbtn.rs_preserve
