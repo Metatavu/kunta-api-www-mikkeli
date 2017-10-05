@@ -89,12 +89,13 @@ mixin tile(tile)
   .tile(data-lazy-bg-image=tile.imageSrc)
     if tile.link
       a.tile-link(href=tile.link,target="_blank")
-    .details  
-      h3
-        span
-          !=tile.title
-      .tile-text
-        !=tile.contents
+    if tile.title || tile.contents
+      .details  
+        h3
+          span
+            !=tile.title
+        .tile-text
+          !=tile.contents
       
 block styles
   link(rel="stylesheet", href="/css/index.min.css")
@@ -152,7 +153,7 @@ block content
     .row
       .col-xs.text-xs-center.events-title
         span
-          |Tulevia tapahtumia mikkelissä
+          |Tapahtumakalenteri
     .row
       .col-xs.events-container.no-gutters
         .swiper-container
@@ -215,7 +216,7 @@ block content
                           =announcement.shortDate
                   if announcements && announcements.length
                     .all-link-container
-                      a.all-link(href='/kuulutukset/' + announcements[0].slug) 
+                      a.all-link(href='/kuulutukset/')
                         |Katso kaikki
   .container
     .social-media-items
