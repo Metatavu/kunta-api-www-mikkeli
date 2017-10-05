@@ -37,10 +37,17 @@
       nextButton: '.swiper-button-next',
       prevButton: '.swiper-button-prev',
       paginationClickable: true,
-      slidesPerView: 'auto',
+      slidesPerView: 3,
+      initialSlide: 1,
       centeredSlides: true,
       autoplay: 2500,
-      autoplayDisableOnInteraction: false
+      autoplayDisableOnInteraction: false,
+      breakpoints: {
+        991: {
+          slidesPerView: 1,
+          initialSlide: 0
+        }
+      }
     });
 
     $('.social-media-items').css('opacity', '0');
