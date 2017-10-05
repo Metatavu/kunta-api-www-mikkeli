@@ -89,12 +89,13 @@ mixin tile(tile)
   .tile(data-lazy-bg-image=tile.imageSrc)
     if tile.link
       a.tile-link(href=tile.link,target="_blank")
-    .details  
-      h3
-        span
-          !=tile.title
-      .tile-text
-        !=tile.contents
+    if tile.title || tile.contents
+      .details  
+        h3
+          span
+            !=tile.title
+        .tile-text
+          !=tile.contents
       
 block styles
   link(rel="stylesheet", href="/css/index.min.css")
