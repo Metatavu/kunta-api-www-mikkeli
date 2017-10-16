@@ -1,0 +1,66 @@
+if contacts.length
+  each contact in contacts
+    .col-xs-24.no-gutters.p-t-1
+      .row
+        .col-xs-24
+          h5
+            =contact.displayName
+      if contact.title
+        .row
+          .col-xs-9
+            |Nimike
+          .col-xs-15
+            =contact.title       
+      if contact.emails && contact.emails.length
+        .row
+          .col-xs-9
+            if contact.emails.length === 1
+              |Sähköposti
+            else
+              |Sähköpostit
+          .col-xs-15
+            =contact.emails.join(', ')
+      if contact.phoneNumbers && contact.phoneNumbers.length
+        .row
+          .col-xs-9
+            if contact.phoneNumbers.length === 1
+              |Puhelinnumero
+            else
+              |Puhelinnumerot
+          .col-xs-15
+            =contact.phoneNumbers.join(', ')
+      if contact.contactAddresses && contact.contactAddresses.length
+        .row
+          .col-xs-9
+            if contact.contactAddresses.length === 1
+              |Osoite
+            else
+              |Osoitteet
+          .col-xs-15
+            =contact.contactAddresses.join(', ')
+      if contact.organizationUnits && contact.organizationUnits.length
+        .row
+          .col-xs-9
+            |Yksikkö
+          .col-xs-15
+            =contact.organizationUnits[contact.organizationUnits.length - 1]
+  if paged  
+    .col-xs-24.pages-container.no-gutters
+      if page > 0
+        a.page-prev(data-pagea=page - 1, href='#')
+          |Edellinen sivu
+      else
+        span.page-prev
+          |Edellinen sivu
+      span.page-number
+        |Sivu 
+        =page + 1
+      if !lastPage
+        a.page-next(data-page=page + 1, href='#')
+          |Seuraava sivu
+      else
+        span.page-next
+          |Seuraava sivu
+else
+  p.no-search-results.p-t-1
+    |Hakuehdolla ei löytynyt yhteystietoja

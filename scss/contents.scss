@@ -118,3 +118,39 @@
   }
   
 }
+
+.kunta-api-contact-search {
+  
+  .contact-search-results {
+    min-height: 400px;
+  }
+  
+  &.searching .contact-search-results {
+    background-image: url("/gfx/load.svg");
+    background-size: 64px auto;
+    background-position: center center;
+    background-repeat: no-repeat;
+  }
+  
+  .pages-container {
+    text-align: center;
+    padding-top: 20px;
+    white-space: nowrap;
+
+    .page-prev {
+      padding-right: 15px;
+
+      &::before {
+        content: "< ";
+      }
+    }
+
+    .page-next {
+      padding-left: 15px;
+
+      &::after {
+        content: " >";
+      }
+    }
+  }
+}
