@@ -87,13 +87,83 @@
     }
   
   });
+  
+  $.widget("custom.contactSearch", {
+    
+    _create : function() {
+      this._page = 0;
+      this._lastSearch = null;
+      this.element.append($("<input>").addClass('contact-search form-control m-t-1'));
+      this.element.append($("<div>").addClass('contact-search-results'));
+      this.element.on('click', '.pages-container a.page-prev', $.proxy(this._onPagePrevClick, this));
+      this.element.on('click', '.pages-container a.page-next', $.proxy(this._onPageNextClick, this));
+      this.element.on("keyup", 'input.contact-search', $.proxy(this._onInputKeyUp, this));
+      this._search();
+    },
+    
+    _getSearch: function () {
+      return $.trim(this.element.find('input.contact-search').val());
+    },
+    
+    _search: function () {
+      var search = this._getSearch();
+      
+      this._lastSearch = search;
+      if (!this._searching) {
+        this._searching = true;
+        this.element.addClass('searching');
+        this.element.find('.contact-search-results').empty();
+      
+        $.ajax({
+          url : '/ajax/contactSearch/?page=' + this._page,
+          data : {
+            search: search
+          },
+          success : $.proxy(function(data) {
+            this._searching = false;
+            this.element
+              .find('.contact-search-results')
+              .html(data)
+              .show();
 
+            if (search !== this._getSearch()) {
+              this._search();
+            } else {
+              this.element.removeClass('searching');
+            }
+          }, this)
+        });
+      }
+    },
+    
+    _onInputKeyUp: function (event) {
+      if (this._lastSearch !== this._getSearch()) {
+        this._page = 0;
+        this._search();
+      }
+    },
+    
+    _onPagePrevClick: function (event) {
+      event.preventDefault();
+      this._page = $(event.target).attr('data-page');
+      this._search();
+    },
+    
+    _onPageNextClick: function (event) {
+      event.preventDefault();
+      this._page = $(event.target).attr('data-page');
+      this._search();
+    }
+  
+  });
+  
   $(document).ready(function () {
     $(document.body).contentsNav({
       rootPath: $('.rootPath').val()
     });
     
     $('.casem-history-topic').casemHistoryTopic();
+    $('.kunta-api-contact-search').contactSearch();
     
     $("img.lazy").lazyload();
   });

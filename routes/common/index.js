@@ -80,6 +80,10 @@
       return 5;
     }
     
+    static get SEARCH_CONTACT_PER_TYPE() {
+      return 10;
+    }
+    
     static resolveLinkType(link) {
       if (!link || link.startsWith('#')) {
         return 'NONE';
