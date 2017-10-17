@@ -93,7 +93,7 @@
     _create : function() {
       this._page = 0;
       this._lastSearch = null;
-      this.element.append($("<input>").addClass('contact-search form-control m-t-1'));
+      this.element.append($("<input>").addClass('contact-search form-control m-t-1').attr('placeholder', this.element.attr('data-placeholder')));
       this.element.append($("<div>").addClass('contact-search-results'));
       this.element.on('click', '.pages-container a.page-prev', $.proxy(this._onPagePrevClick, this));
       this.element.on('click', '.pages-container a.page-next', $.proxy(this._onPageNextClick, this));
