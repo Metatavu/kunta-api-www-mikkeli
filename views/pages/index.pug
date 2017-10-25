@@ -16,17 +16,9 @@ mixin event(event)
               .name
                 =event.name 
 
-mixin newsArticleTop(article)
-  .news-article.top-article(data-lazy-bg-image=article.imageSrc)
-    .details
-      .date
-        =article.shortDate
-      .title
-        a(href='/uutiset/' + article.slug)
-          !=article.title
-    .border
 mixin newsArticleThumb(article)
-  .news-article.thumb-article(data-lazy-bg-image=article.imageSrc)
+  .news-article.thumb-article
+    .news-article-image(data-lazy-bg-image=article.imageSrc)
     .details
       .date
         =article.shortDate
@@ -118,10 +110,6 @@ block content
       .col-xs
         .row
           .col-lg-18
-            .row
-              .col-xs.no-gutter-left.top-article-container
-                if news.top
-                  +newsArticleTop(news.top)
             .row
               .col-xs.no-gutter-left.thumb-articles-container
                 .row

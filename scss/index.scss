@@ -201,104 +201,55 @@
   
   position: relative;
   overflow: hidden;
-  background-size: cover;
   
   .date {
     background: $musta;
     color: $valkoinen;
     display: inline-block;
-    @include font-std(16px);
-    padding: 2px 15px;
+    @include font-h9();
+    padding-top: 8px;
+    padding-bottom: 8px;
+    min-width: 110px;
+    text-align: center;
+  }
+
+  .title {
+    a {
+      color: $musta;
+      text-decoration: none;
+      @include font-h6();
+
+      &:hover {
+        text-decoration: underline;
+      }
+    }
   }
 
   .details {
-    position: absolute;
-    bottom: 0;
-    left: 0;
-    right: 0;
-    background: transparentize($valkoinen, 0.25);
-    padding-left: 24px;
-    padding-right: 24px;
-    padding-bottom: 19px;
-    
-    .title {
-      
-      a {
-        color: $musta;
-        text-decoration: none;
-        
-        &:hover {
-          text-decoration: underline;
-        }
-      }
-    
-      @include font-ultra(30px);
-      @media (max-width: $break-x-small) { 
-        @include font-ultra(24px);
-      }
-    }
-    
-    .abstract {
-      color: #000;
-      @include font-std(15px);
-    }
+    background: $news-details-background-color;
+    padding: 20px 20px 10px 20px;
   }
-
-  &.top-article {
-    min-height: 458px;
-    margin-bottom: 15px;
-
-    .date {
-      margin-top: -47px;
-      position: absolute;
-      left: 0;
-    }
-
-    .details {
-      min-height: 155px;
-      padding-top: 19px;
-    }
   
-    &:after {
-      content: '.';
-      color: transparent;
-      font-size: 0;
-      display: block;
-      height: 8px;
-      background-repeat: repeat-x;
-      background-image: url('/gfx/layout/mikkeli-banner-border.png');
-      position: absolute;
-      bottom: 0;
-      left: 0;
-      right: 0;
-    }
+  .news-article-image {
+    min-height: 200px;
+    background-size: cover;
   }
   
   &.thumb-article {
-    min-height: 287px;
     margin-bottom: 15px;
     
     .details {
-      min-height: 120px;
+      min-height: 130px;
       padding-top: 6px;
      
       .date {
-        margin-top: -34px;
+        margin-top: -43px;
         position: absolute;
         left: 0;
       }
       
       .title {
-        font-size: 22px;
-        @media (max-width: $break-x-small) { 
-          font-size: 18px;
-        }
-      }
-
-      .abstract {
-        max-height: 45px;
-        overflow: hidden;
-        text-overflow: ellipsis;
+        padding: 20px 5px;
       }
     }
   }
@@ -313,11 +264,9 @@
       background: $musta;
       color: $valkoinen;
       display: inline-block;
-      @include font-std(16px);
     }
   
     .title {
-      @include font-std(18px);
       padding-left: 12px;
       display: inline-block;
       

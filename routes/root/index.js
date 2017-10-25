@@ -78,8 +78,7 @@
             jobs: jobs,
             announcements: announcements,
             news: {
-              top: news.splice(0, 1)[0],
-              thumbs: news.splice(0, 4),
+              thumbs: news.splice(0, 6),
               texts: news
             }
           }));
