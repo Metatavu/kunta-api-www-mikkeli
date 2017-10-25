@@ -100,8 +100,9 @@
 }
 
 nav.navbar {
-  padding-top: 26px;
-  padding-bottom: 3px;
+  padding-top: 36px;
+  padding-bottom: 18px;
+  padding-right: 20px
 }
 
 .navbar-toggler {
@@ -129,28 +130,43 @@ nav.navbar {
   padding-bottom: 15px;
   
   input {
-    border: 1px solid #ccc;
-    border-radius: 20px;
+    border: none;
+    border-radius: 0px;
     font-size: 12px;
     padding-bottom: 4px;
     padding-left: 10px;
     padding-top: 4px;
     width: 100%;
+    background: $menu-sarch-background-color;
+    color: #fff;
+    height: 30px;
+
+    &:focus {
+      outline: none;
+    }
 
     @media (min-width: $break-small) {
       max-width: 190px;
     }
   }
 
-  .fa-search {
-    margin-left: -25px;
-    color: #aaa;
-    font-size: 15px;
-    margin-top: 1px;
+  .fa-search, .fa-circle-o-notch {
+    margin-left: -35px;
+    color: #fff;
+    font-size: 27px;
+    margin-top: 4px;
+    position: absolute;
     
     &:hover {
       text-decoration: none;
     }
+  }
+  
+  .fa-circle-o-notch {
+    display: none;
+    font-size: 20px;
+    margin-top: 5px;
+    margin-left: -27px;
   }
   
   &.searching {
@@ -158,10 +174,8 @@ nav.navbar {
       visibility: hidden;
     }
     
-    input {
-      background-image: url("/gfx/load-2.svg");
-      background-repeat: no-repeat;
-      background-position: calc(100% - 10px) 4px;
+    .fa-circle-o-notch {
+      display: inline-block;
     }
   }    
 }
@@ -208,7 +222,7 @@ nav.navbar {
 .navbar-light .navbar-nav.nav-bar-primary,
 .navbar-light .navbar-nav.nav-bar-secondary {
   .nav-link {
-    @include font-std(17px);
+    @include font-h9;
     color: #aaa;
     text-transform: uppercase;
   }
