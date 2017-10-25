@@ -260,18 +260,5 @@ footer {
   p {
     @include font-std(15px);
   }
-  
-  &:before {
-    height: 8px;
-    background-repeat: repeat-x;
-    background-image: url("/gfx/layout/mikkeli-banner-border.png");
-    width: 100%;
-    left: 0;
-    right: 0;
-    position: absolute;
-    display: block;
-    content: '.';
-    color: transparent;
-  }
 }
 

@@ -56,7 +56,6 @@ mixin banners-slider(banners)
           li.nav-item
             a.nav-link(href=item.url)
               =item.label
-    .header-border-top
     #banner-slide.carousel.slide(data-ride='carousel')
       .banner-carousel-indicators
         ol.carousel-indicators
@@ -75,7 +74,6 @@ mixin banners-slider(banners)
         a.right.carousel-control(href='#banner-slide', role='button', data-slide='next')
           span.icon-next(aria-hidden='true')
           span.sr-only Next
-    .header-border-bottom
     
 mixin tile(tile)
   .tile(data-lazy-bg-image=tile.imageSrc)
@@ -131,11 +129,6 @@ block content
                .row
                  .col-xs
                    +tile(tile)
-              
-  .container-fluid.no-gutters
-    .row
-      .col-xs
-        .horizontal-line
         
   .container.no-gutters
     .row
