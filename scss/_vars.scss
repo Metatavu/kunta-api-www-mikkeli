@@ -6,35 +6,35 @@ $break-medium: 991px;
 $break-large: 1199px;
 
 @mixin font-ultra($size) {
-  font-family: 'Cairo';
+  font-family: "Cairo";
   font-size: $size;
   font-weight: 900;
   letter-spacing: 1.5px;
 }
 
 @mixin font-std($size) {
-  font-family: 'Titillium Web', sans-serif;
+  font-family: "Titillium Web", sans-serif;
   font-size: $size;
   font-weight: 400;
 }
 
 
 @mixin font-h1() {
-  font-family: 'Questa Grande', sans-serif;
+  font-family: "Questa Grande", sans-serif;
   font-size: 90px;
   line-height: 90px;
   letter-spacing: 0;
 }
 
 @mixin font-h2() {
-  font-family: 'Questa Grande', sans-serif;
+  font-family: "Questa Grande", sans-serif;
   font-size: 35px;
   line-height: 42px;
   letter-spacing: 0;
 }
 
 @mixin font-h3() {
-  font-family: 'Cairo', sans-serif;
+  font-family: "Cairo", sans-serif;
   font-weight: 700;
   font-size: 44px;
   line-height: 54px;
@@ -42,7 +42,7 @@ $break-large: 1199px;
 }
 
 @mixin font-h4() {
-  font-family: 'Cairo', sans-serif;
+  font-family: "Cairo", sans-serif;
   font-weight: 600;
   font-size: 30px;
   line-height: 33px;
@@ -50,7 +50,7 @@ $break-large: 1199px;
 }
 
 @mixin font-h5() {
-  font-family: 'Cairo', sans-serif;
+  font-family: "Cairo", sans-serif;
   font-weight: 700;
   font-size: 24px;
   line-height: 27px;
@@ -58,7 +58,7 @@ $break-large: 1199px;
 }
 
 @mixin font-h6() {
-  font-family: 'Cairo', sans-serif;
+  font-family: "Cairo", sans-serif;
   font-weight: 600;
   font-size: 20px;
   line-height: 21px;
@@ -66,7 +66,7 @@ $break-large: 1199px;
 }
 
 @mixin font-h7() {
-  font-family: 'Cairo', sans-serif;
+  font-family: "Cairo", sans-serif;
   font-weight: 600;
   font-size: 16px;
   line-height: 20px;
@@ -74,7 +74,7 @@ $break-large: 1199px;
 }
 
 @mixin font-h8() {
-  font-family: 'Titillium Web', sans-serif;
+  font-family: "Titillium Web", sans-serif;
   font-weight: 400;
   font-size: 18px;
   line-height: 23px;
@@ -82,7 +82,7 @@ $break-large: 1199px;
 }
 
 @mixin font-h9() {
-  font-family: 'Titillium Web', sans-serif;
+  font-family: "Titillium Web", sans-serif;
   font-weight: 700;
   font-size: 16px;
   line-height: 21px;
@@ -90,7 +90,7 @@ $break-large: 1199px;
 }
 
 @mixin font-h10() {
-  font-family: 'Titillium Web', sans-serif;
+  font-family: "Titillium Web", sans-serif;
   font-weight: 400;
   font-size: 14px;
   line-height: 21px;

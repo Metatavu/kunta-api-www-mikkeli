@@ -127,7 +127,7 @@
     
       h3 {
         @include font-h2();
-        color: #fff;
+        color: $valkoinen;
         margin-bottom: 10px;
       }
       
@@ -135,28 +135,28 @@
         position: absolute;
         bottom: 20px;
         width: 100%;
-        left: 0px;
+        left: 0;
         padding-left: 25px;
         padding-right: 12px;
         
         .fa-angle-right {
           float: right;
-          color: #fff;
-          background: #000;
-          padding: 0px 8px;
+          color: $valkoinen;
+          background: $musta;
+          padding: 0 8px;
           font-size: 26px;
         }
       }
       
       p {
-        color: #fff;
         @include font-h7();
+        color: $valkoinen;
         display: inline-block;
         padding: 0;
         margin: 0;
         
         a {
-          color: #fff;
+          color: $valkoinen;
           text-decoration: none;
           display: inline-block;
           padding: 0;
@@ -167,7 +167,7 @@
   }
   
   .menu-most-popular {
-    background: #000;
+    background: $musta;
     padding: 20px 15px 5px 25px;
     
     h3 {
@@ -198,9 +198,9 @@
 
         .fa-angle-right {
           float: right;
-          background: #fff;
-          color: #000;
-          padding: 0px 8px;
+          background: $valkoinen;
+          color: $musta;
+          padding: 0 8px;
           font-size: 27px;
         }
       }
@@ -407,7 +407,7 @@
 
     .details {
       position: absolute;
-      background: #fff;
+      background: $valkoinen;
       height: 90px;
       left: 0;
       right: 0;
@@ -416,7 +416,7 @@
 
       .date, 
       .place {
-        color: #000;
+        color: $musta;
       }
 
       .date {
@@ -430,7 +430,7 @@
 
       .name {
         @include font-h10;      
-        color: #000;
+        color: $musta;
         white-space: nowrap;
       }
 
@@ -561,7 +561,7 @@
     .content,
     a {
       @include font-h7;
-      color: #fff;
+      color: $valkoinen;
       margin-top: 10px;
     }
     
@@ -569,7 +569,7 @@
       @include font-h4;
       margin-top: 17px;
       text-transform: uppercase;
-      color: #fff;
+      color: $valkoinen;
     }
 
     &.info-block {
@@ -610,13 +610,13 @@
   
     .all-link {
       @include font-h7;
-      border: 3px solid #fff;
+      border: 3px solid $valkoinen;
       padding: 12px 26px;
       margin-left: auto;
       margin-right: auto;
       white-space: nowrap;
       display: inline-block;
-      color: #fff;
+      color: $valkoinen;
     }
   }
 }

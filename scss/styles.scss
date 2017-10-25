@@ -57,7 +57,7 @@
       a {
         vertical-align: middle;
         font-size: 14px;
-        color: #000;
+        color: $musta;
         margin-left: 5px;
         max-width: calc(100% - 40px);
         white-space: nowrap;
@@ -102,7 +102,7 @@
 nav.navbar {
   padding-top: 36px;
   padding-bottom: 18px;
-  padding-right: 20px
+  padding-right: 20px;
 }
 
 .navbar-toggler {
@@ -130,15 +130,15 @@ nav.navbar {
   padding-bottom: 15px;
   
   input {
-    border: none;
-    border-radius: 0px;
+    border: 0;
+    border-radius: 0;
     font-size: 12px;
     padding-bottom: 4px;
     padding-left: 10px;
     padding-top: 4px;
     width: 100%;
     background: $menu-sarch-background-color;
-    color: #fff;
+    color: $valkoinen;
     height: 30px;
 
     &:focus {
@@ -150,9 +150,10 @@ nav.navbar {
     }
   }
 
-  .fa-search, .fa-circle-o-notch {
+  .fa-search,
+  .fa-circle-o-notch {
     margin-left: -35px;
-    color: #fff;
+    color: $valkoinen;
     font-size: 27px;
     margin-top: 4px;
     position: absolute;
@@ -194,7 +195,7 @@ nav.navbar {
   text-align: right;
   
   .fa {
-    color: #fff;
+    color: $valkoinen;
     font-size: 16px;
     background: #52b9e9;
     width: 28px;
@@ -240,7 +241,7 @@ nav.navbar {
 }
 
 footer {
-  color: #fff;
+  color: $valkoinen;
   margin-top: 59px;
   min-height: 280px;
   background: linear-gradient(50deg, $footer-gradient-start, $footer-gradient-end);
@@ -252,7 +253,7 @@ footer {
   a,
   a:hover,
   a:visited {
-    color: #fff;
+    color: $valkoinen;
   }
 
   img {
