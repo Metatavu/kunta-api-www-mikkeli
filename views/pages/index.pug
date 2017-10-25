@@ -47,15 +47,6 @@ mixin banner(banner)
       
 mixin banners-slider(banners) 
   .header-banner
-    if menus['suositut']
-      .banner-popular
-        h3
-          |Suosituimmat      
-        ul
-        each item in menus['suositut'].items
-          li.nav-item
-            a.nav-link(href=item.url)
-              =item.label
     #banner-slide.carousel.slide(data-ride='carousel')
       .banner-carousel-indicators
         ol.carousel-indicators
@@ -125,10 +116,20 @@ block content
                 a.all-news-link(href="/uutiset/")
                   | > Katso kaikki uutiset
           .col-lg-6.tiles.no-gutters
-             each tile in tiles
-               .row
-                 .col-xs
-                   +tile(tile)
+            each tile in tiles
+              .row
+                .col-xs
+                  +tile(tile)
+            if menus['suositut']
+              .menu-most-popular
+                h3
+                  |Suosituimmat      
+                ul
+                each item in menus['suositut'].items
+                  li.nav-item
+                    a.nav-link(href=item.url)
+                      =item.label
+                      i.fa.fa-angle-right
   .container-fluid.event-section
     .container.no-gutters
       .row

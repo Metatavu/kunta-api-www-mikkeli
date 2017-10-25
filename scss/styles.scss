@@ -243,17 +243,20 @@ footer {
   color: #fff;
   margin-top: 59px;
   min-height: 280px;
-  background: $kallio;
+  background: linear-gradient(50deg, $footer-gradient-start, $footer-gradient-end);
+  
+  .footer-container {
+    padding-bottom: 25px; 
+  }
   
   a,
   a:hover,
   a:visited {
     color: #fff;
-    text-decoration: underline;
   }
 
   img {
-    margin-top: 64px;
+    margin-top: 55px;
     margin-bottom: 10px;
   }
 
@@ -266,13 +269,13 @@ footer {
   }
   
   h4 {
-    @include font-ultra(16px);
+    @include font-h9;
     text-transform: uppercase;
-    margin-top: 62px;
+    margin-top: 50px;
   }
 
   p {
-    @include font-std(15px);
+    @include font-h9;
   }
 }
 
