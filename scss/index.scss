@@ -485,15 +485,13 @@
 .content-blocks-container {
   padding-top: 40px;
   padding-bottom: 70px;
-  background-image: url("/gfx/layout/mikkeli-index-blocks-background.jpg");
   margin-bottom: 30px;
   background-repeat: no-repeat;
   background-size: cover;
   
   .content-block {
-    background: rgba(255, 255, 255, 0.8);
     text-align: center;
-    padding-top: 20px;
+    padding-top: 48px;
     padding-bottom: 35px;
     min-height: 455px;
     position: relative;
@@ -512,77 +510,45 @@
       display: inline-block;
     }
 
-    .content a {
-      @include font-ultra(16px);
+    .content, a {
+      @include font-h7;
+      color: #fff;
+      margin-top: 10px;
+    }
+    
+    .title {
+      margin-top: 17px;
+      text-transform: uppercase;
+      @include font-h4;
+      color: #fff;
     }
 
     &.info-block {
+      background: linear-gradient(to top right, $osallistu-gradient-start, $osallistu-gradient-end);
+
       .icon {
         background-image: url("/gfx/layout/mikkeli-osallistuvaikuta-icon.png");
       }
-    
-      .title, .content a {
-        color: #779c40;
-      }
-    
-      .content a:before {
-        content: '< ';
-      }
-    
-      .content a:after {
-        content: ' >';
-      }
-    
-      .all-link {
-        background-color: #779c40;
-      } 
     }
   
     &.jobs-block {
+      background: linear-gradient(to top right, $kuntarekry-gradient-start, $kuntarekry-gradient-end);
+      
       .icon {
         background-image: url("/gfx/layout/mikkeli-kunta-rekry-icon.png");
       }
     
-      .title, .content a {
-        color: #2b50a4;
-      }
-    
       .content a {
         text-transform: uppercase;
-      }
-    
-      .all-link {
-        background-color: #2b50a4;
       }
     }
   
     &.announcements-block {
+      background: linear-gradient(to top right, $kuulutukset-gradient-start, $kuulutukset-gradient-end);
+
       .icon {
         background-image: url("/gfx/layout/mikkeli-kuulutukset-icon.png");
       }
-    
-      .title, .content a {
-        color: $musta;
-      }
-    
-      .content a {
-        text-transform: uppercase;
-      }
-    
-      .all-link {
-        background-color: $musta;
-      }
-    }
-    
-    .title {
-      margin-top: 25px;
-      text-transform: uppercase;
-      line-height: 32px;
-      @include font-ultra(32px);
-    }
-  
-    .content {
-      margin-top: 10px;
     }
   
     .content-block-row {
@@ -593,22 +559,16 @@
       }
     }
   
-    .all-link-container {
-      position: absolute;
-      bottom: -30px;
-      left: 0;
-      right: 0;
-    }
-  
     .all-link {
-      padding: 20px 25px;
+      border: 3px solid #fff;
+      padding: 12px 26px;
       margin-left: auto;
       margin-right: auto;
       white-space: nowrap;
       display: inline-block;
       line-height: 20px;
-      @include font-ultra(20px);
-      color: $valkoinen;
+      @include font-h7;
+      color: #fff;
     }
   }
 }

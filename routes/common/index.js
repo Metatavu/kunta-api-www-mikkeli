@@ -29,7 +29,7 @@
     }
     
     static get ANNOUNCEMENT_COUNT() { 
-      return 5;
+      return 3;
     }
     
     static get ANNOUNCEMENT_COUNT_PAGE() { 
