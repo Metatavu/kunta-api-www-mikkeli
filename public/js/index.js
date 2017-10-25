@@ -1,36 +1,7 @@
 (function () {
   'use strict';
-  
-  function fitTiles() {
-    $('.tile h3').bigtext({
-      maxfontsize: 28
-    });
-
-    $('.tile .details').each(function (index, detailsElement) {
-      var detailsHeight = $(detailsElement).height() - parseInt($(detailsElement).css('padding-top'));
-      var h3Height = $(detailsElement).find('h3').height();
-      var textHeight = detailsHeight - h3Height; 
-      var textElement = $(detailsElement).find('.tile-text');
-      var fontSize = parseFloat(textElement.css('font-size'));
-      var step = 0.05;
-      
-      while (fontSize > 1 && textElement.outerHeight(true) > textHeight) {
-        fontSize -= step;
-        $(detailsElement).find('.tile-text p').css('font-size', fontSize + 'px');        
-      }
-    });
-
-    $('.tile .details').css('visibility', 'visible');
-  }
-  
-  $(window).resize(function () {
-    $('.tile .details').css('visibility', 'hidden');
-    $('.tile .tile-text p').css('font-size', 'initial');
-    fitTiles();
-  });
 
   $(document).ready(function () {
-    fitTiles();
     
     new Swiper('.swiper-container', {
       pagination: '.swiper-pagination',
