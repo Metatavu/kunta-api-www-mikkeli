@@ -129,29 +129,31 @@ block content
                .row
                  .col-xs
                    +tile(tile)
-        
-  .container.no-gutters
-    .row
-      .col-xs.text-xs-center.events-title
-        span
-          |Tapahtumakalenteri
-    .row
-      .col-xs.events-container.no-gutters
-        .swiper-container
-          .swiper-wrapper
-            each event in events
-              +event(event)
-          .swiper-pagination
+  .container-fluid.event-section
+    .container.no-gutters
+      .row
+        .col-xs.text-xs-center.events-title
+          span
+            |Tapahtumakalenteri
+      .row
+        .col-xs.events-container.no-gutters
+          .swiper-container
+            .swiper-wrapper
+              each event in events
+                +event(event)
           .swiper-button-next
           .swiper-button-prev
-        .row
-          .col-xs.text-xs-center.all-events-container
-            span
-              |Katso kaikki tapahtumat
-            span
-              | 
-            a(href="http://www.mikkelinyt.fi",target="_blank")
-              |www.mikkelinyt.fi
+          .row
+            .col-xs
+              .swiper-pagination
+          .row
+            .col-xs.text-xs-center.all-events-container
+              span
+                |Katso kaikki tapahtumat
+              span
+                | 
+              a(href="http://www.mikkelinyt.fi",target="_blank")
+                |www.mikkelinyt.fi
               
   .container-fluid.no-gutters
     .row
