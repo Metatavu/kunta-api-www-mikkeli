@@ -16,17 +16,9 @@ mixin event(event)
               .name
                 =event.name 
 
-mixin newsArticleTop(article)
-  .news-article.top-article(data-lazy-bg-image=article.imageSrc)
-    .details
-      .date
-        =article.shortDate
-      .title
-        a(href='/uutiset/' + article.slug)
-          !=article.title
-    .border
 mixin newsArticleThumb(article)
-  .news-article.thumb-article(data-lazy-bg-image=article.imageSrc)
+  .news-article.thumb-article
+    .news-article-image(data-lazy-bg-image=article.imageSrc)
     .details
       .date
         =article.shortDate
@@ -55,16 +47,6 @@ mixin banner(banner)
       
 mixin banners-slider(banners) 
   .header-banner
-    if menus['suositut']
-      .banner-popular
-        h3
-          |Suosituimmat      
-        ul
-        each item in menus['suositut'].items
-          li.nav-item
-            a.nav-link(href=item.url)
-              =item.label
-    .header-border-top
     #banner-slide.carousel.slide(data-ride='carousel')
       .banner-carousel-indicators
         ol.carousel-indicators
@@ -83,7 +65,6 @@ mixin banners-slider(banners)
         a.right.carousel-control(href='#banner-slide', role='button', data-slide='next')
           span.icon-next(aria-hidden='true')
           span.sr-only Next
-    .header-border-bottom
     
 mixin tile(tile)
   .tile(data-lazy-bg-image=tile.imageSrc)
@@ -96,13 +77,12 @@ mixin tile(tile)
             !=tile.title
         .tile-text
           !=tile.contents
+          i.fa.fa-angle-right
       
 block styles
   link(rel="stylesheet", href="/css/index.min.css")
 
 block scripts
-  script(defer="defer", type="text/javascript", src="//cdnjs.cloudflare.com/ajax/libs/textfit/2.3.1/textFit.min.js")
-  script(defer="defer", type="text/javascript", src="//cdn.metatavu.io/libs/bigtext/0.1.8/bigtext.js")
   script(defer="defer", type="text/javascript", src="https://cdnjs.cloudflare.com/ajax/libs/masonry/4.1.1/masonry.pkgd.min.js")
   script(defer="defer", type="text/javascript", src="https://cdnjs.cloudflare.com/ajax/libs/jquery.imagesloaded/4.1.1/imagesloaded.pkgd.min.js")
   script(defer="defer", type="text/javascript", src="/js/index.js")
@@ -118,10 +98,6 @@ block content
       .col-xs
         .row
           .col-lg-18
-            .row
-              .col-xs.no-gutter-left.top-article-container
-                if news.top
-                  +newsArticleTop(news.top)
             .row
               .col-xs.no-gutter-left.thumb-articles-container
                 .row
@@ -139,38 +115,45 @@ block content
                 a.all-news-link(href="/uutiset/")
                   | > Katso kaikki uutiset
           .col-lg-6.tiles.no-gutters
-             each tile in tiles
-               .row
-                 .col-xs
-                   +tile(tile)
-              
-  .container-fluid.no-gutters
-    .row
-      .col-xs
-        .horizontal-line
-        
-  .container.no-gutters
-    .row
-      .col-xs.text-xs-center.events-title
-        span
-          |Tapahtumakalenteri
-    .row
-      .col-xs.events-container.no-gutters
-        .swiper-container
-          .swiper-wrapper
-            each event in events
-              +event(event)
-          .swiper-pagination
+            each tile in tiles
+              .row
+                .col-xs
+                  +tile(tile)
+            if menus['suositut']
+              .menu-most-popular
+                h3
+                  |Suosituimmat      
+                ul
+                each item in menus['suositut'].items
+                  li.nav-item
+                    a.nav-link(href=item.url)
+                      =item.label
+                      i.fa.fa-angle-right
+  .container-fluid.event-section
+    .container.no-gutters
+      .row
+        .col-xs.text-xs-center.events-title
+          span
+            |Tapahtumakalenteri
+      .row
+        .col-xs.events-container.no-gutters
+          .swiper-container
+            .swiper-wrapper
+              each event in events
+                +event(event)
           .swiper-button-next
           .swiper-button-prev
-        .row
-          .col-xs.text-xs-center.all-events-container
-            span
-              |Katso kaikki tapahtumat
-            span
-              | 
-            a(href="http://www.mikkelinyt.fi",target="_blank")
-              |www.mikkelinyt.fi
+          .row
+            .col-xs
+              .swiper-pagination
+          .row
+            .col-xs.text-xs-center.all-events-container
+              span
+                |Katso kaikki tapahtumat
+              span
+                | 
+              a(href="http://www.mikkelinyt.fi",target="_blank")
+                |www.mikkelinyt.fi
               
   .container-fluid.no-gutters
     .row
