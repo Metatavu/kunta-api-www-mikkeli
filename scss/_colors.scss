@@ -1,6 +1,14 @@
 @charset "utf-8";
 
+$menu-sarch-background-color: #e5e5e5;
+
+$event-calendar-background-color: #f7f7f7;
+$event-inactive-bullet-color: #63bae7;
+$event-active-bullet-color: #a6147f;
+$event-arrow-color: #214d8e;
+
 $announcementlist-separator-line-color: #aaaaaa;
+$news-details-background-color: #f7f7f7;
 
 $musta: rgb(0, 0, 0);
 $valkoinen: rgb(255, 255, 255);
@@ -13,3 +21,13 @@ $orvokki: rgb(167, 22, 128);
 $kallio: rgb(113, 118, 125);
 $aamurusko: rgb(240, 126, 38);
 $marjapuuro: rgb(217, 76, 112);
+
+$osallistu-gradient-start: #5ca740;
+$osallistu-gradient-end: #d2d92a;
+$kuntarekry-gradient-start: #224c8e;
+$kuntarekry-gradient-end: #62bae9;
+$kuulutukset-gradient-start: #a61680;
+$kuulutukset-gradient-end: #d84c6f;
+
+$footer-gradient-start: #224c8e 60%;
+$footer-gradient-end: #62bae9 100%;
