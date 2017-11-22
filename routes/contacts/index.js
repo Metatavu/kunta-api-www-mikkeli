@@ -17,12 +17,7 @@
       const search = req.query.search;
       const page = parseInt(req.query.page)||0;
       const perPage = Common.SEARCH_CONTACT_PER_TYPE;
-      
-      const searchTerms = _.map(search.replace(/\ {1,}/g, ' ').split(' '), (term) => {
-        return `+(${term}*)`;
-      });
-      
-      const searchString = searchTerms.join(' ');
+      const searchString = Common.processFreeTextSearch(search);
       
       new ModulesClass(config)
         .contacts.search(searchString, page * perPage, perPage + 1, 'DISPLAY_NAME')
