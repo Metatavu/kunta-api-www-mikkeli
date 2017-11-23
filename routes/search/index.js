@@ -44,7 +44,7 @@
     
     app.get('/ajax/search/pages', (req, res) => {
       const perPage = Common.SEARCH_PAGES_PER_PAGE;
-      const search = req.query.search;
+      const search = Common.processFreeTextSearch(req.query.search);
       const preferLanguages = req.headers['accept-language'];
       const page = parseInt(req.query.page)||0;
       
@@ -90,7 +90,7 @@
     
     app.get('/ajax/search/files', (req, res) => {
       const perPage = Common.SEARCH_FILES_PER_PAGE;
-      const search = req.query.search;
+      const search = Common.processFreeTextSearch(req.query.search);
       const page = parseInt(req.query.page)||0;
       
       new ModulesClass(config)
@@ -108,7 +108,7 @@
     
     app.get('/ajax/search/news', (req, res) => {
       const perPage = Common.SEARCH_NEWS_PER_PAGE;
-      const search = req.query.search;
+      const search = Common.processFreeTextSearch(req.query.search);
       const page = parseInt(req.query.page)||0;
       
       new ModulesClass(config)
