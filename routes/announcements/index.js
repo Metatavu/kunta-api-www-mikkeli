@@ -67,7 +67,7 @@
           let announcements = data[0].splice(0, perPage).map(announcement => {
             return Object.assign(announcement, {
               "shortDate": moment(announcement.published).format("D.M.YYYY"),
-              "shortContent": _.truncate($.load(announcement.contents).text(), {
+              "shortContent": _.truncate($.load(announcement.contents||'').text(), {
                 'length': 200,
               })
             });
