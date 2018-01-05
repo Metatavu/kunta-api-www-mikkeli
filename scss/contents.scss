@@ -45,14 +45,14 @@
   }
   
   .service-hour {
-      .service-hour-additional-info {
-        display: inline;
+    .service-hour-additional-info {
+      display: inline;
         
-        &::before {
-          content: ' - ';
-        }
-        
+      &::before {
+        content: " - ";
       }
+        
+    }
   }
   
 }

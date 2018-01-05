@@ -118,8 +118,8 @@
   }
   
   a {
-    color: $mustikka;
     @include font-h9();
+    color: $mustikka;
   }
   
   li {
@@ -129,7 +129,7 @@
     list-style-type: none;
     
     &::before {
-      content: '\2022';
+      content: "\2022";
       position: absolute;
       margin-left: -40px;
       font-size: 14px; 
@@ -178,7 +178,7 @@
   
   .open-folder {
     position: absolute;
-    right: 0px;
+    right: 0;
     width: 34px;
     height: 24px;
     background-image: url("/gfx/layout/mikkeli-menu-closed.png");
@@ -303,14 +303,14 @@
   .sidebar-block {
 
     a {
-      color: $mustikka;
       @include font-h9();
+      color: $mustikka;
     }
       
     h3 {
+      @include font-h9();
       color: $mustikka;
       text-transform: uppercase;
-      @include font-h9();
     }
     
     h4 {
