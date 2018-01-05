@@ -101,14 +101,40 @@
   }
  
   h3 {
-    margin-top: 35px;
-    margin-bottom: 25px;
-    padding: 0;
-    font-size: 24px;
+    @include font-h13();
+    padding-bottom: 10px;
+  }
+  
+  h4 {
+    @include font-h8();
+  }
+  
+  h5 {
+    @include font-y13();
   }
  
   p {
-    font-size: 15px;
+    @include font-h11();
+  }
+  
+  a {
+    @include font-h9();
+    color: $mustikka;
+  }
+  
+  li {
+    @include font-h11();
+    margin-top: 8px;
+    margin-bottom: 8px;
+    list-style-type: none;
+    
+    &::before {
+      content: "\2022";
+      position: absolute;
+      margin-left: -40px;
+      font-size: 14px; 
+    }
+    
   }
 
   .featured-image {
@@ -120,6 +146,22 @@
     background-position: center;
   }
  
+}
+
+.open-folder,
+.leaf-page {
+  padding-right: 10px;
+  position: absolute;
+  margin-left: -15px;
+  
+  &:hover, 
+  &:focus {
+    text-decoration: none;
+  }
+}
+
+.open > .child-pages > li {
+  display: block;
 }
 
 .page-nav {
@@ -134,26 +176,113 @@
     margin-bottom: 0;
   }
   
+  .open-folder {
+    position: absolute;
+    right: 0;
+    width: 34px;
+    height: 24px;
+    background-image: url("/gfx/layout/mikkeli-menu-closed.png");
+    background-position: center;
+    background-repeat: no-repeat;
+  }
+  
+  .open {
+      
+    > .open-folder {
+      background-image: url("/gfx/layout/mikkeli-menu-open.png");
+    }
+    
+    > .child-pages {
+      padding-top: 5px; 
+    }
+    
+  }
+  
+  .active {
+    > .open-folder {
+      background-image: url("/gfx/layout/mikkeli-menu-closed-active.png");
+      height: 32px;
+    }
+    
+    &.open > .open-folder {
+      background-image: url("/gfx/layout/mikkeli-menu-open-active.png");
+    }
+    
+    > .child-pages {
+      padding-top: 0; 
+    }
+  }
+  
+  .loading > .open-folder {
+    background-image: url("/gfx/load-2.svg");
+    background-size: 21px 21px;
+  }
+  
   .page-nav-item {
     display: block;
     padding-top: 5px;
     padding-bottom: 5px;
     color: #363636;
+    position: relative;
+    border-top: 1px solid $menu-border-color;
     
     @media (max-width: $break-medium) {
       margin-right: 50px;
     }
     
     a {
-      color: #363636;
+      color: $kallio;
     }
     
-    &.active > a {
-      color: $orvokki;
-      font-weight: bold;
+    &.active {
+      padding-top: 0;
+      padding-bottom: 0;
+      
+      > a {        
+        color: $valkoinen;
+        background-color: $marjapuuro;
+        display: block;
+        padding: 5px 10px;
+        margin-left: -10px;
+      }
+
+    }
+    
+    &.has-children {
+      > a.page-nav-link {        
+        padding-right: 28px;
+      }
+    }
+    
+    &.open {
+      padding-bottom: 0;
     }
   }
+  
+  > .page-nav-item:first-of-type {
+    border-top: 0;
+  }
    
+}
+    
+.hidden-lg-up {
+  
+  .page-nav {
+    margin-top: 50px;
+  }
+  
+  .page-nav-item {
+    width: 100%;
+  }
+  
+}
+
+.child-pages {
+  padding-left: 10px;
+  
+  > li {
+    display: none;
+  }
 }
 
 .sidebar {
@@ -172,16 +301,27 @@
   }
 
   .sidebar-block {
-    
+
+    a {
+      @include font-h9();
+      color: $mustikka;
+    }
+      
     h3 {
+      @include font-h9();
+      color: $mustikka;
+      text-transform: uppercase;
+    }
+    
+    h4 {
+      @include font-h9();
       color: $musta;
-      @include font-ultra(24px);
-      margin-top: 35px;
+      padding-top: 5px;
+      padding-bottom: 5px;
     }
     
     p {
-      letter-spacing: 0;
-      font-size: 15px;
+      @include font-h9();
     }
   }
 }

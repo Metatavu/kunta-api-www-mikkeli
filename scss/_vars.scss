@@ -96,3 +96,39 @@ $break-large: 1199px;
   line-height: 21px;
   letter-spacing: 0;
 }
+
+@mixin font-h11() {
+  font-family: "Titillium Web", sans-serif;
+  font-weight: 400;
+  font-size: 17px;
+  line-height: 24px;
+  letter-spacing: 0;
+  color: #4d4d4d;
+}
+
+@mixin font-h12() {
+  font-family: "Arial", sans-serif;
+  font-weight: 400;
+  font-size: 41px;
+  line-height: 55px;
+  letter-spacing: 0;
+  color: #737373;
+}
+
+@mixin font-h13() {
+  font-family: "Cairo", sans-serif;
+  font-weight: 700;
+  font-size: 20px;
+  line-height: 21px;
+  letter-spacing: 0;
+}
+
+@mixin font-y13() {
+  font-family: "Arial", sans-serif;
+  font-weight: 400;
+  font-size: 17px;
+  font-style: italic;
+  line-height: 24px;
+  letter-spacing: 0;
+  color: #62bae9;
+}
