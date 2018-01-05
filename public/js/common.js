@@ -105,9 +105,7 @@
       $(element).lazyBackgroundImage();
     });
     
-    $('.nav-search-container').menuSearch();
-    
-    $('.page-nav-item.active').parents('.page-nav-item.open').addClass('active');
+    $('.nav-search-container').menuSearch();    
   });
   
 }).call(this);

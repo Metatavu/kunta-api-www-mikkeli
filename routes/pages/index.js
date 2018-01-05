@@ -116,11 +116,11 @@
             .pages.listImages(page.id)
             .callback(function(pageData) {
               var contents = pageData[0];
-              var breadcrumbs = pageData[1];
+              let breadcrumbs = pageData[1];
               var rootFolderTitle = rootPage.title;
               var openTreeNodes = pageData[3];
               var images = pageData[4];
-              var activeIds = _.map(breadcrumbs, (breadcrumb) => {
+              let activeIds = _.map(breadcrumbs, (breadcrumb) => {
                 return breadcrumb.id;
               });
               
