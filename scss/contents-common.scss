@@ -80,7 +80,7 @@
 .page-content {
   font-size: 95%;
   margin-bottom: 45px;
-
+  
   h1 {
     color: $kallio;
     @include font-ultra(40px);
@@ -302,7 +302,8 @@
   }
 
   .sidebar-block {
-
+    font-family: "Titillium Web", sans-serif;
+  
     a {
       @include font-h9();
       color: $mustikka;
@@ -326,8 +327,9 @@
       margin-bottom: 0;
     }
     
-    p {
-      @include font-h11();
+    p, 
+    small {
+      @include font-h9n();
     }
   }
 }
