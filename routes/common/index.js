@@ -134,7 +134,7 @@
       
       return result;
     }
-
+    
     static processPageContent(currentPage, content) {
       if (!content) {
         return '';
@@ -145,33 +145,11 @@
         var href = $(link).attr('href');
         $(link).attr('href', Common.processLink(currentPage, href));
       });
-
-      $('.kunta-api-image[data-image-type="content-image"]').each((index, img) => {
-        const pageId = $(img).attr('data-page-id');
-        const imageId = $(img).attr('data-attachment-id');
-        const width = parseInt($(img).attr('width'));
-        const height = parseInt($(img).attr('height'));
-        const size = width && height ? Math.min(width, height) : width || height || null;
-                
-        const src = util.format('/pageImages/%s/%s%s', pageId, imageId, size ? util.format('?size=%s', size) : '');
-        $(img)
-          .removeAttr('data-page-id')
-          .removeAttr('data-attachment-id')
-          .removeAttr('data-organization-id')
-          .removeAttr('data-image-type')
-          .attr('src', src);
-      });
-
-      $('img[src]').each((index, img) => {
-        var src = $(img).attr('src');
-        $(img)
-          .addClass('lazy')
-          .removeAttr('src')
-          .removeAttr('srcset')
-          .attr('data-original', src);
-      });
       
       $('aside').remove();
+        
+      Common.processPageDomImages($);
+      Common.lazyPageDomImages($);
 
       return $.html();
     }
@@ -182,6 +160,7 @@
       }
       
       const $ = cheerio.load(content);
+      Common.processPageDomImages($);
       
       $('aside').find('*[contenteditable]').removeAttr('contenteditable');
 
@@ -193,6 +172,35 @@
         .removeAttr('height');
 
       return $('aside').html();
+    }
+    
+    static processPageDomImages($) {
+      $('.kunta-api-image[data-image-type="content-image"]').each((index, img) => {
+        const pageId = $(img).attr('data-page-id');
+        const imageId = $(img).attr('data-attachment-id');
+        const width = parseInt($(img).attr('width'));
+        const height = parseInt($(img).attr('height'));
+        const size = width && height ? Math.min(width, height) : width || height || null;
+        const src = util.format('/pageImages/%s/%s%s', pageId, imageId, size ? util.format('?size=%s', size) : '');
+        
+        $(img)
+          .removeAttr('data-page-id')
+          .removeAttr('data-attachment-id')
+          .removeAttr('data-organization-id')
+          .removeAttr('data-image-type')
+          .attr('src', src);
+      });
+    }
+    
+    static lazyPageDomImages($) {
+      $('img[src]').each((index, img) => {
+        const src = $(img).attr('src');
+        $(img)
+          .addClass('lazy')
+          .removeAttr('src')
+          .removeAttr('srcset')
+          .attr('data-original', src);
+      });
     }
     
     static plainTextParagraphs(text) {
