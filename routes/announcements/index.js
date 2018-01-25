@@ -45,7 +45,13 @@
             sidebarContents: Common.getSidebarContent(announcement.contents),
             bannerSrc: bannerSrc,
             siblings: siblings,
-            breadcrumbs : [{path: util.format('%s/%s', Common.ANNOUNCEMENTS_FOLDER, announcement.slug), title: announcement.title }]
+            breadcrumbs : [{
+              path: Common.ANNOUNCEMENTS_FOLDER, 
+              title: 'Kuulutukset'
+            }, {
+              path: util.format('%s/%s', Common.ANNOUNCEMENTS_FOLDER, announcement.slug), 
+              title: announcement.title
+            }]
           }));
 
         }, function(err) {
