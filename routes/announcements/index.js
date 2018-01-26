@@ -42,7 +42,6 @@
             slug: announcement.slug,
             title: announcement.title,
             contents: Common.processPageContent('/', announcement.contents),
-            sidebarContents: Common.getSidebarContent(announcement.contents),
             bannerSrc: bannerSrc,
             siblings: siblings,
             breadcrumbs : [{
