@@ -37,7 +37,7 @@
 
           var bannerSrc = '/gfx/layout/mikkeli-page-banner-default.jpg';
 
-           res.render('pages/announcement.pug', Object.assign(req.kuntaApi.data, {
+          res.render('pages/announcement.pug', Object.assign(req.kuntaApi.data, {
             id: announcement.id,
             slug: announcement.slug,
             title: announcement.title,
