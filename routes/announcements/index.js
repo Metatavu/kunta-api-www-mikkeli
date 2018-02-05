@@ -37,15 +37,20 @@
 
           var bannerSrc = '/gfx/layout/mikkeli-page-banner-default.jpg';
 
-           res.render('pages/announcement.pug', Object.assign(req.kuntaApi.data, {
+          res.render('pages/announcement.pug', Object.assign(req.kuntaApi.data, {
             id: announcement.id,
             slug: announcement.slug,
             title: announcement.title,
             contents: Common.processPageContent('/', announcement.contents),
-            sidebarContents: Common.getSidebarContent(announcement.contents),
             bannerSrc: bannerSrc,
             siblings: siblings,
-            breadcrumbs : [{path: util.format('%s/%s', Common.ANNOUNCEMENTS_FOLDER, announcement.slug), title: announcement.title }]
+            breadcrumbs : [{
+              path: Common.ANNOUNCEMENTS_FOLDER, 
+              title: 'Kuulutukset'
+            }, {
+              path: util.format('%s/%s', Common.ANNOUNCEMENTS_FOLDER, announcement.slug), 
+              title: announcement.title
+            }]
           }));
 
         }, function(err) {
