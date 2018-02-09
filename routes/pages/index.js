@@ -152,7 +152,7 @@
                   title: title,
                   rootFolderTitle: rootFolderTitle,
                   contents: Common.processPageContent(path, contents),
-                  sidebarContents: Common.getSidebarContent(contents),
+                  sidebarContents: Common.getSidebarContent(path, contents),
                   breadcrumbs: breadcrumbs,
                   featuredImageSrc: featuredImageSrc,
                   activeIds: activeIds,
