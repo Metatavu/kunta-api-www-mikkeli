@@ -135,32 +135,43 @@
       return result;
     }
     
+    /**
+     * Processes links within dom
+     * 
+     * @param {String} currentPage current page
+     * @param {Cheerio} $ dom
+     */
+    static processDomLinks(currentPage, $) {
+      $('a[href]').each((index, link) => {
+        const href = $(link).attr('href');
+        $(link).attr('href', Common.processLink(currentPage, href));
+      });
+    }
+    
     static processPageContent(currentPage, content) {
       if (!content) {
         return '';
       }
 
       const $ = cheerio.load(content);
-      $('a[href]').each((index, link) => {
-        var href = $(link).attr('href');
-        $(link).attr('href', Common.processLink(currentPage, href));
-      });
       
       $('aside').remove();
         
+      Common.processDomLinks(currentPage, $);
       Common.processPageDomImages($);
       Common.lazyPageDomImages($);
 
       return $.html();
     }
 
-    static getSidebarContent(content) {
+    static getSidebarContent(currentPage, content) {
       if (!content) {
         return '';
       }
       
       const $ = cheerio.load(content);
       Common.processPageDomImages($);
+      Common.processDomLinks(currentPage, $);
       
       $('aside').find('*[contenteditable]').removeAttr('contenteditable');
 
