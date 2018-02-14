@@ -231,6 +231,8 @@
       }
       
       const $ = cheerio.load(html);
+      $('script,embed,style,.embed-container,iframe').remove();
+      
       return $.text().replace(/\s+/g, ' ');
     }
     
