@@ -1,0 +1,107 @@
+@charset "UTF-8";
+
+@import "vars";
+
+html,body {
+  background-repeat: no-repeat;
+  width: 100%;
+  height: 100%;
+  background: #a91a7c;
+  background: -moz-linear-gradient(45deg, #a91a7c 0%, #ee7b27 100%);
+  background: -webkit-linear-gradient(45deg, #a91a7c 0%,#ee7b27 100%);
+  background: linear-gradient(45deg, #a91a7c 0%,#ee7b27 100%);
+  filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#a91a7c', endColorstr='#ee7b27',GradientType=1 );
+}
+
+.metaform-paged .metaform {
+  section.ui-effects-placeholder {
+    position: absolute;
+  }
+}
+
+.metaform-container {
+  padding-top: 150px;
+  color: #fff;
+  
+  section {
+    width: 100%;
+  }
+  
+  .metaform-pages-container {
+    @include font-h6();
+    font-size: 24px;
+    line-height: 27px;
+  }
+  
+  label {
+    @include font-h6();
+    display: inline;
+    font-size: 24px;
+    line-height: 27px;
+  }
+  
+  .metaform-next,
+  .metaform-prev {
+    display: none;
+    background: #000;
+    color: #fff;
+    text-decoration: none;
+    font-size: 22px;
+    line-height: 0;
+    margin-right: 6px;
+    padding-top: 4px;
+    padding-bottom: 2px;
+  }
+
+  .metaform-prev {
+    padding-left: 5px;
+    padding-right: 8px;
+  }
+
+  .metaform-next {
+    padding-left: 8px;
+    padding-right: 5px;
+  }
+  
+  fieldset {
+    padding-left: 50px;
+  }
+  
+  h2 {
+    @include font-h2-titillum-italic();
+    padding-left: 10px;
+    padding-top: 10px;
+    padding-bottom: 25px;
+  }
+  
+  .header-page-container {
+    text-align: center;
+    
+    h1 {
+      @include font-h1();
+      margin-bottom: 65px;
+    }
+    
+    p {
+      @include font-h4();
+      margin-bottom: 55px;
+    }
+    
+    .start-query-btn {
+      @include font-h4();
+      background-color: #000;
+      color: #fff;
+      padding: 20px 25px;
+      font-weight: 700;
+      border: 0;
+      border-radius: 0;
+    }
+  }
+  
+}
+
+.container {
+  @media (min-width: 1200px) {
+    max-width: 1000px;
+  }
+}

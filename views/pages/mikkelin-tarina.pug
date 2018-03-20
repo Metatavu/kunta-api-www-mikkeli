@@ -1,0 +1,17 @@
+doctype html
+html
+  include ../includes/head.pug
+  block scripts
+    script(defer="defer",type="text/javascript", src="//cdn.metatavu.io/libs/metaform-fields/0.6.17/js/form.js")
+    script(defer="defer",type="text/javascript", src="//cdn.metatavu.io/libs/metaform-fields/0.6.17/js/form-utils.js")
+    script(defer="defer",type="text/javascript", src="//cdn.metatavu.io/libs/metaform-fields/0.6.17/js/modernizr.js")
+    script(defer="defer",type="text/javascript", src="//cdn.metatavu.io/libs/metaform-fields/0.6.17/js/metaform-client.min.js")
+    script(defer="defer",type="text/javascript", src="/js/mikkelin-tarina.js")
+
+  block styles
+    link(rel="stylesheet", href="//cdn.metatavu.io/libs/metaform-fields/0.6.16/css/form.min.css")
+    link(rel="stylesheet", href="/css/mikkelin-tarina.min.css")
+
+  body   
+    .container
+      !=contents
