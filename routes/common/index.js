@@ -118,7 +118,24 @@
 
       return link;
     }
+
+    static resolveKuntaApiPageMeta(content) {
+      const result = {};
+      
+      if (content && _.trim(content)) {
+        const $ = cheerio.load(content);
+
+        $('.kunta-api-meta').each((index, metaElement) => {
+          const name = $(metaElement).attr('name');
+          const value = $(metaElement).attr('value');
+          result[name] = value;
+        });
+      }
+      
+      return result;
+    }
     
+    /* @deprecated CaseM support has been removed from kunta-api */
     static resolvePageCasemMeta(content) {
       const result = {};
       
