@@ -29,12 +29,14 @@
 
     for (var i = 0; i < valuesArray.length; i++) {
       var name = valuesArray[i].name;
-      var value = valuesArray[i].value;
-      values[name] = value;
+      if (name !== 'page' && name !== 'page-count') {
+        var value = valuesArray[i].value;
+        values[name] = value;
+      }
     }
 
     $.post('/ajax/metaform', {id: id, data: values}, function(res) {
-      cb(res);
+      cb(res, values);
     });
   }
   
@@ -44,9 +46,8 @@
     $(metaform).metaform('option', 'animation.show.options.direction', delta > 0 ? 'right' : 'left');
     var page = getMetaformPage(metaform) + delta;
     if (page > getMetaformPageCount($(metaform))) {
-      saveMetaformReply(metaform, function(res) {
-        alert('Saved');
-        //TODO: results page
+      saveMetaformReply(metaform, function(res, values) {
+        window.location.href = '/mikkelin-tarina?q=' + btoa(JSON.stringify(values));
       });
     } else {
       setMetaformPage(metaform, page);
