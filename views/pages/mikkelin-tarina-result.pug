@@ -2,8 +2,33 @@ doctype html
 html
   include ../includes/head.pug
   block scripts
+    script(defer="defer",type="text/javascript", src="/js/mikkelin-tarina-results.js")
   block styles
     link(rel="stylesheet", href="/css/mikkelin-tarina.min.css")
-  body   
-    .container
+  body.story-results
+    .top-bar
+      .container
+        .row
+          .col-xs-9
+            img.mikkeli-logo(src="/gfx/mikkelintarina/mikkeli-logo.png")
+          .col-xs-15
+            .top-bar-btn-container
+              h4.hashtag #mikkelintarina
+              a.redo-btn(href="/sisalto/mikkelin-tarina") Tee kysely uudelleen
+              h3
+                i.fa.fa-facebook-square.social-share-btn(data-share-url="https://www.facebook.com/sharer/sharer.php?u={{url}}")
+                i.fa.fa-twitter.social-share-btn(data-share-url="https://twitter.com/intent/tweet/?url={{url}}&hashtags=mikkelintarina")
+    .container-fluid
+      .row
+        .col-xs-8
+          .results-image
+        .col-xs-16
+          .story-container
+            !=story
+            br
+            br
+            h3 Jaa tuloksesi
+              i.fa.fa-facebook-square.social-share-btn(data-share-url="https://www.facebook.com/sharer/sharer.php?u={{url}}")
+              i.fa.fa-twitter.social-share-btn(data-share-url="https://twitter.com/intent/tweet/?url={{url}}&hashtags=mikkelintarina")
+            p Millaisia mikkeliläisiä kaverisi ovat? Kutsu heidät mukaan rakentamaan Mikkelin brändiä.
       

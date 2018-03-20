@@ -12,6 +12,17 @@ html
     link(rel="stylesheet", href="//cdn.metatavu.io/libs/metaform-fields/0.6.16/css/form.min.css")
     link(rel="stylesheet", href="/css/mikkelin-tarina.min.css")
 
-  body   
+  body
+    .top-bar
+      .container
+        .row
+          .col-xs-9
+            img.mikkeli-logo(src="/gfx/mikkelintarina/mikkeli-logo.png")
+          .col-xs-15
+            .top-bar-btn-container
+              h4.hashtag.white #mikkelintarina
+              h3
+                i.fa.fa-facebook-square.social-share-btn(data-share-url="https://www.facebook.com/sharer/sharer.php?u={{url}}")
+                i.fa.fa-twitter.social-share-btn(data-share-url="https://twitter.com/intent/tweet/?url={{url}}&hashtags=mikkelintarina")
     .container
       !=contents
