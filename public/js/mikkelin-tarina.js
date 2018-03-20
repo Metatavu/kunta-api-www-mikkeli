@@ -1,10 +1,10 @@
-(() => {
+(function() {
   'use strict';
   
-  function setMetaformPage(metaform, page) {
+  function setMetaformPage(metaform, pageParam) {
     var pageInput = $(metaform).find('input[name="page"]');
     var max = parseInt(metaform.find('input[name="page-count"]').val());
-    var page = Math.min(Math.max((parseInt(page) || 0), 0), max);
+    var page = Math.min(Math.max((parseInt(pageParam) || 0), 0), max);
     pageInput.val(page).change();
     metaform.closest('.metaform-container').find('.metaform-page').text(page);
     if (page === 0) {
@@ -97,7 +97,7 @@
       var metaform = input.closest('.metaform');
       changeMetaformPage(metaform, 1);
     });
-  };
+  }
 
   $(document).on('metaformcreate', function (event, ui) {
     var metaform = $(event.target);
@@ -143,4 +143,4 @@
     });
   });
   
-})();
+}).call(this);

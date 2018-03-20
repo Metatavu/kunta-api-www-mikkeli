@@ -34,19 +34,20 @@ html,body {
   }
   
   label {
-    display: inline;
     @include font-h6();
+    display: inline;
     font-size: 24px;
     line-height: 27px;
   }
   
-  .metaform-next,.metaform-prev {
+  .metaform-next,
+  .metaform-prev {
     display: none;
     background: #000;
     color: #fff;
     text-decoration: none;
     font-size: 22px;
-    line-height: 0px;
+    line-height: 0;
     margin-right: 6px;
     padding-top: 4px;
     padding-bottom: 2px;
@@ -87,10 +88,10 @@ html,body {
     }
     
     .start-query-btn {
+      @include font-h4();
       background-color: #000;
       color: #fff;
       padding: 20px 25px;
-      @include font-h4();
       font-weight: 700;
       border: 0;
       border-radius: 0;
