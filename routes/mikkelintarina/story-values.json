@@ -1,4 +1,15 @@
 {
+  "images": {
+    "question": "minka-moton-valitset",
+    "values": {
+      "ookoo": "alamakihiihtaja1.jpg",
+      "hyvatulee": "letkanvetaja2.jpg",
+      "nohittomiksei": "umpihankihiihtaja1.jpg",
+      "saha": "vapaatyyli1.jpg",
+      "jaksaa-jaksaa": "vesihiitaja1.jpg",
+      "kylla-se-siita": "ylamakihiihtaja1.jpg"
+    }
+  },
   "ingres": {
     "question": "minka-moton-valitset",
     "values": {
