@@ -236,6 +236,8 @@ html,body {
 
   .form-check {
 
+    margin-left: 50px;
+
     label.form-check-label {
       padding-left: 0;
     }
@@ -274,6 +276,11 @@ html,body {
     @include font-h6();
     font-size: 24px;
     line-height: 27px;
+    margin-left: 10px;
+
+    @media (max-width: $break-small) { 
+      margin-left: 0;
+    }
   }
   
   label {
