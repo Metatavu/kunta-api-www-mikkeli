@@ -11,7 +11,7 @@ html
         .row
           .col-sm-9
             img.mikkeli-logo(src="/gfx/mikkelintarina/mikkeli-logo.jpg")
-          .col-sm-15
+          .col-sm-15.social-button-col
             .top-bar-btn-container
               a.redo-btn(href="/sisalto/mikkelin-tarina") Tee kysely uudelleen
               h4.hashtag #mikkelintarina
@@ -31,6 +31,7 @@ html
             h3 Jaa tuloksesi
               i.fa.fa-facebook-square.social-share-btn(data-share-url="https://www.facebook.com/sharer/sharer.php?u={{url}}")
               i.fa.fa-twitter.social-share-btn(data-share-url="https://twitter.com/intent/tweet/?url={{url}}&hashtags=mikkelintarina")
+              a.fa.fa-download.download-image(download='mikkelin-tarina.jpg')
             p Millaisia mikkeliläisiä kaverisi ovat? Kutsu heidät mukaan rakentamaan Mikkelin brändiä.
         .col 
           canvas(id="canvas", width=1920,height=1080, style="display: none")

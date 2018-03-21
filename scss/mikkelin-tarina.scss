@@ -102,8 +102,8 @@ html,body {
   h4 {
     @include font-h2-titillum-italic();
     color: #d84c6e;
-    font-size: 33px;
-    line-height: 33px;
+    font-size: 28px;
+    line-height: 28px;
     margin-right: 30px;
     
     &.white {
@@ -133,11 +133,11 @@ html,body {
     }
     
     @media (max-width: 1200px) { 
-      font-size: 30px;
+      font-size: 28px;
     }
     
     @media (max-width: $break-x-small) {
-      font-size: 30px;
+      font-size: 28px;
     }
   }
   
@@ -159,6 +159,12 @@ html,body {
 }
 
 .story-results {
+  
+  .social-button-col {
+    @media (max-width: $break-x-small) {
+      padding: 0;
+    }
+  }
   
   .results-image {
     height: 100vh;
@@ -184,6 +190,7 @@ html,body {
     
     @media (max-width: 991px) { 
       padding-top: 530px;
+      padding-left: 0;
     }
     
     h2 {
@@ -192,6 +199,11 @@ html,body {
       line-height: 55px;
       color: #b12672;
       margin-bottom: 35px;
+      
+      @media (max-width: $break-x-small) {
+        font-size: 30px;
+        line-height: 35px;
+      }
     }
     
     h3 {
@@ -202,6 +214,8 @@ html,body {
 
       .fa {
         margin-left: 15px;
+        text-decoration: none;
+        cursor: pointer;
       }
       
     }
