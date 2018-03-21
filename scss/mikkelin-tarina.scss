@@ -207,8 +207,14 @@ html,body {
 
   .form-check {
 
+    label.form-check-label {
+      padding-left: 0;
+    }
+
     input {
       opacity: 0;
+      position: absolute;
+      width: 0;
     }
   
     label::before {
@@ -223,8 +229,10 @@ html,body {
       border-radius: $metaform-radio-width / 2;
       border-color: $metaform-radio-color;
       border-style: solid;
+      position: absolute;
+      margin-left: -40px;
     }
-
+    
     &:hover label::before,
     input:active + label::before,
     input:checked + label::before {
