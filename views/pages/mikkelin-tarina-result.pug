@@ -9,21 +9,21 @@ html
     .top-bar
       .container
         .row
-          .col-xs-9
+          .col-sm-9
             img.mikkeli-logo(src="/gfx/mikkelintarina/mikkeli-logo.jpg")
-          .col-xs-15
+          .col-sm-15
             .top-bar-btn-container
-              h4.hashtag #mikkelintarina
               a.redo-btn(href="/sisalto/mikkelin-tarina") Tee kysely uudelleen
+              h4.hashtag #mikkelintarina
               h3
                 i.fa.fa-facebook-square.social-share-btn(data-share-url="https://www.facebook.com/sharer/sharer.php?u={{url}}")
                 i.fa.fa-twitter.social-share-btn(data-share-url="https://twitter.com/intent/tweet/?url={{url}}&hashtags=mikkelintarina")
                 a.fa.fa-download.download-image(download='mikkelin-tarina.jpg')
     .container-fluid
-      .row
-        .col-xs-8
+      .row.negative-margin
+        .col-lg-8
           .results-image(style="background-image:url(/gfx/mikkelintarina/" + image + ")")
-        .col-xs-16
+        .col-lg-16
           .story-container
             !=story
             br
