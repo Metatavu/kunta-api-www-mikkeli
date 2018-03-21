@@ -118,6 +118,9 @@ html,body {
     
     .fa {
       margin-left: 15px;
+      color: #000;
+      text-decoration: none;
+      cursor: pointer;
     }
     
     @media (max-width: $break-x-small) {

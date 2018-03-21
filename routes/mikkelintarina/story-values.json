@@ -24,15 +24,15 @@
   "question-2": {
     "question": "mikkelilainen-on",
     "values": {
-      "nautiskelija": "<p>Olet nautiskelija, joka ymmärtää hyvän päälle, mutta haluaa jakaa hyvää muillekin. ",
-      "humoristi": "<p>Olet armoitettu humoristi. Ja älykäskin vielä. Tekemisessäsi on aina huumoria ja pikkaisen perkelettä. ",
-      "rauhallinen": "<p>Voit näyttää rauhalliselta, mutta todellisuudessa keskität huomiosi vain oikeisiin asioihin. ",
-      "puurtaja": "<p>Pidät itseäsi sitkeänä puurtajana, ja sinultahan sujuu mikä vain. Menet eteenpäin varmasti kuin dieselveturi. ",
-      "elamysahmatti": "<p>Koet asioita täysillä ja rohmuat uusia kokemuksia. Elämys per päivä pitää lääkärin loitolla. ",
-      "vaaraleuka": "<p>Olet huumorin suurlähettiläs. Osaat ottaa ilon irti ja juttu lentää kuin leppäkeihäs. Sinuun jäädään suusta kiinni. ",
-      "ajattelija": "<p>Olet ajattelija ja älykkö. Valokuvauksellisen ulkonäkösi ei pidä antaa hämätä. Sisältä olet vieläkin upeampi. ",
-      "tekija": "<p>Saatat esittää, ettet tee mitään, mutta jälki puhuu puolestaan. Ja sitähän syntyy. Olet vikkelä kuin talkkari jäisellä peltikatolla. ",
-      "rajatapaus": "<p>Olet optimistinen ja rohkea. Haluat aina antaa mahikselle tsäänssin, sillä koskaan ei voi tietää, mitä se tuo tullessaan. "
+      "nautiskelija": "<p class=\"story-text\">Olet nautiskelija, joka ymmärtää hyvän päälle, mutta haluaa jakaa hyvää muillekin. ",
+      "humoristi": "<p class=\"story-text\">Olet armoitettu humoristi. Ja älykäskin vielä. Tekemisessäsi on aina huumoria ja pikkaisen perkelettä. ",
+      "rauhallinen": "<p class=\"story-text\">Voit näyttää rauhalliselta, mutta todellisuudessa keskität huomiosi vain oikeisiin asioihin. ",
+      "puurtaja": "<p class=\"story-text\">Pidät itseäsi sitkeänä puurtajana, ja sinultahan sujuu mikä vain. Menet eteenpäin varmasti kuin dieselveturi. ",
+      "elamysahmatti": "<p class=\"story-text\">Koet asioita täysillä ja rohmuat uusia kokemuksia. Elämys per päivä pitää lääkärin loitolla. ",
+      "vaaraleuka": "<p class=\"story-text\">Olet huumorin suurlähettiläs. Osaat ottaa ilon irti ja juttu lentää kuin leppäkeihäs. Sinuun jäädään suusta kiinni. ",
+      "ajattelija": "<p class=\"story-text\">Olet ajattelija ja älykkö. Valokuvauksellisen ulkonäkösi ei pidä antaa hämätä. Sisältä olet vieläkin upeampi. ",
+      "tekija": "<p class=\"story-text\">Saatat esittää, ettet tee mitään, mutta jälki puhuu puolestaan. Ja sitähän syntyy. Olet vikkelä kuin talkkari jäisellä peltikatolla. ",
+      "rajatapaus": "<p class=\"story-text\">Olet optimistinen ja rohkea. Haluat aina antaa mahikselle tsäänssin, sillä koskaan ei voi tietää, mitä se tuo tullessaan. "
     }
   },
   "question-4": {

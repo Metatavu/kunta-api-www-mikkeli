@@ -10,7 +10,7 @@ html
       .container
         .row
           .col-xs-9
-            img.mikkeli-logo(src="/gfx/mikkelintarina/mikkeli-logo.png")
+            img.mikkeli-logo(src="/gfx/mikkelintarina/mikkeli-logo.jpg")
           .col-xs-15
             .top-bar-btn-container
               h4.hashtag #mikkelintarina
@@ -18,6 +18,7 @@ html
               h3
                 i.fa.fa-facebook-square.social-share-btn(data-share-url="https://www.facebook.com/sharer/sharer.php?u={{url}}")
                 i.fa.fa-twitter.social-share-btn(data-share-url="https://twitter.com/intent/tweet/?url={{url}}&hashtags=mikkelintarina")
+                a.fa.fa-download.download-image(download='mikkelin-tarina.jpg')
     .container-fluid
       .row
         .col-xs-8
@@ -31,4 +32,7 @@ html
               i.fa.fa-facebook-square.social-share-btn(data-share-url="https://www.facebook.com/sharer/sharer.php?u={{url}}")
               i.fa.fa-twitter.social-share-btn(data-share-url="https://twitter.com/intent/tweet/?url={{url}}&hashtags=mikkelintarina")
             p Millaisia mikkeliläisiä kaverisi ovat? Kutsu heidät mukaan rakentamaan Mikkelin brändiä.
+        .col 
+          canvas(id="canvas", width=1920,height=1080, style="display: none")
+          img(id="image",src="/gfx/mikkelintarina/" + image, style="display: none")
       
