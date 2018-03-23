@@ -5,6 +5,7 @@
   'use strict';
 
   const storyValuesLookUp = require('./story-values.json');
+  const cheerio = require('cheerio');
 
   module.exports = (app, config, ModulesClass) => {
     
@@ -30,10 +31,18 @@
       const imageLookup = storyValuesLookUp.images;
       const imageValue = normalizeQuestionValue(formValues[imageLookup.question]);
       const image = imageLookup.values[imageValue] || 'alamakihiihtaja1.jpg';
+      const storyHtml = story.join('');
+      const $ = cheerio.load(storyHtml);
+      const storyTitle = $('h2').text();
+      const storyContent = $('.story-text').text();
+      const siteUrl = `${req.protocol}://${req.get('host')}`;
 
       res.render('pages/mikkelin-tarina-result.pug', {
-        story: story.join(''),
-        image: image
+        story: storyHtml,
+        image: image,
+        storyTitle: storyTitle,
+        storyContent: storyContent,
+        siteUrl: siteUrl
       });
     });
   };

@@ -5,6 +5,9 @@ html
   block scripts
     script(defer="defer",type="text/javascript", src="/js/mikkelin-tarina-results.js")
   block styles
+    meta(property='og:title', content=storyTitle)
+    meta(property='og:description', content=storyContent)
+    meta(property='og:image', content=siteUrl + "/gfx/mikkelintarina/" + image)
     link(rel="stylesheet", href="/css/mikkelin-tarina.min.css")
   body.story-results
     .top-bar
