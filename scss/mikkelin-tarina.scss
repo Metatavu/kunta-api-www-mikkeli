@@ -36,7 +36,7 @@ html,body {
 }
 
 .loading-screen {
-   @include font-h2();
+  @include font-h2();
   font-size: 48px;
   line-height: 55px;
   display: none;
