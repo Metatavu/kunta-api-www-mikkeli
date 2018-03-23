@@ -1,3 +1,4 @@
+- var hashtag = "ihanmikkelistä";
 doctype html
 html
   include ../includes/head.pug
@@ -23,9 +24,10 @@ html
             img.mikkeli-logo(src="/gfx/mikkelintarina/mikkeli-logo.jpg")
           .col-sm-15
             .top-bar-btn-container
-              h4.hashtag.white #mikkelintarina
+              h4.hashtag.white
+                ='#' + hashtag
               h3
                 i.fa.fa-facebook-square.social-share-btn(data-share-url="https://www.facebook.com/sharer/sharer.php?u={{url}}")
-                i.fa.fa-twitter.social-share-btn(data-share-url="https://twitter.com/intent/tweet/?url={{url}}&hashtags=mikkelintarina")
+                i.fa.fa-twitter.social-share-btn(data-share-url="https://twitter.com/intent/tweet/?url={{url}}&hashtags=" + hashtag)
     .container
       !=contents

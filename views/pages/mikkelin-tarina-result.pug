@@ -1,3 +1,4 @@
+- var hashtag = "ihanmikkelistä";
 doctype html
 html
   include ../includes/head.pug
@@ -10,14 +11,15 @@ html
       .container
         .row
           .col-sm-9
-            img.mikkeli-logo(src="/gfx/mikkelintarina/mikkeli-logo.jpg")
+            img.mikkeli-logo(src="/gfx//mikkeli-logo.jpg")
           .col-sm-15.social-button-col
             .top-bar-btn-container
               a.redo-btn(href="/sisalto/mikkelin-tarina") Tee kysely uudelleen
-              h4.hashtag #mikkelintarina
+              h4.hashtag
+                ='#' + hashtag
               h3
                 i.fa.fa-facebook-square.social-share-btn(data-share-url="https://www.facebook.com/sharer/sharer.php?u={{url}}")
-                i.fa.fa-twitter.social-share-btn(data-share-url="https://twitter.com/intent/tweet/?url={{url}}&hashtags=mikkelintarina")
+                i.fa.fa-twitter.social-share-btn(data-share-url="https://twitter.com/intent/tweet/?url={{url}}&hashtags=" + hashtag)
                 a.fa.fa-download.download-image(download='mikkelin-tarina.jpg')
     .container-fluid
       .row.negative-margin
@@ -30,7 +32,7 @@ html
             br
             h3 Jaa tuloksesi
               i.fa.fa-facebook-square.social-share-btn(data-share-url="https://www.facebook.com/sharer/sharer.php?u={{url}}")
-              i.fa.fa-twitter.social-share-btn(data-share-url="https://twitter.com/intent/tweet/?url={{url}}&hashtags=mikkelintarina")
+              i.fa.fa-twitter.social-share-btn(data-share-url="https://twitter.com/intent/tweet/?url={{url}}&hashtags=" + hashtag)
               a.fa.fa-download.download-image(download='mikkelin-tarina.jpg')
             p Millaisia mikkeliläisiä kaverisi ovat? Kutsu heidät mukaan rakentamaan Mikkelin brändiä.
         .col 
