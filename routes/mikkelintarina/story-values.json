@@ -15,7 +15,7 @@
     "values": {
       "kylla-se-siita": "<h2>Olet yltiöpäinen ylämäkihiihtäjä. Elämä voi olla joskus haasteellista, mutta kaikesta on selvitty.</h2>",
       "jaksaa-jaksaa": "<h2>Olet vallaton vesihiihtäjä. Isot pärskeet ja taidokkaat kuviot ovat sinun juttusi.</h2>",
-      "ookoo": "<h2>Olet selvästi alamäkihiihtäjä. Painovoima tuo alaspäin, ja viisas hyödyntää sen. Menossasi on vauhdin hurmaa ja otat aina haasteet vastaan.</h2>",
+      "ookoo": "<h2>Olet aito alamäkihiihtäjä. Painovoima tuo alaspäin, ja viisas hyödyntää sen. Menossasi on vauhdin hurmaa ja otat aina haasteet vastaan.</h2>",
       "saha": "<h2>Olet vapaan tyylin taitaja. Sinulla on kaikki tyylit hallussa. Odotat vain seuraavaa uutta juttua, jota pääsisit kokeilemaan.</h2>",
       "hyvatulee": "<h2>Olet letkan vetäjä. Näytät mallia muille, miten hommat hoidetaan. Eihän tänne ihmettelemään ole tultu.</h2>",
       "nohittomiksei": "<h2>Olet peloton umpihankihiihtäjä, joka ei tarvitse valmiita latuja ja havuja, vaan haet jatkuvasti uusia reittejä ja näkymiä.</h2>"
@@ -40,7 +40,7 @@
     "values": {
       "mutkaton": "Et anna mutkien hidastaa kulkua, vaan valitset linnuntien – liitäen yli esteiden, suoraan kohti määränpäätä. ",
       "hinee": "On vaikea olla nöyrä, kun on niin älyttömän hyvä – tämän sinä, jos kuka, tiedät ihan omasta kokemuksesta. ",
-      "peloton": "Kiidät rotsi auki kohti hyppyrin nokkaa ja ponnistat kaikin voimin lentoon -– alastulokoordinaatteja tietämättä. ",
+      "peloton": "Kiidät rotsi auki kohti hyppyrin nokkaa ja ponnistat kaikin voimin lentoon – alastulokoordinaatteja tietämättä. ",
       "jaarapainen": "Järkälemäisellä tahdonvoimallasi menet läpi harmaan kiven ja poljet käyntiin vaikka tulpattoman mopon. ",
       "leppoisa": "Leppoisana tyyppinä voit näyttää lutuiselta, mutta olet kuitenkin täysi peto hommiin ryhtyessäsi. ",
       "kesyttamaton": "Lykit eteenpäin kesyttämättömällä eläimen raivolla. Sinua on vaikea saada kiinni edes pisimmällä suorilla. ",
@@ -51,12 +51,12 @@
     "question": "jos-ruotsin-kunigas-tulisi-mikkeliin-veisit-hanet-ensimmaisena",
     "values": {
       "torille": "Istuskelet auringossa Mikkelin torilla, ",
-      "paamajamuseoon": "Ylpeänä Mikkelin historiasta käyt fiilistelemässä päämajamuseossa, ",
+      "paamajamuseoon": "Ylpeänä Mikkelin historiasta käyt fiilistelemässä Päämajamuseossa, ",
       "naisvuorelle": "Kiipeät Naisvuorelle tiirailemaan kaupunkia lintuperspektiivistä, ",
       "stellaan-chillaamaan": "Seurankipeänä menet Stellaan chillaamaan, ",
-      "saimaalle": "Saimaa on sinulle Mikkelin sydän – sydämesi suorastaan sykkii laineiden tahdissa – ",
+      "saimaalle": "Luonto on toinen kotisi – sydämesi sykkii laineiden tahdissa – ",
       "astuvansalmen-kalliomaalauksille": "Kun haluat palata juurillesi, käyt katsomassa esi-isien maalauksia Astuvansalmella, ",
-      "ostamaan-tuliaiset-kotivaelle-kenkaverosta": "Kenkäverosta käyt ostamassa kunnon käsityötä, mitä ei tahdo enää saada mistään, ",
+      "ostamaan-tuliaiset-kotivaelle-kenkaverosta": "Kenkäverosta käyt ostamassa kunnon käsitöitä, joita ei tahdo enää saada mistään, ",
       "jurassic-rockiin": "Käyt kuluttamassa kulttuuria kesätapahtumissa, ",
       "jukureiden-matsiin": "Voitonnälkäisenä menet Jukureiden matsiin, ",
       "graanille-prismaan": "Lauantaisin käyt Graanin Prismassa,  "
@@ -93,8 +93,8 @@
       "ookoo": "Mottosi mukaan sinulle käy kaikki. Mitä oudompi juttu, sitä innokkaammin olet mukana.</p>",
       "kylla-se-siita": "Mottosi todistaa, että olet luonteeltasi optimisti – uskosi onnistumiseen on vankkumaton kuin eteläsavolainen kallio.</p>",
       "jaksaa-jaksaa": "Mottosi kertoo vastustamattomasta sinnikkyydestä. Et heitä helpolla pyyhettä kehään.</p>",
-      "nohittomiksei": "Mottosi kertoo, että osaat panna kaiken peliin, kun tulee tiukka paikka. Huumorilla ja sisulla selviydyt mistä vain.</p>",
-      "hyvatulee": "Mottosi on “no hitto miksei” ja olet siinä aivan oikeassa, että kaikkea uutta kannattaa kokeilla. Se voi yllättää.</p>",
+      "hyvatulee": "Mottosi kertoo, että osaat panna kaiken peliin, kun tulee tiukka paikka. Huumorilla ja sisulla selviydyt mistä vain.</p>",
+      "nohittomiksei": "Mottosi on “no hitto miksei” ja olet siinä aivan oikeassa, että kaikkea uutta kannattaa kokeilla. Se voi yllättää.</p>",
       "saha": "Mottosi todistaa, että käyt luovalla kierteellä. Kierroksia löytyy ja oletkin ajatuksiltasi usein edellä muita.</p>"
     }
   }
