@@ -127,6 +127,10 @@
     if (metaform.closest('.metaform-paged').length) {
       createPagedMetaform(metaform);
     }
+
+    if (metaform.closest('.mikkelintarina-contact').length) {
+      $(metaform).find('input[name="phase"]').val('form').change();
+    }
   });
   
   $(document).on('click', '.metaform-next,.start-query-btn', function (event) {
@@ -171,5 +175,23 @@
         .metaform();     
     });
   });
+
+  $(document).on("click", '.mikkelintarina-contact input[type="submit"]', function (e) {
+    var metaform = $(e.target).closest('.metaform-container').find('.metaform');
+    var valid = typeof metaform[0].checkValidity === 'function' ? metaform[0].checkValidity() : true;    
+    if (valid) {
+      $(metaform)
+        .find('input[type="submit"]')
+        .replaceWith($('<h4 style="display:inline;padding-left:15px;">Tallennetaan <i class="fa fa-spin fa-spinner"/></h4>'));
+        
+      e.preventDefault();
+      
+      saveMetaformReply(metaform, function(res, values) {
+        $(metaform).find('input[name="phase"]').val('result').change();
+      });  
+    }
+
+  });
+
   
 }).call(this);

@@ -232,6 +232,30 @@ html,body {
       color: #000;
     }
   }
+
+  .btn {
+    @include font-h6();
+    background-color: #000;
+    color: #fff;
+    padding: 15px 20px;
+    font-weight: 700;
+    border: 0;
+    border-radius: 0;
+    margin-right: 15px;
+    margin-top: 27px;
+
+    .fa {
+      padding-left: 10px;
+      font-size: 30px;
+      vertical-align: sub;
+    }
+    
+    @media (max-width: 991px) { 
+      display: block;
+      text-align: center;
+    }
+  }
+
 }
 
 .metaform-paged .metaform {
@@ -241,21 +265,8 @@ html,body {
   }
 }
 
-.metaform-container {
-  padding-top: 250px;
-  color: #fff;
-  
-  @media (max-width: $break-small) { 
-    padding-top: 180px;
-  }
-  
-  section {
-    width: 100%;
-  }
+.metaform-paged {
 
-  fieldset {
-    width: 100%;
-  }
 
   .form-check {
 
@@ -304,6 +315,23 @@ html,body {
     @media (max-width: $break-small) { 
       margin-left: 0;
     }
+  }
+}
+
+.metaform-container {
+  padding-top: 250px;
+  color: #fff;
+  
+  @media (max-width: $break-small) { 
+    padding-top: 180px;
+  }
+  
+  section {
+    width: 100%;
+  }
+
+  fieldset {
+    width: 100%;
   }
   
   label {
@@ -422,4 +450,78 @@ html,body {
   @media (min-width: 1200px) {
     max-width: 1000px;
   }
+}
+
+.lottery-container {
+  
+  h2 {
+    color: #000;
+    margin-bottom: 0;
+    padding-bottom: 5px;
+  }
+
+  p,
+  label {
+    @include font-h6();
+    color: #000;
+    line-height: 30px;
+  }
+
+  label {
+    padding-bottom: 4px;
+  }
+
+  a {
+    @include font-h6();
+    color: #d84c6f;
+    padding-left: 20px;
+    white-space: nowrap;
+  }
+
+  input[type='submit'] {
+    @include font-h6();
+    background-color: #d84c6f;
+    color: #fff;
+    padding: 15px 20px;
+    font-weight: 700;
+    border: 0;
+    border-radius: 0;
+    margin-right: 15px;
+  }
+  
+}
+
+.mikkelintarina-contact {
+  min-height: 100vh;
+}
+
+.footer-logos {
+  text-align: right;
+  position: absolute;
+  right: 50px;
+  margin-top: -130px;
+  max-width: 400px;
+
+  @media (max-width: $break-small) {
+    display: none;
+  }
+
+  @media (max-width: $break-large) {
+    max-width: 250px;
+  }
+
+  img {
+    padding-left: 50px;
+    max-height: 100px; 
+
+    @media (max-width: 1590px) {
+      margin-top: 30px;
+    }
+
+    @media (max-width: $break-large) {
+      max-height: 50px;
+      margin-top: 30px;
+    }
+  }
+
 }
