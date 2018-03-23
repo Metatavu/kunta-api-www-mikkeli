@@ -1,6 +1,6 @@
 (function() {
   'use strict';
-  
+
   function setMetaformPage(metaform, pageParam) {
     var pageInput = $(metaform).find('input[name="page"]');
     var max = parseInt(metaform.find('input[name="page-count"]').val());
@@ -38,6 +38,14 @@
     $.post('/ajax/metaform', {id: id, data: values}, function(res) {
       cb(res, values);
     });
+  }
+
+  function checkDisabled() {
+    if ($('.metaform-paged section:visible .form-check-input').is(':checked')) {
+      $('.metaform-next').removeClass('disabled');
+    } else {
+      $('.metaform-next').addClass('disabled');
+    }
   }
   
   function changeMetaformPage(metaform, delta) {
@@ -92,13 +100,24 @@
       }
     });
 
-    $(document).on('change', '.form-check-input', function (event) {
+    $(document).on('change', 'input[type="radio"]', function (event) {
       event.preventDefault();
-      $('body').css('height', $('body').height() + 'px');
-      $('.metaform-next,.metaform-prev').hide();
-      var input = $(event.target);
-      var metaform = input.closest('.metaform');
-      changeMetaformPage(metaform, 1);
+
+      var currentSection = $('.metaform-paged section:visible');
+      var radios = $(currentSection).find('input[type="radio"]');
+      var hasEmptyRadios = radios.length > 0 ? radios.find(':checked').length > 0 : false;
+      var inputs = $(currentSection).find('input[type="text"],textarea');
+      var hasEmptyInputs = inputs.length > 0 ? !inputs.val() : false;
+
+      if (!hasEmptyInputs && !hasEmptyRadios) {
+        $('body').css('height', $('body').height() + 'px');
+        $('.metaform-next, .metaform-prev').hide();
+        var input = $(event.target);
+        var metaform = input.closest('.metaform');
+        changeMetaformPage(metaform, 1);
+      }
+
+      checkDisabled();
     });
   }
 
@@ -134,11 +153,7 @@
       $('.metaform-next,.metaform-prev').show();
     }
 
-    if ($('.metaform-paged section:visible .form-check-input').is(':checked')) {
-      $('.metaform-next').removeClass('disabled');
-    } else {
-      $('.metaform-next').addClass('disabled');
-    }
+    checkDisabled();
   });
   
   $(document).ready(function () {    
