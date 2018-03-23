@@ -1,0 +1,44 @@
+- var hashtag = "ihanmikkelistä";
+doctype html
+html
+  include ../includes/head.pug
+  block scripts
+    script(defer="defer",type="text/javascript", src="/js/mikkelin-tarina-results.js")
+  block styles
+    link(rel="stylesheet", href="/css/mikkelin-tarina.min.css")
+  body.story-results
+    .top-bar
+      .container
+        .row
+          .col-sm-9
+            img.mikkeli-logo(src="/gfx/mikkelintarina/mikkeli-logo.jpg")
+          .col-sm-15.social-button-col
+            .top-bar-btn-container
+              a.redo-btn(href="/sisalto/mikkelin-tarina") Tee kysely uudelleen
+              h4.hashtag
+                ='#' + hashtag
+              h3
+                i.fa.fa-facebook-square.social-share-btn(data-share-url="https://www.facebook.com/sharer/sharer.php?u={{url}}")
+                i.fa.fa-twitter.social-share-btn(data-share-url="https://twitter.com/intent/tweet/?url={{url}}&hashtags=" + hashtag)
+                a.fa.fa-download.download-image(download='mikkelin-tarina.jpg')
+    .container-fluid
+      .row.negative-margin
+        .col-lg-8
+          .results-image(style="background-image:url(/gfx/mikkelintarina/" + image + ")")
+        .col-lg-16
+          .story-container
+            !=story
+            a.btn(href="/sisalto/mikkelin-tarina-yhteystiedot")
+              |Osallistu 300 € arvontaan
+              i.fa.fa-angle-right
+            br
+            br
+            h3 Jaa tuloksesi
+              i.fa.fa-facebook-square.social-share-btn(data-share-url="https://www.facebook.com/sharer/sharer.php?u={{url}}")
+              i.fa.fa-twitter.social-share-btn(data-share-url="https://twitter.com/intent/tweet/?url={{url}}&hashtags=" + hashtag)
+              a.fa.fa-download.download-image(download='mikkelin-tarina.jpg')
+            p Millaisia mikkeliläisiä kaverisi ovat? Kutsu heidät mukaan rakentamaan Mikkelin brändiä.
+        .col 
+          canvas(id="canvas", width=1920,height=1080, style="display: none")
+          img(id="image",src="/gfx/mikkelintarina/" + image, style="display: none")
+      

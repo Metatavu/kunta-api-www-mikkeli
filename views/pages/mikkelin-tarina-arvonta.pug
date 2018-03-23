@@ -2,6 +2,7 @@
 doctype html
 html
   include ../includes/head.pug
+
   block scripts
     script(defer="defer",type="text/javascript", src="//cdn.metatavu.io/libs/metaform-fields/0.6.18/js/modernizr.js")
     script(defer="defer",type="text/javascript", src="//cdn.metatavu.io/libs/metaform-fields/0.6.18/js/form.js")
@@ -13,21 +14,30 @@ html
     link(rel="stylesheet", href="//cdn.metatavu.io/libs/metaform-fields/0.6.18/css/form.min.css")
     link(rel="stylesheet", href="/css/mikkelin-tarina.min.css")
 
-  body
-    .loading-screen
-       img(src='/gfx/mikkelintarina/load.svg')
-       h2 Ladataan...
+  body.story-results
     .top-bar
       .container
         .row
           .col-sm-9
             img.mikkeli-logo(src="/gfx/mikkelintarina/mikkeli-logo.jpg")
-          .col-sm-15
+          .col-sm-15.social-button-col
             .top-bar-btn-container
-              h4.hashtag.white
+              a.redo-btn(href="/sisalto/mikkelin-tarina") Tee kysely uudelleen
+              h4.hashtag
                 ='#' + hashtag
               h3
                 i.fa.fa-facebook-square.social-share-btn(data-share-url="https://www.facebook.com/sharer/sharer.php?u={{url}}")
                 i.fa.fa-twitter.social-share-btn(data-share-url="https://twitter.com/intent/tweet/?url={{url}}&hashtags=" + hashtag)
+                a.fa.fa-download.download-image(download='mikkelin-tarina.jpg')
     .container
-      !=contents
+      .row
+        .col-xs-24
+          .lottery-container
+            !=contents
+    .container-fluid
+      .row
+        .col-xs-24.footer-logos
+          img.mt-logo(src="/gfx/mikkelintarina/mt-logo.png")
+          img.nitro-id-logo(src="/gfx/mikkelintarina/nitro-id-logo.png")
+          
+      
