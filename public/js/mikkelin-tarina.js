@@ -63,7 +63,7 @@
     if (page > getMetaformPageCount($(metaform))) {
       $('.loading-screen').show();
       saveMetaformReply(metaform, function(res, values) {
-        window.location.href = '/mikkelin-tarina?q=' + btoa(JSON.stringify(values));
+        window.location.href = '/mikkelin-tarina?q=' + encodeURIComponent(btoa(JSON.stringify(values)));
       });
     } else {
       setMetaformPage(metaform, page);
