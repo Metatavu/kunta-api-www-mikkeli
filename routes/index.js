@@ -27,6 +27,8 @@
     require(__dirname + '/redirect')(app, config, ModulesClass);
     require(__dirname + '/incidents')(app, config, ModulesClass);
     require(__dirname + '/contacts')(app, config, ModulesClass);
+    require(__dirname + '/metaform')(app, config, ModulesClass);
+    require(__dirname + '/mikkelintarina')(app, config, ModulesClass);
     
     // Register error routes. Keep these as last to ensure catch all functionality
     
