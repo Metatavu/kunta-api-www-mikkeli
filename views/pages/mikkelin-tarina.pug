@@ -1,22 +1,21 @@
-- var hashtag = "ihanmikkelistä";
-doctype html
-html
-  include ../includes/head.pug
-  block scripts
-    script(defer="defer",type="text/javascript", src="//cdn.metatavu.io/libs/metaform-fields/0.6.18/js/modernizr.js")
-    script(defer="defer",type="text/javascript", src="//cdn.metatavu.io/libs/metaform-fields/0.6.18/js/form.js")
-    script(defer="defer",type="text/javascript", src="//cdn.metatavu.io/libs/metaform-fields/0.6.18/js/form-utils.js")
-    script(defer="defer",type="text/javascript", src="//cdn.metatavu.io/libs/metaform-fields/0.6.18/js/metaform-client.min.js")
-    script(defer="defer",type="text/javascript", src="/js/mikkelin-tarina.js")
+extends ../layout/mikkelin-tarina.pug
 
-  block styles
-    link(rel="stylesheet", href="//cdn.metatavu.io/libs/metaform-fields/0.6.18/css/form.min.css")
-    link(rel="stylesheet", href="/css/mikkelin-tarina.min.css")
+block scripts
+  script(defer="defer",type="text/javascript", src="//cdn.metatavu.io/libs/metaform-fields/0.6.18/js/modernizr.js")
+  script(defer="defer",type="text/javascript", src="//cdn.metatavu.io/libs/metaform-fields/0.6.18/js/form.js")
+  script(defer="defer",type="text/javascript", src="//cdn.metatavu.io/libs/metaform-fields/0.6.18/js/form-utils.js")
+  script(defer="defer",type="text/javascript", src="//cdn.metatavu.io/libs/metaform-fields/0.6.18/js/metaform-client.min.js")
+  script(defer="defer",type="text/javascript", src="/js/mikkelin-tarina.js")
 
+block styles
+  link(rel="stylesheet", href="//cdn.metatavu.io/libs/metaform-fields/0.6.18/css/form.min.css")
+  link(rel="stylesheet", href="/css/mikkelin-tarina.min.css")
+
+block body
   body
     .loading-screen
-       img(src='/gfx/mikkelintarina/load.svg')
-       h2 Ladataan...
+      img(src='/gfx/mikkelintarina/load.svg')
+      h2 Ladataan...
     .top-bar
       .container
         .row
