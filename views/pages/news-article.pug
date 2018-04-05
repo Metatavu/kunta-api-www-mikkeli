@@ -65,6 +65,23 @@ block content
                each tag in tags
                 a.tag(href='/uutiset/?tag=' + tag)
                   =tag
+          .row
+            .col-xs-24
+              #disqus_thread
+              script.
+                var disqus_config = function () {
+                this.page.url = "#{siteUrl}";
+                this.page.identifier = "#{slug}";
+                };
+                (function() {
+                var d = document, s = d.createElement('script');
+                s.src = 'https://mikkeli.disqus.com/embed.js';
+                s.setAttribute('data-timestamp', +new Date());
+                (d.head || d.body).appendChild(s);
+                })();
+              noscript
+                | Please enable JavaScript to view the 
+                a(href='https://disqus.com/?ref_noscript') comments powered by Disqus.
           
       if sidebarContents
         .col-xs-24.col-lg-5.sidebar

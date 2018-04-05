@@ -61,6 +61,7 @@
           }
 
           var bannerSrc = '/gfx/layout/mikkeli-page-banner-default.jpg';
+          const siteUrl = `${req.protocol}://${req.get('host')}${req.originalUrl}`;
           res.render('pages/news-article.pug', Object.assign(req.kuntaApi.data, {
             id: newsArticle.id,
             slug: newsArticle.slug,
@@ -71,6 +72,7 @@
             imageSrc: newsArticle.imageId ? util.format('/newsArticleImages/%s/%s?size=670', newsArticle.id, newsArticle.imageId) : null,
             bannerSrc: bannerSrc,
             siblings: siblings,
+            siteUrl: siteUrl,
             breadcrumbs : [{path: util.format('%s/%s', Common.NEWS_FOLDER, newsArticle.slug), title: newsArticle.title }]
           }));
 
