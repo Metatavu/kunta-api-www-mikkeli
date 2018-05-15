@@ -89,8 +89,16 @@
       let tag = req.query.tag || null;
       let page = parseInt(req.query.page)||0;
       let module = new ModulesClass(config);
+      
+      const options = {
+        tag: tag,
+        page: page,
+        firstResult: page * perPage,
+        maxResults: perPage + 1,
+        sortBy: 'ORDER_NUMBER_PUBLISHED'
+      };
         
-      (tag ? module.news.listByTag(page * perPage, perPage + 1, tag) : module.news.latest(page * perPage, perPage + 1))
+      module.news.listNews(options)
         .callback((data) => {
           let lastPage = data[0].length < perPage + 1;
           let newsArticles = data[0].splice(0, perPage).map(newsArticle => {
