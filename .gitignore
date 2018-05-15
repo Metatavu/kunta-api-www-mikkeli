@@ -10,3 +10,4 @@ project.xml
 project.properties
 /coverage
 /.nyc_output
+.DS_Store
