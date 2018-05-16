@@ -53,8 +53,9 @@ block content
                           !=newsArticle.abstract
           if page !== undefined
             .col-xs-24.pages-container.no-gutters
+              - var tagQueryParam = tag ? '&tag=' + tag : ''
               if page > 0
-                a.page-prev(href="?page=" + (page - 1))
+                a.page-prev(href="?page=" + (page - 1) + tagQueryParam)
                   |Edellinen sivu
               else
                 span.page-prev
@@ -63,7 +64,7 @@ block content
                 |Sivu 
                 =page + 1
               if !lastPage
-                a.page-next(href="?page=" + (page + 1))
+                a.page-next(href="?page=" + (page + 1) + tagQueryParam)
                   |Seuraava sivu
               else
                 span.page-next

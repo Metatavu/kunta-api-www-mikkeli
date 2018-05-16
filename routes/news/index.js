@@ -6,6 +6,9 @@
   const util = require('util');
   const moment = require('moment');
   const Common = require(__dirname + '/../common');
+  const striptags = require('striptags');
+  const Entities = require('html-entities').AllHtmlEntities;
+  const entities = new Entities();
 
   module.exports = (app, config, ModulesClass) => {
     
@@ -62,7 +65,13 @@
 
           var bannerSrc = '/gfx/layout/mikkeli-page-banner-default.jpg';
           const siteUrl = `${req.protocol}://${req.get('host')}${req.originalUrl}`;
+          const ogContent = entities.decode(striptags(newsArticle.contents));
+          
           res.render('pages/news-article.pug', Object.assign(req.kuntaApi.data, {
+            baseUrl : req.protocol + '://' + req.get('host'),
+            ogTitle: entities.decode(newsArticle.title),
+            ogContent: ogContent,
+            summary: ogContent.substring(0, 256),
             id: newsArticle.id,
             slug: newsArticle.slug,
             title: newsArticle.title,
@@ -86,11 +95,19 @@
 
     app.get(Common.NEWS_FOLDER + '/', (req, res, next) => {
       const perPage = Common.NEWS_COUNT_PAGE;
-      let tag = req.query.tag;
-      let page = tag ? null : parseInt(req.query.page)||0;
+      let tag = req.query.tag || null;
+      let page = parseInt(req.query.page)||0;
       let module = new ModulesClass(config);
+      
+      const options = {
+        tag: tag,
+        page: page,
+        firstResult: page * perPage,
+        maxResults: perPage + 1,
+        sortBy: 'ORDER_NUMBER_PUBLISHED'
+      };
         
-      (tag ? module.news.listByTag(tag) : module.news.latest(page * perPage, perPage + 1))
+      module.news.listNews(options)
         .callback((data) => {
           let lastPage = data[0].length < perPage + 1;
           let newsArticles = data[0].splice(0, perPage).map(newsArticle => {
