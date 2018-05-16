@@ -6,6 +6,9 @@
   const util = require('util');
   const moment = require('moment');
   const Common = require(__dirname + '/../common');
+  const striptags = require('striptags');
+  const Entities = require('html-entities').AllHtmlEntities;
+  const entities = new Entities();
 
   module.exports = (app, config, ModulesClass) => {
     
@@ -62,7 +65,13 @@
 
           var bannerSrc = '/gfx/layout/mikkeli-page-banner-default.jpg';
           const siteUrl = `${req.protocol}://${req.get('host')}${req.originalUrl}`;
+          const ogContent = entities.decode(striptags(newsArticle.contents));
+          
           res.render('pages/news-article.pug', Object.assign(req.kuntaApi.data, {
+            baseUrl : req.protocol + '://' + req.get('host'),
+            ogTitle: entities.decode(newsArticle.title),
+            ogContent: ogContent,
+            summary: ogContent.substring(0, 256),
             id: newsArticle.id,
             slug: newsArticle.slug,
             title: newsArticle.title,
