@@ -116,16 +116,16 @@
       .details {
         min-height: 80px;
         padding-top: 6px;
+      }
+      
+      .date {
+        margin-top: -43px;
+        position: absolute;
+        left: 0;
+      }
 
-        .date {
-          margin-top: -43px;
-          position: absolute;
-          left: 0;
-        }
-
-        .title {
-          padding: 20px 5px;
-        }
+      .title {
+        padding: 20px 5px;
       }
     }
 
