@@ -40,9 +40,9 @@
         });
     });
     
-    app.get('/ajax/newsByTag/:tag', (req, res, next) => {
+    app.get('/ajax/newsByTag', (req, res, next) => {
       const maxResults = parseInt(req.query.maxResults);
-      const tag = req.params.tag;
+      const tag = req.query.tag;
       let module = new ModulesClass(config);
       
       console.log(maxResults);

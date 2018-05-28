@@ -57,90 +57,83 @@
   }
 }
 
-.news-article {
+.kunta-api-news-by-category {
+  width: 100%;
   
-  position: relative;
-  overflow: hidden;
-  
-  .date {
-    @include font-h9();
-    background: $musta;
-    color: $valkoinen;
-    display: inline-block;
-    padding-top: 8px;
-    padding-bottom: 8px;
-    min-width: 110px;
-    text-align: center;
-  }
-
-  .title {
-    a {
-      @include font-h6();
-      color: $musta;
-      text-decoration: none;
-
-      &:hover {
-        text-decoration: underline;
-      }
-    }
-  }
-
-  .details {
-    background: $news-details-background-color;
-    padding: 20px 20px 10px 20px;
+  .row {
+    display: flex;
+    flex-direction: row;
   }
   
-  .news-article-image {
-    min-height: 160px;
-    background-size: cover;
+  .news-article:nth-last-of-type(1n) {
+    margin: 10px 27px 10px 0;
   }
   
-  &.thumb-article {
-    margin-bottom: 15px;
+  .news-article:nth-last-of-type(2n) {
+    margin: 10px 27px 10px 27px;
+  }
+  
+  .news-article:nth-last-of-type(3n) {
+    margin: 10px 0 10px 27px;
+  }
+    
+  .news-article {
+    overflow: hidden;
+    width: 200px;
     
     .details {
-      min-height: 80px;
-      padding-top: 6px;
-     
-      .date {
-        margin-top: -43px;
-        position: absolute;
-        left: 0;
-      }
-      
-      .title {
-        padding: 20px 5px;
-      }
+      width: 100%;
+      background: $news-details-background-color;
+      padding: 20px 20px 10px 20px;
     }
-  }
-   
-  &.text-article {
-    
-    border-top: 1px solid #aaa;
-    padding-top: 7px;
-    padding-bottom: 7px;
-      
+
     .date {
+      @include font-h9();
       background: $musta;
       color: $valkoinen;
-      display: inline-block;
+      padding-top: 8px;
+      padding-bottom: 8px;
+      width: 100%;
+      text-align: center;
     }
-  
+
     .title {
-      padding-left: 12px;
-      display: inline-block;
-      
       a {
-        color: #373a3c;
+        @include font-h6();
+        color: $musta;
         text-decoration: none;
-        
+
         &:hover {
           text-decoration: underline;
         }
       }
-    
     }
-    
+
+    .news-article-image {
+      min-height: 160px;
+      background-size: cover;
+    }
+
+    &.thumb-article {
+      margin-bottom: 15px;
+      position: relative;
+      width: 200px;
+
+      .details {
+        min-height: 80px;
+        padding-top: 6px;
+
+        .date {
+          margin-top: -43px;
+          position: absolute;
+          left: 0;
+        }
+
+        .title {
+          padding: 20px 5px;
+        }
+      }
+    }
+
   }
-    
 }
