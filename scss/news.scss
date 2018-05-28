@@ -63,23 +63,15 @@
   .row {
     display: flex;
     flex-direction: row;
-  }
-  
-  .news-article:nth-last-of-type(1n) {
-    margin: 10px 27px 10px 0;
-  }
-  
-  .news-article:nth-last-of-type(2n) {
-    margin: 10px 27px 10px 27px;
-  }
-  
-  .news-article:nth-last-of-type(3n) {
-    margin: 10px 0 10px 27px;
+    flex-wrap: wrap;
+    justify-content: space-between;
   }
     
   .news-article {
     overflow: hidden;
-    width: 200px;
+    box-sizing: border-box;
+    margin: 10px 0;
+    width: 30%;
     
     .details {
       width: 100%;
@@ -117,7 +109,6 @@
     &.thumb-article {
       margin-bottom: 15px;
       position: relative;
-      width: 200px;
 
       .details {
         min-height: 80px;
@@ -135,5 +126,14 @@
       }
     }
 
+  }
+}
+
+@media screen and (max-width: $break-x-small) {
+  .kunta-api-news-by-category {
+    
+    .news-article {
+      width: 46%;
+    }
   }
 }
