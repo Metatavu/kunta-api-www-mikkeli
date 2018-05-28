@@ -45,9 +45,6 @@
       const tag = req.query.tag;
       let module = new ModulesClass(config);
       
-      console.log(maxResults);
-      console.log(tag);
-      
       const options = {
         tag: tag,
         page: 0,
@@ -58,7 +55,6 @@
       
       module.news.listNews(options)
         .callback((data) => {
-          console.log(data);
           res.json(data[0]);
         });
     });

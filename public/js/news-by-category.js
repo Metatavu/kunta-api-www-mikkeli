@@ -30,7 +30,6 @@
     appendNews: function (news) {
       for (var i = 0; i < news.length; i++) {
         var article = news[i];
-        console.log(article);
         var imageSrc = '/newsArticleImages/' + article.id + '/' + article.imageId;
 
         $('.kunta-api-news-by-category > .row').append(
