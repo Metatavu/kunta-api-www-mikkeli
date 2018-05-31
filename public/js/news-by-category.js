@@ -8,8 +8,8 @@
     },
     
     getParameters: function () {
-      var category = $('.kunta-api-news-by-category').attr('data-category');
-      var maxResults = $('.kunta-api-news-by-category').attr('data-max-results');
+      var category = this.element.attr('data-category');
+      var maxResults = this.element.attr('data-max-results');
       
       return {
         category: category,
@@ -21,42 +21,40 @@
       $.ajax({
         url : '/ajax/newsByTag',
         data: this.getParameters(),
-        success : $.proxy(function(data) {
-          this.appendNews(data);
+        success : $.proxy(function(news) {
+          var row = $('<div>').addClass('row').appendTo(this.element);
+          for (var i = 0; i < news.length; i++) {
+            var article = news[i];
+            this.appendArticle(row, article);
+          }
         }, this)
       });
     },
     
-    appendNews: function (news) {
-      for (var i = 0; i < news.length; i++) {
-        var article = news[i];
-        var imageSrc = '/newsArticleImages/' + article.id + '/' + article.imageId;
-
-        $('.kunta-api-news-by-category > .row').append(
-            $('<div/>', {'class': 'news-article thumb-article'}).append(
-                $('<div/>', {'class': 'news-article-image'})
+    appendArticle: function (row, article) {        
+      var imageSrc = '/newsArticleImages/' + article.id + '/' + article.imageId;
+      
+      row.append(
+        $('<div/>', {'class': 'news-article thumb-article'}).append(
+          $('<div/>', {'class': 'news-article-image'})
+            .attr('data-lazy-bg-image', imageSrc)
+        )
+        .append(
+          $('<div/>', {'class': 'details'}).append(
+            $('<div/>', {'class': 'date'}).append(
+              $('<span/>', {'text': moment(article.published).format("D.M.YYYY")})
             )
-            .append(
-                $('<div/>', {'class': 'details'}).append(
-                    $('<div/>', {'class': 'date'}).append(
-                      $('<span/>', {'text': moment(article.published).format("D.M.YYYY")})
-                    )
-                )
-                .append(
-                  $('<div/>', {'class': 'title'}).append(
-                    $('<a/>', {'id': 'news-article-link-' + i, 'href': '/uutiset/' + article.slug}).append(
-                      $('<span/>', {'text': article.title})
-                    )
-                  )
-                )
+          )
+          .append(
+            $('<div/>', {'class': 'title'}).append(
+              $('<a/>', {'href': '/uutiset/' + article.slug}).append(
+                $('<span/>', {'text': article.title})
+              )
             )
-        );
-        $('.news-article-image').attr('data-lazy-bg-image', imageSrc);
-      }
-
-      $('*[data-lazy-bg-image]').each(function (index, element) {
-        $(element).lazyBackgroundImage();
-      });
+          )
+        )
+      );
+      row.find('*[data-lazy-bg-image]').lazyBackgroundImage();
     }
   });
   
