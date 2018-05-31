@@ -56,3 +56,87 @@
     margin-top: 10px;
   }
 }
+
+.kunta-api-news-by-category {
+  width: 100%;
+  
+  .row {
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+    justify-content: space-between;
+  }
+    
+  .news-article {
+    overflow: hidden;
+    box-sizing: border-box;
+    margin: 10px 0;
+    width: 30%;
+    
+    .details {
+      width: 100%;
+      background: $news-details-background-color;
+      padding-top: 20px;
+      padding-right: 20px;
+      padding-bottom: 10px;
+      padding-left: 20px;
+    }
+
+    .date {
+      @include font-h9();
+      background: $musta;
+      color: $valkoinen;
+      padding-top: 8px;
+      padding-bottom: 8px;
+      width: 100%;
+      text-align: center;
+    }
+
+    .title {
+      a {
+        @include font-h6();
+        color: $musta;
+        text-decoration: none;
+
+        &:hover {
+          text-decoration: underline;
+        }
+      }
+    }
+
+    .news-article-image {
+      min-height: 160px;
+      background-size: cover;
+    }
+
+    &.thumb-article {
+      margin-bottom: 15px;
+      position: relative;
+
+      .details {
+        min-height: 80px;
+        padding-top: 6px;
+      }
+      
+      .date {
+        margin-top: -43px;
+        position: absolute;
+        left: 0;
+      }
+
+      .title {
+        padding: 20px 5px;
+      }
+    }
+
+  }
+}
+
+@media screen and (max-width: $break-x-small) {
+  .kunta-api-news-by-category {
+    
+    .news-article {
+      width: 46%;
+    }
+  }
+}

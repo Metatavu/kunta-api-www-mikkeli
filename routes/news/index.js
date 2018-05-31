@@ -40,6 +40,25 @@
         });
     });
     
+    app.get('/ajax/newsByTag', (req, res, next) => {
+      const maxResults = parseInt(req.query.maxResults);
+      const tag = req.query.tag;
+      let module = new ModulesClass(config);
+      
+      const options = {
+        tag: tag,
+        page: 0,
+        firstResult: 0,
+        maxResults: maxResults,
+        sortBy: 'ORDER_NUMBER_PUBLISHED'
+      };
+      
+      module.news.listNews(options)
+        .callback((data) => {
+          res.json(data[0]);
+        });
+    });
+    
     app.get(util.format('%s/:slug', Common.NEWS_FOLDER), (req, res, next) => {
       var slug = req.params.slug;
 
