@@ -104,7 +104,9 @@
     $('*[data-lazy-bg-image]').each(function (index, element) {
       $(element).lazyBackgroundImage();
     });
-    
+
+    $('table').stacktable();
+
     $('.nav-search-container').menuSearch();    
   });
   
