@@ -90,6 +90,7 @@
             baseUrl : req.protocol + '://' + req.get('host'),
             ogTitle: entities.decode(newsArticle.title),
             ogContent: ogContent,
+            published: moment(newsArticle.published).format("DD.MM.YYYY"),
             summary: ogContent.substring(0, 256),
             id: newsArticle.id,
             slug: newsArticle.slug,
