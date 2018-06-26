@@ -164,7 +164,8 @@
     
     $('.casem-history-topic').casemHistoryTopic();
     $('.kunta-api-contact-search').contactSearch();
-    
+    $('.page-content table').stacktable();
+
     $("img.lazy").lazyload();
   });
   
