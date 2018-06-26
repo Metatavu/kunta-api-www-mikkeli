@@ -105,8 +105,7 @@
       $(element).lazyBackgroundImage();
     });
 
-    $('table').stacktable();
-
+    $('.page-content table').stacktable();
     $('.nav-search-container').menuSearch();    
   });
   
