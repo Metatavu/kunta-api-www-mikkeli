@@ -10,6 +10,8 @@
   const cheerio = require('cheerio');
   const Promise = require('bluebird');
   const Common = require(__dirname + '/../common');
+  const Entities = require('html-entities').AllHtmlEntities;
+  const entities = new Entities();
   
   module.exports = (app, config, ModulesClass) => {
     
@@ -30,9 +32,17 @@
         .files.search(search, 0, Common.SEARCH_RESULTS_PER_TYPE)
         .news.search(search, 0, Common.SEARCH_RESULTS_PER_TYPE)
         .callback((data) => {
-          const pages = data[0];
+          const pages = data[0].map((page) => {
+            page.title = entities.decode(page.title);
+            return page;
+          });
+
           const files = data[1];
-          const newsArticles = data[2];
+
+          const newsArticles = data[2].map((newsArticle) => {
+            newsArticle.title = entities.decode(newsArticle.title);
+            return newsArticle;
+          });
           
           res.render('ajax/menu-search.pug', {
             pages: pages,
