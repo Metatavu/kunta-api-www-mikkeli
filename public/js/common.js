@@ -48,7 +48,7 @@
     
     _onInputKeyUp: function (event) {
       if (event.which === 13) {
-        window.location.href= "/haku?search=" + this._getSearch();
+        window.location.href= "/haku?search=" + encodeURIComponent(this._getSearch());
       } else {
         this._search();
       }
