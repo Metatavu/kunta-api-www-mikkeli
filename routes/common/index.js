@@ -257,8 +257,9 @@
       if (!search) {
         return null;
       }
-      
-      const searchTerms = _.map(search.replace(/\ {1,}/g, ' ').split(' '), (term) => {
+
+      const sanitizedSearch =  search.replace(/[-+]/g, " ").replace(/\ {1,}/g, " ");
+      const searchTerms = _.map(sanitizedSearch.split(" "), (term) => {
         return `+(${term}*)`;
       });
       
