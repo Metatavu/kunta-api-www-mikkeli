@@ -73,7 +73,7 @@
           res.render('pages/index.pug', Object.assign(req.kuntaApi.data, {
             events: events,
             banners: banners,
-            tiles:  tiles.slice(0, 3),
+            tiles:  tiles,
             socialMediaItems: socialMediaItems,
             jobs: jobs,
             announcements: announcements,
