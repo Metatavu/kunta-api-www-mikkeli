@@ -122,19 +122,20 @@
     color: $mustikka;
   }
   
-  li {
-    @include font-h11();
-    margin-top: 8px;
-    margin-bottom: 8px;
-    list-style-type: none;
-    
-    &::before {
-      content: "\2022";
-      position: absolute;
-      margin-left: -40px;
-      font-size: 14px; 
+  ul {
+    padding-left: 25px;
+
+    li {
+      @include font-h11();
+      margin-top: 8px;
+      margin-bottom: 8px;
+      list-style-type: none;
+      
+      &::before {
+        content: "\2022";
+      }
+      
     }
-    
   }
 
   .featured-image {
