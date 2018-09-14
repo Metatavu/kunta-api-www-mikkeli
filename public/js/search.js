@@ -244,7 +244,7 @@
       event.preventDefault();
       
       var href = $(event.target).attr('href');
-      if (href.startsWith('#p')) {
+      if (href.substring(0, 2) == '#p') {
         this._loadPages(parseInt(href.substring(2)));
       }
     },
@@ -253,7 +253,7 @@
       event.preventDefault();
       
       var href = $(event.target).attr('href');
-      if (href.startsWith('#p')) {
+      if (href.substring(0, 2) == '#p') {
         this._loadPages(parseInt(href.substring(2)));
       }
     },
@@ -262,7 +262,7 @@
       event.preventDefault();
       
       var href = $(event.target).attr('href');
-      if (href.startsWith('#p')) {
+      if (href.substring(0, 2) == '#p') {
         this._loadNews(parseInt(href.substring(2)));
       }
     },
@@ -271,7 +271,7 @@
       event.preventDefault();
       
       var href = $(event.target).attr('href');
-      if (href.startsWith('#p')) {
+      if (href.substring(0, 2) == '#p') {
         this._loadNews(parseInt(href.substring(2)));
       }
     },
@@ -280,7 +280,7 @@
       event.preventDefault();
       
       var href = $(event.target).attr('href');
-      if (href.startsWith('#p')) {
+      if (href.substring(0, 2) == '#p') {
         this._loadFiles(parseInt(href.substring(2)));
       }
     },
@@ -289,7 +289,7 @@
       event.preventDefault();
       
       var href = $(event.target).attr('href');
-      if (href.startsWith('#p')) {
+      if (href.substring(0, 2) == '#p') {
         this._loadFiles(parseInt(href.substring(2)));
       }
     }
