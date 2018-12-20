@@ -336,7 +336,7 @@
   }
 }
 
-.kunta-api-news-by-category {
+.kunta-api-news-list {
   width: 100%;
   padding-right: 15px;
   
@@ -413,7 +413,7 @@
 }
 
 @media screen and (max-width: $break-x-small) {
-  .kunta-api-news-by-category {
+  .kunta-api-news-list {
     
     .news-article {
       width: 46%;

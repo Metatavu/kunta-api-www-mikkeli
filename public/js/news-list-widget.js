@@ -1,18 +1,18 @@
 (function () {
   'use strict';
 
-  $.widget("custom.newsByCategory", {
+  $.widget("custom.newsList", {
     
     _create: function() {
       this.getNews();
     },
     
     getParameters: function () {
-      var category = this.element.attr('data-category');
+      var tag = this.element.attr('data-tag');
       var maxResults = this.element.attr('data-max-results');
       
       return {
-        category: category,
+        tag: tag,
         maxResults: maxResults
       };
     },
@@ -48,7 +48,7 @@
           .append(
             $('<div/>', {'class': 'title'}).append(
               $('<a/>', {'href': '/uutiset/' + article.slug}).append(
-                $('<span/>', {'text': article.title})
+                $('<span/>', {'html': article.title})
               )
             )
           )
@@ -59,7 +59,7 @@
   });
   
   $(document).ready(function () {
-    $('.kunta-api-news-by-category').newsByCategory();
+    $('.kunta-api-news-list').newsList();
   });
   
 }).call(this);
