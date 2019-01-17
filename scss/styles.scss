@@ -88,6 +88,25 @@
   background-color: #eee !important;
 }
 
+.locales-container {
+
+  margin-bottom: -25px;
+
+  a {
+    background: $musta;
+    color: $valkoinen;
+    font-size: 12px;
+    padding: 4px;
+    text-align: center;
+    margin-left: 3px;
+    width: 32px;
+    display: inline-block;
+    text-transform: uppercase;
+    text-decoration: none;
+    cursor: pointer;
+  }
+}
+
 .logo-container {
 
   @media (min-width: $break-large) {
