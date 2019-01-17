@@ -21,7 +21,7 @@
       Object.keys(menus)
         .filter((menuSlug) => {
           const match = localeRegex.exec(menuSlug);
-          const menuLocale = match ? match[1] : "fi";
+          const menuLocale = match && match.length > 0 ? match[1] : "fi";
           return menuLocale === locale;
         })
         .forEach((menuSlug) => {
