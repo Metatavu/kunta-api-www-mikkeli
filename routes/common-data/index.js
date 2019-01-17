@@ -8,6 +8,30 @@
 
   module.exports = (app, config, ModulesClass) => {
 
+    /**
+     * Maps appropriate menus for given locale
+     * 
+     * @param {String} locale locale
+     * @param {Object} menus available menus 
+     */
+    const getMenus = (locale, menus) => {
+      const result = {};
+      const localeRegex = /^([a-z]{2})_/;
+
+      Object.keys(menus)
+        .filter((menuSlug) => {
+          const match = localeRegex.exec(menuSlug);
+          const menuLocale = match ? match[1] : "fi";
+          return menuLocale === locale;
+        })
+        .forEach((menuSlug) => {
+          const bareSlug = menuSlug.replace(localeRegex, "");
+          result[bareSlug] = menus[menuSlug];
+        });
+
+      return result;
+    };
+
     app.use(function(req, res, next) {
       var modules = new ModulesClass(config);
 
@@ -15,9 +39,20 @@
         .menus.list()
         .fragments.list()
         .callback(function(data) {
-          var menus = data[0];
+          let locale = "fi";
+
+          if (req.query.locale) {
+            locale = req.query.locale;
+            res.cookie("kawwwlocale", req.query.locale);
+          } else if (req.cookies.kawwwlocale) {
+            locale = req.cookies.kawwwlocale;
+          }
+
+          const locales = config.get("locales");
+
+          var menus = getMenus(locale, data[0]);
           var fragments = data[1];
-          
+
           _.keys(menus).forEach(menuKey => {
             var menu = menus[menuKey];
 
@@ -57,6 +92,8 @@
 
           req.kuntaApi = {
             data: {
+              locale: locale,
+              locales: locales,
               menus: menus,
               fragmentMap: fragmentMap,
               googleAnalytics: googleAnalytics,

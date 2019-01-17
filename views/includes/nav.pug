@@ -33,6 +33,13 @@ nav.navbar.navbar-light
               .nav-quick-icons
                 a(href="http://kartta.mikkeli.fi/kartta/", target="_blank")
                   i.fa.fa-map-marker(aria-hidden="true")
+          if locales
+            .row.locales-container.text-xs-right
+              .col-xs-24
+                each locale in locales 
+                  a(href="?locale=" + locale.code)
+                    =locale.text
+            
       nav.navbar.navbar-light.row
         .col-xs-24.no-gutter-left.no-gutters-medium
           ul.nav.navbar-nav.nav-bar-primary
