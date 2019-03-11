@@ -223,11 +223,11 @@
     }
     
     static processSmallPageBanners($) {
-      if ($('a.small-page-banner').length) {
-        const container = $("<div>").addClass("small-page-banners row").insertAfter($('a.small-page-banner')[0]);
+      if ($("a.small-page-banner").length) {
+        const container = $("<div>").addClass("small-page-banners row").insertAfter($("a.small-page-banner")[0]);
 
 
-        $('a.small-page-banner').each((index, bannerLink) => {
+        $("a.small-page-banner").each((index, bannerLink) => {
           const title = $(bannerLink).attr("title");
           const imageSrc = $(bannerLink).find("img").attr("data-original");
           const href = $(bannerLink).attr("href");
