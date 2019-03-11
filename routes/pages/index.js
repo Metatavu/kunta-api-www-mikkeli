@@ -10,27 +10,55 @@
 
   module.exports = (app, config, ModulesClass) => {
 
-    function loadChildPages(pages, preferLanguages, callback) {
-      var module = new ModulesClass(config);
-      
-      pages.forEach((page) => {
-        if (!page.meta || !page.meta.hideMenuChildren) {
-          module.pages.listMetaByParentId(page.id, preferLanguages);
-        }
-      });
-      
-      module.callback(function (data) {
-        var index = 0;
+    /**
+     * Resolves root page for given page.
+     * 
+     * @param {Page} page 
+     * @return root page for given page.
+     */
+    const resolveRootPage = async (page) => {
+      const pagesModule = (new ModulesClass(config)).pages;
+      const pageTree = await pagesModule.resolvePageTree(null, page.id);
+
+      if (!pageTree || !pageTree.length) {
+        return null;
+      }
+
+      let rootIndex = 0;
+      while (pageTree[rootIndex] && pageTree[rootIndex].meta && pageTree[rootIndex].meta.siteRootPage) {
+        rootIndex++;
+      }
+
+      if (pageTree[rootIndex]) {
+        return pagesModule.processPage(pageTree[rootIndex]);
+      }
+
+      return pageTree[0];
+    };
+  
+    const loadChildPages = (pages, preferLanguages) => {
+      return new Promise((resolve) => {
+        const module = new ModulesClass(config);
+        
         pages.forEach((page) => {
-          if (!page.meta || !page.meta.hideMenuChildren) {
-            pages[index].hasChildren = data[index] && data[index].length > 0;
-            index++;
+          if (!page.meta || !page.meta.hideMenuChildren) {
+            module.pages.listMetaByParentId(page.id, preferLanguages);
           }
         });
         
-        callback(pages);
+        module.callback((data) => {
+          let index = 0;
+          pages.forEach((page) => {
+            if (!page.meta || !page.meta.hideMenuChildren) {
+              pages[index].hasChildren = data[index] && data[index].length > 0;
+              index++;
+            }
+          });
+          
+          resolve(pages);
+        });
       });
-    }
+    };
     
     function mapOpenChildren(children, activeIds, openTreeNodes) {
       if (openTreeNodes.length > 0) {
@@ -52,12 +80,12 @@
       
       new ModulesClass(config)
         .pages.listMetaByParentId(pageId, preferLanguages)
-        .callback(function(data) {
-          loadChildPages(data[0], preferLanguages, (children) => {
-            res.render('ajax/pagenav.pug', {
-              childPages: children,
-              activeIds: []
-            });
+        .callback(async (data) => {
+          const children = await loadChildPages(data[0], preferLanguages);
+
+          res.render("ajax/pagenav.pug", {
+            childPages: children,
+            activeIds: []
           });
         });
     });
@@ -66,7 +94,7 @@
       var pageId = req.params.pageId;
       var imageId = req.params.imageId;
       
-      if (!pageId || !imageId) {
+      if (!pageId || !imageId) {
         next({
           status: 404
         });
@@ -89,37 +117,46 @@
           }
         });
     });
-    
+
     app.get(util.format('%s*', Common.CONTENT_FOLDER), (req, res, next) => {
       var path = req.path.substring(9);
-      var rootPath = path.split('/')[0];
       var preferLanguages = req.headers['accept-language'];
 
       new ModulesClass(config)
         .pages.findByPath(path, preferLanguages)
-        .pages.findByPath(rootPath, preferLanguages)
-        .callback(function(data) {
-          var page = data[0];
-          var rootPage = data[1];
-          if (!page || !rootPage) {
+        .callback(async (data) => {
+          const page = data[0];
+          if (!page) {
             next({
               status: 404
             });
             return;
           }
-          
+
+          const rootPage = await resolveRootPage(page);
+          if (!rootPage) {
+            next({
+              status: 404
+            });
+
+            return;
+          }
+
           new ModulesClass(config)
+            .pages.resolvePath(rootPage.id)
             .pages.getContent(page.id, preferLanguages)
             .pages.resolveBreadcrumbs(Common.CONTENT_FOLDER, page, preferLanguages)
             .pages.listMetaByParentId(rootPage.id, preferLanguages)
             .pages.readMenuTree(rootPage.id, page.id, preferLanguages)
             .pages.listImages(page.id)
-            .callback(function(pageData) {
-              var contents = pageData[0];
-              let breadcrumbs = pageData[1];
+            .callback(async (pageData) => {
+              const rootPath = pageData[0];
+              var contents = pageData[1];
+              let breadcrumbs = pageData[2];
               var rootFolderTitle = rootPage.title;
-              var openTreeNodes = pageData[3];
-              var images = pageData[4];
+              var openTreeNodes = pageData[4];
+
+              var images = pageData[5];
               let activeIds = _.map(breadcrumbs, (breadcrumb) => {
                 return breadcrumb.id;
               });
@@ -137,27 +174,27 @@
               const featuredImageSrc = featuredImageId ? util.format('/pageImages/%s/%s?size=670', page.id, featuredImageId) : null;
               const bannerSrc = bannerImageId ? util.format('/pageImages/%s/%s', page.id, bannerImageId) : '/gfx/layout/mikkeli-page-banner-default.jpg';
               const kuntaApiPageMeta = Common.resolveKuntaApiPageMeta(contents);
-              const template = kuntaApiPageMeta["page-template"] || "contents";
+              const template = kuntaApiPageMeta["page-template"] || "contents";
               
-              let title = page.title;
+              const title = page.title;
+              const children = rootPage.meta.hideMenuChildren ? [] : await loadChildPages(pageData[3], preferLanguages);
               
-              loadChildPages(pageData[2], preferLanguages, (children) => {
-                res.render(`pages/${template}.pug`, Object.assign(req.kuntaApi.data, {
-                  id: page.id,
-                  slug: page.slug,
-                  rootPath: util.format("%s/%s", Common.CONTENT_FOLDER, rootPath),
-                  title: title,
-                  rootFolderTitle: rootFolderTitle,
-                  contents: Common.processPageContent(path, contents),
-                  sidebarContents: Common.getSidebarContent(path, contents),
-                  breadcrumbs: breadcrumbs,
-                  featuredImageSrc: featuredImageSrc,
-                  activeIds: activeIds,
-                  children: mapOpenChildren(children, activeIds, openTreeNodes),
-                  openTreeNodes: openTreeNodes,
-                  bannerSrc: bannerSrc
-                }));
-              });
+              res.render(`pages/${template}.pug`, Object.assign(req.kuntaApi.data, {
+                id: page.id,
+                slug: page.slug,
+                rootPath: util.format("%s/%s", Common.CONTENT_FOLDER, rootPath),
+                title: title,
+                rootFolderTitle: rootFolderTitle,
+                contents: Common.processPageContent(path, contents),
+                sidebarContents: Common.getSidebarContent(path, contents),
+                breadcrumbs: breadcrumbs,
+                featuredImageSrc: featuredImageSrc,
+                activeIds: activeIds,
+                children: mapOpenChildren(children, activeIds, openTreeNodes),
+                hideMenu: !!rootPage.meta.hideMenuChildren,
+                openTreeNodes: openTreeNodes,
+                bannerSrc: bannerSrc
+              }));
 
             }, (contentErr) => {
               next({

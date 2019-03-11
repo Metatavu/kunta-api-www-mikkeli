@@ -22,20 +22,22 @@ block content
       
   .container.page-container
     .row
-      .col-lg-5.page-nav.no-gutters.hidden-md-down
-        h3
-          =rootFolderTitle
-        each child in children
-          +pageMenuItem(child)
+      if !hideMenu
+        .col-lg-5.page-nav.no-gutters.hidden-md-down
+          h3
+            =rootFolderTitle
+          each child in children
+            +pageMenuItem(child)
                   
-      .col-xs-24.hidden-lg-up
-        a.btn.btn-primary.btn-menu(title='Näytä valikko', data-toggle='collapse', href='#collapse-menu', aria-expanded='false', aria-controls='collapse-menu')
-          i.fa.fa-bars
-        .collapse#collapse-menu
-          .col-xs-24.page-nav.no-gutters
-            each child in children
-              +pageMenuItem(child)
-      .col-xs-24.col-lg-14
+        .col-xs-24.hidden-lg-up
+          a.btn.btn-primary.btn-menu(title='Näytä valikko', data-toggle='collapse', href='#collapse-menu', aria-expanded='false', aria-controls='collapse-menu')
+            i.fa.fa-bars
+          .collapse#collapse-menu
+            .col-xs-24.page-nav.no-gutters
+              each child in children
+                +pageMenuItem(child)
+
+      div(class=hideMenu ? "col-xs-24 col-lg-24" : "col-xs-24 col-lg-14") 
         .page-content
           h1
             !=title
