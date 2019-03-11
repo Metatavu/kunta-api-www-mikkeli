@@ -34,7 +34,7 @@
       }
 
       return pageTree[0];
-    }
+    };
   
     const loadChildPages = (pages, preferLanguages) => {
       return new Promise((resolve) => {
@@ -58,7 +58,7 @@
           resolve(pages);
         });
       });
-    }
+    };
     
     function mapOpenChildren(children, activeIds, openTreeNodes) {
       if (openTreeNodes.length > 0) {
@@ -83,7 +83,7 @@
         .callback(async (data) => {
           const children = await loadChildPages(data[0], preferLanguages);
 
-          res.render('ajax/pagenav.pug', {
+          res.render("ajax/pagenav.pug", {
             childPages: children,
             activeIds: []
           });
