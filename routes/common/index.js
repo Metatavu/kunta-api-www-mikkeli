@@ -5,6 +5,7 @@
   const util = require('util');
   const _ = require('lodash');
   const cheerio = require('cheerio');
+  const pug = require("pug");
   
   class Common {
     
@@ -177,6 +178,7 @@
       Common.processDomLinks(currentPage, $);
       Common.processPageDomImages($);
       Common.lazyPageDomImages($);
+      Common.processSmallPageBanners($);
 
       return $.html();
     }
@@ -218,6 +220,27 @@
           .removeAttr('data-image-type')
           .attr('src', src);
       });
+    }
+    
+    static processSmallPageBanners($) {
+      if ($("a.small-page-banner").length) {
+        const container = $("<div>").addClass("small-page-banners row").insertAfter($("a.small-page-banner")[0]);
+
+
+        $("a.small-page-banner").each((index, bannerLink) => {
+          const title = $(bannerLink).attr("title");
+          const imageSrc = $(bannerLink).find("img").attr("data-original");
+          const href = $(bannerLink).attr("href");
+
+          $(container).append($(pug.renderFile(`${__dirname}/../../views/fragments/small-page-banner.pug`, {
+            title: title,
+            imageSrc: imageSrc,
+            href
+          })));
+
+          $(bannerLink).remove();
+        });        
+      }
     }
     
     static lazyPageDomImages($) {
