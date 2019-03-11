@@ -20,12 +20,12 @@
       const pagesModule = (new ModulesClass(config)).pages;
       const pageTree = await pagesModule.resolvePageTree(null, page.id);
 
-      if (!pageTree || !pageTree.length) {
+      if (!pageTree || !pageTree.length) {
         return null;
       }
 
       let rootIndex = 0;
-      while (pageTree[rootIndex] && pageTree[rootIndex].meta && pageTree[rootIndex].meta.siteRootPage) {
+      while (pageTree[rootIndex] && pageTree[rootIndex].meta && pageTree[rootIndex].meta.siteRootPage) {
         rootIndex++;
       }
 
@@ -41,7 +41,7 @@
         const module = new ModulesClass(config);
         
         pages.forEach((page) => {
-          if (!page.meta || !page.meta.hideMenuChildren) {
+          if (!page.meta || !page.meta.hideMenuChildren) {
             module.pages.listMetaByParentId(page.id, preferLanguages);
           }
         });
@@ -49,7 +49,7 @@
         module.callback((data) => {
           let index = 0;
           pages.forEach((page) => {
-            if (!page.meta || !page.meta.hideMenuChildren) {
+            if (!page.meta || !page.meta.hideMenuChildren) {
               pages[index].hasChildren = data[index] && data[index].length > 0;
               index++;
             }
@@ -94,7 +94,7 @@
       var pageId = req.params.pageId;
       var imageId = req.params.imageId;
       
-      if (!pageId || !imageId) {
+      if (!pageId || !imageId) {
         next({
           status: 404
         });
@@ -174,10 +174,10 @@
               const featuredImageSrc = featuredImageId ? util.format('/pageImages/%s/%s?size=670', page.id, featuredImageId) : null;
               const bannerSrc = bannerImageId ? util.format('/pageImages/%s/%s', page.id, bannerImageId) : '/gfx/layout/mikkeli-page-banner-default.jpg';
               const kuntaApiPageMeta = Common.resolveKuntaApiPageMeta(contents);
-              const template = kuntaApiPageMeta["page-template"] || "contents";
+              const template = kuntaApiPageMeta["page-template"] || "contents";
               
               const title = page.title;
-              const children = rootPage.meta.hideMenuChildren ? [] : await loadChildPages(pageData[3], preferLanguages);
+              const children = rootPage.meta.hideMenuChildren ? [] : await loadChildPages(pageData[3], preferLanguages);
               
               res.render(`pages/${template}.pug`, Object.assign(req.kuntaApi.data, {
                 id: page.id,
