@@ -100,12 +100,26 @@
     
   });
 
+  $.widget("custom.localeMenu", {
+
+    _create : function() {
+      this.element.removeClass("locale-menu-open");
+      this.element.find(".current-locale").click($.proxy(this._onCurrentLocaleClick, this));
+    },
+
+    _onCurrentLocaleClick: function () {
+      this.element.toggleClass("locale-menu-open");
+    }
+
+  });
+
   $(document).ready(function () {
     $('*[data-lazy-bg-image]').each(function (index, element) {
       $(element).lazyBackgroundImage();
     });
 
-    $('.nav-search-container').menuSearch();    
+    $('.nav-search-container').menuSearch();
+    $( ".locale-menu" ).localeMenu();
   });
   
 }).call(this);
