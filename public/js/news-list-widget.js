@@ -1,3 +1,5 @@
+/* global $, moment */
+
 (function () {
   'use strict';
 
@@ -27,7 +29,7 @@
           var row = $('<div>').addClass('row').appendTo(this.element);
           for (var i = 0; i < news.length; i++) {
             var article = news[i];
-            if (displayFormat == "text") {
+            if (displayFormat == "text") {
               this.appendTextArticle(row, article);
             } else {
               this.appendThumbArticle(row, article);
@@ -44,13 +46,13 @@
       const result = $("<div>").addClass("news-article text-article");
       const date = $("<div>").addClass("date").text(moment(article.published).format("D.M.YYYY"));
       const title = $("<div>").addClass("title");
-      const titleLink = $("<a>").attr("href", '/uutiset/' + article.slug).text(article.title);
+      const titleLink = $("<a>").attr("href", "/uutiset/" + article.slug).text(article.title);
 
       result.append(date);
       result.append(title.append(titleLink));
 
       row.append(result);
-      row.find('*[data-lazy-bg-image]').lazyBackgroundImage();
+      row.find("*[data-lazy-bg-image]").lazyBackgroundImage();
     },
     
     /**

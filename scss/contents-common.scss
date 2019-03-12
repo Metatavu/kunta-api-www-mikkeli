@@ -356,7 +356,7 @@
 
     .date {
       @include font-h9();
-      float:left;
+      float: left;
       width: 15%;
       background: $musta;
       color: $valkoinen;
@@ -385,23 +385,26 @@
       }
     }
 
-    @media (max-width: $break-medium) { 
-      .date{
+    @media (max-width: $break-medium) {
+      .date {
         width: 20%;
       }
-      .title{
+
+      .title {
         width: 78%;
       }
     }
 
-    @media (max-width: $break-small) { 
-      .date{
+    @media (max-width: $break-small) {
+      .date {
         width: 25%;
       }
-      .title{
+      
+      .title {
         width: 73%;
       }
-    }    
+    }
+
   }
     
   .news-article.thumb-article {
