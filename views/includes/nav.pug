@@ -14,12 +14,12 @@ nav.navbar.navbar-light
             img.logo(src="/gfx/layout/mikkeli-logo.png")
         .col-xs-24.col-md-14.text-md-right.text-xs-left.no-gutters
           .row
-            .col-xs-24.col-md-10.col-lg-15.flex-md-last.flex-lg-first
+            .col-xs-24.col-md-10.col-lg-13.flex-md-last.flex-lg-first
               .nav-search-container
                 input
                 i.fa.fa-circle-o-notch.fa-spin
                 a.fa.fa-search(aria-hidden="true", href="/haku")
-            .col-xs-20.col-md-12.col-lg-7.pull-lg-right.no-gutter-right
+            .col-xs-16.col-md-10.col-lg-7.pull-lg-right.no-gutter-right
               .nav-some-icons
                 a(href="https://www.facebook.com/mikkelinkaupunki", target="_blank")
                   i.fa.fa-facebook-official(aria-hidden="true")
@@ -29,16 +29,17 @@ nav.navbar.navbar-light
                   i.fa.fa-instagram(aria-hidden="true")
                 a(href="https://www.linkedin.com/company/mikkelin-kaupunki", target="_blank")
                   i.fa.fa-linkedin(aria-hidden="true")
-            .col-xs-2
+            .col-xs-6.col-md-4.no-gutter-right
               .nav-quick-icons
-                a(href="http://kartta.mikkeli.fi/kartta/", target="_blank")
+                a.map-link(href="http://kartta.mikkeli.fi/kartta/", target="_blank")
                   i.fa.fa-map-marker(aria-hidden="true")
-          if locales
-            .row.locales-container.text-xs-right
-              .col-xs-24
-                each locale in locales 
-                  a(href="?locale=" + locale.code)
-                    =locale.text
+                if locales
+                  .locale-menu
+                    .current-locale
+                      =locale
+                    each locale in locales 
+                      a(href="?locale=" + locale.code)
+                        =locale.text
             
       nav.navbar.navbar-light.row
         .col-xs-24.no-gutter-left.no-gutters-medium

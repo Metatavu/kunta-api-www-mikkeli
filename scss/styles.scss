@@ -88,23 +88,69 @@
   background-color: #eee !important;
 }
 
-.locales-container {
+.map-link {
+  display: inline-block;
+  height: 28px;
+  vertical-align: top;
+}
 
-  margin-bottom: -25px;
+.locale-menu {
+  display: inline-block;
+  position: relative;
+  height: 28px;
+  vertical-align: top;
+  
+  .current-locale {
+    display: block;
+
+    &::after {
+      content: '⌄';
+      position: absolute;
+      bottom: 0px;
+      background: #52b9e9;
+      width: 100%;
+      height: 9px;
+      padding: 0;
+      margin: 0;
+      color: #fff;
+      left: 0;
+      font-size: 18px;
+      line-height: 0px;
+    }
+  }
 
   a {
-    background: $musta;
+    display: none;
+  }
+
+  .current-locale,
+  a {     
+    z-index: 999999;
+    background: #52b9e9;
     color: $valkoinen;
     font-size: 12px;
     padding: 4px;
     text-align: center;
     margin-left: 3px;
-    width: 32px;
-    display: inline-block;
     text-transform: uppercase;
     text-decoration: none;
     cursor: pointer;
+    width: 28px;
+    height: 28px;
+    position: relative;
   }
+
+  &.locale-menu-open {
+    
+    a {
+      display: block;
+    }
+
+    .current-locale::after {
+      content: ' ';
+    }
+  }
+  
 }
 
 .logo-container {
