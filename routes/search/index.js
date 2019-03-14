@@ -26,9 +26,17 @@
     app.get('/ajax/menuSearch', (req, res) => {
       const search = Common.processFreeTextSearch(req.query.search);
       const preferLanguages = req.headers['accept-language'];
+
+      const searchOptions = {
+        search: search,
+        firstResult: 0,
+        maxResults: Common.SEARCH_RESULTS_PER_TYPE,
+        sortBy: 'SCORE',
+        sortDir: 'DESC'
+      };
       
       new ModulesClass(config)
-        .pages.search(search, preferLanguages, 0, Common.SEARCH_RESULTS_PER_TYPE)
+        .pages.search(searchOptions, preferLanguages)
         .files.search(search, 0, Common.SEARCH_RESULTS_PER_TYPE)
         .news.search(search, 0, Common.SEARCH_RESULTS_PER_TYPE)
         .callback((data) => {
@@ -57,9 +65,17 @@
       const search = Common.processFreeTextSearch(req.query.search);
       const preferLanguages = req.headers['accept-language'];
       const page = parseInt(req.query.page)||0;
+
+      const searchOptions = {
+        search: search,
+        firstResult: page * perPage,
+        maxResults: perPage + 1,
+        sortBy: 'SCORE',
+        sortDir: 'DESC'
+      };
       
       new ModulesClass(config)
-        .pages.search(search, preferLanguages, page * perPage, (perPage + 1))
+        .pages.search(searchOptions, preferLanguages)
         .callback((data) => {
           const lastPage = data[0].length < perPage + 1;
           let pages = data[0].splice(0, perPage);
@@ -75,6 +91,7 @@
             for (let i = 0; i < pages.length; i++) {
               const content = datas[i * 2];
               const images =  datas[(i * 2) + 1];
+              const title = entities.decode(pages[i].title);
               
               let image = findImageByType(images, 'featured');
               if (!image && images.length) {
@@ -82,6 +99,7 @@
               }
               
               pages[i] = Object.assign(pages[i], {
+                title: title,
                 excerpt: _.truncate(Common.htmlToText(content), {
                   length: 500
                 }),
