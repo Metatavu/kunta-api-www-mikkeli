@@ -31,8 +31,8 @@
         search: search,
         firstResult: 0,
         maxResults: Common.SEARCH_RESULTS_PER_TYPE,
-        sortBy: 'SCORE',
-        sortDir: 'DESC'
+        sortBy: "SCORE",
+        sortDir: "DESC"
       };
       
       new ModulesClass(config)
@@ -70,8 +70,8 @@
         search: search,
         firstResult: page * perPage,
         maxResults: perPage + 1,
-        sortBy: 'SCORE',
-        sortDir: 'DESC'
+        sortBy: "SCORE",
+        sortDir: "DESC"
       };
       
       new ModulesClass(config)
