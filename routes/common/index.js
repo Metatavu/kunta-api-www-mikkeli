@@ -283,9 +283,9 @@
 
       const sanitizedSearch =  search.replace(/[-+]/g, " ").replace(/\ {1,}/g, " ");
       const searchTerms = _.map(sanitizedSearch.split(" "), (term) => {
-        return `+(${term}*)`;
+        return `+(${term}* titleFi:${term}^10)`;
       });
-      
+
       return searchTerms.join(' ');
     }
   }
