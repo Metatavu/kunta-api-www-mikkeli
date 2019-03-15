@@ -335,3 +335,148 @@
     }
   }
 }
+
+.kunta-api-news-list {
+  width: 100%;
+  padding-right: 15px;
+  
+  .row {
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+    justify-content: space-between;
+  }
+
+  .news-article.text-article {
+
+    width: 100%;
+    border-bottom: 1px solid #aaa;
+    padding-top: 7px;
+    padding-bottom: 7px;
+
+    .date {
+      @include font-h9();
+      float: left;
+      width: 15%;
+      background: $musta;
+      color: $valkoinen;
+      padding-top: 8px;
+      padding-bottom: 8px;
+      text-align: center;
+    }
+
+    .title {
+      float: left;
+      width: 83%;
+      padding-left: 12px;
+      
+      a {
+        color: #373a3c;
+        text-decoration: none;
+        font-family: "Cairo", sans-serif;
+        font-weight: 600;
+        font-size: 20px;
+        line-height: 21px;
+        letter-spacing: 0;
+          
+        &:hover {
+          text-decoration: underline;
+        }
+      }
+    }
+
+    @media (max-width: $break-medium) {
+      .date {
+        width: 20%;
+      }
+
+      .title {
+        width: 78%;
+      }
+    }
+
+    @media (max-width: $break-small) {
+      .date {
+        width: 25%;
+      }
+      
+      .title {
+        width: 73%;
+      }
+    }
+
+  }
+    
+  .news-article.thumb-article {
+    overflow: hidden;
+    box-sizing: border-box;
+    margin: 10px 0;
+    width: 30%;
+    
+    .details {
+      width: 100%;
+      background: $news-details-background-color;
+      padding-top: 20px;
+      padding-right: 20px;
+      padding-bottom: 10px;
+      padding-left: 20px;
+    }
+
+    .date {
+      @include font-h9();
+      background: $musta;
+      color: $valkoinen;
+      padding-top: 8px;
+      padding-bottom: 8px;
+      width: 100%;
+      text-align: center;
+    }
+
+    .title {
+      a {
+        @include font-h6();
+        color: $musta;
+        text-decoration: none;
+
+        &:hover {
+          text-decoration: underline;
+        }
+      }
+    }
+
+    .news-article-image {
+      min-height: 160px;
+      background-size: cover;
+    }
+
+    &.thumb-article {
+      margin-bottom: 15px;
+      position: relative;
+
+      .details {
+        min-height: 80px;
+        padding-top: 6px;
+      }
+      
+      .date {
+        margin-top: -43px;
+        position: absolute;
+        left: 0;
+      }
+
+      .title {
+        padding: 20px 5px;
+      }
+    }
+
+  }
+}
+
+@media screen and (max-width: $break-x-small) {
+  .kunta-api-news-list {
+    
+    .news-article {
+      width: 46%;
+    }
+  }
+}

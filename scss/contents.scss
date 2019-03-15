@@ -1,5 +1,6 @@
 @charset "UTF-8";
 
+@import "colors";
 @import "vars";
 
 .page-featured-img {
@@ -122,4 +123,48 @@
     margin-bottom: 20px !important;
   }
   
+}
+
+.small-page-banner {
+  height: 200px;
+  position: relative;
+  background-size: cover;
+  background-repeat: no-repeat;
+  margin-bottom: 10px;
+
+  .small-page-banner-link {
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    opacity: 0;
+    background: transparent;
+    z-index: 1;
+  }
+
+  .small-page-banner-title {
+    position: absolute;
+    bottom: 20px;
+    width: 100%;
+    left: 0;
+    padding-left: 25px;
+    padding-right: 12px;
+
+    span {
+      @include font-h7();
+      color: $valkoinen;
+      display: inline-block;
+      padding: 0;
+      margin: 0;
+    }
+    
+    .fa-angle-right {
+      float: right;
+      color: $valkoinen;
+      background: $musta;
+      padding: 0 8px;
+      font-size: 26px;
+    }
+  }
 }
