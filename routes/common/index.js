@@ -229,7 +229,7 @@
 
         $("a.small-page-banner").each((index, bannerLink) => {
           const title = $(bannerLink).attr("title");
-          const imageSrc = $(bannerLink).find("img").attr("data-original");
+          const imageSrc = $(bannerLink).find("img").attr("data-original").replace(/(.*)\?.*/, "\$1");
           const href = $(bannerLink).attr("href");
 
           $(container).append($(pug.renderFile(`${__dirname}/../../views/fragments/small-page-banner.pug`, {
