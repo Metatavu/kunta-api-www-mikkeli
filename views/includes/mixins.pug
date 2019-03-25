@@ -1,7 +1,5 @@
 mixin breadcrumbs(breadcrumbs)
   .col-xs.breadcrumbs-container
-    a.breadcrumb-item(href="/")
-      |Etusivu
     if breadcrumbs && breadcrumbs.length
       each breadcrumb, index in breadcrumbs
         if(index === breadcrumbs.length - 1)

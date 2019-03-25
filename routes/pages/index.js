@@ -11,30 +11,75 @@
   module.exports = (app, config, ModulesClass) => {
 
     /**
-     * Resolves root page for given page.
+     * Resolves page tree for given page.
      * 
      * @param {Page} page 
-     * @return root page for given page.
+     * @return page tree
      */
-    const resolveRootPage = async (page) => {
+    const resolvePageTree = async (page) => {
       const pagesModule = (new ModulesClass(config)).pages;
       const pageTree = await pagesModule.resolvePageTree(null, page.id);
 
       if (!pageTree || !pageTree.length) {
-        return null;
+        return [];
       }
 
+      return Promise.all(pageTree.map((treePage) => {
+        return pagesModule.processPage(treePage);
+      }));
+    };
+
+    /**
+     * Resolves root page
+     * 
+     * @param {Page[]} pageTree 
+     * @return root page
+     */
+    const resolveRootPage = (pageTree) => {
       let rootIndex = 0;
       while (pageTree[rootIndex] && pageTree[rootIndex].meta && pageTree[rootIndex].meta.siteRootPage) {
         rootIndex++;
       }
 
       if (pageTree[rootIndex]) {
-        return pagesModule.processPage(pageTree[rootIndex]);
+        return pageTree[rootIndex];
       }
 
       return pageTree[0];
     };
+
+    /**
+     * Resolves breadcrumps for a page tree
+     * 
+     * @param {String} basePath base path 
+     * @param {Page[]} pageTree 
+     * @returns {any[]} breadcrumps
+     */
+    const resolveBreadcrumbs = (basePath, pageTree) => {
+      const result = [];
+      const path = [];
+
+      if (!pageTree[0].meta.siteRootPage) {
+        result.push({
+          path: "/",
+          title: "Etusivu"
+        });
+      } else if (pageTree.length === 1 && pageTree[0].meta.siteRootPage) {
+        // Exception on breadcrump logic, hide all breadcrumps when we are on locale index page
+        return [];
+      }
+      
+      for (let i = 0, l = pageTree.length; i < l; i++) {
+        path.push(pageTree[i].slug);   
+        result.push({
+          id: pageTree[i].id,
+          path: basePath + '/' + path.join('/'),
+          title: pageTree[i].title
+        });
+      }
+      
+      return result;
+    }
   
     const loadChildPages = (pages, preferLanguages) => {
       return new Promise((resolve) => {
@@ -59,7 +104,7 @@
         });
       });
     };
-    
+
     function mapOpenChildren(children, activeIds, openTreeNodes) {
       if (openTreeNodes.length > 0) {
         for (var i = 0; i < children.length; i++) {
@@ -133,7 +178,8 @@
             return;
           }
 
-          const rootPage = await resolveRootPage(page);
+          const pageTree = await resolvePageTree(page);
+          const rootPage = await resolveRootPage(pageTree);
           if (!rootPage) {
             next({
               status: 404
@@ -142,21 +188,21 @@
             return;
           }
 
+          const breadcrumbs = await resolveBreadcrumbs(Common.CONTENT_FOLDER, pageTree);
+
           new ModulesClass(config)
             .pages.resolvePath(rootPage.id)
             .pages.getContent(page.id, preferLanguages)
-            .pages.resolveBreadcrumbs(Common.CONTENT_FOLDER, page, preferLanguages)
             .pages.listMetaByParentId(rootPage.id, preferLanguages)
             .pages.readMenuTree(rootPage.id, page.id, preferLanguages)
             .pages.listImages(page.id)
             .callback(async (pageData) => {
               const rootPath = pageData[0];
               var contents = pageData[1];
-              let breadcrumbs = pageData[2];
               var rootFolderTitle = rootPage.title;
-              var openTreeNodes = pageData[4];
+              var openTreeNodes = pageData[3];
 
-              var images = pageData[5];
+              var images = pageData[4];
               let activeIds = _.map(breadcrumbs, (breadcrumb) => {
                 return breadcrumb.id;
               });
@@ -177,7 +223,7 @@
               const template = kuntaApiPageMeta["page-template"] || "contents";
               
               const title = page.title;
-              const children = rootPage.meta.hideMenuChildren ? [] : await loadChildPages(pageData[3], preferLanguages);
+              const children = rootPage.meta.hideMenuChildren ? [] : await loadChildPages(pageData[2], preferLanguages);
               
               res.render(`pages/${template}.pug`, Object.assign(req.kuntaApi.data, {
                 id: page.id,
