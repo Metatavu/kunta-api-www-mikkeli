@@ -168,3 +168,17 @@
     }
   }
 }
+
+@media (min-width: 768px) {
+  .small-page-banner-container {
+
+    &:nth-of-type(even) {
+      padding-left: 5px !important;
+    }
+
+    &:nth-of-type(odd) {
+      padding-right: 5px !important;
+    }
+    
+  }
+}
