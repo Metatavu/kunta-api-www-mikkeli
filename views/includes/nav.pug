@@ -44,8 +44,13 @@ nav.navbar.navbar-light
       nav.navbar.navbar-light.row
         .col-xs-24.no-gutter-left.no-gutters-medium
           ul.nav.navbar-nav.nav-bar-primary
-            if menus['paavalikko']
-              each item in menus['paavalikko'].items.concat(menus['sisalto'].items||[])
+            if menus['paavalikko'] && menus['paavalikko'].items
+              each item in menus['paavalikko'].items
+                li.nav-item
+                  a.nav-link(href=item.url)
+                    = item.label
+            if menus['paavalikko'] && menus['sisalto'].items
+              each item in menus['sisalto'].items
                 li.nav-item
                   a.nav-link(href=item.url)
                     = item.label
