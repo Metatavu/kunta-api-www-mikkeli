@@ -1,4 +1,4 @@
-/* global $, document */
+/* global $, document, Swiper */
 
 (function () {
   'use strict';
