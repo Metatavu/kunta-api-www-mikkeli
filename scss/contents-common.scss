@@ -81,12 +81,12 @@
   font-size: 95%;
   margin-bottom: 45px;
 
-  .phone-contact{
+  .phone-contact {
     @include font-y13();
     color: $meri;
   }
 
-  label{
+  label {
     font-weight: bold;
     margin-bottom: 0;
   }
@@ -179,7 +179,7 @@
 .page-nav {
   margin-bottom: 15px;
 
-  .nav-folder-title{
+  .nav-folder-title {
     @include font-ultra(14px);    
     text-transform: uppercase;
     margin-bottom: 8px;
@@ -203,7 +203,7 @@
     background-position: center;
     background-repeat: no-repeat;
     background-color: transparent;
-    border: none;
+    border: 0;
   }
   
   .open {
