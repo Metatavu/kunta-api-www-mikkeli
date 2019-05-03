@@ -13,14 +13,14 @@ if newsArticles.length
             .col-xs-24.details-container
               span.date
                 =newsArticle.shortDate
-              a.title(href='/uutiset/' + newsArticle.slug)
+              a.title(href='/uutiset/' + newsArticle.slug, title=newsArticle.title)
                 !=newsArticle.title
           .row.hidden-sm-down
             .col-xs-24
               !=newsArticle.abstract
   .col-xs-24.pages-container.no-gutters
     if page > 0
-      a.page-prev(href="#p" + (page - 1))
+      a.page-prev(href="#p" + (page - 1), title="Edellinen sivu")
         |Edellinen sivu
     else
       span.page-prev
@@ -29,7 +29,7 @@ if newsArticles.length
       |Sivu 
       =page + 1
     if !lastPage
-      a.page-next(href="#p" + (page + 1))
+      a.page-next(href="#p" + (page + 1), title="Seuraava sivu")
         |Seuraava sivu
     else
       span.page-next

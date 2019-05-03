@@ -3,11 +3,6 @@
 $menu-sarch-background-color: #e5e5e5;
 $menu-border-color: #e5e5e5;
 
-$event-calendar-background-color: #f7f7f7;
-$event-inactive-bullet-color: #63bae7;
-$event-active-bullet-color: #a6147f;
-$event-arrow-color: #214d8e;
-
 $announcementlist-separator-line-color: #aaaaaa;
 $news-details-background-color: #f7f7f7;
 
@@ -22,6 +17,17 @@ $orvokki: rgb(167, 22, 128);
 $kallio: rgb(113, 118, 125);
 $aamurusko: rgb(240, 126, 38);
 $marjapuuro: rgb(217, 76, 112);
+$meri : rgb(35, 76, 142);
+$sitruuna : rgb(255, 212, 0);
+
+$event-calendar-background-color: #f7f7f7;
+$event-inactive-bullet-color: $meri;
+$event-active-bullet-color: #a6147f;
+$event-arrow-color: #214d8e;
+
+$osallistu-background-color: #5CA740;
+$kuntarekry-background-color: $meri;
+$kuulutukset-background-color: #D84C6F;
 
 $osallistu-gradient-start: #5ca740;
 $osallistu-gradient-end: #d2d92a;

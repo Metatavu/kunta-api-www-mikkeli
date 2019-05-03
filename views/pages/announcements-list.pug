@@ -43,7 +43,7 @@ block content
                         .col-xs-24
                           span.date
                             =announcement.shortDate
-                          a.title(href='/kuulutukset/' + announcement.slug)
+                          a.title(title=announcement.title, href='/kuulutukset/' + announcement.slug)
                             !=announcement.title
                       .row
                         .col-xs-24
@@ -51,7 +51,7 @@ block content
           if page !== undefined
             .col-xs-24.pages-container.no-gutters
               if page > 0
-                a.page-prev(href="?page=" + (page - 1))
+                a.page-prev(href="?page=" + (page - 1), title="Edellinen sivu")
                   |Edellinen sivu
               else
                 span.page-prev
@@ -60,7 +60,7 @@ block content
                 |Sivu 
                 =page + 1
               if !lastPage
-                a.page-next(href="?page=" + (page + 1))
+                a.page-next(href="?page=" + (page + 1), title="Seuraava sivu")
                   |Seuraava sivu
               else
                 span.page-next

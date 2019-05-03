@@ -40,7 +40,21 @@
       margin-top: 0;
     }
   }
-  
+  .search-header{
+    font-size: 16px;
+    background: rgba(0, 0, 0, 0.01);
+    padding: 5px;
+    margin-left: -5px;
+    margin-right: -5px;
+    font-weight: bold;
+    margin-top: 10px;
+    margin-bottom: 0;
+    
+    &:first-of-type {
+      margin-top: 0;
+    }
+  }
+
   ul {
     margin-left: 0;
     margin-bottom: 0;
@@ -193,6 +207,15 @@ nav.navbar {
 
 .nav-search-container {
   padding-bottom: 15px;
+
+  .search-label {
+    margin-right:10px;
+    font-family: "Titillium Web", sans-serif;
+    font-weight: 400;
+    font-size: 18px;
+    line-height: 23px;
+    letter-spacing: 0;
+  }
   
   input {
     border: 0;
@@ -207,7 +230,7 @@ nav.navbar {
     height: 30px;
 
     &:focus {
-      outline: none;
+      border-color: $meri;
     }
 
     @media (min-width: $break-small) {
@@ -219,9 +242,11 @@ nav.navbar {
   .fa-circle-o-notch {
     margin-left: -35px;
     color: $valkoinen;
-    font-size: 27px;
+    font-size: 20px;
     margin-top: 4px;
     position: absolute;
+    border: none;
+    background-color: transparent;
     
     &:hover {
       text-decoration: none;
@@ -289,7 +314,7 @@ nav.navbar {
 .navbar-light .navbar-nav.nav-bar-secondary {
   .nav-link {
     @include font-h9;
-    color: #aaa;
+    color: $meri;
     text-transform: uppercase;
   }
 
@@ -309,7 +334,7 @@ footer {
   color: $valkoinen;
   margin-top: 59px;
   min-height: 280px;
-  background: linear-gradient(50deg, $footer-gradient-start, $footer-gradient-end);
+  background-color: $meri;
   
   .footer-container {
     padding-bottom: 25px; 
@@ -333,10 +358,8 @@ footer {
   .footer-address-container {
     margin-top: 26px;
   }
-  
-  h4 {
-    @include font-h9;
-    text-transform: uppercase;
+
+  .footer-row{
     margin-top: 50px;
   }
 

@@ -3,31 +3,31 @@ if !pages.length && !files.length
     |Haulla ei löytynyt tuloksia
 else
   if pages.length
-    h3
+    p.search-header
       |Sivut
     ul
       each page in pages
         li
           i.fa.fa-file-text-o(aria-hidden="true")
-          a(href='/redirect/page/' + page.id)
+          a(href='/redirect/page/' + page.id,title=page.title)
             =page.title
   if files.length
-    h3
+    p.search-header
       |Tiedostot
     ul
       each file in files
         li
           i.fa.fa-paperclip(aria-hidden="true")
-          a(href='/redirect/file/' + file.id)
+          a(href='/redirect/file/' + file.id, title=file.title)
             =file.title
           a.file-page-link(href='/redirect/page/' + file.pageId)
             i.fa.fa-external-link(aria-hidden="true")
   if newsArticles.length
-    h3
+    p.search-header
       |Uutiset
     ul
       each newsArticle in newsArticles
         li
           i.fa.fa-newspaper-o(aria-hidden="true")
-          a(href='/uutiset/' + newsArticle.slug)
+          a(href='/uutiset/' + newsArticle.slug, title=newsArticle.title)
             =newsArticle.title

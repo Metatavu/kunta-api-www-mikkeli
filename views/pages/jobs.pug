@@ -18,16 +18,16 @@ block content
         
   .container.page-container
     .row
-      .col-lg-5.page-nav.no-gutters.hidden-md-down
-        h3
+      nav.col-lg-5.page-nav.no-gutters.hidden-md-down
+        p(class="nav-folder-title")
           =folderTitle
         each job in jobs
           if job.id == activeJob.id
             .page-nav-item.active
-              a(href=job.id)
+              a(title=job.title, href=job.id)
                 !=job.title
           else
-            a.page-nav-item(href=job.id)
+            a.page-nav-item(title=job.title, href=job.id)
               !=job.title
       .col-xs-24.hidden-lg-up
         a.btn.btn-primary.btn-menu(title='Näytä valikko', data-toggle='collapse', href='#collapse-menu', aria-expanded='false', aria-controls='collapse-menu')
@@ -37,32 +37,36 @@ block content
             each job in jobs
               if job.id == activeJob.id
                 .page-nav-item.active
-                  a(href=job.id)
+                  a(title=job.title, href=job.id)
                     !=job.title
               else
-                a.page-nav-item(href=job.id)
+                a.page-nav-item(title=job.title, href=job.id)
                   !=job.title
       .col-xs-24.col-lg-14
         .page-content
           h1
             =activeJob.title
-          h5
+          h2
+            |Organisaatio
+          p
             =activeJob.organisationalUnit
-          h6
+          h2
+            |Sijainti
+          p  
             =activeJob.location
-          h3
+          h2
             |Hakuaika päättyy
           p
             =activeJob.endTime
-          h3
+          h2
             |Työn luonne
           p
             =activeJob.duration
-          h3
+          h2
             |Työn kuvaus
           p
             !=activeJob.description
           p
             |Lisätietoja saat&nbsp;
-            a(href=activeJob.link, target='_blank')
+            a(title=activeJob.link,href=activeJob.link, target='_blank')
               |Kuntarekryn sivulta          
