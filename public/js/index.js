@@ -1,11 +1,13 @@
+/* global $, document */
+
 (function () {
   'use strict';
 
   $(document).ready(function () {
-    var mySwiper = new Swiper('.swiper-container', {
-      pagination: '.swiper-pagination',
-      nextButton: '.swiper-button-next',
-      prevButton: '.swiper-button-prev',
+    var mySwiper = new Swiper(".swiper-container", {
+      pagination: ".swiper-pagination",
+      nextButton: ".swiper-button-next",
+      prevButton: ".swiper-button-prev",
       paginationClickable: true,
       slidesPerView: 3,
       initialSlide: 1,
@@ -20,15 +22,15 @@
       }
     });
 
-    $('.event-link').focus(function (e) {
+    $(".event-link").focus(function () {
       mySwiper.stopAutoplay();
     });
 
-    $('.slide-play').click(function (e) {
+    $(".slide-play").click(function () {
       mySwiper.startAutoplay();
     });
 
-    $('.slide-pause').click(function (e) {
+    $(".slide-pause").click(function () {
       mySwiper.stopAutoplay();
     });
 
