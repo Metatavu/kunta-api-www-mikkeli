@@ -23,8 +23,8 @@ block content
   .container.page-container
     .row
       if !hideMenu
-        .col-lg-5.page-nav.no-gutters.hidden-md-down
-          h3
+        nav.col-lg-5.page-nav.no-gutters.hidden-md-down
+          p(class="nav-folder-title")
             =rootFolderTitle
           each child in children
             +pageMenuItem(child)
@@ -42,7 +42,7 @@ block content
           h1
             !=title
           if featuredImageSrc
-            img.page-featured-img.lazy(data-original=featuredImageSrc)
+            img.page-featured-img.lazy(data-original=featuredImageSrc, alt="Artikkelikuva", title="Artikkelikuva")
           if readSpeakerCustomerId
             .read-speaker-container
               +readSpeaker(readSpeakerCustomerId)

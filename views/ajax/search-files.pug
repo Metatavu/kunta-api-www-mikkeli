@@ -8,16 +8,16 @@ if files.length
         .col-xs-24.col-md-18.col-lg-23
           .row
             .col-xs-24.details-container
-              a.title(href='/redirect/file/' + file.id)
+              a.title(href='/redirect/file/' + file.id, title='Lataa liite ' + file.title)
                 |Lataa liite: 
                 =file.title
               if file.pageId
                 br
-                a.title(href='/redirect/page/' + file.pageId)
+                a.title(href='/redirect/page/' + file.pageId, title='Näytä sivu, joka sisältää liitteen ' + file.title)
                   |Näytä sivu, joka sisältää liitteen
   .col-xs-24.pages-container.no-gutters
     if page > 0
-      a.page-prev(href="#p" + (page - 1))
+      a.page-prev(href="#p" + (page - 1), title="Edellinen sivu")
         |Edellinen sivu
     else
       span.page-prev
@@ -26,7 +26,7 @@ if files.length
       |Sivu 
       =page + 1
     if !lastPage
-      a.page-next(href="#p" + (page + 1))
+      a.page-next(href="#p" + (page + 1), title="Seuraava sivu")
         |Seuraava sivu
     else
       span.page-next

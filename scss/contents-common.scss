@@ -26,7 +26,7 @@
     }
    
     &:first-child {
-      color: #428ecc;
+      color: $musta;
     }
   
     &:first-child::before {
@@ -80,7 +80,17 @@
 .page-content {
   font-size: 95%;
   margin-bottom: 45px;
-  
+
+  .phone-contact {
+    @include font-y13();
+    color: $meri;
+  }
+
+  label {
+    font-weight: bold;
+    margin-bottom: 0;
+  }
+
   h1 {
     color: $kallio;
     @include font-ultra(40px);
@@ -168,6 +178,12 @@
 
 .page-nav {
   margin-bottom: 15px;
+
+  .nav-folder-title {
+    @include font-ultra(14px);    
+    text-transform: uppercase;
+    margin-bottom: 8px;
+  }
   
   h3 {
     @include font-ultra(14px);    
@@ -186,6 +202,8 @@
     background-image: url("/gfx/layout/mikkeli-menu-closed.png");
     background-position: center;
     background-repeat: no-repeat;
+    background-color: transparent;
+    border: 0;
   }
   
   .open {

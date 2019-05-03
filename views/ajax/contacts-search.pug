@@ -3,7 +3,7 @@ if contacts.length
     .col-xs-24.no-gutters.p-t-1
       .row
         .col-xs-24
-          h5
+          p(class="phone-contact")
             =contact.displayName
       if contact.title
         .row
@@ -47,7 +47,7 @@ if contacts.length
   if paged  
     .col-xs-24.pages-container.no-gutters
       if page > 0
-        a.page-prev(data-pagea=page - 1, href='#')
+        a.page-prev(title="Edellinen sivu", data-pagea=page - 1, href='#')
           |Edellinen sivu
       else
         span.page-prev
@@ -56,7 +56,7 @@ if contacts.length
         |Sivu 
         =page + 1
       if !lastPage
-        a.page-next(data-page=page + 1, href='#')
+        a.page-next(title="Seuraava sivu", data-page=page + 1, href='#')
           |Seuraava sivu
       else
         span.page-next

@@ -6,15 +6,15 @@ mixin breadcrumbs(breadcrumbs)
           span.breadcrumb-item.active
             !=breadcrumb.title
         else 
-          a.breadcrumb-item(href=breadcrumb.path)
+          a.breadcrumb-item(title=breadcrumb.title, href=breadcrumb.path)
             !=breadcrumb.title
 
 mixin pageMenuItem(item)
   if (item.meta && !item.meta.hideMenuChildren) && ((item.children && item.children.length) || item.hasChildren)
     span.page-nav-item(class=[item.id == id ? 'active' : '', item.children && item.children.length ? 'open' : '', 'has-children'].join(' '))
-      a.open-folder(href="#", data-page-id=item.id, data-slug=item.slug)
-      a.page-nav-link(href='#')
+      a.page-nav-link(title=item.title, href='#')
         !=item.title
+      button.open-folder(title='Avaa ' + item.slug, href="#", data-page-id=item.id, data-slug=item.slug)
       ul.child-pages
         if item.children
           each child in item.children
@@ -24,7 +24,7 @@ mixin pageMenuItem(item)
     span.page-nav-item(class=[activeIds.indexOf(item.id) != -1 ? 'active' : ''].join(' '))
       span.leaf-page(data-page-id=item.id, data-slug=item.slug)
         |&nbsp;
-      a.page-nav-link(href='#')
+      a.page-nav-link(title=item.title, href='#')
         !=item.title
 
 mixin readSpeaker(customerId)
