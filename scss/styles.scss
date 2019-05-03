@@ -40,7 +40,7 @@
       margin-top: 0;
     }
   }
-  .search-header{
+  .search-header {
     font-size: 16px;
     background: rgba(0, 0, 0, 0.01);
     padding: 5px;
@@ -209,7 +209,7 @@ nav.navbar {
   padding-bottom: 15px;
 
   .search-label {
-    margin-right:10px;
+    margin-right: 10px;
     font-family: "Titillium Web", sans-serif;
     font-weight: 400;
     font-size: 18px;
@@ -245,7 +245,7 @@ nav.navbar {
     font-size: 20px;
     margin-top: 4px;
     position: absolute;
-    border: none;
+    border: 0;
     background-color: transparent;
     
     &:hover {
@@ -359,7 +359,7 @@ footer {
     margin-top: 26px;
   }
 
-  .footer-row{
+  .footer-row {
     margin-top: 50px;
   }
 
