@@ -36,7 +36,7 @@ nav.navbar.navbar-light
                   i.fa.fa-map-marker(aria-hidden="true")
                 if locales
                   .locale-menu
-                    .current-locale
+                    button.current-locale(title="Vaihda kieli")
                       =locale
                     each locale in locales 
                       a(title="Vaihda kieli " + locale.code, href="?locale=" + locale.code)

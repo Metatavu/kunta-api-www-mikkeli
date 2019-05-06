@@ -11,10 +11,10 @@ mixin breadcrumbs(breadcrumbs)
 
 mixin pageMenuItem(item)
   if (item.meta && !item.meta.hideMenuChildren) && ((item.children && item.children.length) || item.hasChildren)
-    span.page-nav-item(class=[item.id == id ? 'active' : '', item.children && item.children.length ? 'open' : '', 'has-children'].join(' '))
+    div.page-nav-item(class=[item.id == id ? 'active' : '', item.children && item.children.length ? 'open' : '', 'has-children'].join(' '))
       a.page-nav-link(title=item.title, href='#')
         !=item.title
-      button.open-folder(title='Avaa ' + item.slug, href="#", data-page-id=item.id, data-slug=item.slug)
+      button.open-folder(title='Avaa ' + item.slug, data-page-id=item.id, data-slug=item.slug)
       ul.child-pages
         if item.children
           each child in item.children

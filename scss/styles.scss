@@ -116,6 +116,7 @@
   
   .current-locale {
     display: block;
+    border: 0;
 
     &::after {
       content: '⌄';
@@ -361,6 +362,11 @@ footer {
 
   .footer-row {
     margin-top: 50px;
+
+    a:focus {
+      color: $sitruuna;
+    }
+
   }
 
   p {

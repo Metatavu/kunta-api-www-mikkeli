@@ -110,18 +110,17 @@ block content
                 h3
                   |Suosituimmat      
                 ul
-                each item in menus['suositut'].items
-                  li.nav-item
-                    a.nav-link(title=item.label ,href=item.url)
-                      =item.label
-                      i.fa.fa-angle-right
+                  each item in menus['suositut'].items
+                    li.nav-item
+                      a.nav-link(title=item.label ,href=item.url)
+                        =item.label
+                        i.fa.fa-angle-right
   .container-fluid.event-section
     .container.no-gutters
       .row
         .col-xs.text-xs-center.events-title
-          span
-            h3
-              |Tapahtumakalenteri
+          h3
+            |Tapahtumakalenteri
       .row
         .col-xs.events-container.no-gutters
           .swiper-container
@@ -134,16 +133,16 @@ block content
             .col-xs(class="pagination-container")
               .swiper-pagination
               button.slide-play(title="Aloita slide")
-                img(src='/gfx/layout/arrow.png')
+                img(alt="play-icon", src='/gfx/layout/arrow.png')
               button.slide-pause(title="Pysäytä slide")
-                  img(src='/gfx/layout/pause.png')
+                img(alt="pause-icon", src='/gfx/layout/pause.png')
           .row
             .col-xs.text-xs-center.all-events-container
               span
                 |Katso kaikki tapahtumat
               span
                 | 
-              a(title="http://www.mikkelinyt.fi",href="http://www.mikkelinyt.fi",target="_blank")
+              a(title="http://www.mikkelinyt.fi", href="http://www.mikkelinyt.fi",target="_blank")
                 |www.mikkelinyt.fi
               
   .container-fluid.no-gutters
