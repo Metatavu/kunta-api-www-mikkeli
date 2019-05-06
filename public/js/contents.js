@@ -1,4 +1,4 @@
-/* global $ */
+/* global $, document */
 
 (function () {
   'use strict';
