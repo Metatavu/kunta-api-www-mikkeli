@@ -48,6 +48,36 @@ block content
               +readSpeaker(readSpeakerCustomerId)
           .rs_read_this_class
             !=contents
+          if !accessibilityInfo
+            .accessibilityInfo
+              .accessibility-info-header
+                p
+                  strong
+                    ="Esteettömyystiedot"
+              .accessibility-info-container
+                button.open-info(title="Avaa reitti pääsisäänkäynnille")
+                  span.arrow-icon.closed
+                  span.button-text
+                    |Reitti pääsisäänkäynnille
+                .accessibility-info-content.hidden
+                  ul
+                    li Saattoliikenteen pysähtymispaikka sijaitsee sisäänkäynnin läheisyydessä (etäisyys enintään 5 metriä), josta sisäänkäynnille pääsee siirtymään sujuvasti.
+                    li Kulkureitti sisäänkäynnille on opastettu, tasainen ja riittävän leveä sekä valaistu.
+              .accessibility-info-container
+                button.open-info(title="Avaa pääsisäänkäynti")
+                  span.arrow-icon.closed
+                  span.button-text
+                    |Pääsisäänkäynti
+                .accessibility-info-content.hidden
+                  ul
+                    li testi
+                    li testi 2
+              .accessibility-info-container
+                button.open-info(title="Avaa sisätilat")
+                  span.arrow-icon.closed
+                  span.button-text
+                    |Sisätilat
+
       if sidebarContents
         .col-xs-24.col-lg-5.sidebar
           .sidebar-block

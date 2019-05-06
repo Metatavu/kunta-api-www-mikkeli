@@ -555,20 +555,27 @@
     @include font-h8;
     padding-top: 15px;
     padding-bottom: 36px;
+
+    a {
+      color: $meri;
+    }
+    
   }
   
   .swiper-button-prev {
     background: none;
     background-color: transparent;
     border: 0;
+    margin-left: 400px;
+    margin-top: 60px;
     
     &::after {
       color: $event-arrow-color;
       font-family: "FontAwesome";
       content: "\f104";
       font-size: 40px;
-      margin-left: 400px;
-      margin-top: 53px;
+      margin-top: -30px;
+      margin-left: -8px;
       position: absolute;
     }
   }
@@ -577,14 +584,16 @@
     background: none;
     background-color: transparent;
     border: 0;
+    margin-right: 400px;
+    margin-top: 60px;
 
     &::after {
       color: $event-arrow-color;
       font-family: "FontAwesome";
       content: "\f105";
       font-size: 40px;
-      margin-left: -400px;
-      margin-top: 53px;
+      margin-top: -30px;
+      margin-left: -8px;
       position: absolute;
     }
   }
@@ -814,31 +823,11 @@
 @media screen and (max-width: 1201px) {
   .event-section {
     .swiper-button-prev {
-      &::after {
-        margin-left: 350px;
-      }
+        margin-left: 200px;
     }
     
     .swiper-button-next {
-      &::after {
-        margin-left: -350px;
-      }
-    }
-    }
-  }
-
-@media screen and (max-width: 992px) {
-  .event-section {
-    .swiper-button-prev {
-      &::after {
-        margin-left: 150px;
-      }
-    }
-    
-    .swiper-button-next {
-      &::after {
-        margin-left: -150px;
-      }
+        margin-right: 200px;
     }
 
     .pagination-container {
@@ -850,3 +839,39 @@
   }
 }
 
+@media screen and (max-width: 992px) {
+  .event-section {
+    .swiper-button-prev {
+        margin-left: 20%;
+    }
+    
+    .swiper-button-next {
+        margin-right: 20%;
+    }
+
+  }
+}
+
+@media screen and (max-width: 750px) {
+  .event-section {
+
+    .swiper-pagination {
+      width: 60%;
+      margin-left: 20%;
+    }
+
+    .swiper-button-prev {
+      visibility: hidden;
+    }
+  
+    .swiper-button-next {
+      visibility: hidden;
+    }
+    .pagination-container {
+      .slide-play {
+        margin-left: 5%;
+        margin-right: 1.5%;
+      }
+    } 
+  }
+}

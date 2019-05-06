@@ -167,6 +167,25 @@
     $('.kunta-api-contact-search').contactSearch();
 
     $("img.lazy").lazyload();
+
+    $("button.open-info").click(function(event){
+      event.preventDefault();
+      var openLink = $(event.currentTarget);
+      var item = openLink.children("span.arrow-icon");
+      var content = openLink.siblings("div.accessibility-info-content");
+      if (item.hasClass('open')) {
+        item.addClass('closed').removeClass('open');
+        content.addClass('hidden');
+        return;
+      }
+      
+      if (item.hasClass('closed')) {
+        item.addClass('open').removeClass('closed');
+        content.removeClass('hidden');
+        return;
+      }
+    });
+
   });
   
 }).call(this);
