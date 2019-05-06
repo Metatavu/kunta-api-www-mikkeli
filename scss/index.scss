@@ -823,11 +823,11 @@
 @media screen and (max-width: 1201px) {
   .event-section {
     .swiper-button-prev {
-        margin-left: 200px;
+      margin-left: 200px;
     }
     
     .swiper-button-next {
-        margin-right: 200px;
+      margin-right: 200px;
     }
 
     .pagination-container {
@@ -840,19 +840,22 @@
 }
 
 @media screen and (max-width: 992px) {
+
   .event-section {
     .swiper-button-prev {
-        margin-left: 20%;
+      margin-left: 20%;
     }
     
     .swiper-button-next {
-        margin-right: 20%;
+      margin-right: 20%;
     }
 
   }
+
 }
 
 @media screen and (max-width: 750px) {
+
   .event-section {
 
     .swiper-pagination {
@@ -862,11 +865,14 @@
 
     .swiper-button-prev {
       visibility: hidden;
+
     }
   
     .swiper-button-next {
       visibility: hidden;
+
     }
+
     .pagination-container {
       .slide-play {
         margin-left: 5%;
