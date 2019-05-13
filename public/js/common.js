@@ -123,9 +123,9 @@
     $('.nav-search-container').menuSearch();
     $( ".locale-menu" ).localeMenu();
 
-    $('.to-content').click(function (){
-      if($('.page-content')){
-        $('.page-content').focus();
+    $(".to-content").click(function (){
+      if($(".page-content")){
+        $(".page-content").focus();
       }
     });
 
