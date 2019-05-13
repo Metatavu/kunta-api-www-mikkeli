@@ -85,7 +85,7 @@
           var bannerSrc = '/gfx/layout/mikkeli-page-banner-default.jpg';
           const siteUrl = `${req.protocol}://${req.get('host')}${req.originalUrl}`;
           const ogContent = entities.decode(striptags(newsArticle.contents));
-          
+
           res.render('pages/news-article.pug', Object.assign(req.kuntaApi.data, {
             baseUrl : req.protocol + '://' + req.get('host'),
             ogTitle: entities.decode(newsArticle.title),

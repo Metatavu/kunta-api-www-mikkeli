@@ -23,7 +23,7 @@ block content
   .container.page-container
     .row
       .col-xs-24
-        .page-content
+        .page-content(tabindex="0")
           .col-xs-24
             .row
               h1
@@ -40,7 +40,7 @@ block content
                   .row.news-article
                     .col-xs-24.col-md-6.col-lg-4
                       .article-image-container
-                        img.lazy.article-image(data-original=newsArticle.imageSrc, alt="Uutisartikkelin kuva", title="Uutisartikkelin kuva")
+                        img.lazy.article-image(src=newsArticle.imageSrc, alt="Artikkelin kuva", title="Artikkelin kuva")
                     .col-xs-24.col-md-18.col-lg-20
                       .row
                         .col-xs-24
