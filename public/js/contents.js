@@ -164,26 +164,26 @@
   $.widget("custom.accessibilityContainer", {
      
     _create : function() {
-     this.element.on('click', 'button' , $.proxy(this._onTitleClick, this));
-     const buttonText = this.element.children('b').first().text();
-     this.element.children('b').first().replaceWith("<button type='button'>");
-     this.element.children('button').first().addClass("button-text").text(buttonText);
-     this.element.children('button').first().addClass('closed');
-     this.element.children('p').wrapAll("<ul/>")
-     this.element.children('ul').first().children('p').replaceWith(function(i, content){ 
+      this.element.on("click", "button" , $.proxy(this._onTitleClick, this));
+      const buttonText = this.element.children("b").first().text();
+      this.element.children("b").first().replaceWith("<button type='button'>");
+      this.element.children("button").first().addClass("button-text").text(buttonText);
+      this.element.children("button").first().addClass("closed");
+      this.element.children("p").wrapAll("<ul/>")
+      this.element.children("ul").first().children("p").replaceWith(function(i, content) {
       return "<li>" + content + "</li>" ;
-     });
-     this.element.children('ul').first().addClass("hidden");
+      });
+      this.element.children("ul").first().addClass("hidden");
     },
     
     _onTitleClick: function (event) {
       event.preventDefault();
-      if (this.element.children('button').first().hasClass("closed")) {
-        this.element.children('button').first().addClass("open").removeClass("closed");
-        this.element.children('ul').first().removeClass("hidden");
+      if (this.element.children("button").first().hasClass("closed")) {
+        this.element.children("button").first().addClass("open").removeClass("closed");
+        this.element.children("ul").first().removeClass("hidden");
       } else {
-        this.element.children('button').first().addClass("closed").removeClass("open");
-        this.element.children('ul').first().addClass("hidden");
+        this.element.children("button").first().addClass("closed").removeClass("open");
+        this.element.children("ul").first().addClass("hidden");
       }
 
     }
@@ -198,8 +198,8 @@
     $('.casem-history-topic').casemHistoryTopic();
     $('.kunta-api-contact-search').contactSearch();
 
-    $('.accessibility-sentences').siblings('h2').addClass('accessibility-info-header');
-    $( '.accessibility-sentence' ).accessibilityContainer();
+    $(".accessibility-sentences").siblings("h2").addClass("accessibility-info-header");
+    $( ".accessibility-sentence" ).accessibilityContainer();
 
     $("img.lazy").lazyload();
 

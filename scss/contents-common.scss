@@ -195,8 +195,8 @@
       }
       
       .open {
-        &:before {
-          content: '';
+        &::before {
+          content: "";
           width: 34px;
           height: 24px;
           background-image: url("/gfx/layout/mikkeli-menu-open.png");
@@ -206,8 +206,8 @@
       }
       
       .closed {
-        &:before {
-          content: '';
+        &::before {
+          content: "";
           width: 34px;
           height: 24px;
           background-image: url("/gfx/layout/mikkeli-menu-closed.png");
