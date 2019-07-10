@@ -38,46 +38,17 @@ block content
                 +pageMenuItem(child)
 
       div(class=hideMenu ? "col-xs-24 col-lg-19" : "col-xs-24 col-lg-14") 
-        .page-content
+        .page-content(tabindex="0")
           h1
             !=title
           if featuredImageSrc
-            img.page-featured-img.lazy(data-original=featuredImageSrc, alt="Artikkelikuva", title="Artikkelikuva")
+            img.page-featured-img.lazy(src=featuredImageSrc, alt="Artikkelikuva", title="Artikkelikuva")
           if readSpeakerCustomerId
             .read-speaker-container
               +readSpeaker(readSpeakerCustomerId)
           .rs_read_this_class
             !=contents
-          if !accessibilityInfo
-            .accessibility-info
-              .accessibility-info-header
-                p
-                  strong
-                    ="Esteettömyystiedot"
-              .accessibility-info-container
-                button.open-info(title="Avaa reitti pääsisäänkäynnille")
-                  span.arrow-icon.closed
-                  span.button-text
-                    |Reitti pääsisäänkäynnille
-                .accessibility-info-content.hidden
-                  ul
-                    li Saattoliikenteen pysähtymispaikka sijaitsee sisäänkäynnin läheisyydessä (etäisyys enintään 5 metriä), josta sisäänkäynnille pääsee siirtymään sujuvasti.
-                    li Kulkureitti sisäänkäynnille on opastettu, tasainen ja riittävän leveä sekä valaistu.
-              .accessibility-info-container
-                button.open-info(title="Avaa pääsisäänkäynti")
-                  span.arrow-icon.closed
-                  span.button-text
-                    |Pääsisäänkäynti
-                .accessibility-info-content.hidden
-                  ul
-                    li testi
-                    li testi 2
-              .accessibility-info-container
-                button.open-info(title="Avaa sisätilat")
-                  span.arrow-icon.closed
-                  span.button-text
-                    |Sisätilat
-
+          
       if sidebarContents
         .col-xs-24.col-lg-5.sidebar
           .sidebar-block

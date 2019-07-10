@@ -14,12 +14,13 @@ nav.navbar.navbar-light
             img.logo(alt="Mikkelin logo, navigoi etusivulle", title="Mikkelin logo - navigoi etusivulle", src="/gfx/layout/mikkeli-logo.png")
         .col-xs-24.col-md-14.text-md-right.text-xs-left.no-gutters
           .row
+            button(class="to-content", title="Mene sisältöön")
             .col-xs-24.col-md-10.col-lg-13.flex-md-last.flex-lg-first
               .nav-search-container
-                label(for="search" class="search-label") Päähaku
-                input(title="Päähaku" id="search")
+                label(for="search" class="search-label") Hae sivustosta
+                input(title="Hae sivustosta" id="search")
                 i.fa.fa-circle-o-notch.fa-spin
-                button.fa.fa-search(aria-hidden="true",title="Päähaku -painike", onclick="location.href='/haku'")
+                button.fa.fa-search(aria-hidden="true",title="Hae sivustosta -painike", onclick="location.href='/haku'")
             .col-xs-16.col-md-10.col-lg-7.pull-lg-right.no-gutter-right
               .nav-some-icons
                 a(href="https://www.facebook.com/mikkelinkaupunki",title="Facebook - Mikkelikaupunki", target="_blank")

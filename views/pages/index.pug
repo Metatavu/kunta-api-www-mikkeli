@@ -45,13 +45,24 @@ mixin banner(banner)
       
 mixin banners-slider(banners) 
   .header-banner
-    #banner-slide.carousel.slide(data-ride='carousel')
+    .banner-slide.carousel.slide
+      .banner-carousel-indicators
+        ol.carousel-indicators
+          each banner, bannerIndex in banners
+            li(data-target='#banner-slide', data-slide-to='#{bannerIndex}')
       .banner-carousel-items
         .carousel-inner(role='listbox')
           each banner, bannerIndex in banners
             - var itemClass=bannerIndex == 0 ? "carousel-item active" : 'carousel-item'
             div(class=itemClass)
               +banner(banner)
+      .banner-carousel-controls
+        a.left.carousel-control(href='#banner-slide', data-slide='prev', role="button")
+          div.icon-prev(aria-hidden='true')
+          div.sr-only Previous
+        a.right.carousel-control(href='#banner-slide', data-slide='next', role="button")
+          div.icon-next(aria-hidden='true')
+          div.sr-only Next
     
 mixin tile(tile)
   .tile(data-lazy-bg-image=tile.imageSrc)
