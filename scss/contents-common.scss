@@ -109,8 +109,7 @@
   }
  
   h2 {
-    @include font-h11();
-    font-weight: 700;
+    @include font-h14();
   }
  
   h3 {
@@ -166,14 +165,14 @@
     background-size: cover;
     background-position: center;
   }
-
-  .accessibility-info-header {
-    border-bottom: 0.5px solid #d3d3d3;
-    padding-bottom: 20px;
-    margin-bottom: 10px;
-  }
   
   .accessibility-sentences {
+
+    .p-info {
+      border-bottom: 0.5px solid #d3d3d3;
+      padding-bottom: 15px;
+      padding-top: 5px;
+    }
 
     .accessibility-sentence {
       border-bottom: 0.5px solid #d3d3d3;
@@ -190,8 +189,8 @@
       }
 
       .button-text {
-        color: $kallio;
-        font-weight: 500;
+        color: $tummakallio;
+        font-weight: 700;
       }
       
       .open {
