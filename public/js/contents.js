@@ -199,7 +199,7 @@
     $('.kunta-api-contact-search').contactSearch();
 
     var accessibilitySentences = $(".accessibility-sentences");
-    accessibilitySentences.prepend("<p class='p-info'>Klikkaa nuolta avataksesi lisätietokentän</p>")
+    accessibilitySentences.prepend("<p class='p-info'>Klikkaa nuolta avataksesi lisätietokentän</p>");
     $( ".accessibility-sentence" ).accessibilityContainer();
 
     $("img.lazy").lazyload();
