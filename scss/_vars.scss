@@ -141,6 +141,15 @@ $break-large: 1199px;
   color: #62bae9;
 }
 
+@mixin font-h14() {
+  font-family: "Titillium Web", sans-serif;
+  font-weight: 700;
+  font-size: 20px;
+  line-height: 24px;
+  letter-spacing: 0;
+  color: #000;
+}
+
 @mixin font-h2-titillum-italic() {
   font-family: "Titillium Web", sans-serif;
   font-weight: 600;
