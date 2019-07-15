@@ -108,10 +108,7 @@
     
   }
  
-  h2 {
-    @include font-h14();
-  }
- 
+  h2,
   h3 {
     @include font-h13();
     padding-bottom: 10px;
@@ -155,6 +152,10 @@
       }
       
     }
+  }
+
+  .electronic-service-channel-link {
+    margin-bottom: .5em;
   }
 
   .featured-image {
@@ -393,7 +394,8 @@
       @include font-h9();
       color: $mustikka;
     }
-      
+    
+    h2,
     h3 {
       @include font-h9();
       text-transform: uppercase;
@@ -406,6 +408,13 @@
     h4 {
       @include font-h9();
       color: $musta;
+      padding-top: 5px;
+      padding-bottom: 0;
+      margin-top: 15px;
+      margin-bottom: 0;
+    }
+
+    .service-location-channel-link {
       padding-top: 5px;
       padding-bottom: 0;
       margin-top: 15px;
