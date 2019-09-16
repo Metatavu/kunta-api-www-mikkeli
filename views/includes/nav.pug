@@ -40,7 +40,7 @@ nav.navbar.navbar-light
                     button.current-locale(title="Vaihda kieli")
                       =locale
                     each locale in locales 
-                      a(title="Vaihda kieli " + locale.code, href="?locale=" + locale.code)
+                      a(title="Vaihda kieli " + locale.code, href=(locale.path || "") + "?locale=" + locale.code)
                         =locale.text
             
       nav.navbar.navbar-light.row
