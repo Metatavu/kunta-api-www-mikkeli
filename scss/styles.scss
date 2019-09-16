@@ -374,5 +374,10 @@ footer {
   p {
     @include font-h9;
   }
+
+  h4 {
+    @include font-h9;
+    text-transform: uppercase;
+  }
 }
 
