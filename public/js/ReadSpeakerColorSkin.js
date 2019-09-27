@@ -1,7 +1,5 @@
 // <!--
 
-window = undefined;
-
 if (! window.rsConf) { window.rsConf = {}; }
 if (! window.rsConf.ui) { window.rsConf.ui = {}; }
 window.rsConf.ui.rsbtnClass = 'rsbtn_colorskin';
