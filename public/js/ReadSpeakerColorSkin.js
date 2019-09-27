@@ -1,5 +1,7 @@
 // <!--
 
+window = undefined;
+
 if (! window.rsConf) { window.rsConf = {}; }
 if (! window.rsConf.ui) { window.rsConf.ui = {}; }
 window.rsConf.ui.rsbtnClass = 'rsbtn_colorskin';
@@ -36,10 +38,10 @@ window.rsConf.ui.player = [
 
 
 window.rsConf.ui.popupbutton = [
-  '<a class="rsbtn_play" accesskey="L" title="Listen with ReadSpeaker" href="">',
-    '<span class="rsbtn_left rspart"><span class="rsbtn_text"><span>Listen</span></span></span>',
-    '<span class="rsbtn_right rsimg rsplay rspart"></span>',
-  '</a>'
+  "<a class=\"rsbtn_play\" accesskey=\"L\" title=\"Listen with ReadSpeaker\" href=\"\">",
+  "	<span class=\"rsbtn_left rspart\"><span class=\"rsbtn_text\"><span>Listen</span></span></span>",
+  "	<span class=\"rsbtn_right rsimg rsplay rspart\"></span>",
+  "</a>"
 ];
 /*
 window.rsConf.ui.popupbutton = [];
