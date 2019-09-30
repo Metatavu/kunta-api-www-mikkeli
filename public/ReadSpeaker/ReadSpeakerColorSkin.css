@@ -49,8 +49,11 @@
  */
 .rsbtn_colorskin .rspart.rsbutton {
 	background-color: rgb(100, 100, 100);
-	width: 20px;
-	height: 20px;
+	border: 1px solid black;
+	border-radius: 4px;
+	-moz-border-radius: 4px;
+	width: 22px;
+	height: 22px;
   
   /* 
    * Add rounded corners to supported browsers 
@@ -94,7 +97,7 @@
 }
 
 .rsbtn_colorskin .rsbtn_left .rsbtn_text {
-	background: transparent url("ReadSpeaker/icon_16px_gray.gif") no-repeat scroll 0 0;
+	background: transparent url("ReadSpeaker/icon_16px_black.gif") no-repeat scroll 0 0;
 	padding-left: 24px;
   	color: rgb(100, 100, 100);
 }
@@ -151,8 +154,8 @@
 /************************************************ PROGRESS DRAG HANDLE */
 .rsbtn_colorskin .rsbtn_progress_handle.rsimg {
 	position: absolute;
-	background-color: rgb(100, 100, 100);
-	top: -3px;
+	background-color: rgb(0, 0, 0);
+	top: -4px;
 	left: -2px;
 	width: 6px;
 	height: 16px;
@@ -180,7 +183,7 @@
 	top: 100%;
 	width: 18px;
 	height: 40px;
-	border: 1px solid rgb(100, 100, 100);
+	border: 1px solid rgb(0, 0, 0);
 	background: #fff;
 }
 
@@ -196,10 +199,10 @@
 .rsbtn_colorskin .rsbtn_volume_handle.rsimg {
 	position: absolute;
 	top: -2px;	
-	left: -2px;	
+	left: -3px;	
 	width: 12px;
 	height: 6px;
-	background: rgb(100, 100, 100);
+	background: rgb(0, 0, 0);
 }
 
 /************************************************ DOWNLOAD BUTTON */
@@ -292,7 +295,7 @@
 .rsbtn_colorskin.rs_blacklogo .rsbtn_powered,
 .rsbtn_colorskin.rs_blacklogo .rsbtn_powered .rsbtn_btnlabel a span.rsbtn_label_read,
 .rsbtn_colorskin.rs_blacklogo .rsbtn_powered .rsbtn_btnlabel a span.rsbtn_label_speaker {
-	color: rgb(100, 100, 100);
+	color: rgb(0, 0, 0);
 }
 
 .rsbtn_colorskin.rs_blacklogo .rsbtn_powered .rsbtn_btnlabel a span.rsbtn_label_icon.rsimg {
@@ -302,7 +305,7 @@
 /* About-page link */
 .rsbtn_colorskin a.rsbtn_abouthelp {
 	background: url(ReadSpeaker/ReadSpeakerColorSkin.png) no-repeat scroll -20px -128px transparent;
-	background-color: rgb(100, 100, 100);
+	background-color: rgb(0, 0, 0);
 	border-radius: 7px;
 	transition: background-color 0.2s ease 0s;
 	height: 14px;
@@ -321,5 +324,5 @@
 /*Status overlay*/
 
 .rsbtn_exp .rsbtn_status_overlay span.rsbtn_status {
-    margin-top: 0px !important;
+	margin-top: 0px !important;
 }

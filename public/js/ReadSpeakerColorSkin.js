@@ -2,7 +2,7 @@
 
 if (! window.rsConf) { window.rsConf = {}; }
 if (! window.rsConf.ui) { window.rsConf.ui = {}; }
-window.rsConf.ui.rsbtnClass = 'rsbtn_colorskin';
+window.rsConf.ui.rsbtnClass = "rsbtn_colorskin";
 window.rsConf.ui.player = [
   "<span class=\"rsbtn_box\">",
   "	<a href=\"javascript:void(0);\" class=\"rsbtn_pause rsimg rspart rsbutton\" title=\"Pause\">",
