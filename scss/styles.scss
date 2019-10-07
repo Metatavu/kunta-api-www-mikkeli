@@ -380,4 +380,14 @@ footer {
     text-transform: uppercase;
   }
 }
+.read-speaker-wrapper {
 
+  margin-top: 20px;
+  margin-bottom: 75px;
+  font-size: 14px;
+  
+  @media (max-width: $break-medium) {
+    margin-bottom: 30px;
+  }
+  }
+  
