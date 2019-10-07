@@ -1,5 +1,5 @@
 mixin breadcrumbs(breadcrumbs)
-  .col-xs.breadcrumbs-container
+  .col-xs.breadcrumbs-container.no-gutters
     if breadcrumbs && breadcrumbs.length
       each breadcrumb, index in breadcrumbs
         if(index === breadcrumbs.length - 1)
@@ -28,9 +28,9 @@ mixin pageMenuItem(item)
         !=item.title
 
 mixin readSpeaker(customerId)
-  #readspeaker_button1.rs_skip.rsbtn.rs_preserve
+  #readspeaker_button.rs_skip.rsbtn_colorskin.rs_preserve
     a.rsbtn_play(rel='nofollow', accesskey='L', title='Kuuntele ReadSpeakerilla', href='//app-eu.readspeaker.com/cgi-bin/rsent?customerid=' + customerId + '&readclass=rs_read_this_class&lang=fi_fi&url=' + readSpeakerUrl)
-      span.rsbtn_left.rsimg.rspart
+      span.rsbtn_left.rspart
         span.rsbtn_text
           span Kuuntele
       span.rsbtn_right.rsimg.rsplay.rspart

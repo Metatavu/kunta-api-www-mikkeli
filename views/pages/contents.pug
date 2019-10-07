@@ -17,8 +17,15 @@ block content
         .banner(data-lazy-bg-image=bannerSrc)
         
   .container.page-container
-    .row
-      +breadcrumbs(breadcrumbs)
+    .container-fluid
+      .row
+        .col-lg-17.col-md-14.no-gutters
+          +breadcrumbs(breadcrumbs)
+        .col-lg-7.col-md-10.col.no-gutters
+          if readSpeakerCustomerId
+            .col-xs.read-speaker-wrapper.no-gutters
+              .read-speaker-container
+                +readSpeaker(readSpeakerCustomerId)
       
   .container.page-container
     .row
@@ -43,9 +50,6 @@ block content
             !=title
           if featuredImageSrc
             img.page-featured-img.lazy(src=featuredImageSrc, alt="Artikkelikuva", title="Artikkelikuva")
-          if readSpeakerCustomerId
-            .read-speaker-container
-              +readSpeaker(readSpeakerCustomerId)
           .rs_read_this_class
             !=contents
           
