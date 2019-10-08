@@ -25,7 +25,8 @@ block content
           if readSpeakerCustomerId
             .col-xs.read-speaker-wrapper.no-gutters
               .read-speaker-container
-                +readSpeaker(readSpeakerCustomerId)
+                if locale.readSpeaker.enabled == true 
+                  +readSpeaker(readSpeakerCustomerId)
       
   .container.page-container
     .row

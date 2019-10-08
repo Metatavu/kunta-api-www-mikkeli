@@ -25,7 +25,8 @@ block content
           if readSpeakerCustomerId
             .col-xs.read-speaker-wrapper.no-gutters
               .read-speaker-container
-                +readSpeaker(readSpeakerCustomerId)
+                if locale.readSpeaker.enabled == true
+                  +readSpeaker(readSpeakerCustomerId)
         
   .container.page-container
     .row
@@ -71,7 +72,8 @@ block content
               img.article-img.lazy(src=imageSrc, alt="Artikkelin kuva", title="Artikkelin kuva")
           .row
             .col-xs-24
-              !=contents
+              .rs_read_this_class
+                !=contents
           .row
             .col-xs-24.tags
                each tag in tags

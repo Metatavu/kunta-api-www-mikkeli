@@ -39,18 +39,18 @@
         .menus.list()
         .fragments.list()
         .callback(function(data) {
-          let locale = "fi";
+          let localeCode = "fi";
 
           if (req.query.locale) {
-            locale = req.query.locale;
+            localeCode = req.query.locale;
             res.cookie("kawwwlocale", req.query.locale);
           } else if (req.cookies.kawwwlocale) {
-            locale = req.cookies.kawwwlocale;
+            localeCode = req.cookies.kawwwlocale;
           }
 
           const locales = config.get("locales");
 
-          var menus = getMenus(locale, data[0]);
+          var menus = getMenus(localeCode, data[0]);
           var fragments = data[1];
 
           _.keys(menus).forEach(menuKey => {
@@ -89,6 +89,10 @@
               incidentUrls.push(incidentUrl);
             }
           }
+
+          const locale = locales.find((locale) => {
+            return locale.code == localeCode;
+          });
 
           req.kuntaApi = {
             data: {
