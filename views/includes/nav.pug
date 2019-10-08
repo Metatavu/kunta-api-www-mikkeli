@@ -38,10 +38,10 @@ nav.navbar.navbar-light
                 if locales
                   .locale-menu
                     button.current-locale(title="Vaihda kieli")
-                      =locale
-                    each locale in locales 
-                      a(title="Vaihda kieli " + locale.code, href=(locale.path || "") + "?locale=" + locale.code)
-                        =locale.text
+                      =locale.code
+                    each localeItem in locales 
+                      a(title="Vaihda kieli " + localeItem.code, href=(localeItem.path || "") + "?locale=" + localeItem.code)
+                        =localeItem.text
             
       nav.navbar.navbar-light.row
         .col-xs-24.no-gutter-left.no-gutters-medium
