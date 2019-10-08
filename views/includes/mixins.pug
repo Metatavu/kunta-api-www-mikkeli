@@ -32,5 +32,6 @@ mixin readSpeaker(customerId)
     a.rsbtn_play(rel='nofollow', accesskey='L', title='Kuuntele ReadSpeakerilla', href='//app-eu.readspeaker.com/cgi-bin/rsent?customerid=' + customerId + '&readclass=rs_read_this_class&lang=' + locale.readSpeaker.locale + '&url=' + readSpeakerUrl)
       span.rsbtn_left.rspart
         span.rsbtn_text
-          span.locale.readSpeaker.text
+          span
+            =locale.readSpeaker.text
       span.rsbtn_right.rsimg.rsplay.rspart
