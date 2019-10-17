@@ -47,12 +47,12 @@ block content
 
       div(class=hideMenu ? "col-xs-24 col-lg-19" : "col-xs-24 col-lg-14") 
         .page-content(tabindex="0")
+          .rs_read_this_class
           h1
             !=title
           if featuredImageSrc
             img.page-featured-img.lazy(src=featuredImageSrc, alt="Artikkelikuva", title="Artikkelikuva")
-          .rs_read_this_class
-            !=contents
+              !=contents
           
       if sidebarContents
         .col-xs-24.col-lg-5.sidebar
