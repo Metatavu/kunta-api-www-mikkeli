@@ -6,6 +6,7 @@
   const _ = require('lodash');
   const cheerio = require('cheerio');
   const pug = require("pug");
+  const LinkedEventsClient = require("linkedevents-client");
   
   class Common {
     
@@ -83,6 +84,19 @@
     
     static get SEARCH_CONTACT_PER_TYPE() {
       return 10;
+    }
+
+    /**
+     * Returns events API instance
+     *
+     * @returns {LinkedEventsClient.EventApi} events API instance
+     */
+    static getLinkedEventsEventsApi(config) {
+      const apiUrl = config.get("linkedevents:api-url");
+
+      const client = LinkedEventsClient.ApiClient.instance;
+      client.basePath = apiUrl;
+      return new LinkedEventsClient.EventApi();
     }
     
     static resolveLinkType(link) {
