@@ -9,12 +9,26 @@
   const Common = require(__dirname + "/../common");
   const Autolinker = require("autolinker");
 
+  /**
+   * Provides time left before the event
+   * 
+   * @param {moment} date event date
+   * @returns {number} time before the event
+   */
   function hasTime(date) {
     const momentDate = moment(date);
     const midnight = momentDate.clone().startOf("day");
+
     return momentDate.diff(midnight) > 0;
   }
 
+  /**
+   * Does event start and end on the same day
+   * 
+   * @param {moment} start start date
+   * @param {moment} end end date
+   * @returns {boolean} 
+   */
   function isSameDay(start, end) {
     const startMoment = moment(start);
     const endMoment = moment(end);
@@ -22,6 +36,12 @@
     return startMoment.isSame(endMoment, "day");
   }
 
+  /**
+   * Provides a date part format
+   * 
+   * @param {moment} date event date
+   * @returns {moment} date formatted
+   */
   function formatDatePart(date) {
     if (hasTime(date)) {
       return moment(date).format("D.M.YYYY HH:mm");
@@ -30,6 +50,13 @@
     return moment(date).format("D.M.YYYY");
   }
 
+  /**
+   * Provides a format form date
+   * 
+   * @param {moment} start start date
+   * @param {moment} end end date
+   * @returns {moment} date formatted
+   */
   function formatDate(start, end) {
     if (!end && !hasTime(start)) {
       return moment(start).format("D.M.YYYY");
@@ -105,7 +132,7 @@
         place: place,
         originalUrl: originalUrl,
         start: start,
-        shortDate: moment(event.start_time).format("D.M.YYYY"),
+        shortDate: moment(event.start_time).format("D/M"),
         imageSrc: imageUrl || defaultImage,
         description: Common.plainTextParagraphs(Autolinker.link(description)),
         shortDescription: _.truncate(shortDescription, { length: 200 })
@@ -113,7 +140,7 @@
     }
     
     app.get('/', async (req, res, next) => {
-      const eventsToday = await listEvents(Common.EVENT_COUNT, 1, moment(), undefined, "/gfx/layout/tapahtuma_default_120_95.jpg");
+      const events = await listEvents(Common.EVENT_COUNT, 1, moment(), undefined, "/gfx/layout/tapahtuma_default_120_95.jpg");
 
       new ModulesClass(config)
         .news.latest(0, 9)
@@ -124,11 +151,11 @@
         .announcements.list(Common.ANNOUNCEMENT_COUNT, 'PUBLICATION_DATE', 'DESCENDING')
         .events.latest(Common.EVENT_COUNT, 'START_DATE', 'DESCENDING')
         .callback(function(data) {
-          var events = _.clone(eventsToday || []).map(event => {
-            return Object.assign(event, {
-              "shortDate": moment(event.start).format("M/D")
-            });
-          });
+          // var events = _.clone(eventsToday || []).map(event => {
+          //   return Object.assign(event, {
+          //     "shortDate": moment(event.start).format("M/D")
+          //   });
+          // });
 
           var news = _.clone(data[0]).map(newsArticle => {
             return Object.assign(newsArticle, {
