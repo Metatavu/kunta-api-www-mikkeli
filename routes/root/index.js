@@ -151,11 +151,6 @@
         .announcements.list(Common.ANNOUNCEMENT_COUNT, 'PUBLICATION_DATE', 'DESCENDING')
         .events.latest(Common.EVENT_COUNT, 'START_DATE', 'DESCENDING')
         .callback(function(data) {
-          // var events = _.clone(eventsToday || []).map(event => {
-          //   return Object.assign(event, {
-          //     "shortDate": moment(event.start).format("M/D")
-          //   });
-          // });
 
           var news = _.clone(data[0]).map(newsArticle => {
             return Object.assign(newsArticle, {
