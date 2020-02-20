@@ -23,17 +23,18 @@ block content
   .container.page-container
     .row
       .col-xs-24
-        .page-content
+        .page-content(tabindex="0")
           .col-xs-24
             h1
               |Haku
           .col-xs-24.search-container
             .row
               .col-xs-24
-                input.form-control(type="text", name="query", value=search)
+                label(for="query-search") Haku
+                input.form-control(title="Haku" type="text", id="query-search" ,name="query", value=search)
             .row
               .col-xs-24
-                input.btn.btn-lg.btn-primary(type="submit", name="search",value="Hae")
+                input.btn.btn-lg.btn-primary(type="submit", title="Haku -painike", name="search",value="Hae")
             .row
               .col-xs-24.results-container
                 .col-xs-24.search-hint-container.no-gutters(style="display:none")
@@ -41,13 +42,13 @@ block content
                 .col-xs-24.search-results-container.no-gutters(style="display:none")
                   ul.nav.nav-tabs.search-results-tabs(role="tablist")
                     li.nav-item
-                      a.nav-link.pages-tab.active(data-toggle="tab", href="#pages-tab", role="tab")
+                      a.nav-link.pages-tab.active(title="Sivut", data-toggle="tab", href="#pages-tab", role="tab")
                         |Sivut
                     li.nav-item
-                      a.nav-link.news-tab(data-toggle="tab", href="#news-tab", role="tab")
+                      a.nav-link.news-tab(title="Uutiset", data-toggle="tab", href="#news-tab", role="tab")
                         |Uutiset
                     li.nav-item
-                      a.nav-link.files-tab(data-toggle="tab", href="#files-tab", role="tab")
+                      a.nav-link.files-tab(title="Tiedostot", data-toggle="tab", href="#files-tab", role="tab")
                         |Tiedostot
                   .tab-content.search-results-tab-content
                     .tab-pane#pages-tab(role="tabpanel")

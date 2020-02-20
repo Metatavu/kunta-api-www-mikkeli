@@ -20,6 +20,11 @@
 }
 
 .page-content {
+
+  &:focus {
+    outline: 0;
+  }
+  
   .casem-history-topic {
     > h3 {
       display: block;
@@ -44,7 +49,7 @@
       padding-bottom: 4px;
     }
   }
-  
+
   .service-hour {
     .service-hour-additional-info {
       display: inline;

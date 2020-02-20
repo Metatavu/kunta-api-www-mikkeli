@@ -26,7 +26,7 @@
     }
    
     &:first-child {
-      color: #428ecc;
+      color: $musta;
     }
   
     &:first-child::before {
@@ -80,7 +80,22 @@
 .page-content {
   font-size: 95%;
   margin-bottom: 45px;
+
   
+  &:focus {
+    outline: 0;
+  }
+
+  .phone-contact {
+    @include font-y13();
+    color: $meri;
+  }
+
+  label {
+    font-weight: bold;
+    margin-bottom: 0;
+  }
+
   h1 {
     color: $kallio;
     @include font-ultra(40px);
@@ -93,13 +108,7 @@
     
   }
  
-  h2 {
-    margin-top: 35px;
-    margin-bottom: 25px;
-    padding: 0;
-    font-size: 27px;
-  }
- 
+  h2,
   h3 {
     @include font-h13();
     padding-bottom: 10px;
@@ -130,13 +139,23 @@
       margin-top: 8px;
       margin-bottom: 8px;
       list-style-type: none;
+      position: relative;
+      margin-left: 10px;
       
       &::before {
         content: "\2022";
-        margin-right: 5px;
+        display: block;
+        position: absolute;
+        left: -15px;
+
+        //margin-right: 5px;
       }
       
     }
+  }
+
+  .electronic-service-channel-link {
+    margin-bottom: 0.5em;
   }
 
   .featured-image {
@@ -146,6 +165,63 @@
     background-repeat: no-repeat;
     background-size: cover;
     background-position: center;
+  }
+  
+  .accessibility-sentences {
+
+    .p-info {
+      border-bottom: 0.5px solid #d3d3d3;
+      padding-bottom: 15px;
+      padding-top: 5px;
+    }
+
+    .accessibility-sentence {
+      border-bottom: 0.5px solid #d3d3d3;
+      margin-bottom: 10px;
+    
+      button {
+        display: flex;
+        flex: 1;
+        flex-direction: row;
+        background-color: transparent;
+        border: 0;
+        text-align: left;
+        margin-bottom: 10px;
+      }
+
+      .button-text {
+        color: $tummakallio;
+        font-weight: 700;
+      }
+      
+      .open {
+        &::before {
+          content: "";
+          width: 34px;
+          height: 24px;
+          background-image: url("/gfx/layout/mikkeli-menu-open.png");
+          background-position: center;
+          background-repeat: no-repeat;
+        }
+      }
+      
+      .closed {
+        &::before {
+          content: "";
+          width: 34px;
+          height: 24px;
+          background-image: url("/gfx/layout/mikkeli-menu-closed.png");
+          background-position: center;
+          background-repeat: no-repeat;
+        }
+      }
+
+    }
+
+    .hidden {
+      display: none;
+    }
+
   }
  
 }
@@ -168,6 +244,12 @@
 
 .page-nav {
   margin-bottom: 15px;
+
+  .nav-folder-title {
+    @include font-ultra(14px);    
+    text-transform: uppercase;
+    margin-bottom: 8px;
+  }
   
   h3 {
     @include font-ultra(14px);    
@@ -186,6 +268,8 @@
     background-image: url("/gfx/layout/mikkeli-menu-closed.png");
     background-position: center;
     background-repeat: no-repeat;
+    background-color: transparent;
+    border: 0;
   }
   
   .open {
@@ -310,7 +394,8 @@
       @include font-h9();
       color: $mustikka;
     }
-      
+    
+    h2,
     h3 {
       @include font-h9();
       text-transform: uppercase;
@@ -323,6 +408,13 @@
     h4 {
       @include font-h9();
       color: $musta;
+      padding-top: 5px;
+      padding-bottom: 0;
+      margin-top: 15px;
+      margin-bottom: 0;
+    }
+
+    .service-location-channel-link {
       padding-top: 5px;
       padding-bottom: 0;
       margin-top: 15px;

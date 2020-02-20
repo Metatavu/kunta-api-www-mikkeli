@@ -17,23 +17,32 @@ block content
         .banner(data-lazy-bg-image=bannerSrc)
       
   .container.page-container
-    .row
-      +breadcrumbs(breadcrumbs)
+    .container-fluid
+      .row
+        .col-lg-17.col-md-14.no-gutters
+          +breadcrumbs(breadcrumbs)
+        .col-lg-7.col-md-10.col.no-gutters
+          if readSpeakerCustomerId
+            .col-xs.read-speaker-wrapper.no-gutters
+              .read-speaker-container
+                if locale.readSpeaker.enabled
+                  +readSpeaker(readSpeakerCustomerId)
         
   .container.page-container
     .row
-      .col-lg-5.page-nav.no-gutters.hidden-md-down
-        h3
-          =folderTitle
+      nav.col-lg-5.page-nav.no-gutters.hidden-md-down
+        if(folderTitle)
+          p(class="nav-folder-title")
+            =folderTitle
         each sibling in siblings
           if sibling.id == id
             .page-nav-item.active
-              a(href=sibling.slug)
+              a(title=sibling.title, href=sibling.slug)
                 !=sibling.title
           else
-            a.page-nav-item(href=sibling.slug)
+            a.page-nav-item(title=sibling.title, href=sibling.slug)
               !=sibling.title
-        a.all-news-link(href="/uutiset/")
+        a.all-news-link(title="Katso kaikki uutiset", href="/uutiset/")
           |Katso kaikki uutiset
       .col-xs-24.hidden-lg-up
         a.btn.btn-primary.btn-menu(title='Näytä valikko', data-toggle='collapse', href='#collapse-menu', aria-expanded='false', aria-controls='collapse-menu')
@@ -43,13 +52,13 @@ block content
             each sibling in siblings
               if sibling.id == id
                 .page-nav-item.active
-                  a(href=sibling.slug)
+                  a(title=sibling.title, href=sibling.slug)
                     !=sibling.title
               else
-                a.page-nav-item(href=sibling.slug)
+                a.page-nav-item(title=sibling.title, href=sibling.slug)
                   !=sibling.title
       .col-xs-24.col-lg-14
-        .page-content
+        .page-content(tabindex="0")
           .row
             .col-xs-24.title-container
               h1
@@ -60,26 +69,27 @@ block content
                 !=published
           .row
             .col-xs-24.image-container
-              img.article-img.lazy(data-original=imageSrc)
+              img.article-img.lazy(src=imageSrc, alt="Artikkelin kuva", title="Artikkelin kuva")
           .row
             .col-xs-24
-              !=contents
+              .rs_read_this_class
+                !=contents
           .row
             .col-xs-24.tags
                each tag in tags
-                a.tag(href='/uutiset/?tag=' + tag)
+                a.tag(title=tag, href='/uutiset/?tag=' + tag)
                   =tag
           .row
             .col-xs-24.social-buttons
               p Jaa:
 
-              a(href='https://www.facebook.com/share.php?u='+siteUrl)
+              a(title="Jaa facebookissa", href='https://www.facebook.com/share.php?u='+siteUrl)
                 i(class="fa fa-facebook-official")
-              a(href='http://twitter.com/share?text=' + ogTitle + '&url=' + siteUrl)
+              a(title="Jaa twitterissä", href='http://twitter.com/share?text=' + ogTitle + '&url=' + siteUrl)
                 i(class="fa fa-twitter-square")
-              a(href='whatsapp://send?text=' + siteUrl, data-action='share/whatsapp/share')
+              a(title="Jaa whatsupissa", href='whatsapp://send?text=' + siteUrl, data-action='share/whatsapp/share')
                 i(class="fa fa-whatsapp")
-              a(href='https://www.linkedin.com/shareArticle?mini=true&url=' + siteUrl + '&title=' + ogTitle + '&summary=' + summary + '&source=mikkeli.fi')
+              a(title="Jaa linkedinissä", href='https://www.linkedin.com/shareArticle?mini=true&url=' + siteUrl + '&title=' + ogTitle + '&summary=' + summary + '&source=mikkeli.fi')
                 i(class="fa fa-linkedin-square")
           .row
             .col-xs-24
@@ -97,7 +107,7 @@ block content
                 })();
               noscript
                 | Please enable JavaScript to view the 
-                a(href='https://disqus.com/?ref_noscript') comments powered by Disqus.
+                a(title="https://disqus.com/?ref_noscript",href='https://disqus.com/?ref_noscript') comments powered by Disqus.
           
       if sidebarContents
         .col-xs-24.col-lg-5.sidebar

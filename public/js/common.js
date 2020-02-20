@@ -1,3 +1,5 @@
+/* global $, document, window, Cookies */
+
 (function () {
   'use strict';
   
@@ -120,6 +122,24 @@
 
     $('.nav-search-container').menuSearch();
     $( ".locale-menu" ).localeMenu();
+
+    $(".to-content").click(function (){
+      if($(".page-content")){
+        $(".page-content").focus();
+      }
+    });
+
+    var language = Cookies.get("kawwwlocale");
+    if(language){
+      $("html").attr("lang", language);
+    }else{
+      $("html").attr("lang", "fi");
+    }
+  
+  });
+
+  $( window ).on( "load", function() {
+    $(".banner-slide.carousel.slide").attr("data-ride", "carousel");
   });
   
 }).call(this);

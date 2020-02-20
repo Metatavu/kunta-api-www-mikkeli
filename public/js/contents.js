@@ -1,3 +1,6 @@
+/* jshint esversion:6 */
+/* global $, document */
+
 (function () {
   'use strict';
   
@@ -93,7 +96,8 @@
     _create : function() {
       this._page = 0;
       this._lastSearch = null;
-      this.element.append($("<input>").addClass('contact-search form-control m-t-1').attr('placeholder', this.element.attr('data-placeholder')));
+      this.element.append($("<label>").text(this.element.attr("data-placeholder")).attr("for", this.element.attr("data-placeholder")));
+      this.element.append($("<input>").addClass('contact-search form-control m-t-1').attr('placeholder', this.element.attr('data-placeholder')).attr("id", this.element.attr("data-placeholder")).attr("title", this.element.attr("data-placeholder")));
       this.element.append($("<div>").addClass('contact-search-results'));
       this.element.on('click', '.pages-container a.page-prev', $.proxy(this._onPagePrevClick, this));
       this.element.on('click', '.pages-container a.page-next', $.proxy(this._onPageNextClick, this));
@@ -156,6 +160,35 @@
     }
   
   });
+
+  $.widget("custom.accessibilityContainer", {
+     
+    _create : function() {
+      this.element.on("click", "button" , $.proxy(this._onTitleClick, this));
+      const buttonText = this.element.children("b").first().text();
+      this.element.children("b").first().replaceWith("<button type='button'>");
+      this.element.children("button").first().addClass("button-text").text(buttonText);
+      this.element.children("button").first().addClass("closed");
+      this.element.children("p").wrapAll("<ul/>")
+      this.element.children("ul").first().children("p").replaceWith(function(i, content) {
+      return "<li>" + content + "</li>" ;
+      });
+      this.element.children("ul").first().addClass("hidden");
+    },
+    
+    _onTitleClick: function (event) {
+      event.preventDefault();
+      if (this.element.children("button").first().hasClass("closed")) {
+        this.element.children("button").first().addClass("open").removeClass("closed");
+        this.element.children("ul").first().removeClass("hidden");
+      } else {
+        this.element.children("button").first().addClass("closed").removeClass("open");
+        this.element.children("ul").first().addClass("hidden");
+      }
+
+    }
+  
+  });
   
   $(document).ready(function () {
     $(document.body).contentsNav({
@@ -165,7 +198,12 @@
     $('.casem-history-topic').casemHistoryTopic();
     $('.kunta-api-contact-search').contactSearch();
 
+    var accessibilitySentences = $(".accessibility-sentences");
+    accessibilitySentences.prepend("<p class='p-info'>Klikkaa nuolta avataksesi lisätietokentän</p>");
+    $( ".accessibility-sentence" ).accessibilityContainer();
+
     $("img.lazy").lazyload();
+
   });
   
 }).call(this);

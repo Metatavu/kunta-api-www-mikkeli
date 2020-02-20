@@ -11,14 +11,14 @@ if pages.length
         .col-xs-24.col-md-18.col-lg-21
           .row
             .col-xs-24.details-container
-              a.title(href='/redirect/page/' + page.id)
+              a.title(href='/redirect/page/' + page.id, title=page.title)
                 =page.title
           .row.hidden-sm-down
             .col-xs-24
               !=page.excerpt
   .col-xs-24.pages-container.no-gutters
     if page > 0
-      a.page-prev(href="#p" + (page - 1))
+      a.page-prev(href="#p" + (page - 1), title="Edellinen sivu")
         |Edellinen sivu
     else
       span.page-prev
@@ -27,7 +27,7 @@ if pages.length
       |Sivu 
       =page + 1
     if !lastPage
-      a.page-next(href="#p" + (page + 1))
+      a.page-next(href="#p" + (page + 1), title="Seuraava sivu")
         |Seuraava sivu
     else
       span.page-next

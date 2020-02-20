@@ -18,7 +18,7 @@ block body
       .container
         .row
           .col-sm-9
-            img.mikkeli-logo(src="/gfx/mikkelintarina/mikkeli-logo.jpg")
+            img.mikkeli-logo(alt="mikkeli-logo", title="mikkeli-logo", src="/gfx/mikkelintarina/mikkeli-logo.jpg")
           .col-sm-15.social-button-col
             .top-bar-btn-container
               a.redo-btn(href="/sisalto/mikkelin-tarina") Tee kysely uudelleen
@@ -44,5 +44,5 @@ block body
             p Millaisia mikkeliläisiä kaverisi ovat? Kutsu heidät mukaan rakentamaan Mikkelin brändiä.
         .col 
           canvas(id="canvas", width=1920,height=1080, style="display: none")
-          img(id="image",src="/gfx/mikkelintarina/" + image, style="display: none")
+          img(alt=image, title=image, id="image",src="/gfx/mikkelintarina/" + image, style="display: none")
       

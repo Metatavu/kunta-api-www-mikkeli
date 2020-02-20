@@ -93,6 +93,7 @@
         position: relative;
         z-index: 1;
         color: $valkoinen;
+        text-shadow: 3px 3px 3px #000000;
       }
     }  
   }
@@ -118,9 +119,12 @@
       left: 0;
       right: 0;
       bottom: 0;
-      opacity: 0;
       background: transparent;
       z-index: 1;
+    }
+
+    a.tile-link:focus {
+      border: 2px solid $meri;
     }
     
     .details {
@@ -130,8 +134,9 @@
       padding-right: 20px;
       padding-bottom: 10px;
     
-      h3 {
+      h2 {
         @include font-h2();
+        font-weight: 400;
         color: $valkoinen;
         margin-bottom: 10px;
       }
@@ -382,11 +387,15 @@
   background-color: $event-calendar-background-color;
   
   .events-title {
-    @include font-h4;
-    color: $musta;
-    text-transform: uppercase;
     margin-top: 47px;
     margin-bottom: 26px;
+
+    h3 {
+      @include font-h4;
+      color: $musta;
+      text-transform: uppercase;
+    }
+
   }
 
   .events-container {
@@ -436,6 +445,10 @@
       right: 0;
       bottom: 0;
       z-index: 9999;
+    }
+
+    .event-link:focus {
+      border: 2px solid $meri;
     }
 
     .details {
@@ -521,7 +534,8 @@
   .swiper-pagination {
     margin-top: 32px;
     margin-bottom: 13px;
-    width: 100%;
+    width: 24%;
+    margin-left: 38%;
     position: relative;
 
     .swiper-pagination-bullet {
@@ -541,36 +555,70 @@
     @include font-h8;
     padding-top: 15px;
     padding-bottom: 36px;
+
+    a {
+      color: $meri;
+    }
+    
   }
   
   .swiper-button-prev {
     background: none;
+    background-color: transparent;
+    border: 0;
+    margin-left: 400px;
+    margin-top: 60px;
     
     &::after {
       color: $event-arrow-color;
       font-family: "FontAwesome";
       content: "\f104";
-      font-size: 85px;
-      margin-left: -50px;
-      margin-top: -115px;
+      font-size: 40px;
+      margin-top: -30px;
+      margin-left: -8px;
       position: absolute;
     }
   }
   
   .swiper-button-next {
     background: none;
+    background-color: transparent;
+    border: 0;
+    margin-right: 400px;
+    margin-top: 60px;
 
     &::after {
       color: $event-arrow-color;
       font-family: "FontAwesome";
       content: "\f105";
-      font-size: 85px;
-      margin-left: 45px;
-      margin-top: -115px;
+      font-size: 40px;
+      margin-top: -30px;
+      margin-left: -8px;
       position: absolute;
     }
   }
 
+  .pagination-container {
+    display: flex;
+    align-items: baseline;
+
+    .slide-play {
+      background-color: $meri;
+      color: $valkoinen;
+      margin-left: 4%;
+      margin-right: 1%;
+      margin-bottom: 2px;
+      border: 0;
+    }
+    
+    .slide-pause {
+      background-color: $meri;
+      color: $valkoinen;
+      margin-bottom: 2px;
+      border: 0;
+    }
+
+  }
 }
 
 .content-blocks-container {
@@ -609,25 +657,27 @@
     }
     
     .title {
-      @include font-h4;
-      margin-top: 17px;
-      text-transform: uppercase;
-      color: $valkoinen;
+      h4 {
+        @include font-h4;
+        margin-top: 17px;
+        text-transform: uppercase;
+        color: $valkoinen;
+      }
     }
 
     &.info-block {
-      background: linear-gradient(to top right, $osallistu-gradient-start, $osallistu-gradient-end);
+      background-color: $osallistu-background-color;
 
       .icon {
-        background-image: url("/gfx/layout/mikkeli-osallistuvaikuta-icon.png");
+        background-image: url("/gfx/layout/mikkeli-osallistuvaikuta-icon2.png");
       }
     }
   
     &.jobs-block {
-      background: linear-gradient(to top right, $kuntarekry-gradient-start, $kuntarekry-gradient-end);
+      background-color: $kuntarekry-background-color;
       
       .icon {
-        background-image: url("/gfx/layout/mikkeli-kunta-rekry-icon.png");
+        background-image: url("/gfx/layout/mikkeli-kunta-rekry-icon2.png");
       }
     
       .content a {
@@ -636,7 +686,7 @@
     }
   
     &.announcements-block {
-      background: linear-gradient(to top right, $kuulutukset-gradient-start, $kuulutukset-gradient-end);
+      background-color: $kuulutukset-background-color;
 
       .icon {
         background-image: url("/gfx/layout/mikkeli-kuulutukset-icon.png");
@@ -684,7 +734,7 @@
   }
   
   &[data-source="twitter"] {
-    background: #55acee;
+    background: $meri;
     color: $valkoinen;
     
     .link {
@@ -692,7 +742,7 @@
     }
   
     .text a {
-      color: #0c6cab;
+      color: $sitruuna;
     }
     
   }
@@ -770,3 +820,66 @@
   }
 }
 
+@media screen and (max-width: 1201px) {
+  .event-section {
+    .swiper-button-prev {
+      margin-left: 200px;
+    }
+    
+    .swiper-button-next {
+      margin-right: 200px;
+    }
+
+    .pagination-container {
+      .slide-play {
+        margin-left: 20%;
+        margin-right: 1.5%;
+      }
+    } 
+  }
+}
+
+@media screen and (max-width: 992px) {
+
+  .event-section {
+    .swiper-button-prev {
+      margin-left: 20%;
+    }
+    
+    .swiper-button-next {
+      margin-right: 20%;
+    }
+
+  }
+
+}
+
+@media screen and (max-width: 750px) {
+
+  .event-section {
+
+    .swiper-pagination {
+      width: 60%;
+      margin-left: 20%;
+    }
+
+    .swiper-button-prev {
+      
+      visibility: hidden;
+
+    }
+  
+    .swiper-button-next {
+
+      visibility: hidden;
+
+    }
+
+    .pagination-container {
+      .slide-play {
+        margin-left: 5%;
+        margin-right: 1.5%;
+      }
+    } 
+  }
+}

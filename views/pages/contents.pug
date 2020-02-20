@@ -17,14 +17,22 @@ block content
         .banner(data-lazy-bg-image=bannerSrc)
         
   .container.page-container
-    .row
-      +breadcrumbs(breadcrumbs)
+    .container-fluid
+      .row
+        .col-lg-17.col-md-14.no-gutters
+          +breadcrumbs(breadcrumbs)
+        .col-lg-7.col-md-10.no-gutters
+          if readSpeakerCustomerId
+            .col-xs.read-speaker-wrapper.no-gutters
+              .read-speaker-container
+                if locale.readSpeaker.enabled 
+                  +readSpeaker(readSpeakerCustomerId)
       
   .container.page-container
     .row
       if !hideMenu
-        .col-lg-5.page-nav.no-gutters.hidden-md-down
-          h3
+        nav.col-lg-5.page-nav.no-gutters.hidden-md-down
+          p(class="nav-folder-title")
             =rootFolderTitle
           each child in children
             +pageMenuItem(child)
@@ -38,16 +46,14 @@ block content
                 +pageMenuItem(child)
 
       div(class=hideMenu ? "col-xs-24 col-lg-19" : "col-xs-24 col-lg-14") 
-        .page-content
+        .page-content(tabindex="0")
           h1
             !=title
           if featuredImageSrc
-            img.page-featured-img.lazy(data-original=featuredImageSrc)
-          if readSpeakerCustomerId
-            .read-speaker-container
-              +readSpeaker(readSpeakerCustomerId)
+            img.page-featured-img.lazy(src=featuredImageSrc, alt="Artikkelikuva", title="Artikkelikuva")
           .rs_read_this_class
             !=contents
+          
       if sidebarContents
         .col-xs-24.col-lg-5.sidebar
           .sidebar-block

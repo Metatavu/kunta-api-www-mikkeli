@@ -1,0 +1,328 @@
+.rsbtn_colorskin {
+    position: relative;
+    font-family: Arial, Helvetica, sans-serif;
+    font-size: 16px;
+    line-height: 1.3em;
+    float: left;
+    border: 0px solid rgb(100, 100, 100);
+  background: #fff;
+  /* 
+   * Add rounded corners to supported browsers 
+   
+  -moz-border-radius: 3px;
+  border-radius: 3px;
+  */
+}
+
+/************************************************ GENERAL CLASSES */
+
+/**
+ * These are a couple of classes that apply to many object or redefine elements
+ */
+.rsbtn_colorskin a, .rsbtn_colorskin span {
+    position: relative;
+    display: block;
+    text-decoration: none;
+}
+
+/**
+ * Use the predefined CSS sprite for all graphical elements.
+ */
+.rsbtn_colorskin .rsimg {
+    background: transparent url(ReadSpeaker/ReadSpeakerColorSkin.png) no-repeat scroll 0 0;
+}
+
+/**
+ * All the player elements should float.
+ */
+.rsbtn_colorskin .rspart {
+    float: left;
+    margin-left: 2px;
+}
+
+.rsbtn_colorskin .rsdefloat {
+    clear: both;
+}
+
+/**
+ * This goes for all buttons
+ */
+.rsbtn_colorskin .rspart.rsbutton {
+    background-color: rgb(100, 100, 100);
+    border: 1px solid black;
+    border-radius: 4px;
+    -moz-border-radius: 4px;
+    width: 22px;
+    height: 22px;
+  
+  /* 
+   * Add rounded corners to supported browsers 
+   */
+
+  /*-moz-border-radius: 5px;
+  border-radius: 5px;
+
+    /**
+     * This is just to make the rollover effect a little smoother.
+     */
+    -moz-transition: background-color .2s ease;
+    -webkit-transition: background-color .2s ease;
+    -o-transition: background-color .2s ease;
+    transition: background-color .2s ease;
+}
+
+/**
+ * Add a subtle rollover effect to the buttons.
+ */
+.rsbtn_colorskin .rspart.rsbutton:hover {
+    background-color: #ccc;
+}
+
+/**
+ * Hide all text labels. They will still be visible to non-CSS browsers
+ */
+.rsbtn_colorskin .rspart .rsbtn_btnlabel {
+    display: none;
+}
+
+/************************************************ PLAYER BOX */
+.rsbtn_colorskin .rsbtn_box {
+    margin: 1px;
+}
+
+/************************************************ LISTEN BUTTON + ICON */
+.rsbtn_colorskin .rsbtn_play {
+    float: left;
+    margin: 1px;
+}
+
+.rsbtn_colorskin .rsbtn_left .rsbtn_text {
+    background: transparent url("ReadSpeaker/icon_16px_black.gif") no-repeat scroll 0 0;
+    padding-left: 24px;
+      color: rgb(100, 100, 100);
+}
+
+.rsbtn_colorskin .rsbtn_left.rspart {
+    background: none;
+}
+
+/************************************************ EXPANDING AREA */
+.rsbtn_colorskin .rsbtn_exp.rsimg.rspart {
+    background: none;
+    float: left;
+    display: none;
+}
+
+/**
+ * We want the expanding area to be visible only when the player
+ * is expanded, hence the .rsexpanded class.
+ */
+.rsbtn_colorskin.rsexpanded .rsbtn_exp.rsimg {
+    display: block;
+}
+
+/************************************************ PLAY/PAUSE BUTTON */
+.rsbtn_colorskin .rsbtn_pause {
+    background-position: -17px -17px;
+}
+
+.rsbtn_colorskin.rspaused .rsbtn_pause,
+.rsbtn_colorskin.rsstopped .rsbtn_pause {
+    background-position: -17px 1px;
+}
+
+/************************************************ STOP BUTTON */
+.rsbtn_colorskin .rsbtn_stop {
+    background-position: -17px -35px;
+}
+
+/************************************************ PROGRESS CONTAINER */
+.rsbtn_colorskin .rsbtn_progress_container {
+    border: 1px solid rgb(100, 100, 100);
+    width: 50px;
+    height: 10px;
+    margin-top: 4px;
+    margin-left: 4px;
+    background-image: none;
+  /* 
+   * Add rounded corners to supported browsers 
+   */
+  -moz-border-radius: 3px;
+  border-radius: 3px;
+}
+
+/************************************************ PROGRESS DRAG HANDLE */
+.rsbtn_colorskin .rsbtn_progress_handle.rsimg {
+    position: absolute;
+    background-color: rgb(0, 0, 0);
+    top: -4px;
+    left: -2px;
+    width: 6px;
+    height: 16px;
+    background-image: none;
+}
+
+/************************************************ PROGRESS BAR */
+.rsbtn_colorskin .rsbtn_progress_played {
+    position: absolute;
+    height: 100%;
+    background-color: #ccc;
+    background-image: none;
+}
+
+/************************************************ VOLUME BUTTON */
+.rsbtn_colorskin .rsbtn_volume {
+    margin-left: 4px;
+    background-position: -17px -53px;
+}
+
+/************************************************ VOLUME SLIDER CONTAINER */
+.rsbtn_colorskin .rsbtn_volume_container {
+    position: absolute;
+    display: none;
+    top: 100%;
+    width: 18px;
+    height: 40px;
+    border: 1px solid rgb(0, 0, 0);
+    background: #fff;
+}
+
+/************************************************ VOLUME SLIDER SLIDER AREA */
+.rsbtn_colorskin .rsbtn_volume_slider {
+    width: 6px;
+    height: 30px;
+    margin: 5px;
+    background: #ccc;
+}
+
+/************************************************ VOLUME SLIDER SLIDE HANDLE */
+.rsbtn_colorskin .rsbtn_volume_handle.rsimg {
+    position: absolute;
+    top: -2px;	
+    left: -3px;	
+    width: 12px;
+    height: 6px;
+    background: rgb(0, 0, 0);
+}
+
+/************************************************ DOWNLOAD BUTTON */
+.rsbtn_colorskin .rsbtn_dl {
+    background-position: -17px -71px;
+}
+
+/************************************************ SETTINGS BUTTON */
+.rsbtn_colorskin .rsbtn_settings {
+    background-position: -17px -89px;
+}
+
+/************************************************ CLOSE BUTTON */
+.rsbtn_colorskin .rsbtn_closer {
+    margin-left: 2px;
+    background-position: -17px -107px;
+}
+
+/************************************************ POPUP BUTTON */
+/**
+ * This is the style of the listen button that popups when the user
+ * makes a text selection on the page.
+ */
+.rsbtn_colorskin.rspopup {
+    position: absolute;
+    background: #fff;
+    border: 0px solid #555;
+    box-shadow: 0 0 5px #777;
+    display: none;
+}
+
+/************************************************ POWERED BY READSPEAKER */
+.rsbtn_colorskin .rsbtn_powered {
+    position: absolute;
+    right: -12px;
+    top: 23px;
+    height: 10px;
+    z-index: -1;
+    color: #999;
+    font-family: "Lucida Grande", "Lucida Sans", "Lucida", sans-serif;
+    font-weight: normal;
+    font-style: normal;
+    line-height: 10px;
+    font-size: 10px;
+    background: none;
+    cursor: pointer;
+}
+
+.rsbtn_colorskin .rsbtn_powered a, .rsbtn_colorskin .rsbtn_powered span {
+    font-family: "Lucida Grande", "Lucida Sans", "Lucida", sans-serif;
+    font-weight: normal;
+    font-style: normal;
+    line-height: 10px;
+    font-size: 10px;	
+    display: inline;
+}
+
+.rsbtn_colorskin .rsbtn_powered .rsbtn_btnlabel {
+    display: inline;
+}
+
+.rsbtn_colorskin .rsbtn_powered .rsbtn_btnlabel a span.rsbtn_label_read {
+    color: #e60;
+}
+
+.rsbtn_colorskin .rsbtn_powered .rsbtn_btnlabel a span.rsbtn_label_speaker {
+    color: #33a;
+}
+
+.rsbtn_colorskin .rsbtn_powered .rsbtn_btnlabel a span.rsbtn_label_icon.rsimg {
+    position: relative;
+    top: 1px;
+    width: 11px;
+    height: 9px;
+    margin-left: 2px;
+    padding-right: 11px;
+    background-position: -137px -490px;
+}
+
+.rsbtn_colorskin.rs_whitelogo .rsbtn_powered,
+.rsbtn_colorskin.rs_whitelogo .rsbtn_powered .rsbtn_btnlabel a span.rsbtn_label_read,
+.rsbtn_colorskin.rs_whitelogo .rsbtn_powered .rsbtn_btnlabel a span.rsbtn_label_speaker {
+    color: #fff;
+}
+
+.rsbtn_colorskin.rs_whitelogo .rsbtn_powered .rsbtn_btnlabel a span.rsbtn_label_icon.rsimg {
+    background-position: -285px -490px;
+}
+
+.rsbtn_colorskin.rs_blacklogo .rsbtn_powered,
+.rsbtn_colorskin.rs_blacklogo .rsbtn_powered .rsbtn_btnlabel a span.rsbtn_label_read,
+.rsbtn_colorskin.rs_blacklogo .rsbtn_powered .rsbtn_btnlabel a span.rsbtn_label_speaker {
+    color: rgb(0, 0, 0);
+}
+
+.rsbtn_colorskin.rs_blacklogo .rsbtn_powered .rsbtn_btnlabel a span.rsbtn_label_icon.rsimg {
+    background-position: -433px -490px;
+}
+
+/* About-page link */
+.rsbtn_colorskin a.rsbtn_abouthelp {
+    background: url(ReadSpeaker/ReadSpeakerColorSkin.png) no-repeat scroll -20px -128px transparent;
+    background-color: rgb(0, 0, 0);
+    border-radius: 7px;
+    transition: background-color 0.2s ease 0s;
+    height: 14px;
+    width: 14px;
+    float: left;
+    margin: 3px 1px 1px;
+}
+
+.rsbtn_colorskin a.rsbtn_abouthelp:hover {
+    background-color: #ccc;
+}
+.rsbtn_colorskin a.rsbtn_abouthelp span {
+    display: none;
+}
+
+/*Status overlay*/
+
+.rsbtn_exp .rsbtn_status_overlay span.rsbtn_status {
+    margin-top: 0px !important;
+}

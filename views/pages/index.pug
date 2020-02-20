@@ -4,7 +4,7 @@ mixin event(event)
   .swiper-slide.col-lg-8.no-gutters
     .event-container
       .event(data-lazy-bg-image=event.imageSrc)
-        a.event-link(href=event.originalUrl,target="_blank")
+        a.event-link(href=event.originalUrl,title=event.originalUrl,target="_blank")
         .details
           .row
             .col-xs-10.no-gutters
@@ -23,7 +23,7 @@ mixin newsArticleThumb(article)
       .date
         =article.shortDate
       .title
-        a(href='/uutiset/' + article.slug)
+        a(title=article.title, href='/uutiset/' + article.slug)
           !=article.title
 
 mixin newsArticleText(article)
@@ -31,21 +31,21 @@ mixin newsArticleText(article)
     .date
       =article.shortDate
     .title
-      a(href='/uutiset/' + article.slug)
+      a(title=article.title, href='/uutiset/' + article.slug)
         !=article.title
       
 mixin banner(banner)
   .header-banner-item(data-lazy-bg-image=banner.imageSrc,data-lazy-bg-size='.carousel-inner')
     .container-fluid.banner-content-container
       if banner.link
-        a.banner-link(href=banner.link,target="_blank")
+        a.banner-link(title=banner.contents , href=banner.link,target="_blank")
       .banner-text-container
         .banner-text(style=banner.style)
           !=banner.contents
       
 mixin banners-slider(banners) 
   .header-banner
-    #banner-slide.carousel.slide(data-ride='carousel')
+    .banner-slide.carousel.slide
       .banner-carousel-indicators
         ol.carousel-indicators
           each banner, bannerIndex in banners
@@ -57,22 +57,21 @@ mixin banners-slider(banners)
             div(class=itemClass)
               +banner(banner)
       .banner-carousel-controls
-        a.left.carousel-control(href='#banner-slide', role='button', data-slide='prev')
-          span.icon-prev(aria-hidden='true')
-          span.sr-only Previous
-        a.right.carousel-control(href='#banner-slide', role='button', data-slide='next')
-          span.icon-next(aria-hidden='true')
-          span.sr-only Next
+        a.left.carousel-control(href='#banner-slide', data-slide='prev', role="button")
+          div.icon-prev(aria-hidden='true')
+          div.sr-only Previous
+        a.right.carousel-control(href='#banner-slide', data-slide='next', role="button")
+          div.icon-next(aria-hidden='true')
+          div.sr-only Next
     
 mixin tile(tile)
   .tile(data-lazy-bg-image=tile.imageSrc)
     if tile.link
-      a.tile-link(href=tile.link,target="_blank")
+      a.tile-link(title=tile.link, href=tile.link,target="_blank")
     if tile.title || tile.contents
       .details  
-        h3
-          span
-            !=tile.title
+        h2
+          !=tile.title
         .tile-text
           !=tile.contents
           i.fa.fa-angle-right
@@ -110,7 +109,7 @@ block content
                       +newsArticleText(newsArticle)
             .row
               .col-xs.no-gutters
-                a.all-news-link(href="/uutiset/")
+                a.all-news-link(title="Katso kaikki uutiset", href="/uutiset/")
                   | > Katso kaikki uutiset
           .col-lg-6.tiles.no-gutters
             each tile in tiles
@@ -122,16 +121,16 @@ block content
                 h3
                   |Suosituimmat      
                 ul
-                each item in menus['suositut'].items
-                  li.nav-item
-                    a.nav-link(href=item.url)
-                      =item.label
-                      i.fa.fa-angle-right
+                  each item in menus['suositut'].items
+                    li.nav-item
+                      a.nav-link(title=item.label ,href=item.url)
+                        =item.label
+                        i.fa.fa-angle-right
   .container-fluid.event-section
     .container.no-gutters
       .row
         .col-xs.text-xs-center.events-title
-          span
+          h3
             |Tapahtumakalenteri
       .row
         .col-xs.events-container.no-gutters
@@ -139,18 +138,22 @@ block content
             .swiper-wrapper
               each event in events
                 +event(event)
-          .swiper-button-next
-          .swiper-button-prev
+          button.swiper-button-prev(title="Edellinen")
+          button.swiper-button-next(title="Seuraava")
           .row
-            .col-xs
+            .col-xs(class="pagination-container")
               .swiper-pagination
+              button.slide-play(title="Aloita slide")
+                img(alt="play-icon", src='/gfx/layout/arrow.png')
+              button.slide-pause(title="Pysäytä slide")
+                img(alt="pause-icon", src='/gfx/layout/pause.png')
           .row
             .col-xs.text-xs-center.all-events-container
               span
                 |Katso kaikki tapahtumat
               span
                 | 
-              a(href="http://www.mikkelinyt.fi",target="_blank")
+              a(title="http://www.mikkelinyt.fi", href="http://www.mikkelinyt.fi",target="_blank")
                 |www.mikkelinyt.fi
               
   .container-fluid.no-gutters
@@ -163,41 +166,44 @@ block content
                 .content-block.info-block
                   .icon
                   .title
-                    |Osallistu ja vaikuta
+                    h4
+                      |Osallistu ja vaikuta
                   .content
                     !=fragmentMap['osallistu-ja-vaikuta']
                   .all-link-container
-                    a.all-link(href="/sisalto/osallistujavaikuta") 
+                    a.all-link(title="Katso kaikki osallistu ja vaikuta", href="/sisalto/osallistujavaikuta") 
                       |Katso kaikki
               .col-lg-8
                 .content-block.jobs-block
                   .icon
                   .title
-                    |Avoimet työpaikat
+                    h4
+                      |Avoimet työpaikat
                   .content
                     each job in jobs
                       .content-block-row
-                        a(href=/tyot/ + job.id) #{job.title}
+                        a(title=job.title, href=/tyot/ + job.id) #{job.title}
                         span #{job.employmentType}, #{job.taskArea}
                   if jobs && jobs.length
                     .all-link-container
-                      a.all-link(href=/tyot/ + jobs[0].id) 
+                      a.all-link(title="Katso kaikki työpaikat", href=/tyot/ + jobs[0].id) 
                         |Katso kaikki
               .col-lg-8
                 .content-block.announcements-block
                   .icon
                   .title
-                    |Kuulutukset
+                    h4
+                      |Kuulutukset
                   .content
                     each announcement in announcements
                       .content-block-row
-                        a(href='/kuulutukset/' + announcement.slug)
+                        a(title=announcement.title, href='/kuulutukset/' + announcement.slug)
                           =announcement.title
                         span
                           =announcement.shortDate
                   if announcements && announcements.length
                     .all-link-container
-                      a.all-link(href='/kuulutukset/')
+                      a.all-link(title="Katso kaikki kuulutukset", href='/kuulutukset/')
                         |Katso kaikki
   .container
     .social-media-items
@@ -212,10 +218,10 @@ block content
                 i.icon.fa.fa-facebook-official(aria-hidden="true")
               when 'instagram'
                 i.icon.fa.fa-instagram(aria-hidden="true")
-            a.link(href=socialMediaItem.link, target="_blank")
+            a.link(title=socialMediaItem.link, href=socialMediaItem.link, target="_blank")
               =socialMediaItem.shortDate
           .content
             if (socialMediaItem.image) 
-              img(src=socialMediaItem.image)
+              img(alt=socialMediaItem.source + " kuvituskuva", title=socialMediaItem.source + " kuvituskuva", src=socialMediaItem.image)
             .text
               !=socialMediaItem.text

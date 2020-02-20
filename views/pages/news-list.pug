@@ -23,7 +23,7 @@ block content
   .container.page-container
     .row
       .col-xs-24
-        .page-content
+        .page-content(tabindex="0")
           .col-xs-24
             .row
               h1
@@ -40,13 +40,13 @@ block content
                   .row.news-article
                     .col-xs-24.col-md-6.col-lg-4
                       .article-image-container
-                        img.lazy.article-image(data-original=newsArticle.imageSrc)
+                        img.lazy.article-image(src=newsArticle.imageSrc, alt="Artikkelin kuva", title="Artikkelin kuva")
                     .col-xs-24.col-md-18.col-lg-20
                       .row
                         .col-xs-24
                           span.date
                             =newsArticle.shortDate
-                          a.title(href='/uutiset/' + newsArticle.slug)
+                          a.title(title=newsArticle.title,href='/uutiset/' + newsArticle.slug)
                             !=newsArticle.title
                       .row
                         .col-xs-24
@@ -55,7 +55,7 @@ block content
             .col-xs-24.pages-container.no-gutters
               - var tagQueryParam = tag ? '&tag=' + tag : ''
               if page > 0
-                a.page-prev(href="?page=" + (page - 1) + tagQueryParam)
+                a.page-prev(href="?page=" + (page - 1) + tagQueryParam, title="Edellinen sivu")
                   |Edellinen sivu
               else
                 span.page-prev
@@ -64,7 +64,7 @@ block content
                 |Sivu 
                 =page + 1
               if !lastPage
-                a.page-next(href="?page=" + (page + 1) + tagQueryParam)
+                a.page-next(href="?page=" + (page + 1) + tagQueryParam, title="Seuraava sivu")
                   |Seuraava sivu
               else
                 span.page-next

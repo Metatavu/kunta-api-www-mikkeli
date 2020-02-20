@@ -1,20 +1,20 @@
 mixin breadcrumbs(breadcrumbs)
-  .col-xs.breadcrumbs-container
+  .col-xs.breadcrumbs-container.no-gutters
     if breadcrumbs && breadcrumbs.length
       each breadcrumb, index in breadcrumbs
         if(index === breadcrumbs.length - 1)
           span.breadcrumb-item.active
             !=breadcrumb.title
         else 
-          a.breadcrumb-item(href=breadcrumb.path)
+          a.breadcrumb-item(title=breadcrumb.title, href=breadcrumb.path)
             !=breadcrumb.title
 
 mixin pageMenuItem(item)
   if (item.meta && !item.meta.hideMenuChildren) && ((item.children && item.children.length) || item.hasChildren)
-    span.page-nav-item(class=[item.id == id ? 'active' : '', item.children && item.children.length ? 'open' : '', 'has-children'].join(' '))
-      a.open-folder(href="#", data-page-id=item.id, data-slug=item.slug)
-      a.page-nav-link(href='#')
+    div.page-nav-item(class=[item.id == id ? 'active' : '', item.children && item.children.length ? 'open' : '', 'has-children'].join(' '))
+      a.page-nav-link(title=item.title, href='#')
         !=item.title
+      button.open-folder(title='Avaa ' + item.slug, data-page-id=item.id, data-slug=item.slug)
       ul.child-pages
         if item.children
           each child in item.children
@@ -24,13 +24,14 @@ mixin pageMenuItem(item)
     span.page-nav-item(class=[activeIds.indexOf(item.id) != -1 ? 'active' : ''].join(' '))
       span.leaf-page(data-page-id=item.id, data-slug=item.slug)
         |&nbsp;
-      a.page-nav-link(href='#')
+      a.page-nav-link(title=item.title, href='#')
         !=item.title
 
 mixin readSpeaker(customerId)
-  #readspeaker_button1.rs_skip.rsbtn.rs_preserve
-    a.rsbtn_play(rel='nofollow', accesskey='L', title='Kuuntele ReadSpeakerilla', href='//app-eu.readspeaker.com/cgi-bin/rsent?customerid=' + customerId + '&readclass=rs_read_this_class&lang=fi_fi&url=' + readSpeakerUrl)
-      span.rsbtn_left.rsimg.rspart
+  #readspeaker_button.rs_skip.rsbtn_colorskin.rs_preserve
+    a.rsbtn_play(rel='nofollow', accesskey='L', title='Kuuntele ReadSpeakerilla', href='//app-eu.readspeaker.com/cgi-bin/rsent?customerid=' + customerId + '&readclass=rs_read_this_class&lang=' + locale.readSpeaker.locale + '&url=' + readSpeakerUrl)
+      span.rsbtn_left.rspart
         span.rsbtn_text
-          span Kuuntele
+          span
+            =locale.readSpeaker.text
       span.rsbtn_right.rsimg.rsplay.rspart
