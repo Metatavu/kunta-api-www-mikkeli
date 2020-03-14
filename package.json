@@ -37,9 +37,11 @@
     "selenium-webdriver": "^3.4.0"
   },
   "dependencies": {
+    "autolinker": "^3.12.0",
     "bluebird": "^3.5.0",
     "cheerio": "^0.22.0",
     "html-entities": "^1.2.1",
+    "linkedevents-client": "0.0.18",
     "lodash": "^4.17.4",
     "moment": "^2.17.1",
     "phantomjs": "^2.1.7",

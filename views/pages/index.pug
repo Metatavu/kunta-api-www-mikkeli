@@ -3,7 +3,7 @@ extends ../layout/index.pug
 mixin event(event) 
   .swiper-slide.col-lg-8.no-gutters
     .event-container
-      .event(data-lazy-bg-image=event.imageSrc)
+      .event(data-lazy-bg-image=event.imageSrc,event-id=event.id)
         a.event-link(href=event.originalUrl,title=event.originalUrl,target="_blank")
         .details
           .row
