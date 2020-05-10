@@ -47,17 +47,20 @@
 
       request(config.get("contacts"), (error, response, body) => {
         const cards = vCard.parse(body);
-        const contacts = cards.map(card => translateCardToContact(card)).filter((contact) => {
+        const allContacts = cards.map(card => translateCardToContact(card));
+        const startIndex = page * perPage;        
+        const filteredContacts = allContacts.filter((contact) => {
           if (!search) {
             return true;
           }
 
           const haystack = `${contact.displayName || ""} ${contact.title || ""}`.toLocaleLowerCase();
           return haystack.indexOf((search || "").toLocaleLowerCase()) > -1;
-        }).splice(page * perPage, perPage);
-
-        const lastPage = contacts.length < perPage + 1;
-
+        });
+        
+        const lastPage = filteredContacts.length <= startIndex + perPage;
+        const contacts = filteredContacts.splice(startIndex, perPage);    
+        
         res.render('ajax/contacts-search.pug', {
           paged: page > 0 || !lastPage,
           page: page,
