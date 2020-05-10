@@ -4,20 +4,20 @@
 (() => {
   'use strict';
 
-  const request = require('request');
-  const vCard = require( 'vcf' );
-  const Common = require(__dirname + '/../common');
+  const request = require("request");
+  const vCard = require("vcf");
+  const Common = require(__dirname + "/../common");
 
   function translateCardAddress(adr) {
     const values = adr.valueOf().split(";");
 
-    const streetAddresses = values[2] || "";
-    const localities = values[3] || "";
-    const postalCodes = values[5] || "";
+    const streetAddresses = values[2] || "";
+    const localities = values[3] || "";
+    const postalCodes = values[5] || "";
 
-    const postOfficeText = [ postalCodes, localities ].join('\u00A0');
+    const postOfficeText = [ postalCodes, localities ].join("\u00A0");
     
-    return [streetAddresses, postOfficeText].filter(i => !!i).join(', ');
+    return [streetAddresses, postOfficeText].filter(i => !!i).join(", ");
   }
   
   function translateCardToContact(card) {
@@ -55,14 +55,14 @@
           }
 
           const haystack = `${contact.displayName || ""} ${contact.title || ""}`.toLocaleLowerCase();
-          return haystack.indexOf((search || "").toLocaleLowerCase()) > -1;
+          return haystack.indexOf((search || "").toLocaleLowerCase()) > -1;
         });
         
         const lastPage = filteredContacts.length <= startIndex + perPage;
         const contacts = filteredContacts.splice(startIndex, perPage);    
         
-        res.render('ajax/contacts-search.pug', {
-          paged: page > 0 || !lastPage,
+        res.render("ajax/contacts-search.pug", {
+          paged: page > 0 || !lastPage,
           page: page,
           lastPage: lastPage, 
           contacts: contacts
