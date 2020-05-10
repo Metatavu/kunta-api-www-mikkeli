@@ -4,54 +4,70 @@
 (() => {
   'use strict';
 
-  const _ = require('lodash');
-  const util = require('util');
-  const moment = require('moment');
-  const cheerio = require('cheerio');
-  const Promise = require('bluebird');
-  const Common = require(__dirname + '/../common');
+  const request = require("request");
+  const vCard = require("vcf");
+  const Common = require(__dirname + "/../common");
+
+  function translateCardAddress(adr) {
+    const values = adr.valueOf().split(";");
+
+    const streetAddresses = values[2] || "";
+    const localities = values[3] || "";
+    const postalCodes = values[5] || "";
+
+    const postOfficeText = [ postalCodes, localities ].join("\u00A0");
+    
+    return [streetAddresses, postOfficeText].filter(i => !!i).join(", ");
+  }
+  
+  function translateCardToContact(card) {
+    const titles = Array.isArray(card.get("title")) ? card.get("title") : [ card.get("title") ];
+    const orgs = Array.isArray(card.get("org")) ? card.get("org") : [ card.get("org") ];
+    const adrs = Array.isArray(card.get("adr")) ? card.get("adr") : [ card.get("adr") ];
+    const emails = Array.isArray(card.get("email")) ? card.get("email") : [ card.get("email") ];
+    const tels = Array.isArray(card.get("tel")) ? card.get("tel") : [ card.get("tel") ];
+    const fn = card.get("fn");
+    
+    return {
+      displayName: fn ? fn.valueOf() : "",
+      title: titles.filter(i => !!i).map(title => title.valueOf()).join(", "),
+      emails: emails.filter(i => !!i).map(email => email.valueOf()),
+      phoneNumbers: tels.filter(i => !!i).map(tel => tel.valueOf()),
+      contactAddresses: adrs.filter(i => !!i).map(adr => translateCardAddress(adr)),
+      organizationUnits: orgs.filter(i => !!i && i.valueOf() !== "null").map(org => org.valueOf())
+    };
+  }
   
   module.exports = (app, config, ModulesClass) => {
     
     app.get('/ajax/contactSearch', (req, res) => {
-      const search = req.query.search;
+      const search = req.query.search;      
       const page = parseInt(req.query.page)||0;
       const perPage = Common.SEARCH_CONTACT_PER_TYPE;
-      const searchString = Common.processFreeTextSearch(search)||'*';
-      
-      new ModulesClass(config)
-        .contacts.search(searchString, page * perPage, perPage + 1, 'DISPLAY_NAME')
-        .callback((data) => {
-          const contacts = data[0];
-          const lastPage = contacts.length < perPage + 1;
-      
-          res.render('ajax/contacts-search.pug', {
-            paged: page > 0 || !lastPage,
-            page: page,
-            lastPage: lastPage, 
-            contacts: _.map(contacts, (contact) => {
-              return Object.assign({
-                phoneNumbers: _.map(contact.phones||[], (phone) => {
-                  const type = phone.type === 'fax' ? ' (Fax)' : '';
-                  return `${phone.number}${type}`;
-                }),
-                contactAddresses: _.map(contact.addresses, (address) => {
-                  const streetAddress = _.first(_.filter(address.streetAddress, (streetAddress) => {
-                    return streetAddress.language === 'fi';
-                  }));
-                  
-                  const postOffice = _.first(_.filter(address.postOffice, (postOffice) => {
-                    return postOffice.language === 'fi';
-                  }));
-                  
-                  const postalCode = address.postalCode;
-                  const postOfficeText = [postalCode||'', postOffice ? postOffice.value : ''].join('\u00A0');
-                  return [streetAddress ? streetAddress.value : '', postOfficeText ? postOfficeText : ''].join(', ');
-                })
-              }, contact);
-            })
-          });
+
+      request(config.get("contacts"), (error, response, body) => {
+        const cards = vCard.parse(body);
+        const allContacts = cards.map(card => translateCardToContact(card));
+        const startIndex = page * perPage;        
+        const filteredContacts = allContacts.filter((contact) => {
+          if (!search) {
+            return true;
+          }
+
+          const haystack = `${contact.displayName || ""} ${contact.title || ""}`.toLocaleLowerCase();
+          return haystack.indexOf((search || "").toLocaleLowerCase()) > -1;
         });
+        
+        const lastPage = filteredContacts.length <= startIndex + perPage;
+        const contacts = filteredContacts.splice(startIndex, perPage);    
+        
+        res.render("ajax/contacts-search.pug", {
+          paged: page > 0 || !lastPage,
+          page: page,
+          lastPage: lastPage, 
+          contacts: contacts
+        });
+      });
     });
     
   };
