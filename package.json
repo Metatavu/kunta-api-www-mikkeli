@@ -1,6 +1,6 @@
 {
   "name": "kunta-api-www-mikkeli",
-  "version": "0.1.54",
+  "version": "0.1.55",
   "description": " Kunta API visualization layer implementation for Mikkeli",
   "main": "index.js",
   "scripts": {
