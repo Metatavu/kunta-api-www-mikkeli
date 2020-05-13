@@ -17,7 +17,11 @@
             .pages.resolvePath(id)
             .callback((data) => {
               if (data) {
-                res.redirect(util.format("%s/%s", Common.CONTENT_FOLDER, data));  
+                if (Array.isArray(data) && data[0]) {
+                  res.redirect(util.format("%s/%s", Common.CONTENT_FOLDER, data[0]));  
+                } else {
+                  res.redirect(util.format("%s/%s", Common.CONTENT_FOLDER, data.toString()));  
+                }
               } else {
                 res.redirect('/');
               }
