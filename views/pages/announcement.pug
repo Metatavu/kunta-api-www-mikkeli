@@ -15,6 +15,12 @@ block content
   .container.page-container
     .row
       +breadcrumbs(breadcrumbs)
+      .col-lg-7.col-md-10.no-gutters
+        if readSpeakerCustomerId
+          .col-xs.read-speaker-wrapper.no-gutters
+            .read-speaker-container
+              if locale.readSpeaker.enabled 
+                +readSpeaker(readSpeakerCustomerId)
         
   .container.page-container
     .row
@@ -46,4 +52,5 @@ block content
         .page-content(tabindex="0")
           h1
             !=title
-          !=contents
+          .rs_read_this_class
+            !=contents
