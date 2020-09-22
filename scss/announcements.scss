@@ -4,5 +4,8 @@
 
 .page-content {
   min-height: 300px;
-  outline: thin dotted grey;
+}
+
+.page-content:focus {
+  outline: thin dotted #808080;
 }
