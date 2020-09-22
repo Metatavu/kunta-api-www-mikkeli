@@ -5,6 +5,10 @@
 @import "icons";
 @import "vars";
 
+html {
+  scroll-behavior: smooth;
+}
+
 .content-container {
   overflow-x: hidden;
   overflow: hidden;
@@ -122,7 +126,7 @@
       content: '⌄';
       position: absolute;
       bottom: 0px;
-      background: #52b9e9;
+      background: #304ea2;
       width: 100%;
       height: 9px;
       padding: 0;
@@ -141,7 +145,7 @@
   .current-locale,
   a {     
     z-index: 999999;
-    background: #52b9e9;
+    background: #304ea2;
     color: $valkoinen;
     font-size: 12px;
     padding: 4px;
@@ -290,7 +294,7 @@ nav.navbar {
   .fa {
     color: $valkoinen;
     font-size: 16px;
-    background: #52b9e9;
+    background: #304ea2;
     width: 28px;
     text-align: center;
     padding-top: 6px;
@@ -389,5 +393,26 @@ footer {
   @media (max-width: $break-medium) {
     margin-bottom: 30px;
   }
-  }
+}
+
+.skip-link {
+  background-color: #fff;
+  padding: 15px 20px;
+  font-size: 16px;
+  position: absolute;
+  top: 0;
+  left: -100%;
+  z-index: 5;
+  transition: all,.5s;
+  border-radius: 0 0 10px 0;
+}
+
+.skip-link:focus {
+  left: 0;
+}
+
+.skip-link:hover {
+  background: rgb(121, 121, 121);
+  text-decoration: none;
+}
   

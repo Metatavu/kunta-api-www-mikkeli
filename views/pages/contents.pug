@@ -18,7 +18,7 @@ block content
         
   .container.page-container
     .container-fluid
-      .row
+      .row#main
         .col-lg-17.col-md-14.no-gutters
           +breadcrumbs(breadcrumbs)
         .col-lg-7.col-md-10.no-gutters
@@ -39,7 +39,7 @@ block content
                   
         .col-xs-24.hidden-lg-up
           a.btn.btn-primary.btn-menu(title='Näytä valikko', data-toggle='collapse', href='#collapse-menu', aria-expanded='false', aria-controls='collapse-menu')
-            i.fa.fa-bars
+            span.fa.fa-bars
           .collapse#collapse-menu
             .col-xs-24.page-nav.no-gutters
               each child in children
