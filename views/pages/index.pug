@@ -47,15 +47,17 @@ mixin banners-slider(banners)
   .header-banner
     .banner-slide.carousel.slide
       .banner-carousel-indicators
+      if bannerIndex == 0
         ol.carousel-indicators
           each banner, bannerIndex in banners
             li(data-target='#banner-slide', data-slide-to='#{bannerIndex}')
       .banner-carousel-items
-        .carousel-inner(role='listbox')
+        .carousel-inner(role='listbox', title='listbox')
           each banner, bannerIndex in banners
             - var itemClass=bannerIndex == 0 ? "carousel-item active" : 'carousel-item'
             div(class=itemClass)
               +banner(banner)
+    if bannerIndex == 0
       .banner-carousel-controls
         a.left.carousel-control(href='#banner-slide', data-slide='prev', role="button")
           div.icon-prev(aria-hidden='true')
@@ -74,7 +76,7 @@ mixin tile(tile)
           !=tile.title
         .tile-text
           !=tile.contents
-          i.fa.fa-angle-right
+          span.fa.fa-angle-right
       
 block styles
   link(rel="stylesheet", href="/css/index.min.css")
@@ -93,7 +95,7 @@ block content
   .container.no-gutters
     .row
       .col-xs
-        .row
+        .row#main
           .col-lg-18
             .row
               .col-xs.no-gutter-left.thumb-articles-container
@@ -125,7 +127,7 @@ block content
                     li.nav-item
                       a.nav-link(title=item.label ,href=item.url)
                         =item.label
-                        i.fa.fa-angle-right
+                        span.fa.fa-angle-right
                         
   .container-fluid.event-section(style="display: none")
     .container.no-gutters
@@ -214,11 +216,11 @@ block content
           .header
             case socialMediaItem.source
               when 'twitter'
-                i.icon.fa.fa-twitter(aria-hidden="true")
+                span.icon.fa.fa-twitter(aria-hidden="true")
               when 'facebook'
-                i.icon.fa.fa-facebook-official(aria-hidden="true")
+                span.icon.fa.fa-facebook-official(aria-hidden="true")
               when 'instagram'
-                i.icon.fa.fa-instagram(aria-hidden="true")
+                span.icon.fa.fa-instagram(aria-hidden="true")
             a.link(title=socialMediaItem.link, href=socialMediaItem.link, target="_blank")
               =socialMediaItem.shortDate
           .content
