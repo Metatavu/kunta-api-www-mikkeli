@@ -54,8 +54,8 @@
             return true;
           }
 
-          const units = (contact.organizationUnits || []).join(" ");
-          const haystack = `${contact.displayName || ""} ${contact.title || ""} ${units || ""}`.toLocaleLowerCase();
+          const units = (contact.organizationUnits || []).join(" ");
+          const haystack = `${contact.displayName || ""} ${contact.title || ""} ${units || ""}`.toLocaleLowerCase();
           return haystack.indexOf((search || "").toLocaleLowerCase()) > -1;
         });
         
