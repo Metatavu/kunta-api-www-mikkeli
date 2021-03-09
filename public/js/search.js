@@ -15,8 +15,8 @@
       this.element.on('click', '#news-tab a.page-next', $.proxy(this._onNewsNextPageClick, this));
       this.element.on('click', '#files-tab a.page-prev', $.proxy(this._onFilesPrevPageClick, this));
       this.element.on('click', '#files-tab a.page-next', $.proxy(this._onFilesNextPageClick, this));
-      this.element.on('click', "#wordpress-pages-tab a.page-prev", $.proxy(this._onWordpressPagesPrevPageClick, this));
-      this.element.on('click', "#wordpress-pages-tab a.page-next", $.proxy(this._onWordpressPagesNextPageClick, this));
+      this.element.on("click", "#wordpress-pages-tab a.page-prev", this.$.proxy(this._onWordpressPagesPrevPageClick, this));
+      this.element.on("click", "#wordpress-pages-tab a.page-next", this.$.proxy(this._onWordpressPagesNextPageClick, this));
       
       this._search();
     },
@@ -82,8 +82,8 @@
     _searchWordpressPages: function (page, callback) {
       var search = this._getSearch();
 
-      $.ajax({
-        url : '/ajax/search/wordpressPages',
+      this.$.ajax({
+        url : "/ajax/search/wordpressPages",
         data : {
           search: search,
           page: page
@@ -92,7 +92,7 @@
           callback(null, data); 
         },
         error: function (jqXHR, textStatus) {
-          callback(jqXHR.responseText || jqXHR.statusText || textStatus || 'error');
+          callback(jqXHR.responseText || jqXHR.statusText || textStatus || "error");
         }
       });
     },

@@ -9,7 +9,7 @@
   const moment = require('moment');
   const cheerio = require('cheerio');
   const Promise = require('bluebird');
-  const fetch = require('node-fetch');
+  const fetch = require("node-fetch");
   const Common = require(__dirname + '/../common');
   const Entities = require('html-entities').AllHtmlEntities;
   const entities = new Entities();
@@ -169,7 +169,7 @@
         });
     });
 
-    app.get('/ajax/search/wordpressPages', async (req, res) => {
+    app.get("/ajax/search/wordpressPages", async (req, res) => {
       const perPage = Common.SEARCH_PAGES_PER_PAGE;
       const searchInput = req.query.search;
       const page = parseInt(req.query.page);
@@ -184,10 +184,10 @@
                   .map(item => {
                     return new Promise(resolvePost => {
                       fetch(`https://www.oppiminen.mikkeli.fi/wp-json/wp/v2/${ item.subtype === "post" ? "posts" : "pages" }/${ item.id }`)
-                        .then(response => resolvePost(response.json()))
+                        .then(response => resolvePost(response.json()));
                     });
                   })
-              )
+              );
               resolve(
                 posts.map(post => ({
                   id: post.id,
@@ -208,7 +208,7 @@
         })
       ]);
       
-      res.render('ajax/search-wp-pages.pug', {
+      res.render("ajax/search-wp-pages.pug", {
         page: page,
         lastPage: lastPage,
         pages: wordpressPages
