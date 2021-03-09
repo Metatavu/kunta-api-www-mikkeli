@@ -15,6 +15,8 @@
       this.element.on('click', '#news-tab a.page-next', $.proxy(this._onNewsNextPageClick, this));
       this.element.on('click', '#files-tab a.page-prev', $.proxy(this._onFilesPrevPageClick, this));
       this.element.on('click', '#files-tab a.page-next', $.proxy(this._onFilesNextPageClick, this));
+      this.element.on('click', '#wordpress-pages-tab a.page-prev', $.proxy(this._onWordpressPagesPrevPageClick, this));
+      this.element.on('click', '#wordpress-pages-tab a.page-next', $.proxy(this._onWordpressPagesNextPageClick, this));
       
       this._search();
     },
@@ -76,6 +78,24 @@
         }
       });
     },
+
+    _searchWordpressPages: function (page, callback) {
+      var search = this._getSearch();
+
+      $.ajax({
+        url : '/ajax/search/wordpressPages',
+        data : {
+          search: search,
+          page: page
+        },
+        success : function(data) {
+          callback(null, data); 
+        },
+        error: function (jqXHR, textStatus) {
+          callback(jqXHR.responseText || jqXHR.statusText || textStatus || 'error');
+        }
+      });
+    },
     
     _createPageSearch: function (page) {
       return $.proxy(function (callback) {
@@ -92,6 +112,12 @@
     _createNewsSearch: function (page) {
       return $.proxy(function (callback) {
         this._searchNews(page, callback);
+      }, this);
+    },
+
+    _createWordpressPagesSearch: function (page) {
+      return $.proxy(function (callback) {
+        this._searchWordpressPages(page, callback);
       }, this);
     },
     
@@ -116,7 +142,8 @@
           var searches = [ 
             this._createPageSearch(0), 
             this._createFileSearch(0), 
-            this._createNewsSearch(0) 
+            this._createNewsSearch(0),
+            this._createWordpressPagesSearch(0)
           ];
 
           async.parallel(searches, $.proxy(function(err, results) {
@@ -130,10 +157,12 @@
               var pages = results[0]; 
               var files = results[1]; 
               var news = results[2];
+              var wordpressPages = results[3]
     
               this.element.find('#pages-tab').html(pages);
               this.element.find('#files-tab').html(files);
               this.element.find('#news-tab').html(news);
+              this.element.find('#wordpress-pages-tab').html(wordpressPages);
               
               var activeTab = this.element
                 .find('.nav-link.active')
@@ -223,6 +252,29 @@
         }
       }, this));
     },
+
+    _loadWordpressPages: function (page) {
+      var height = this.element
+      .find('#wordpress-pages-tab')
+      .height();
+
+      this.element
+        .find('#wordpress-pages-tab')
+        .empty()
+        .css('height', height)
+        .addClass('searching');
+
+      this._searchWordpressPages(page, $.proxy(function (err, html) {
+        if (err) {
+          this._handleError(err); 
+        } else {
+          this.element.find('#wordpress-pages-tab')
+            .css('height', 'auto')
+            .removeClass('searching')
+            .html(html);
+        }
+      }, this));
+    },
     
     _getSearch: function ()  {
       return this.element.find('input[name="query"]').val(); 
@@ -273,6 +325,24 @@
       var href = $(event.target).attr('href');
       if (href.substring(0, 2) == '#p') {
         this._loadNews(parseInt(href.substring(2)));
+      }
+    },
+
+    _onWordpressPagesPrevPageClick: function (event) {
+      event.preventDefault();
+      
+      var href = $(event.target).attr('href');
+      if (href.substring(0, 2) == '#p') {
+        this._loadWordpressPages(parseInt(href.substring(2)));
+      }
+    },
+    
+    _onWordpressPagesNextPageClick: function (event) {
+      event.preventDefault();
+      
+      var href = $(event.target).attr('href');
+      if (href.substring(0, 2) == '#p') {
+        this._loadWordpressPages(parseInt(href.substring(2)));
       }
     },
 

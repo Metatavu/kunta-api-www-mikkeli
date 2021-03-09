@@ -31,3 +31,12 @@ else
           span.fa.fa-newspaper-o(aria-hidden="true")
           a(href='/uutiset/' + newsArticle.slug, title=newsArticle.title)
             =newsArticle.title
+  if wordpressPages.length
+    p.search-header
+      |Oppiminen.mikkeli.fi
+    ul
+      each wordpressPage in wordpressPages
+        li
+          span.fa.fa-newspaper-o(aria-hidden="true")
+          a(href=wordpressPage.url, title=wordpressPage.title)
+            =wordpressPage.title
