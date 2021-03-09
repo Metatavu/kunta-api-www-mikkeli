@@ -92,7 +92,7 @@
           callback(null, data); 
         },
         error: function(jqXHR, textStatus) {
-          callback(jqXHR.responseText || jqXHR.statusText || textStatus || "error");
+          callback(jqXHR.responseText || jqXHR.statusText || textStatus || "error");
         }
       });
     },
@@ -331,15 +331,15 @@
     _onWordpressPagesPrevPageClick: function(event) {
       event.preventDefault();
       var href = this.$(event.target).attr("href");
-      if (href.substring(0, 2) === "#p") {
+      if (href.substring(0, 2) === "#p") {
         this._loadWordpressPages(parseInt(href.substring(2)));
       }
     },
-    
+
     _onWordpressPagesNextPageClick: function(event) {
       event.preventDefault();
       var href = this.$(event.target).attr("href");
-      if (href.substring(0, 2) === "#p") {
+      if (href.substring(0, 2) === "#p") {
         this._loadWordpressPages(parseInt(href.substring(2)));
       }
     },
