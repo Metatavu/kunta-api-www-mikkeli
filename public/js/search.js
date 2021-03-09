@@ -79,7 +79,7 @@
       });
     },
 
-    _searchWordpressPages: function (page, callback) {
+    _searchWordpressPages: function(page, callback) {
       var search = this._getSearch();
 
       this.$.ajax({
@@ -91,7 +91,7 @@
         success : function(data) {
           callback(null, data); 
         },
-        error: function (jqXHR, textStatus) {
+        error: function(jqXHR, textStatus) {
           callback(jqXHR.responseText || jqXHR.statusText || textStatus || "error");
         }
       });
@@ -328,7 +328,7 @@
       }
     },
 
-    _onWordpressPagesPrevPageClick: function (event) {
+    _onWordpressPagesPrevPageClick: function(event) {
       event.preventDefault();
       var href = this.$(event.target).attr("href");
       if (href.substring(0, 2) == "#p") {
@@ -336,7 +336,7 @@
       }
     },
     
-    _onWordpressPagesNextPageClick: function (event) {
+    _onWordpressPagesNextPageClick: function(event) {
       event.preventDefault();
       var href = this.$(event.target).attr("href");
       if (href.substring(0, 2) == "#p") {
