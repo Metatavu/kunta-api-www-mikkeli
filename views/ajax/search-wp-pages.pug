@@ -5,13 +5,13 @@ if pages.length
         .col-xs-24.col-md-6.col-lg-3.hidden-sm-down
           .search-result-image-container
             if page.imageSrc
-              .search-result-image(style="background-image: url(" + page.imageSrc + '?size=120)')
+              .search-result-image(style="background-image: url(" + page.imageSrc + '?size=120); background-size: contain; background-repeat: no-repeat; background-position: center;')
             else
               span.fa.fa-file-text-o.search-result-image-placeholder(aria-hidden="true")
         .col-xs-24.col-md-18.col-lg-21
           .row
             .col-xs-24.details-container
-              a.title(href='/redirect/page/' + page.id, title=page.title)
+              a.title(href=page.link, title=page.title)
                 =page.title
           .row.hidden-sm-down
             .col-xs-24

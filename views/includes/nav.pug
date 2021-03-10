@@ -3,7 +3,7 @@ nav.navbar.navbar-light
     .row.hidden-sm-up
       .col-xs-6
         button.navbar-toggler.hidden-sm-up(type='button', data-toggle='collapse', data-target='#exCollapsingNavbar', aria-controls='exCollapsingNavbar', aria-expanded='false', aria-label='Toggle navigation')
-          i.fa.fa-bars
+          span.fa.fa-bars
       .col-xs-18.logo-container.text-xs-center
         a(href="/")
           img.logo(alt="Mikkelin logo, navigoi etusivulle", title="Mikkelin logo, navigoi etusivulle", src="/gfx/layout/mikkeli-logo.png")
@@ -19,22 +19,22 @@ nav.navbar.navbar-light
               .nav-search-container
                 label(for="search" class="search-label") Hae sivustosta
                 input(title="Hae sivustosta" id="search")
-                i.fa.fa-circle-o-notch.fa-spin
+                span.fa.fa-circle-o-notch.fa-spin
                 button.fa.fa-search(aria-hidden="true",title="Hae sivustosta -painike", onclick="location.href='/haku'")
             .col-xs-16.col-md-10.col-lg-7.pull-lg-right.no-gutter-right
               .nav-some-icons
                 a(href="https://www.facebook.com/mikkelinkaupunki",title="Facebook - Mikkelikaupunki", target="_blank")
-                  i.fa.fa-facebook-official(aria-hidden="true")
+                  span.fa.fa-facebook-official(aria-hidden="true")
                 a(href="https://twitter.com/MikkelinK",title="Twitter - Mikkelikaupunki", target="_blank")
-                  i.fa.fa-twitter(aria-hidden="true")
+                  span.fa.fa-twitter(aria-hidden="true")
                 a(href="https://www.instagram.com/mikkelinkaupunki/",title="Instagram - Mikkelikaupunki" target="_blank")
-                  i.fa.fa-instagram(aria-hidden="true")
+                  span.fa.fa-instagram(aria-hidden="true")
                 a(href="https://www.linkedin.com/company/mikkelin-kaupunki",title="Linkedin - Mikkelikaupunki", target="_blank")
-                  i.fa.fa-linkedin(aria-hidden="true")
+                  span.fa.fa-linkedin(aria-hidden="true")
             .col-xs-6.col-md-4.no-gutter-right
               .nav-quick-icons
-                a.map-link(href="http://kartta.mikkeli.fi/kartta/",title="Mikkeli kartta" target="_blank")
-                  i.fa.fa-map-marker(aria-hidden="true")
+                a.map-link(href="https://kartta.mikkeli.fi/kartta/",title="Mikkeli kartta" target="_blank")
+                  span.fa.fa-map-marker(aria-hidden="true")
                 if locales
                   .locale-menu
                     button.current-locale(title="Vaihda kieli")

@@ -9,6 +9,7 @@
   const moment = require('moment');
   const cheerio = require('cheerio');
   const Promise = require('bluebird');
+  const fetch = require("node-fetch");
   const Common = require(__dirname + '/../common');
   const Entities = require('html-entities').AllHtmlEntities;
   const entities = new Entities();
@@ -24,7 +25,8 @@
     }
 
     app.get('/ajax/menuSearch', (req, res) => {
-      const search = Common.processFreeTextSearch(req.query.search);
+      const searchInput = req.query.search;
+      const search = Common.processFreeTextSearch(searchInput);
       const preferLanguages = req.headers['accept-language'];
 
       const searchOptions = {
@@ -39,7 +41,8 @@
         .pages.search(searchOptions, preferLanguages)
         .files.search(search, 0, Common.SEARCH_RESULTS_PER_TYPE)
         .news.search(search, 0, Common.SEARCH_RESULTS_PER_TYPE)
-        .callback((data) => {
+        .callback(async (data) => {
+
           const pages = data[0].map((page) => {
             page.title = entities.decode(page.title);
             return page;
@@ -51,11 +54,18 @@
             newsArticle.title = entities.decode(newsArticle.title);
             return newsArticle;
           });
+
+          const oppiminenPages = await new Promise(resolve => {
+            fetch(`https://www.oppiminen.mikkeli.fi/wp-json/wp/v2/search?search=${ searchInput }`)
+              .then((response) => response.json())
+              .then((data) => resolve(data.splice(0, 5)));
+          });
           
           res.render('ajax/menu-search.pug', {
             pages: pages,
             files: files,
-            newsArticles: newsArticles
+            newsArticles: newsArticles,
+            oppiminenPages: oppiminenPages
           });
         });
     });
@@ -157,6 +167,52 @@
             lastPage: lastPage
           });
         });
+    });
+
+    app.get("/ajax/search/oppiminenPages", async (req, res) => {
+      const perPage = Common.SEARCH_PAGES_PER_PAGE;
+      const searchInput = req.query.search;
+      const page = parseInt(req.query.page);
+      
+      const [oppiminenPages, lastPage] = await Promise.all([
+        new Promise(resolve => {
+          fetch(`https://www.oppiminen.mikkeli.fi/wp-json/wp/v2/search?type=post&subtype[]=page&subtype[]=post&search=${ searchInput }&page=${ page + 1 }&per_page=${ perPage }`)
+            .then((response) => response.json())
+            .then( async (data) => {
+              const posts = await Promise.all(
+                data
+                  .map(item => {
+                    return new Promise(resolvePost => {
+                      fetch(`https://www.oppiminen.mikkeli.fi/wp-json/wp/v2/${ item.subtype === "post" ? "posts" : "pages" }/${ item.id }`)
+                        .then(response => resolvePost(response.json()));
+                    });
+                  })
+              );
+              resolve(
+                posts.map(post => ({
+                  id: post.id,
+                  link: post.link,
+                  title: post.title.rendered,
+                  excerpt: post.excerpt.rendered,
+                  imageSrc: "/gfx/layout/mikkeli-logo.png"
+                }))
+              );
+            });
+        }),
+        new Promise(resolve => {
+          fetch(`https://www.oppiminen.mikkeli.fi/wp-json/wp/v2/search?type=post&subtype[]=page&subtype[]=post&search=${ searchInput }&page=${ page + 2 }&per_page=${ perPage }`)
+            .then((response) => response.json())
+            .then( async (data) => {
+              resolve(!data.length);
+            });
+        })
+      ]);
+      
+      res.render("ajax/search-wp-pages.pug", {
+        page: page,
+        lastPage: lastPage,
+        pages: oppiminenPages
+      });
     });
     
     app.get(util.format('%s/', Common.SEARCH_PATH), (req, res, next) => {
