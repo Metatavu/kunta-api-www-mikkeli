@@ -1,6 +1,7 @@
 /* global async */
+/* global $, document */
 
-(function ($) {
+(function () {
   'use strict';
   
   $.widget("custom.search", {
