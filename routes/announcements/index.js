@@ -2,25 +2,25 @@
 /* global __dirname */
 
 (function() {
-  'use strict';
+  "use strict";
 
-  const util = require('util');
-  const Common = require(__dirname + '/../common');
-  const moment = require('moment');
-  const _ = require('lodash');
-  const $ = require('cheerio');
+  const util = require("util");
+  const Common = require(__dirname + "/../common");
+  const moment = require("moment");
+  const _ = require("lodash");
+  const $ = require("cheerio");
 
   module.exports = (app, config, ModulesClass) => {
 
-    app.get(Common.ANNOUNCEMENTS_FOLDER + '/', async (req, res, next) => {
+    app.get(Common.ANNOUNCEMENTS_FOLDER + "/", async (req, res, next) => {
       try {
         const announcements = await Common.listAnnouncements(config, 100);
-        const bannerSrc = '/gfx/layout/mikkeli-page-banner-default.jpg';
+        const bannerSrc = "/gfx/layout/mikkeli-page-banner-default.jpg";
   
-        res.render('pages/announcements-list.pug', Object.assign(req.kuntaApi.data, {
+        res.render("pages/announcements-list.pug", Object.assign(req.kuntaApi.data, {
           bannerSrc: bannerSrc,
           announcements: announcements,
-          breadcrumbs : [{path: util.format('%s/', Common.ANNOUNCEMENTS_FOLDER), title: 'Kuulutukset'}]
+          breadcrumbs : [{path: util.format("%s/", Common.ANNOUNCEMENTS_FOLDER), title: "Kuulutukset"}]
         }));
       } catch (e) {
         next({
