@@ -78,6 +78,7 @@
           const incidentsPollInterval = config.get('incidents:pollInterval') || 30000;
           const incidentScriptVersion = config.get('incidents:scriptVersion');
           const readSpeakerCustomerId = config.get('readSpeaker:customerId');
+          const solidnetPopup = config.get('solidnetPopup:enabled');
           const readSpeakerUrl = encodeURIComponent(req.protocol + '://' + req.get('host') + req.originalUrl);
           
           if (Array.isArray(incidentsConfig)) {
@@ -104,6 +105,7 @@
               liveChat: liveChat,
               readSpeakerCustomerId: readSpeakerCustomerId,
               readSpeakerUrl: readSpeakerUrl,
+              solidnetPopup: solidnetPopup,
               incidentUrls: incidentUrls.join(','),
               incidentsPollInterval: incidentsPollInterval,
               incidentScriptVersion: incidentScriptVersion

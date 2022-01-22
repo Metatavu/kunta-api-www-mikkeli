@@ -42,6 +42,8 @@ head
   if incidentUrls
     script(defer="defer",type="text/javascript", src="//cdn.metatavu.io/libs/kunta-api-incidents/" + incidentScriptVersion + "/incidents.min.js", id="incidents-script", data-urls=incidentUrls, data-interval=incidentsPollInterval)
     link(rel="stylesheet", href="//cdn.metatavu.io/libs/kunta-api-incidents/" + incidentScriptVersion + "/incidents.min.css")
+  if solidnetPopup
+    script(src="https://onlinetutkimus.solinet.fi/kysely-9020265a.js", integrity="sha384-j3WiV0dgZHEBGlaBEeqTJ4EfqwQOA2tKSt+WB+aWj8dUZ3H4NmSXRKefKA2A4zCY", crossorigin="anonymous")
   if readSpeakerCustomerId
     script(type="text/javascript", src='//f1-eu.readspeaker.com/script/' + readSpeakerCustomerId + '/ReadSpeaker.js?pids=embhl')
   if googleAnalytics
