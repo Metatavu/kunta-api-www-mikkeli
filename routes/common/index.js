@@ -7,7 +7,7 @@
   const cheerio = require('cheerio');
   const pug = require("pug");
   const LinkedEventsClient = require("linkedevents-client");
-  const RssParser = require('rss-parser');
+  const RssParser = require("rss-parser");
   const moment = require("moment");
   
   class Common {
@@ -332,12 +332,12 @@
             id: announcement.id,
             title: announcement.title,
             link: announcement.link,
-            content: Common.processPageContent('/', announcement.content),
+            content: Common.processPageContent("/", announcement.content),
             shortDate: moment(announcement.pubDate).format("D.M.YYYY")
           };
         });
       } catch (e) {
-        console.error("Error listing announcements", e);
+        console.error("Error listing announcements", e); // eslint-disable-line no-console
         return [];
       }
     }
