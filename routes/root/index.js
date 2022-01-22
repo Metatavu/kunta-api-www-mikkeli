@@ -140,16 +140,17 @@
     }
     
     app.get('/', async (req, res, next) => {
-      const events = await listEvents(Common.EVENT_COUNT, 1, moment(), undefined, "/gfx/layout/tapahtuma_default_120_95.jpg");
-
+      const [ events, announcements ] = await Promise.all([
+        listEvents(Common.EVENT_COUNT, 1, moment(), undefined, "/gfx/layout/tapahtuma_default_120_95.jpg"),
+        Common.listAnnouncements(config, 5)
+      ]);
+      
       new ModulesClass(config)
         .news.latest(0, 9)
         .banners.list()
         .tiles.list()
         .socialMedia.latest(Common.SOCIAL_MEDIA_POSTS)
         .jobs.list(Common.JOB_COUNT, 'PUBLICATION_END', 'ASCENDING')
-        .announcements.list(Common.ANNOUNCEMENT_COUNT, 'PUBLICATION_DATE', 'DESCENDING')
-        .events.latest(Common.EVENT_COUNT, 'START_DATE', 'DESCENDING')
         .callback(function(data) {
 
           var news = _.clone(data[0]).map(newsArticle => {
@@ -189,11 +190,6 @@
           });
 
           var jobs = _.clone(data[4] || []);
-          var announcements = _.clone(data[5] || []).map(announcement => {
-            return Object.assign(announcement, {
-              "shortDate": moment(announcement.published).format("D.M.YYYY")
-            });
-          });
           
           res.render('pages/index.pug', Object.assign(req.kuntaApi.data, {
             events: events,
