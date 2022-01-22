@@ -7,6 +7,8 @@
   const cheerio = require('cheerio');
   const pug = require("pug");
   const LinkedEventsClient = require("linkedevents-client");
+  const RssParser = require("rss-parser");
+  const moment = require("moment");
   
   class Common {
     
@@ -301,7 +303,45 @@
       });
 
       return searchTerms.join(' ');
+    } 
+
+    /**
+     * Lists announcements from RSS feed
+     * 
+     * @param {Object} config config object
+     * @param {Number} itemCount number of items to list 
+     * @returns {List[Object]} list of announcement objects
+     */
+    static async listAnnouncements(config, itemCount) {
+      try {
+        const feedUrl = config.get("announcements:feedUrl");
+        if (!feedUrl) {
+          return [];
+        }
+
+        const url = new URL(feedUrl);
+        const search = new URLSearchParams(url.search);
+        search.set("itemcount", itemCount);
+        url.search = search.toString();
+
+        const announcementFeed = await (new RssParser()).parseURL(url.toString());
+        const items = announcementFeed ? announcementFeed.items : [];
+        
+        return (items || []).map(announcement => {
+          return {
+            id: announcement.id,
+            title: announcement.title,
+            link: announcement.link,
+            content: Common.processPageContent("/", announcement.content),
+            shortDate: moment(announcement.pubDate).format("D.M.YYYY")
+          };
+        });
+      } catch (e) {
+        console.error("Error listing announcements", e); // eslint-disable-line no-console
+        return [];
+      }
     }
+
   }
 
   module.exports = Common;

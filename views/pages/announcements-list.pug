@@ -42,25 +42,8 @@ block content
                         .col-xs-24
                           span.date
                             =announcement.shortDate
-                          a.title(title=announcement.title, href='/kuulutukset/' + announcement.slug)
+                          a.title(title=announcement.title, href=announcement.link)
                             !=announcement.title
                       .row
                         .col-xs-24
-                          !=announcement.shortContent
-          if page !== undefined
-            .col-xs-24.pages-container.no-gutters
-              if page > 0
-                a.page-prev(href="?page=" + (page - 1), title="Edellinen sivu")
-                  |Edellinen sivu
-              else
-                span.page-prev
-                  |Edellinen sivu
-              span.page-number
-                |Sivu 
-                =page + 1
-              if !lastPage
-                a.page-next(href="?page=" + (page + 1), title="Seuraava sivu")
-                  |Seuraava sivu
-              else
-                span.page-next
-                  |Seuraava sivu
+                          !=announcement.content

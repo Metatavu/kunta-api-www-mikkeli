@@ -200,7 +200,7 @@ block content
                   .content
                     each announcement in announcements
                       .content-block-row
-                        a(title=announcement.title, href='/kuulutukset/' + announcement.slug)
+                        a(title=announcement.title, href=announcement.link)
                           =announcement.title
                         span
                           =announcement.shortDate
