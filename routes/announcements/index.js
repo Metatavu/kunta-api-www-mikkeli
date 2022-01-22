@@ -6,10 +6,7 @@
 
   const util = require("util");
   const Common = require(__dirname + "/../common");
-  const moment = require("moment");
-  const _ = require("lodash");
-  const $ = require("cheerio");
-
+  
   module.exports = (app, config, ModulesClass) => {
 
     app.get(Common.ANNOUNCEMENTS_FOLDER + "/", async (req, res, next) => {
