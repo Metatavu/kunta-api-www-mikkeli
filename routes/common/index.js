@@ -310,7 +310,7 @@
      * 
      * @param {Object} config config object
      * @param {Number} itemCount number of items to list 
-     * @returns 
+     * @returns {List[Object]} list of announcement objects
      */
     static async listAnnouncements(config, itemCount) {
       try {
