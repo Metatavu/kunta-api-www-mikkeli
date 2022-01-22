@@ -325,8 +325,9 @@
         url.search = search.toString();
 
         const announcementFeed = await (new RssParser()).parseURL(url.toString());
+        const items = announcementFeed ? announcementFeed.items : [];
         
-        return (announcementFeed?.items || []).map(announcement => {
+        return (items || []).map(announcement => {
           return {
             id: announcement.id,
             title: announcement.title,

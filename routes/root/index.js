@@ -140,7 +140,7 @@
     }
     
     app.get('/', async (req, res, next) => {
-      const [ events, announcements ] = await Promise.all([
+      const [ events, announcements ] = await Promise.all([
         listEvents(Common.EVENT_COUNT, 1, moment(), undefined, "/gfx/layout/tapahtuma_default_120_95.jpg"),
         Common.listAnnouncements(config, 5)
       ]);
