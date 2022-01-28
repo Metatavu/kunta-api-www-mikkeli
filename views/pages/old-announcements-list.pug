@@ -1,0 +1,66 @@
+extends ../layout/contents.pug
+
+include ../includes/mixins.pug
+
+block scripts
+  script(defer="defer",type="text/javascript", src="//cdn.metatavu.io/libs/jquery-lazyload/1.9.7/jquery.lazyload.min.js")
+  script(defer="defer",type="text/javascript", src="/js/announcements-list.js")
+
+block styles
+  link(rel="stylesheet", href="/css/contents-common.min.css")
+  link(rel="stylesheet", href="/css/common-list.min.css")
+  link(rel="stylesheet", href="/css/announcements-list.min.css")
+
+block content
+  .container-fluid.no-gutters
+    .row
+      .col-xs.banner-container
+        .banner(data-lazy-bg-image=bannerSrc)
+
+  .container.page-container
+    .row#main
+      +breadcrumbs(breadcrumbs)
+        
+  .container.page-container
+    .row
+      .col-xs-24
+        .page-content(tabindex="0")
+          .col-xs-24
+            .row
+              h1 Kuulutukset
+          .col-xs-24.announcements-container
+            .row
+              each announcement in announcements
+                .col-xs-24
+                  .row.announcement
+                    .col-xs-24.col-md-6.col-lg-3
+                      .announcement-image-container
+                        .announcement-image-placeholder
+                          span.fa.fa-bullhorn.fa-3x
+                    .col-xs-24.col-md-18.col-lg-21
+                      .row
+                        .col-xs-24
+                          span.date
+                            =announcement.shortDate
+                          a.title(title=announcement.title, href='/kuulutukset/vanhat/' + announcement.slug)
+                            !=announcement.title
+                      .row
+                        .col-xs-24
+                          !=announcement.shortContent
+          if page !== undefined
+            .col-xs-24.pages-container.no-gutters
+              if page > 0
+                a.page-prev(href="?page=" + (page - 1), title="Edellinen sivu")
+                  |Edellinen sivu
+              else
+                span.page-prev
+                  |Edellinen sivu
+              span.page-number
+                |Sivu 
+                =page + 1
+              if !lastPage
+                a.page-next(href="?page=" + (page + 1), title="Seuraava sivu")
+                  |Seuraava sivu
+              else
+                span.page-next
+                  |Seuraava sivu

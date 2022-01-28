@@ -1,0 +1,56 @@
+extends ../layout/contents.pug
+
+include ../includes/mixins.pug
+
+block styles
+  link(rel="stylesheet", href="/css/contents-common.min.css")
+  link(rel="stylesheet", href="/css/announcements.min.css")
+
+block content
+  .container-fluid.no-gutters
+    .row
+      .col-xs.banner-container
+        .banner(data-lazy-bg-image=bannerSrc)
+      
+  .container.page-container
+    .row#main
+      +breadcrumbs(breadcrumbs)
+      .col-lg-7.col-md-10.no-gutters
+        if readSpeakerCustomerId
+          .col-xs.read-speaker-wrapper.no-gutters
+            .read-speaker-container
+              if locale.readSpeaker.enabled 
+                +readSpeaker(readSpeakerCustomerId)
+        
+  .container.page-container
+    .row
+      nav.col-lg-5.page-nav.no-gutters.hidden-md-down
+        p(class="nav-folder-title")
+          =folderTitle
+        each sibling in siblings
+          if sibling.id == id
+            .page-nav-item.active
+              a(title=sibling.title, href=sibling.slug)
+                !=sibling.title
+          else
+            a.page-nav-item(title=sibling.title, href=sibling.slug)
+              !=sibling.title
+      .col-xs-24.hidden-lg-up
+        a.btn.btn-primary.btn-menu(title='Näytä valikko', data-toggle='collapse', href='#collapse-menu', aria-expanded='false', aria-controls='collapse-menu')
+          span.fa.fa-bars
+        .collapse#collapse-menu
+          .col-xs-24.col-lg-5.page-nav.no-gutters
+            each sibling in siblings
+              if sibling.id == id
+                .page-nav-item.active
+                  a(title=sibling.title, href=sibling.slug)
+                    !=sibling.title
+              else
+                a.page-nav-item(title=sibling.title, href=sibling.slug)
+                  !=sibling.title
+      .col-xs-24.col-lg-19
+        .page-content(tabindex="0")
+          h1
+            !=title
+          .rs_read_this_class
+            !=contents
