@@ -9,6 +9,8 @@
   const LinkedEventsClient = require("linkedevents-client");
   const RssParser = require("rss-parser");
   const moment = require("moment");
+  const Entities = require("html-entities").AllHtmlEntities;
+  const entities = new Entities();
   
   class Common {
     
@@ -330,7 +332,7 @@
         return (items || []).map(announcement => {
           return {
             id: announcement.id,
-            title: announcement.title,
+            title: entities.decode(announcement.title),
             link: announcement.link,
             content: Common.processPageContent("/", announcement.content),
             shortDate: moment(announcement.pubDate).format("D.M.YYYY")
