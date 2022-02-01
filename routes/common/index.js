@@ -9,7 +9,7 @@
   const LinkedEventsClient = require("linkedevents-client");
   const RssParser = require("rss-parser");
   const moment = require("moment");
-  const Entities = require('html-entities').AllHtmlEntities;
+  const Entities = require("html-entities").AllHtmlEntities;
   const entities = new Entities();
   
   class Common {
