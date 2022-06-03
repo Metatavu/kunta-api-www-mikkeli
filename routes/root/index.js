@@ -196,7 +196,7 @@
             banners: banners,
             tiles:  tiles,
             socialMediaItems: socialMediaItems,
-            jobs: [ { title: "Kaupunginjohtaja", id: "bb08707b-5eb4-466c-b049-cb5acf9f5e68", employmentType: "Toistaiseksi voimassa", taskArea: "Mikkeli" }, ...jobs],
+            jobs: jobs,
             announcements: announcements,
             news: {
               thumbs: news.splice(0, 6),
