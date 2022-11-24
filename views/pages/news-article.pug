@@ -59,20 +59,20 @@ block content
                   !=sibling.title
       .col-xs-24.col-lg-14
         .page-content(tabindex="0")
-          .row
-            .col-xs-24.title-container
-              h1
-                !=title
-          .row
-            .col-xs-24.date-container
-              p
-                !=published
-          .row
-            .col-xs-24.image-container
-              img.article-img.lazy(src=imageSrc, alt="Artikkelin kuva", title="Artikkelin kuva")
-          .row
-            .col-xs-24
-              .rs_read_this_class
+          .rs_read_this_class  
+            .row
+              .col-xs-24.title-container
+                h1
+                  !=title
+            .row
+              .col-xs-24.date-container
+                p
+                  !=published
+            .row
+              .col-xs-24.image-container
+                img.article-img.lazy(src=imageSrc, alt="Artikkelin kuva", title="Artikkelin kuva")
+            .row
+              .col-xs-24
                 !=contents
           .row
             .col-xs-24.tags
